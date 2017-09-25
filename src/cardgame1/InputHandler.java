@@ -18,7 +18,7 @@ public class InputHandler extends KeyAdapter implements MouseListener, MouseMoti
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println(e.getX()/Board.xScale + ", " + e.getY()/Board.yScale);
     }
 
     @Override

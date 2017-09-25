@@ -5,9 +5,12 @@
  */
 package cardgame1;
 
+import Cards.ArakkoaCard;
+import Cards.Card;
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 
@@ -24,12 +27,22 @@ public class Main {
     public static BufferedImage BackgroundImage;
     public static Board mainBoard;
     
+    public static ArrayList<Card> enemyCards = new ArrayList<>();
+    public static ArrayList<Card> playerCards = new ArrayList<>();
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         setBackgroundImage();
-        mainBoard = new Board();
+        SpriteHandler.Initialize();
+        for(int i = 0; i < 10 ; i++){
+            enemyCards.add(new ArakkoaCard());
+            playerCards.add(new ArakkoaCard());
+        }
+        
+        Hero enemy = new Hero("AI Hero", enemyCards);
+        Hero player = new Hero("Player Hero", playerCards);
+        mainBoard = new Board(enemy, player);
     }
 
     
@@ -44,7 +57,8 @@ public class Main {
 
     private static void setBackgroundImage() {
         try {
-            BackgroundImage = ImageIO.read(new File(Main.getDir() + Main.assets + "BGtest.png"));
+           // BackgroundImage = ImageIO.read(new File(Main.getDir() + Main.assets + "BGtest.png"));
+            BackgroundImage = ImageIO.read(new File(Main.getDir() + Main.assets + "paper.png"));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -77,7 +91,7 @@ public class Main {
     public static Dimension takeWindowSize() {
         Integer input = null;
         try {
-            input = new Integer(prompt("Desired Window size in pixels (700-1900)"));
+            input = new Integer(prompt("Desired Window length in pixels (700-1900)"));
         } catch (Exception e) {
             display("Must enter Number 700-1900");
             return takeWindowSize();

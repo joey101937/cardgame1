@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Cards;
+package Minions;
 
 /**
  * what kind of card it is. like class. used for things like "give all other dragons +1 attack"
  * @author Joseph
  */
-public enum CardTribe {
+public enum Tribe {
     none,dragon,mech,knight;
 }

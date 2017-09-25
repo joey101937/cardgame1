@@ -5,6 +5,7 @@
  */
 package cardgame1;
 
+import Minions.Minion;
 import Cards.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -24,26 +25,44 @@ public class Hero {
     public String name;
     public ArrayList<Minion> minions = new ArrayList<>(); //currently in play minions.
     public ArrayList<Card> hand = new ArrayList<>();
-    public Deck deck;
+    public ArrayList<Card> deck;
     public int id;
     public boolean turn = false; //is it our turn?
     //CONSTRUCTOR
-    public Hero(String name, Deck deck){
+    public Hero(String name, ArrayList<Card> deck){
         this.name = name;
         this.deck = deck;
-        deck.shuffle();
+        this.picture = SpriteHandler.ashePortrait;
+        for(Card c: deck){
+            c.setHero(this);
+        }
         id = idBank++;
     }
     
     public void draw(){
         if(hand.size()>= maxHandSize){// if we have too many cards in hand
-            System.out.println(("player Milled Card: ") + deck.Draw());
+            System.out.println(("player Milled Card: ") + deck.remove(0));
         }else{
-            hand.add(deck.Draw());
+            hand.add(deck.remove(0));
         }
     }
     
-    public void turnStart(){
-        
+    /**
+     * randomizes the card order
+     */
+    public void shuffle() {
+        ArrayList<Card> temp = new ArrayList<>();
+        while (!deck.isEmpty()) {
+            temp.add(deck.remove((int) Math.random() * deck.size()));
+        }
+        deck = temp;
+    }
+    
+    public void turnStart(){       
+    }
+    
+    
+    public void takeDamage(int amount){
+        this.health-=amount;
     }
 }
