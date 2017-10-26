@@ -14,8 +14,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
 
-/**
- *
+/*
  * @author Joseph
  */
 public class Board extends Canvas implements Runnable {
@@ -23,12 +22,15 @@ public class Board extends Canvas implements Runnable {
     public static Hero topHero; //hero on top side of board
     public static Hero botHero; //hero on bottom side of board
     public static Hero playerHero; //user's hero
+    public static Minion selectedMinion;
     public static double xScale, yScale; //scale of the window reletive to testing
-    Window window;  //main window
-    boolean running = false;
-    Thread thread = null;
-    Dimension d;
-    InputHandler ih = new InputHandler();
+    public static int mouseX, mouseY;
+    public VisualEffectHandler visHandler = null;
+    public Window window;  //main window
+    private boolean running = false;
+    private Thread thread = null;
+    public Dimension d;
+    public InputHandler ih = new InputHandler();
     /* CONSTRUCTOR */
 
     public Board(Hero t, Hero b) {
@@ -44,11 +46,12 @@ public class Board extends Canvas implements Runnable {
         this.addMouseListener(ih);
         this.addMouseMotionListener(ih);
         this.addKeyListener(ih);
-        topHero.minions.add(new ArakkoaMinion(null));
-        topHero.minions.add(new ArakkoaMinion(null));
-        topHero.minions.add(new ArakkoaMinion(null));
-        botHero.minions.add(new ArakkoaMinion(null));
-        botHero.minions.add(new ArakkoaMinion(null));
+        this.visHandler = new VisualEffectHandler(this);
+        topHero.minions.add(new ArakkoaMinion(topHero.deck.get(0)));
+        topHero.minions.add(new ArakkoaMinion(topHero.deck.get(0)));
+        topHero.minions.add(new ArakkoaMinion(topHero.deck.get(0)));
+        botHero.minions.add(new ArakkoaMinion(botHero.deck.get(0)));
+        botHero.minions.add(new ArakkoaMinion(botHero.deck.get(0)));
     }
 
     public void render() {
@@ -65,11 +68,12 @@ public class Board extends Canvas implements Runnable {
         g.setFont(new Font("TimesRoman", Font.BOLD, 35));
         //render top and bot hero's minions in a line
         for(Minion m : topHero.minions){
-            m.render(g, topHero.minions.indexOf(m)*(Minion.WIDTH+100) + 100, 200);
+            m.render(g, topHero.minions.indexOf(m)*(Minion.WIDTH+100) + 100, Minion.TOP_Y_OFFSET);
         }
         for(Minion m : botHero.minions){
-             m.render(g, botHero.minions.indexOf(m)*(Minion.WIDTH+100) + 100, 655);
+             m.render(g, botHero.minions.indexOf(m)*(Minion.WIDTH+100) + 100, Minion.BOT_Y_OFFSET);
         }
+        this.visHandler.render(g);
         g.drawImage(topHero.picture, 710, 0, null);
         g.drawImage(SpriteHandler.cardbackL,800,500,null);
         g.dispose();

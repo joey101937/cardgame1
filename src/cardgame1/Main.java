@@ -40,8 +40,8 @@ public class Main {
             playerCards.add(new ArakkoaCard());
         }
         
-        Hero enemy = new Hero("AI Hero", enemyCards);
-        Hero player = new Hero("Player Hero", playerCards);
+        Hero enemy = new Hero("AI Hero", enemyCards, SpriteHandler.ashePortrait);
+        Hero player = new Hero("Player Hero", playerCards, SpriteHandler.ashePortrait);
         mainBoard = new Board(enemy, player);
     }
 

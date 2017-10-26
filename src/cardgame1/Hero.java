@@ -29,10 +29,10 @@ public class Hero {
     public int id;
     public boolean turn = false; //is it our turn?
     //CONSTRUCTOR
-    public Hero(String name, ArrayList<Card> deck){
+    public Hero(String name, ArrayList<Card> deck, BufferedImage portrait){
         this.name = name;
         this.deck = deck;
-        this.picture = SpriteHandler.ashePortrait;
+        this.picture = portrait;
         for(Card c: deck){
             c.setHero(this);
         }

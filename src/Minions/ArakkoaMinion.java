@@ -29,6 +29,7 @@ public class ArakkoaMinion extends Minion{
     
     public ArakkoaMinion(Card parent){
         this.parent = parent;
+        this.owner = parent.getOwner();
         attack = 1;
         maxHealth = 2;
         health = maxHealth;
