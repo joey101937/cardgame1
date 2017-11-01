@@ -16,14 +16,15 @@ import java.util.ArrayList;
  */
 public class Hero {
     /*   STATICS   */
-    public static int maxHandSize = 5; //max amount of cards to have in your hand
+    public static int maxHandSize = 6; //max amount of cards to have in your hand
     private static int idBank = 0;     //determines what id a hero will have
     /*   FIELDS   */
     public int health = 30;
     public int maxHealth = 30;
+    public int resource, maxResource;   //mana used to play cards
     public BufferedImage picture; //visual representation
     public String name;
-    public ArrayList<Minion> minions = new ArrayList<>(); //currently in play minions.
+    public PlayArea<Minion> minions = new PlayArea<Minion>();
     public ArrayList<Card> hand = new ArrayList<>();
     public ArrayList<Card> deck;
     public int id;

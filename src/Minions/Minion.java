@@ -22,10 +22,11 @@ public abstract class Minion{
     public Integer attack;          //attack value
     public Integer health;          //current health
     public Integer maxHealth;       //current health
-    public Tribe tribe;
-    public BufferedImage sprite;
+    public Tribe tribe;             //"classification" or "type"
+    public BufferedImage sprite;    //visual representation
+    public int damagedTicker = 0; //set to positive value when damaged, passively ticks down to 0 over time.
     public Card parent; //card that summoned it, used for righclick for details.
-    public Hero owner;
+    public Hero owner;  //hero controling this minion
     public static final Integer WIDTH = 150; //width of minion in pixel
     public static final Integer HEIGHT = 225; //heigh in pixels
     public static final Integer TOP_Y_OFFSET = 200; //how far the minion is rendered from the top of the screen for the tophero
@@ -49,6 +50,12 @@ public abstract class Minion{
         g.drawString(attack.toString(), x-20, y+Minion.HEIGHT);
         g.setColor(healthGreen); //green color for health
         g.drawString(health.toString(), x+Minion.WIDTH, y+Minion.HEIGHT);
+        //damaging effect
+        if(damagedTicker > 0){
+        g.setColor(new Color(255,0,0,(this.damagedTicker)*12));
+        damagedTicker--;
+        g.fillRect(x, y, Minion.WIDTH, Minion.HEIGHT);
+        }
     }
     
     /*   MINION GAMEPLAY      */
@@ -58,26 +65,20 @@ public abstract class Minion{
      * @param target 
      */
     public void attack(Minion target){
-        target.health -= this.attack;
-        this.health -= target.attack;
-        if(target.health <= 0){
-            target.destroy();
-        }
-       if(this.health <= 0){
-           this.destroy();
-       }
+        target.takeDamage(this.attack);
+        this.takeDamage(target.attack);
     }
     /**
      * removes from the game
      */
     public void destroy(){
-        for(Minion m : Board.topHero.minions){
+        for(Minion m : Board.topHero.minions.getStorage()){
             if(m == this){
                 Board.topHero.minions.remove(m);
                 return;
             }
         }
-        for(Minion m : Board.botHero.minions){
+        for(Minion m : Board.botHero.minions.getStorage()){
             if(m == this){
                 Board.botHero.minions.remove(m);
                 return;
@@ -85,6 +86,20 @@ public abstract class Minion{
         }
         System.out.println("ERROR: could not find minion to remove in either hero's minion pool.  " + this );
     }
+    
+    /**
+     * damages the minion and applies any needed effects
+     * @param amount 
+     */
+    public void takeDamage(int amount){
+        this.health-=amount;
+        this.damagedTicker = 20;
+        if(this.health <= 0){
+            this.destroy();
+        }
+    }
+    
+    
     /**
      * attacks enemy hero/lifepoints directly
      */
@@ -100,12 +115,12 @@ public abstract class Minion{
      * @return x coordinate of top left corner, -1 if not in play
      */
     public int getXCordinate(){
-        for(Minion m : Board.topHero.minions){
+        for(Minion m : Board.topHero.minions.getStorage()){
             if(m == this){
                 return (Minion.SPACER_SIZE + (Board.topHero.minions.indexOf(m) * (Minion.WIDTH + Minion.SPACER_SIZE)));
             }
         }
-        for (Minion m : Board.botHero.minions) {
+        for (Minion m : Board.botHero.minions.getStorage()) {
             if (m == this) {
                 return (Minion.SPACER_SIZE + (Board.botHero.minions.indexOf(m) * (Minion.WIDTH + Minion.SPACER_SIZE)));
             }

@@ -27,7 +27,7 @@ public class VisualEffectHandler {
      * @param g 
      */
     public void drawLine(Graphics2D g){
-        Minion selected = InputHandler.selected;
+        Minion selected = InputHandler.selectedMinion;
         if(selected == null) return;
         g.drawLine(selected.getXCordinate()+Minion.WIDTH/2, selected.getYcoordinate()+Minion.HEIGHT/2, Board.mouseX, Board.mouseY);
     }

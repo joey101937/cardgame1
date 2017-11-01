@@ -5,6 +5,7 @@
  */
 package cardgame1;
 
+import Cards.Card;
 import Minions.*;
 import java.awt.Canvas;
 import java.awt.Color;
@@ -13,6 +14,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
+import java.util.ArrayList;
 
 /*
  * @author Joseph
@@ -25,6 +27,7 @@ public class Board extends Canvas implements Runnable {
     public static Minion selectedMinion;
     public static double xScale, yScale; //scale of the window reletive to testing
     public static int mouseX, mouseY;
+    public static int buffer = 50; //extra space between rendered cards in hand
     public VisualEffectHandler visHandler = null;
     public Window window;  //main window
     private boolean running = false;
@@ -52,6 +55,11 @@ public class Board extends Canvas implements Runnable {
         topHero.minions.add(new ArakkoaMinion(topHero.deck.get(0)));
         botHero.minions.add(new ArakkoaMinion(botHero.deck.get(0)));
         botHero.minions.add(new ArakkoaMinion(botHero.deck.get(0)));
+        Board.topHero.draw();
+        Board.botHero.draw();
+        Board.botHero.draw();
+        Board.botHero.draw();
+
     }
 
     public void render() {
@@ -66,18 +74,50 @@ public class Board extends Canvas implements Runnable {
         g.setColor(Color.white);
         g.drawImage(Main.BackgroundImage, 0, 0, null);
         g.setFont(new Font("TimesRoman", Font.BOLD, 35));
-        //render top and bot hero's minions in a line
-        for(Minion m : topHero.minions){
-            m.render(g, topHero.minions.indexOf(m)*(Minion.WIDTH+100) + 100, Minion.TOP_Y_OFFSET);
-        }
-        for(Minion m : botHero.minions){
-             m.render(g, botHero.minions.indexOf(m)*(Minion.WIDTH+100) + 100, Minion.BOT_Y_OFFSET);
-        }
+        renderMinions(g);
+        renderPlayerHand(g);
         this.visHandler.render(g);
-        g.drawImage(topHero.picture, 710, 0, null);
+        g.drawImage(topHero.picture, 250, 0, null);
         g.drawImage(SpriteHandler.cardbackL,800,500,null);
         g.dispose();
         bs.show();
+    }
+    
+    
+    private void renderPlayerHand(Graphics2D g){
+        ArrayList<Card> leftColumn = new ArrayList<>();
+        ArrayList<Card> rightColumn = new ArrayList<>();
+        for(Card c : Board.playerHero.hand){
+            if(Board.playerHero.hand.indexOf(c) % 2 == 0){
+                leftColumn.add(c);
+            }else{
+                rightColumn.add(c);
+            }
+        }
+        for(Card c : leftColumn){
+            c.render(g, 1100, 25 + (Board.buffer * leftColumn.indexOf(c) + (Card.HEIGHT * leftColumn.indexOf(c))));
+        }
+        for (Card c : rightColumn) {
+            c.render(g, 1100 + Card.WIDTH + Board.buffer,  25 + (Board.buffer * rightColumn.indexOf(c) + (Card.HEIGHT * rightColumn.indexOf(c))));
+        }
+    }
+    /**
+     * renders all minions in play, arranged in a line
+     * @param g board graphics
+     */
+    private void renderMinions(Graphics2D g) {
+        for (Minion m : topHero.minions.getStorage()) {
+            if (m == null) {
+                continue;
+            }
+            m.render(g, topHero.minions.indexOf(m) * (Minion.WIDTH + 100) + 100, Minion.TOP_Y_OFFSET);
+        }
+        for (Minion m : botHero.minions.getStorage()) {
+            if (m == null) {
+                continue;
+            }
+            m.render(g, botHero.minions.indexOf(m) * (Minion.WIDTH + 100) + 100, Minion.BOT_Y_OFFSET);
+        }
     }
     
     public void tick() {

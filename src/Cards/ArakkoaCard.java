@@ -28,7 +28,7 @@ public class ArakkoaCard extends Card{
         name = "Arakkoa";
         cardType = CardType.Minion;
         cardText = "Test card";
-        sprite = SpriteHandler.cardback2;
+        sprite = SpriteHandler.arakkoaCard;
     }
     
     @Override
