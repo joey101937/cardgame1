@@ -27,7 +27,7 @@ public class SpriteHandler {
             cardback = ImageIO.read(new File(Main.assets + "cardBack.png"));
             cardbackL = ImageIO.read(new File(Main.assets + "cardBackL.png"));
             arakkoaMinion = ImageIO.read(new File(Main.assets + "arakkoaMinionL.png"));
-            arakkoaCard = ImageIO.read(new File(Main.assets + "arakkoaCard2.png"));
+            arakkoaCard = ImageIO.read(new File(Main.assets + "arakkoaBlank.png"));
             cardback2 = ImageIO.read(new File(Main.assets + "cardBack2.png"));
             ashePortrait = ImageIO.read(new File(Main.assets + "ashePortrait.png"));
         } catch (Exception e) {

@@ -5,9 +5,10 @@
  */
 package cardgame1;
 
+import Cards.Card;
+import Cards.CardType;
 import Minions.Minion;
 import java.awt.Graphics2D;
-import java.awt.Stroke;
 
 /**
  *
@@ -20,15 +21,26 @@ public class VisualEffectHandler {
     }
     
     public void render(Graphics2D g){
-        drawLine(g);
+        drawLineM(g);
+        drawLineC(g);
     }
     /**
      * draws line from selected minion to location of the mouse
      * @param g 
      */
-    public void drawLine(Graphics2D g){
+    public void drawLineM(Graphics2D g){
         Minion selected = InputHandler.selectedMinion;
         if(selected == null) return;
         g.drawLine(selected.getXCordinate()+Minion.WIDTH/2, selected.getYcoordinate()+Minion.HEIGHT/2, Board.mouseX, Board.mouseY);
+    }
+    /**
+     * draws a line from the selected card to the location of the mouse
+     * @param g 
+     */
+    public void drawLineC(Graphics2D g){
+        Card selected = InputHandler.selectedCard;
+        if(selected == null) return;
+        if(selected.cardType != CardType.Minion) return; //spells only. this will be used for targeting spells.
+        g.drawLine(selected.getXCoordinate()+Card.WIDTH/2, selected.getYCoordinate()+Card.HEIGHT/2, Board.mouseX, Board.mouseY);
     }
 }

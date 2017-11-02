@@ -15,6 +15,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 
 /*
  * @author Joseph
@@ -54,7 +55,6 @@ public class Board extends Canvas implements Runnable {
         topHero.minions.add(new ArakkoaMinion(topHero.deck.get(0)));
         topHero.minions.add(new ArakkoaMinion(topHero.deck.get(0)));
         botHero.minions.add(new ArakkoaMinion(botHero.deck.get(0)));
-        botHero.minions.add(new ArakkoaMinion(botHero.deck.get(0)));
         Board.topHero.draw();
         Board.botHero.draw();
         Board.botHero.draw();
@@ -78,7 +78,6 @@ public class Board extends Canvas implements Runnable {
         renderPlayerHand(g);
         this.visHandler.render(g);
         g.drawImage(topHero.picture, 250, 0, null);
-        g.drawImage(SpriteHandler.cardbackL,800,500,null);
         g.dispose();
         bs.show();
     }
@@ -143,7 +142,11 @@ public class Board extends Canvas implements Runnable {
                 delta--;
             }
             if (running) {
+                try{
                 this.render();
+                }catch(ConcurrentModificationException cme){
+                    cme.printStackTrace();
+                }
             }
             frames++;
             if (System.currentTimeMillis() - timer > 1000) {

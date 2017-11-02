@@ -43,5 +43,10 @@ public class ArakkoaMinion extends Minion{
        
     }
 
+    @Override
+    public void onSummon() {
+        return;
+    }
+
     
 }

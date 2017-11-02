@@ -5,6 +5,7 @@
  */
 package Cards;
 
+import Minions.Minion;
 import cardgame1.Board;
 import cardgame1.Hero;
 import cardgame1.InputHandler;
@@ -23,14 +24,21 @@ public abstract class Card {
     /* FIELDS */
     public String name;         //name of card
     public CardType cardType;   //type of card
+    public Minion summon;       //if this is a minion card, the minion it summons. if spell, this is null
     public String cardText;     //what the card says on it
     public int cost;            //casting cost
     public BufferedImage sprite; //visual representation of the card
-    private Hero owner;
+    protected Hero owner;
     
     public void render(Graphics2D g, int x, int y){
        if(owner == Board.playerHero){
            g.drawImage(sprite, x, y, null);   //the card is ours so we can see what it is
+           if(summon != null){
+               g.setColor(Minion.attackRed);
+               g.drawString(summon.attack.toString(), x + 60 - (summon.attack.toString().length() * 10), y + (Card.HEIGHT*12)/14);
+               g.setColor(Minion.healthGreen);
+               g.drawString(summon.health.toString(), x + Card.WIDTH - 60 - (summon.health.toString().length() * 10), y + (Card.HEIGHT*12)/14);
+           }
            if(InputHandler.selectedCard == this){
                if(owner.resource >= cost){// if selected and we can afford to cast it, color it green
                    g.setColor(new Color(0,255,0,50));
@@ -45,14 +53,57 @@ public abstract class Card {
        }
     }
     /**
+     * gets the int value of the topleft corner of the rendered card based on location in hand.
+     * @return x value of topleft corner NOT ADJUSTED FOR SCALING; -1 if card is not in hand.
+     */
+    public int getXCoordinate(){
+        for(Card c : Board.playerHero.hand){
+            if(c != this) continue;
+            if(Board.playerHero.hand.indexOf(c) % 2 == 0){
+                //left column, even
+                return 1100;
+            }else{
+                //right column, odd
+                return 1100 + Board.buffer + Card.WIDTH;
+            }
+        }
+        return -1;
+    }
+      /**
+     * gets the int value of the topleft corner of the rendered card based on
+     * location in hand.
+     * @return y value of topleft corner NOT ADJUSTED FOR SCALING; -1 if card is
+     * not in hand.
+     */
+    public int getYCoordinate(){
+        for(Card c : Board.playerHero.hand){
+            if(c != this) continue;
+            if(Board.playerHero.hand.indexOf(c) < 2){
+                return 25 + Board.buffer;       //top level
+            }else if(Board.playerHero.hand.indexOf(c) < 4){
+                return 25 + Board.buffer + Minion.HEIGHT;  //middle level
+            }else if(Board.playerHero.hand.indexOf(c) < 6){
+                return 25 + Board.buffer + Minion.HEIGHT + Minion.HEIGHT; //bottom level
+            }
+        }
+        return -1;
+    }
+    
+    /**
      * what happens when the card is played from the hand.
+     * @param target target minion if applicable. may be null
      * returns an int reflecting the outcome. 
      * 0 for success
      * 1 for not cast (not enough mana, etc)
      */
     public abstract int cast();
-    
-    
+    /**
+     * if the owner has enough resources left to afford the cast cost of this card
+     * @return 
+     */
+    public boolean canAfford(){
+        return owner.resource >= cost;
+    }
     public void destroy(){
         //TODO
     }
@@ -64,6 +115,7 @@ public abstract class Card {
     }
     public void setHero(Hero h){
         owner = h;
+        summon.owner = h;
     }
     public Hero getOwner(){
         return owner;

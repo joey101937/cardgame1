@@ -6,6 +6,7 @@
 package cardgame1;
 
 import Cards.Card;
+import Cards.CardType;
 import Minions.Minion;
 import java.awt.event.KeyAdapter;
 import java.awt.event.MouseEvent;
@@ -26,6 +27,10 @@ public class InputHandler extends KeyAdapter implements MouseListener, MouseMoti
     @Override
     public void mouseClicked(MouseEvent e) {
         System.out.println(e.getX()/Board.xScale + ", " + e.getY()/Board.yScale);
+        Card clickedCard = InputHandler.getCardAt(e.getX()/Board.xScale, e.getY()/Board.yScale);
+        if(clickedCard != null && clickedCard.cardType == CardType.Minion){
+            clickedCard.cast();
+        }
     }
 
     @Override
@@ -45,6 +50,7 @@ public class InputHandler extends KeyAdapter implements MouseListener, MouseMoti
             selectedMinion.attack(target);
         }
        selectedMinion = null;
+       selectedCard = null;
     }
 
     @Override

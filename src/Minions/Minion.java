@@ -32,14 +32,18 @@ public abstract class Minion{
     public static final Integer TOP_Y_OFFSET = 200; //how far the minion is rendered from the top of the screen for the tophero
     public static final Integer BOT_Y_OFFSET = 700; //how far the minion is rendered from the top of the screen for the bot hero
     public static final Integer SPACER_SIZE = 100; //this plus WIDTH is how far apart to render each minion
-    public static Color attackRed = new Color(190,20,20,255);
-    public static Color healthGreen = new Color(30,140,0,255);
+    public static Color attackRed = new Color(250,20,20,255);
+    public static Color healthGreen = new Color(30,200,0,255);
     public Minion(){
     }
     /**
      * runs every tick
      */
     public abstract void tick();
+    /**
+     * runs when the minion is summoned
+     */
+    public abstract void onSummon();
     /**
      * runs every render
      * @param g 

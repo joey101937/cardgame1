@@ -5,7 +5,7 @@
  */
 package Cards;
 
-import cardgame1.Hero;
+import Minions.ArakkoaMinion;
 import cardgame1.SpriteHandler;
 
 /**
@@ -29,11 +29,32 @@ public class ArakkoaCard extends Card{
         cardType = CardType.Minion;
         cardText = "Test card";
         sprite = SpriteHandler.arakkoaCard;
+        cost = 1;
+        summon = new ArakkoaMinion(this);
+        
     }
-    
+
+    /**
+     * attempts to use the card. Returns value based on outcome
+     * 1: success
+     * 0: Canceled- could not afford
+     * -1: could not add to play area. (max minions reached?)
+     * @return
+     */
     @Override
     public int cast() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (canAfford()) {
+            if (owner.minions.add(summon)) {
+                owner.resource -= cost;
+                owner.hand.remove(this);
+                summon.onSummon();
+                return 1;
+            } else {
+                //could not legally summon. likely not enough board slots
+                return -1;
+            }
+        }
+        return 0;
     }
-    
+
 }
