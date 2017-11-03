@@ -11,6 +11,7 @@ import cardgame1.Hero;
 import cardgame1.InputHandler;
 import cardgame1.SpriteHandler;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
@@ -33,6 +34,9 @@ public abstract class Card {
     public void render(Graphics2D g, int x, int y){
        if(owner == Board.playerHero){
            g.drawImage(sprite, x, y, null);   //the card is ours so we can see what it is
+           g.setColor(Color.yellow);
+           g.drawString(String.valueOf(cost), x + 10, y+35);
+           this.renderCardText(g, x, y);
            if(summon != null){
                g.setColor(Minion.attackRed);
                g.drawString(summon.attack.toString(), x + 60 - (summon.attack.toString().length() * 10), y + (Card.HEIGHT*12)/14);
@@ -44,14 +48,29 @@ public abstract class Card {
                    g.setColor(new Color(0,255,0,50));
                    g.fillRect(x, y, Card.WIDTH, Card.HEIGHT);
                }else{
-                   g.setColor(new Color(0,0,255,40)); //if we cannot afford it, color it blue
-                   g.fillRect(x, y, Card.WIDTH, Card.HEIGHT);
+                  // g.setColor(new Color(255,0,0,50)); //if we cannot afford it, color it blue
+                   //g.fillRect(x, y, Card.WIDTH, Card.HEIGHT);
+                   g.drawImage(SpriteHandler.redX, x, y, null);
                }
            }
        }else{
            g.drawImage(SpriteHandler.cardback, x, y, null);    //if we arent the owner of the card, we see the cardback, not the card itself
        }
     }
+    
+    
+    private void renderCardText(Graphics2D g, int x , int y){
+        Font original = g.getFont();
+        Font toUse = new Font("TimesRoman", Font.BOLD, 20);
+        g.setColor(Color.black);
+        g.setFont(toUse);
+        String[] lines = cardText.split(" \n ");
+        for(int i = 0; i < lines.length; i++){
+            g.drawString(lines[i], x + 10, y + 175 + (i * 20));
+        }
+        g.setFont(original);
+    }
+    
     /**
      * gets the int value of the topleft corner of the rendered card based on location in hand.
      * @return x value of topleft corner NOT ADJUSTED FOR SCALING; -1 if card is not in hand.
@@ -96,7 +115,7 @@ public abstract class Card {
      * 0 for success
      * 1 for not cast (not enough mana, etc)
      */
-    public abstract int cast();
+    public abstract int cast(Minion target);
     /**
      * if the owner has enough resources left to afford the cast cost of this card
      * @return 
@@ -115,7 +134,7 @@ public abstract class Card {
     }
     public void setHero(Hero h){
         owner = h;
-        summon.owner = h;
+        if(summon != null)summon.owner = h;
     }
     public Hero getOwner(){
         return owner;

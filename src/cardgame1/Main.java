@@ -5,8 +5,7 @@
  */
 package cardgame1;
 
-import Cards.ArakkoaCard;
-import Cards.Card;
+import Cards.*;
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -38,6 +37,7 @@ public class Main {
         for(int i = 0; i < 10 ; i++){
             enemyCards.add(new ArakkoaCard());
             playerCards.add(new ArakkoaCard());
+            playerCards.add(new FireBoltCard());
         }
         
         Hero enemy = new Hero("AI Hero", enemyCards, SpriteHandler.ashePortrait);

@@ -8,6 +8,7 @@ package cardgame1;
 import Cards.Card;
 import Cards.CardType;
 import Minions.Minion;
+import java.awt.Color;
 import java.awt.Graphics2D;
 
 /**
@@ -40,7 +41,8 @@ public class VisualEffectHandler {
     public void drawLineC(Graphics2D g){
         Card selected = InputHandler.selectedCard;
         if(selected == null) return;
-        if(selected.cardType != CardType.Minion) return; //spells only. this will be used for targeting spells.
+        if(selected.cardType == CardType.Minion || !selected.canAfford()) return; //spells only. this will be used for targeting spells.
+        g.setColor(Color.yellow);
         g.drawLine(selected.getXCoordinate()+Card.WIDTH/2, selected.getYCoordinate()+Card.HEIGHT/2, Board.mouseX, Board.mouseY);
     }
 }

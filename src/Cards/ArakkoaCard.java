@@ -6,6 +6,7 @@
 package Cards;
 
 import Minions.ArakkoaMinion;
+import Minions.Minion;
 import cardgame1.SpriteHandler;
 
 /**
@@ -27,7 +28,7 @@ public class ArakkoaCard extends Card{
     public ArakkoaCard(){
         name = "Arakkoa";
         cardType = CardType.Minion;
-        cardText = "Test card";
+        cardText = "Basic minion";
         sprite = SpriteHandler.arakkoaCard;
         cost = 1;
         summon = new ArakkoaMinion(this);
@@ -42,7 +43,7 @@ public class ArakkoaCard extends Card{
      * @return
      */
     @Override
-    public int cast() {
+    public int cast(Minion target) {
         if (canAfford()) {
             if (owner.minions.add(summon)) {
                 owner.resource -= cost;
