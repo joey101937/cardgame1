@@ -38,6 +38,8 @@ public class Main {
             enemyCards.add(new ArakkoaCard());
             playerCards.add(new ArakkoaCard());
             playerCards.add(new FireBoltCard());
+            playerCards.add(new FrostBearCard());
+            playerCards.add(new ArcherCard());
         }
         
         Hero enemy = new Hero("AI Hero", enemyCards, SpriteHandler.ashePortrait);

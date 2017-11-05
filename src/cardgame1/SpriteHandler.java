@@ -24,6 +24,10 @@ public class SpriteHandler {
     public static BufferedImage arakkoaCard;
     public static BufferedImage fireBoltCard;
     public static BufferedImage redX;
+    public static BufferedImage frostBearCard;
+    public static BufferedImage frostBearMinion;
+    public static BufferedImage archerCard;
+    public static BufferedImage archerMinion;
     
     public static void Initialize() {
         try {
@@ -34,6 +38,10 @@ public class SpriteHandler {
             cardback2 = ImageIO.read(new File(Main.assets + "cardBack2.png"));
             ashePortrait = ImageIO.read(new File(Main.assets + "ashePortrait.png"));
             fireBoltCard = ImageIO.read((new File(Main.assets + "fireBoltCard.png")));
+            frostBearMinion = load("frostBear.png");
+            frostBearCard = load("frostBearCard.png");
+            archerCard = load("archerCard.png");
+            archerMinion = load("archerPortrait.png");
             redX = load("redXsmall.png");
         } catch (Exception e) {
             e.printStackTrace();

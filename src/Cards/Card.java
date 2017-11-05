@@ -24,7 +24,8 @@ public abstract class Card {
     public static final Integer HEIGHT = 300;
     /* FIELDS */
     public String name;         //name of card
-    public CardType cardType;   //type of card
+    public CardType cardType;   //Minion or spell
+    public boolean targeted = false; //does this card's cast method want to take a target?
     public Minion summon;       //if this is a minion card, the minion it summons. if spell, this is null
     public String cardText;     //what the card says on it
     public int cost;            //casting cost
@@ -125,6 +126,25 @@ public abstract class Card {
     }
     public void destroy(){
         //TODO
+    }
+    
+    /**
+     * default method to use for simple summon cards
+     * @return  1 if success, -1 if error, 0 if could not afford
+     */
+    protected int defaultMinionSummon(){
+        if (canAfford()) {
+            if (owner.minions.add(summon)) {
+                owner.resource -= cost;
+                owner.hand.remove(this);
+                summon.onSummon();
+                return 1;
+            } else {
+                //could not legally summon. likely not enough board slots
+                return -1;
+            }
+        }
+        return 0;
     }
     
     

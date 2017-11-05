@@ -25,11 +25,12 @@ public class FireBoltCard extends Card{
      */
     
     /*   FIELDS    */
-    public int damage = 1;
+    public int damage = 2;
     
     public FireBoltCard() {
         name = "FireBolt";
         cardType = CardType.Spell;
+        targeted = true;
         cardText = "Deal " + damage + " damage to \n target minion";
         sprite = SpriteHandler.fireBoltCard;
         cost = 1;

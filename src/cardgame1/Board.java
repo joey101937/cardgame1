@@ -59,6 +59,7 @@ public class Board extends Canvas implements Runnable {
         Board.botHero.draw();
         Board.botHero.draw();
         Board.botHero.draw();
+        Board.botHero.draw();
 
     }
 

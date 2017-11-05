@@ -28,11 +28,10 @@ public class ArakkoaCard extends Card{
     public ArakkoaCard(){
         name = "Arakkoa";
         cardType = CardType.Minion;
-        cardText = "Basic minion";
+        cardText = "";
         sprite = SpriteHandler.arakkoaCard;
         cost = 1;
         summon = new ArakkoaMinion(this);
-        
     }
 
     /**
@@ -44,18 +43,7 @@ public class ArakkoaCard extends Card{
      */
     @Override
     public int cast(Minion target) {
-        if (canAfford()) {
-            if (owner.minions.add(summon)) {
-                owner.resource -= cost;
-                owner.hand.remove(this);
-                summon.onSummon();
-                return 1;
-            } else {
-                //could not legally summon. likely not enough board slots
-                return -1;
-            }
-        }
-        return 0;
+       return defaultMinionSummon();
     }
 
 }

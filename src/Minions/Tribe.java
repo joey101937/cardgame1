@@ -10,5 +10,5 @@ package Minions;
  * @author Joseph
  */
 public enum Tribe {
-    none,dragon,mech,knight;
+    none,dragon,mech,knight,Beast;
 }

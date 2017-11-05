@@ -34,8 +34,8 @@ public class Hero {
         this.name = name;
         this.deck = deck;
         this.picture = portrait;
-        this.resource = 1;
-        this.maxResource = 1;
+        this.resource = 2;
+        this.maxResource = 2;
         for(Card c: deck){
             c.setHero(this);
         }
