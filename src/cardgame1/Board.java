@@ -78,7 +78,6 @@ public class Board extends Canvas implements Runnable {
         renderMinions(g);
         renderPlayerHand(g);
         this.visHandler.render(g);
-        g.drawImage(topHero.picture, 250, 0, null);
         g.dispose();
         bs.show();
     }

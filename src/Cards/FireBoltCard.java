@@ -25,13 +25,14 @@ public class FireBoltCard extends Card{
      */
     
     /*   FIELDS    */
-    public int damage = 2;
+    
     
     public FireBoltCard() {
         name = "FireBolt";
         cardType = CardType.Spell;
-        targeted = true;
-        cardText = "Deal " + damage + " damage to \n target minion";
+        isTargeted = true;
+        spellDamage = 2;
+        cardText = "Deal " + spellDamage + " damage to \n target minion";
         sprite = SpriteHandler.fireBoltCard;
         cost = 1;
     }
@@ -45,7 +46,7 @@ public class FireBoltCard extends Card{
     public int cast(Minion target) {
         if(target == null) return -1;
         if(!canAfford()) return 0; //reutrn 0 if unaffordable
-        target.takeDamage(damage);
+        target.takeDamage(spellDamage);
         owner.resource -= cost;
         owner.hand.remove(this);
         return 1;

@@ -22,10 +22,15 @@ import java.awt.image.BufferedImage;
 public abstract class Card {
     public static final Integer WIDTH = 200;
     public static final Integer HEIGHT = 300;
+    /*   AI FLAGS       */
+    /** will this deal damage (true) or heal (false). used to determine which side of the field to target */
+    public boolean isOffensive = false;
+    
     /* FIELDS */
     public String name;         //name of card
     public CardType cardType;   //Minion or spell
-    public boolean targeted = false; //does this card's cast method want to take a target?
+    public boolean isTargeted = false; //does this card's cast method want to take a target?
+    public int spellDamage = 0;     //damage dealt on cast, if applicable
     public Minion summon;       //if this is a minion card, the minion it summons. if spell, this is null
     public String cardText;     //what the card says on it
     public int cost;            //casting cost

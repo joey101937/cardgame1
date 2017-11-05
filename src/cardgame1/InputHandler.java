@@ -28,7 +28,7 @@ public class InputHandler extends KeyAdapter implements MouseListener, MouseMoti
     public void mouseClicked(MouseEvent e) {
         System.out.println(e.getX()/Board.xScale + ", " + e.getY()/Board.yScale);
         Card clickedCard = InputHandler.getCardAt(e.getX()/Board.xScale, e.getY()/Board.yScale);
-        if(clickedCard != null && clickedCard.targeted == false){
+        if(clickedCard != null && clickedCard.isTargeted == false){
             clickedCard.cast(null); //cast with null param becuase there is no target
         }
     }
@@ -49,7 +49,7 @@ public class InputHandler extends KeyAdapter implements MouseListener, MouseMoti
         if(target != null && selectedMinion != null && selectedMinion.owner != target.owner){
             selectedMinion.attack(target);
         }
-        if(target != null && selectedCard != null && selectedCard.targeted == true){
+        if(target != null && selectedCard != null && selectedCard.isTargeted == true){
             selectedCard.cast(target);
         }
        selectedMinion = null;

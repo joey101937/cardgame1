@@ -20,7 +20,7 @@ public class ArcherCard extends Card{
     public ArcherCard() {
         name = "Archer";
         cardType = CardType.Minion;
-        targeted = true;
+        isTargeted = true;
         cardText = "Deal " + summonDamage + " Damage";
         sprite = SpriteHandler.archerCard;
         cost = 1;

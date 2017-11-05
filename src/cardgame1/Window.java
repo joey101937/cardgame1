@@ -21,14 +21,13 @@ public class Window extends Canvas {
     public Window(int width, int height, String title, Board board) {
         frame = new JFrame(title);
         frame.setMinimumSize(new Dimension(width, height));
+        frame.setResizable(false);
         frame.setVisible(true);
         frame.setAutoRequestFocus(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setTitle(title);
         frame.add(board);
         board.setBounds(0, 0, width, height);
-     //   JPanel panel = new JPanel();
-       // panel.add(board);
 
         board.start();
     }

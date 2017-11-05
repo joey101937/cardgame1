@@ -41,7 +41,7 @@ public class VisualEffectHandler {
     public void drawLineC(Graphics2D g){
         Card selected = InputHandler.selectedCard;
         if(selected == null) return;
-        if(!selected.targeted || !selected.canAfford()) return; //return if card is untargeted or too expensive
+        if(!selected.isTargeted || !selected.canAfford()) return; //return if card is untargeted or too expensive
         g.setColor(Color.yellow);
         g.drawLine(selected.getXCoordinate()+Card.WIDTH/2, selected.getYCoordinate()+Card.HEIGHT/2, Board.mouseX, Board.mouseY);
     }

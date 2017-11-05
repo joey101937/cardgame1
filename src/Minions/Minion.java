@@ -25,6 +25,7 @@ public abstract class Minion{
     public Tribe tribe;             //"classification" or "type"
     public BufferedImage sprite;    //visual representation
     public int damagedTicker = 0; //set to positive value when damaged, passively ticks down to 0 over time.
+    public boolean hasAttacked = false; //has it attacked already this turn?
     public Card parent; //card that summoned it, used for righclick for details.
     public Hero owner;  //hero controling this minion
     public static final Integer WIDTH = 150; //width of minion in pixel
@@ -71,6 +72,7 @@ public abstract class Minion{
     public void attack(Minion target){
         target.takeDamage(this.attack);
         this.takeDamage(target.attack);
+        this.hasAttacked = true;
     }
     /**
      * removes from the game
