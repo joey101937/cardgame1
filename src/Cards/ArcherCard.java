@@ -23,7 +23,7 @@ public class ArcherCard extends Card{
         targeted = true;
         cardText = "Deal " + summonDamage + " Damage";
         sprite = SpriteHandler.archerCard;
-        cost = 2;
+        cost = 1;
         summon = new archerMinion(this);
     }
     

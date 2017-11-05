@@ -5,7 +5,7 @@
  */
 package cardgame1;
 
-import Cards.Card;
+import Cards.*;
 import Minions.*;
 import java.awt.Canvas;
 import java.awt.Color;
@@ -51,7 +51,7 @@ public class Board extends Canvas implements Runnable {
         this.addMouseMotionListener(ih);
         this.addKeyListener(ih);
         this.visHandler = new VisualEffectHandler(this);
-        topHero.minions.add(new ArakkoaMinion(topHero.deck.get(0)));
+        topHero.minions.add(new FrostBearMinion(topHero.deck.get(0)));
         topHero.minions.add(new ArakkoaMinion(topHero.deck.get(0)));
         topHero.minions.add(new ArakkoaMinion(topHero.deck.get(0)));
         botHero.minions.add(new ArakkoaMinion(botHero.deck.get(0)));
