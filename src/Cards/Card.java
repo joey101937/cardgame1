@@ -29,6 +29,7 @@ public abstract class Card {
     /* FIELDS */
     public String name;         //name of card
     public CardType cardType;   //Minion or spell
+    public CardPurpose cardPurpose; //purpose of the card, used with AI
     public boolean isTargeted = false; //does this card's cast method want to take a target?
     public int spellDamage = 0;     //damage dealt on cast, if applicable
     public Minion summon;       //if this is a minion card, the minion it summons. if spell, this is null

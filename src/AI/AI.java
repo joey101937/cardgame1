@@ -3,10 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cardgame1;
+package AI;
 
 import Cards.Card;
 import Minions.Minion;
+import cardgame1.Board;
+import cardgame1.Hero;
+import java.util.ArrayList;
 
 /**
  * Driver for computer players
@@ -136,5 +139,67 @@ public class AI {
         }
         return rawGains > intrinsicValue;
     }
-
+    /**
+     * gets the total value of all minions in an arraylist
+     * @param input list to evaluate
+     * @return sum of all minion's worths
+     */
+    public static int getWorthOfBoard(ArrayList<Minion> input){
+        int output = 0;
+        for(Minion m : input){
+            if(m != null) output += AI.getWorth(m);
+        }
+        return output;
+    }
+    
+    /**
+     * gets the value that playing a card represents
+     * NOT DONE
+     * @param c card to evaluate
+     * @return the value playing the card presents
+     */
+    public static int getValueOfCard(Card c){
+        int output = 0;
+        ArrayList<SimulatedMinion> myMinions = new ArrayList<>();
+        ArrayList<SimulatedMinion> enemyMinions = new ArrayList<>();
+        if(Board.topHero == c.getOwner()){
+            for(Minion m : Board.topHero.minions.getStorage()){
+                myMinions.add(new SimulatedMinion(m)); //tophero's card so popualte friendly vs enemy lists accordingly
+            }
+            for(Minion m : Board.botHero.minions.getStorage()){
+                enemyMinions.add(new SimulatedMinion(m));
+            }
+        }else if(Board.botHero == c.getOwner()){ //bot hero's card so populate enemy vs friendly list accordingly
+            for(Minion m : Board.botHero.minions.getStorage()){
+                myMinions.add(new SimulatedMinion(m));
+            }
+            for(Minion m : Board.topHero.minions.getStorage()){
+                enemyMinions.add(new SimulatedMinion(m));
+            }
+        }else{
+            //card belongs to neither hero
+            System.out.println("ERROR CANNOT FIND VALUE OF CARD WITH UNKNOWN ERROR: " + c.toString());
+            return -1;
+        }
+        //TODO evaluate value based on what the card is supposed to do
+        switch(c.cardPurpose){
+            case VanillaMinion:
+                break;
+            case BattlecryMinion:
+                break;
+            case AOEDamage:
+                break;
+            case DirectDamage:
+                break;
+            case Debuff:
+                break;
+            case AOEHeal:
+                break;
+            case DirectHeal:
+                break;
+            case Buff:
+                break;
+        }
+        return output;
+    }
 }
