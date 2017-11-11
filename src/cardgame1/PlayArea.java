@@ -76,5 +76,13 @@ public class PlayArea<E>{
         return false;
     }
     
+    public boolean isFull(){
+        if(storage.size() < MAX_SIZE) return false;
+        if(storage.size() > MAX_SIZE) return true; //return true if the play area is somehow over popualted
+        for(int i = 0; i < MAX_SIZE; i++){
+            if(storage.get(i) == null) return false;
+        }
+        return true;
+    }
  
     }

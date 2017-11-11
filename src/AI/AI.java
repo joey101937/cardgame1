@@ -100,6 +100,32 @@ public class AI {
         }
         return false;
     }
+   
+    /**
+     * returns the best target for the given minion
+     * @param attacker
+     * @return 
+     */
+    public static Minion getBestTarget(Minion attacker){
+        //TODO
+        return null;
+    }
+    
+    /**
+     * gets the value presented by making the attacker attack the defneder. May be negative, higher is better.
+     * @param attacker minion that we are using
+     * @param defender potential target
+     * @return how good of an idea it is to attack
+     */
+    public static int getTradeValue(Minion attacker, Minion defender){
+        int myPreviousValue = AI.getWorth(attacker);
+        int theirPreviousValue = AI.getWorth(defender);
+        int myNewValue = AI.getValueAfterCombat(attacker, defender);
+        int theirNewValue = AI.getValueAfterCombat(defender, attacker);
+        int ValueGained = theirPreviousValue-theirNewValue - myPreviousValue-myNewValue;
+        return ValueGained;
+    }
+    
     
     public static void tradeUp(Minion m){
         //TODO
@@ -181,11 +207,18 @@ public class AI {
             System.out.println("ERROR CANNOT FIND VALUE OF CARD WITH UNKNOWN ERROR: " + c.toString());
             return -1;
         }
+        //at this point, both arrays are populated
         //TODO evaluate value based on what the card is supposed to do
         switch(c.cardPurpose){
             case VanillaMinion:
-                break;
+                int value = c.summon.attack + c.summon.health;
+                if(c.getOwner().minions.isFull()) return 0; //if there is no place to summon the minion, it has 0 value.
+                for(Minion enemy : enemyMinions){
+                    if(AI.isFavorableTrade(enemy, c.summon)) value --; //reducde value slightly if the minion would be favorably traded against
+                }
+                return value;
             case BattlecryMinion:
+                if(c.getOwner().minions.isFull()) return 0; //if there is no place to summon the minion, it has 0 value.
                 break;
             case AOEDamage:
                 break;
