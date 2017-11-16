@@ -38,8 +38,15 @@ public abstract class Card {
     public BufferedImage sprite; //visual representation of the card
     protected Hero owner;
     
-    public void render(Graphics2D g, int x, int y){
-       if(owner == Board.playerHero){
+    /**
+     * renders a particular card, cardback if its an enemy's card.
+     * @param g graphics to use
+     * @param x where to draw(x)
+     * @param y  where to draw (y)
+     * @param override if set to true, the method always renders the actual card (enemies see the card, not cardback)
+     */
+    public void render(Graphics2D g, int x, int y, boolean override){
+       if(owner == Board.playerHero || override){
            g.drawImage(sprite, x, y, null);   //the card is ours so we can see what it is
            g.setColor(Color.yellow);
            g.drawString(String.valueOf(cost), x + 10, y+35);
@@ -55,8 +62,6 @@ public abstract class Card {
                    g.setColor(new Color(0,255,0,50));
                    g.fillRect(x, y, Card.WIDTH, Card.HEIGHT);
                }else{
-                  // g.setColor(new Color(255,0,0,50)); //if we cannot afford it, color it blue
-                   //g.fillRect(x, y, Card.WIDTH, Card.HEIGHT);
                    g.drawImage(SpriteHandler.redX, x, y, null);
                }
            }
@@ -64,6 +69,8 @@ public abstract class Card {
            g.drawImage(SpriteHandler.cardback, x, y, null);    //if we arent the owner of the card, we see the cardback, not the card itself
        }
     }
+    
+    
     
     
     private void renderCardText(Graphics2D g, int x , int y){

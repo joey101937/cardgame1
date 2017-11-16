@@ -39,8 +39,13 @@ public class InputHandler extends KeyAdapter implements MouseListener, MouseMoti
         double y = e.getY() / Board.yScale;
         System.out.println(getMinionAt(x,y));
         System.out.println(getCardAt(x,y));
-        InputHandler.selectedMinion = getMinionAt(x,y);
-        InputHandler.selectedCard = getCardAt(x,y);
+        if(getMinionAt(x,y) !=null){
+         if(getMinionAt(x,y).owner == Board.playerHero)InputHandler.selectedMinion = getMinionAt(x,y);   
+        }
+        if(getCardAt(x,y) != null){
+          if(getCardAt(x,y).getOwner() == Board.playerHero)InputHandler.selectedCard = getCardAt(x,y);          
+        }
+
     }
 
     @Override
@@ -76,7 +81,6 @@ public class InputHandler extends KeyAdapter implements MouseListener, MouseMoti
     public void mouseMoved(MouseEvent e) {
         Board.mouseX = (int)(e.getX()/Board.xScale);
         Board.mouseY = (int)(e.getY()/Board.yScale);
-      //  throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     /**

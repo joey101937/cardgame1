@@ -51,7 +51,7 @@ public class Board extends Canvas implements Runnable {
         this.addMouseMotionListener(ih);
         this.addKeyListener(ih);
         this.visHandler = new VisualEffectHandler(this);
-        topHero.minions.add(new FrostBearMinion(topHero.deck.get(0)));
+        topHero.minions.add(new FrostBearMinion(new FrostBearCard()));
         topHero.minions.add(new ArakkoaMinion(topHero.deck.get(0)));
         topHero.minions.add(new ArakkoaMinion(topHero.deck.get(0)));
         botHero.minions.add(new ArakkoaMinion(botHero.deck.get(0)));
@@ -94,10 +94,10 @@ public class Board extends Canvas implements Runnable {
             }
         }
         for(Card c : leftColumn){
-            c.render(g, 1100, 25 + (Board.buffer * leftColumn.indexOf(c) + (Card.HEIGHT * leftColumn.indexOf(c))));
+            c.render(g, 1100, 25 + (Board.buffer * leftColumn.indexOf(c) + (Card.HEIGHT * leftColumn.indexOf(c))),false);
         }
         for (Card c : rightColumn) {
-            c.render(g, 1100 + Card.WIDTH + Board.buffer,  25 + (Board.buffer * rightColumn.indexOf(c) + (Card.HEIGHT * rightColumn.indexOf(c))));
+            c.render(g, 1100 + Card.WIDTH + Board.buffer,  25 + (Board.buffer * rightColumn.indexOf(c) + (Card.HEIGHT * rightColumn.indexOf(c))),false);
         }
     }
     /**
@@ -120,7 +120,7 @@ public class Board extends Canvas implements Runnable {
     }
     
     public void tick() {
-
+        this.visHandler.tick();
     }
 
     //Core game loop 
