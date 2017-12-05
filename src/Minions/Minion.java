@@ -46,6 +46,14 @@ public abstract class Minion{
      */
     public abstract void onSummon();
     /**
+     * runs whenever the turn ends while the minion is alive on the board
+     */
+    public void onTurnEnd(){};
+    /**
+     * runs whenever the turn begins while the minion is alive on the board
+     */
+    public void onTurnStart(){};
+    /**
      * runs every render
      * @param g 
      */

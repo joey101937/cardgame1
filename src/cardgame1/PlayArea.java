@@ -35,7 +35,8 @@ public class PlayArea<E>{
      * @return was successful?
      */
     public Boolean add(E m){
-        if(storage.size() >= PlayArea.MAX_SIZE){
+        if(numOccupants() >= PlayArea.MAX_SIZE){
+            System.out.println("failed to summon, storage full");
             return false;
         }
         for(int i = 0; i < storage.size(); i++){
@@ -46,6 +47,21 @@ public class PlayArea<E>{
         }
         return storage.add(m);
     }
+    
+    /**
+     * returns the number of non null items in the array
+     * @return 
+     */
+    public int numOccupants(){
+        int output = 0;
+        for(int i = 0; i < storage.size(); i++){
+            if(storage.get(i) != null){
+              output++;  
+            }
+        }
+        return output;
+    }
+    
     /**
      * adds minion to specified index. overrides size requirements.
      * @param index place to add

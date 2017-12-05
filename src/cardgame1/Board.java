@@ -35,6 +35,7 @@ public class Board extends Canvas implements Runnable {
     private Thread thread = null;
     public Dimension d;
     public InputHandler ih = new InputHandler();
+    public static GameController controller;
     /* CONSTRUCTOR */
 
     public Board(Hero t, Hero b) {
@@ -51,6 +52,15 @@ public class Board extends Canvas implements Runnable {
         this.addMouseMotionListener(ih);
         this.addKeyListener(ih);
         this.visHandler = new VisualEffectHandler(this);
+        this.controller = new GameController(this);
+        //setupTest();
+        controller.startGame();
+    }
+
+    /**
+     * prepopulates the board and makes heros draw for testing purposes
+     */
+    private void setupTest() {
         topHero.minions.add(new FrostBearMinion(new FrostBearCard()));
         topHero.minions.add(new ArakkoaMinion(topHero.deck.get(0)));
         topHero.minions.add(new ArakkoaMinion(topHero.deck.get(0)));
@@ -60,8 +70,8 @@ public class Board extends Canvas implements Runnable {
         Board.botHero.draw();
         Board.botHero.draw();
         Board.botHero.draw();
-
     }
+
 
     public void render() {
         BufferStrategy bs = this.getBufferStrategy();
@@ -77,11 +87,24 @@ public class Board extends Canvas implements Runnable {
         g.setFont(new Font("TimesRoman", Font.BOLD, 35));
         renderMinions(g);
         renderPlayerHand(g);
+        renderEnemyHand(g);
+        renderHeros(g);
         this.visHandler.render(g);
         g.dispose();
         bs.show();
     }
+    /**
+     * renders the cardbacks of the enemy's cards
+     * @param g 
+     */
+    private void renderEnemyHand(Graphics2D g){
+        //TODO
+    }
     
+    private void renderHeros(Graphics2D g){
+        Board.topHero.render(g, 400,0);
+        Board.botHero.render(g, 400, 850);
+    }
     
     private void renderPlayerHand(Graphics2D g){
         ArrayList<Card> leftColumn = new ArrayList<>();

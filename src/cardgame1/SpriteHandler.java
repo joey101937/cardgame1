@@ -28,6 +28,8 @@ public class SpriteHandler {
     public static BufferedImage frostBearMinion;
     public static BufferedImage archerCard;
     public static BufferedImage archerMinion;
+    public static BufferedImage fullCrystal;
+    public static BufferedImage emptyCrystal;
     
     public static void Initialize() {
         try {
@@ -43,6 +45,8 @@ public class SpriteHandler {
             archerCard = load("archerCard.png");
             archerMinion = load("archerPortrait.png");
             redX = load("redXsmall.png");
+            fullCrystal = load("gemCSmall.png");
+            emptyCrystal = load("gemSmall.png");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -55,5 +59,19 @@ public class SpriteHandler {
      */
     private static BufferedImage load(String filename) throws IOException{
         return ImageIO.read(new File(Main.assets + filename));
+    }
+    
+    /**
+     * returns the buffered image associated with the given filename in the Assets directory.
+     * @param filename name of file with extension
+     * @return buffered image representation
+     */
+    public static BufferedImage fetch(String filename){
+        try{
+            return ImageIO.read(new File(Main.assets + filename));
+        }catch(Exception e){
+            e.printStackTrace();
+            return null;
+        }
     }
 }

@@ -9,6 +9,7 @@ import Cards.Card;
 import Cards.CardType;
 import Minions.Minion;
 import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -27,6 +28,7 @@ public class InputHandler extends KeyAdapter implements MouseListener, MouseMoti
     @Override
     public void mouseClicked(MouseEvent e) {
         System.out.println(e.getX()/Board.xScale + ", " + e.getY()/Board.yScale);
+        if(!Board.playerHero.turn) return;  //if its not our turn, ignore it
         Card clickedCard = InputHandler.getCardAt(e.getX()/Board.xScale, e.getY()/Board.yScale);
         if(clickedCard != null && clickedCard.isTargeted == false){
             clickedCard.cast(null); //cast with null param becuase there is no target
@@ -39,6 +41,7 @@ public class InputHandler extends KeyAdapter implements MouseListener, MouseMoti
         double y = e.getY() / Board.yScale;
         System.out.println(getMinionAt(x,y));
         System.out.println(getCardAt(x,y));
+        if(!Board.playerHero.turn) return;
         if(getMinionAt(x,y) !=null){
          if(getMinionAt(x,y).owner == Board.playerHero)InputHandler.selectedMinion = getMinionAt(x,y);   
         }
@@ -50,6 +53,7 @@ public class InputHandler extends KeyAdapter implements MouseListener, MouseMoti
 
     @Override
     public void mouseReleased(MouseEvent e) {
+        if(!Board.playerHero.turn) return;
         Minion target = getMinionAt(e.getX()/Board.xScale,e.getY()/Board.yScale);
         if(target != null && selectedMinion != null && selectedMinion.owner != target.owner){
             selectedMinion.attack(target);
@@ -82,6 +86,15 @@ public class InputHandler extends KeyAdapter implements MouseListener, MouseMoti
         Board.mouseX = (int)(e.getX()/Board.xScale);
         Board.mouseY = (int)(e.getY()/Board.yScale);
     }
+    
+    
+    @Override
+    public void keyPressed(KeyEvent e) {
+    if(e.getKeyChar() == ' '){
+        Board.controller.nextTurn();
+    }
+    }
+    
     
     /**
      * gets the minion that is currently being rendered in the clicked location.
