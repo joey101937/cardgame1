@@ -15,7 +15,8 @@ import java.net.InetAddress;
 public class MultiplayerObject
 {
     /* NOTE: May have this object 'hook' into an InputHandler so each client has a separate InputHandler (prevents P2 controlling P1's cards, etc)
-    */
+     * Not sure (as of yet) how to hook networking into the actual game and the classes already available
+     */
     private InetAddress address;
     private int port;
     

@@ -14,6 +14,9 @@ public enum PacketType {
     
     INVALID(-1), CONNECT(00), DISCONNECT(01);
     
+    /**
+     * ID of the Packet
+     */
     int id;
     
     PacketType(int id)
@@ -21,6 +24,10 @@ public enum PacketType {
         this.id = id;
     }
     
+    /**
+     * Returns this PacketType's unique ID
+     * @return ID of this Packet
+     */
     public int getID()
     {
         return id;

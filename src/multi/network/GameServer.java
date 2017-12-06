@@ -92,11 +92,19 @@ public class GameServer extends Thread{
         }
     }
     
+    /**
+     * Send data to a Client specified by the InetAddress provided, on the port provided.
+     * @param data - byte[] of data to send
+     * @param address - address of Client to send to
+     * @param port - port of Client to send on
+     */
     public void sendData(byte[] data, InetAddress address, int port)
     {
+        // Create a packet to send, filling it with our data and Client information
         DatagramPacket packet = new DatagramPacket(data, data.length, address, port);
         try
         {
+            // Send the packet with on our socket
             socket.send(packet);
         } catch(IOException ioe)
         {
@@ -104,8 +112,13 @@ public class GameServer extends Thread{
         }
     }
     
+    /**
+     * Send data to all connected Clients
+     * @param data - byte[] of data to send
+     */
     public void sendDataToAll(byte[] data)
     {
+        // Use a lambda expression to eliminate most of the boilerplate code. Sends data to each Client
         connected.forEach(player -> sendData(data, player.getAddress(), player.getPort()));
     }
 }

@@ -6,7 +6,7 @@
 package multi.network;
 
 /**
- *
+ * Represents the Client that connects to a Server to play with other Clients.
  * @author Knifesurge
  * @since 2017-12-06
  */
