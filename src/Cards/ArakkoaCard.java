@@ -7,6 +7,7 @@ package Cards;
 
 import Minions.ArakkoaMinion;
 import Minions.Minion;
+import cardgame1.Hero;
 import cardgame1.SpriteHandler;
 
 /**
@@ -44,6 +45,18 @@ public class ArakkoaCard extends Card{
     @Override
     public int cast(Minion target) {
        return defaultMinionSummon();
+    }
+
+     /**
+     * attempts to use the card. Returns value based on outcome
+     * 1: success
+     * 0: Canceled- could not afford
+     * -1: could not add to play area. (max minions reached?)
+     * @return
+     */
+    @Override
+    public int castOnHero(Hero target) {
+        return defaultMinionSummon();
     }
 
 }

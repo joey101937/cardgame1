@@ -95,6 +95,19 @@ public class Hero {
         this.health-=amount;
     }
     
+    /**
+     * adds health to a hero up to their maximum health
+     * @param amount 
+     */
+    public void heal(int amount) {
+        if (amount + health <= maxHealth) {
+            health = maxHealth;
+            return;
+        } else {
+            health += amount;
+        }
+    }
+
     public void render(Graphics2D g, int x, int y){
         g.drawImage(picture, x, y, null);
         g.setColor(Color.red);

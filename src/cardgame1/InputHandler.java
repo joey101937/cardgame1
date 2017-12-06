@@ -23,7 +23,15 @@ public class InputHandler extends KeyAdapter implements MouseListener, MouseMoti
     /*    FIELDS    */
     public static Minion selectedMinion = null;
     public static Card selectedCard = null;
-    
+    private static int keyTimer = 0; // used to prevent too many key presses in quick succession
+    /**
+     * ticks every gametime second
+     */
+    public static void tick(){
+        if(keyTimer > 0){
+            keyTimer--;
+        }
+    }
     
     @Override
     public void mouseClicked(MouseEvent e) {
@@ -55,11 +63,18 @@ public class InputHandler extends KeyAdapter implements MouseListener, MouseMoti
     public void mouseReleased(MouseEvent e) {
         if(!Board.playerHero.turn) return;
         Minion target = getMinionAt(e.getX()/Board.xScale,e.getY()/Board.yScale);
+        Hero targetH = getHeroAt(e.getX()/Board.xScale,e.getY()/Board.yScale);
         if(target != null && selectedMinion != null && selectedMinion.owner != target.owner){
-            selectedMinion.attack(target);
+            selectedMinion.attack(target); //Minion attacking minion
         }
-        if(target != null && selectedCard != null && selectedCard.isTargeted == true){
-            selectedCard.cast(target);
+        if(targetH != null && selectedMinion!=null && selectedMinion.owner != targetH){
+            selectedMinion.attack(targetH); //Minion attacking hero
+        }
+        if(target != null && selectedCard != null && selectedCard.isTargeted){
+            selectedCard.cast(target); //card cast with minion target
+        }
+        if(targetH != null && selectedCard != null && selectedCard.isTargeted){
+            selectedCard.castOnHero(targetH);
         }
        selectedMinion = null;
        selectedCard = null;
@@ -90,9 +105,11 @@ public class InputHandler extends KeyAdapter implements MouseListener, MouseMoti
     
     @Override
     public void keyPressed(KeyEvent e) {
+    if(keyTimer > 0) return;
     if(e.getKeyChar() == ' '){
         Board.controller.nextTurn();
     }
+    keyTimer = 10;
     }
     
     
@@ -148,5 +165,21 @@ public class InputHandler extends KeyAdapter implements MouseListener, MouseMoti
             }
         }
         return output;
+    }
+    
+        /**
+     * returns the hero being rendered at the given coordinates
+     * @param x x-coordinate of mouse click AFTER ADJUSTING FOR RESOLUTION SCALING
+     * @param y x-coordinate of mouse click AFTER ADJUSTING FOR RESOLUTION SCALING
+     * @return hero, either top or bot. null if neither
+     */
+    public static Hero getHeroAt(double x, double y){
+        if(x > 400 && x < 400 + Board.topHero.picture.getWidth() && y > 0 && y < Board.topHero.picture.getHeight()){
+            return Board.topHero;
+        }
+        if(x > 400 && x < 400 + Board.botHero.picture.getWidth() && y > 850 && y < 850 + Board.botHero.picture.getHeight()){
+            return Board.botHero;
+        }
+        return null;
     }
 }

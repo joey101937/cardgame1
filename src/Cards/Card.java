@@ -114,9 +114,9 @@ public abstract class Card {
             if(Board.playerHero.hand.indexOf(c) < 2){
                 return 25 + Board.buffer;       //top level
             }else if(Board.playerHero.hand.indexOf(c) < 4){
-                return 25 + Board.buffer + Minion.HEIGHT;  //middle level
+                return 25 + Board.buffer*2 + Minion.HEIGHT;  //middle level
             }else if(Board.playerHero.hand.indexOf(c) < 6){
-                return 25 + Board.buffer + Minion.HEIGHT + Minion.HEIGHT; //bottom level
+                return 25 + Board.buffer*3 + Minion.HEIGHT + Minion.HEIGHT; //bottom level
             }
         }
         return -1;
@@ -130,6 +130,14 @@ public abstract class Card {
      * 1 for not cast (not enough mana, etc)
      */
     public abstract int cast(Minion target);
+    /**
+     * what happens when the card is played from the hand onto a hero.
+     * @param target
+     * @return an int reflecting outcome
+     * 0 for success
+     * 1 for not cast (not enough mana, cant target heros, etc)
+     */
+    public abstract int castOnHero(Hero target);
     /**
      * if the owner has enough resources left to afford the cast cost of this card
      * @return 

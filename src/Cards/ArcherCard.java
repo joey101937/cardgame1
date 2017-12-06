@@ -8,6 +8,7 @@ package Cards;
 import Minions.Minion;
 import cardgame1.SpriteHandler;
 import Minions.archerMinion;
+import cardgame1.Hero;
 
 /**
  *
@@ -31,6 +32,15 @@ public class ArcherCard extends Card{
     
     @Override
     public int cast(Minion target) {
+        int outcome = defaultMinionSummon();
+        if(outcome == 1){
+            target.takeDamage(summonDamage);
+        }
+        return outcome;
+    }
+
+    @Override
+    public int castOnHero(Hero target) {
         int outcome = defaultMinionSummon();
         if(outcome == 1){
             target.takeDamage(summonDamage);
