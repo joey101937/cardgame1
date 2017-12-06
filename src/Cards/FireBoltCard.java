@@ -6,6 +6,7 @@
 package Cards;
 
 import Minions.Minion;
+import cardgame1.Hero;
 import cardgame1.SpriteHandler;
 
 /**
@@ -52,4 +53,18 @@ public class FireBoltCard extends Card{
         return 1;
     }
     
+    /**
+     * deals damage to target hero
+     * @param target
+     * @return 1 if success, 0 if too expensive, -1 if null param
+     */
+    @Override
+    public int castOnHero(Hero target) {
+        if(target == null) return -1;
+        if(!canAfford()) return 0; //reutrn 0 if unaffordable
+        target.takeDamage(spellDamage);
+        owner.resource -= cost;
+        owner.hand.remove(this);
+        return 1; 
+    }
 }

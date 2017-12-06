@@ -144,6 +144,7 @@ public class Board extends Canvas implements Runnable {
     
     public void tick() {
         this.visHandler.tick();
+        InputHandler.tick();
     }
 
     //Core game loop 

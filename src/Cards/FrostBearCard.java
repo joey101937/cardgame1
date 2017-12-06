@@ -7,6 +7,7 @@ package Cards;
 
 import Minions.FrostBearMinion;
 import Minions.Minion;
+import cardgame1.Hero;
 import cardgame1.SpriteHandler;
 
 /**
@@ -28,6 +29,11 @@ public class FrostBearCard extends Card {
     @Override
     public int cast(Minion target) {
         return defaultMinionSummon();
+    }
+
+    @Override
+    public int castOnHero(Hero target) {
+       return defaultMinionSummon();
     }
 
 
