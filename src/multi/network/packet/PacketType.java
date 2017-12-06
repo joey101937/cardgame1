@@ -12,7 +12,7 @@ package multi.network.packet;
  */
 public enum PacketType {
     
-    INVALID(-1), LOGIN(00), DISCONNECT(01);
+    INVALID(-1), CONNECT(00), DISCONNECT(01);
     
     int id;
     

@@ -38,20 +38,12 @@ public abstract class Packet {
     
     public static PacketType lookupPacket(int packetID)
     {
-/*        for(PacketType type : PacketType.values())
+        for(PacketType type : PacketType.values())
         {
             if(type.getID() == packetID)
                 return type;
         }
         
-        return PacketType.INVALID;
-*/
-        List<PacketType> pktType = Arrays.asList(PacketType.values())
-                                         .stream()
-                                         .filter(type -> type.getID() == packetID)
-                                         .collect(Collectors.toList());
-        if(pktType.get(0) != PacketType.INVALID)
-            return pktType.get(0);
         return PacketType.INVALID;
     }
     
