@@ -36,6 +36,9 @@ public class Main {
         SpriteHandler.Initialize();
         for(int i = 0; i < 5 ; i++){
             enemyCards.add(new ArakkoaCard());
+            enemyCards.add(new ArcherCard());
+            enemyCards.add(new KnightCard());
+            
             playerCards.add(new ArakkoaCard());
             playerCards.add(new FireBoltCard());
             playerCards.add(new FrostBearCard());

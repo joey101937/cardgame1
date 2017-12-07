@@ -5,8 +5,8 @@
  */
 package cardgame1;
 
+import AI.AI;
 import Cards.Card;
-import Cards.CardType;
 import Minions.Minion;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -113,8 +113,16 @@ public class InputHandler extends KeyAdapter implements MouseListener, MouseMoti
                 break;
             case 'q':
                 for(Card c : Board.playerHero.hand){
-                    System.out.println(c + " == " + AI.AI.getValueOfCard(c));
+                    System.out.println(c + " == " + AI.getValueOfCard(c));
                 }
+            break;
+            case 'w':
+                for(Card c : Board.playerHero.hand){
+                   if(c.canAfford()){
+                       System.out.println("Value of " + c +" : " + AI.getValueOfCard(c) + "/" + c.cost);
+                   }
+                }
+                break;
         }
         keyTimer = 10;
     }

@@ -63,7 +63,9 @@ public class Board extends Canvas implements Runnable {
      * prepopulates the board and makes heros draw for testing purposes
      */
     private void setupTest() {
-        topHero.minions.add(new FrostBearMinion(new FrostBearCard()));
+        Card parent = new FrostBearCard();
+        parent.setHero(topHero);
+        topHero.minions.add(new FrostBearMinion(parent));
         topHero.minions.add(new ArakkoaMinion(topHero.deck.get(0)));
         topHero.minions.add(new ArakkoaMinion(topHero.deck.get(0)));
         botHero.minions.add(new ArakkoaMinion(botHero.deck.get(0)));

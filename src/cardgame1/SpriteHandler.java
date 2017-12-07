@@ -34,6 +34,7 @@ public class SpriteHandler {
     public static BufferedImage knightChargeCard;
     public static BufferedImage fullCrystal;
     public static BufferedImage emptyCrystal;
+    public static BufferedImage leftArrow;
     
     public static void Initialize() {
         try {
@@ -55,6 +56,7 @@ public class SpriteHandler {
             redX = load("redXsmall.png");
             fullCrystal = load("gemCSmall.png");
             emptyCrystal = load("gemSmall.png");
+            leftArrow = load("arrow-left.png");
         } catch (Exception e) {
             e.printStackTrace();
         }

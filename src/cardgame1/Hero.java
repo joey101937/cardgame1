@@ -142,6 +142,10 @@ public class Hero {
                 g.drawImage(SpriteHandler.fullCrystal, x + (i*50), y, null); //if they are unspent reources
             }
         }
+        if(this.turn){
+            g.setColor(new Color(255,255,255,100));
+            g.drawImage(SpriteHandler.leftArrow,x + picture.getWidth(), y,null);
+        }
         if(this.damageTicker > 0){
         g.setColor(new Color(255,0,0,(this.damageTicker)*12));
         damageTicker--;
