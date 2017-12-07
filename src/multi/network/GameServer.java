@@ -17,6 +17,7 @@ import java.util.List;
 import multi.MultiplayerObject;
 import multi.network.packet.Packet;
 import multi.network.packet.types.Connect01Packet;
+import multi.network.packet.types.Disconnect02Packet;
 
 /**
  * Represents the Server that the game is running on. GameClients connect to this Server to play
@@ -67,12 +68,17 @@ public class GameServer extends Thread{
         {
             case CONNECT:
                 Connect01Packet packetConnect = new Connect01Packet(data);
-                MultiplayerObject obj = obj = new MultiplayerObject(address, port, packetConnect.getUsername());
+                MultiplayerObject obj = new MultiplayerObject(address, port, packetConnect.getUsername());
                 this.connected.add(obj);
                 System.out.println("<<SERVER>> " + "[" + address.getHostAddress() + ":" + port + "] " + packetConnect.getUsername() + " has connected!");
                 sendDataToAll(("[" + address.getHostAddress() + ":" + port + "] " + packetConnect.getUsername() + " has connected!").getBytes());
                 break;
             case DISCONNECT:
+                Disconnect02Packet packetDisconnect = new Disconnect02Packet(data);
+                MultiplayerObject object = new MultiplayerObject(address, port, packetDisconnect.getUsername());
+                this.connected.remove(object);
+                System.out.println("<<SERVER>> " + "[" + address.getHostAddress() + ":" + port + "] " + packetDisconnect.getUsername() + " has disconnected!");
+                sendDataToAll(("[" + address.getHostAddress() + ":" + port + "] " + packetDisconnect.getUsername() + " has disconnected!").getBytes());
                 break;
             case INVALID:
                 break;

@@ -42,6 +42,10 @@ public class GameClient extends Thread
      */
     private int serverPort;
     /**
+     * Username of this Client
+     */
+    private String username;
+    /**
      * Constructor. Chooses a random port to hook to and gets the IP Address by the provided String
      * @param address - IP Address to hook to, if able to
      */
@@ -150,5 +154,15 @@ public class GameClient extends Thread
     public int getPortOfServer()
     {
         return serverPort;
+    }
+    
+    public void setUsername(String username)
+    {
+        this.username = username;
+    }
+    
+    public String getUsername()
+    {
+        return username;
     }
 }

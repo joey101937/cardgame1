@@ -32,17 +32,22 @@ public class Disconnect02Packet extends Packet
     
     @Override
     public void writeData(GameClient client) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        client.sendData(getData(), client.getPortOfServer());
     }
 
     @Override
     public void writeData(GameServer server) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        server.sendDataToAll(getData());
     }
 
     @Override
     public byte[] getData() {
         return ("02" + this.username).getBytes();
+    }
+    
+    public String getUsername()
+    {
+        return username;
     }
     
 }
