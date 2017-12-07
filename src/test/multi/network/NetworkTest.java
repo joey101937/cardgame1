@@ -6,12 +6,14 @@
 package test.multi.network;
 
 import java.awt.Canvas;
-import java.net.InetAddress;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import multi.network.GameClient;
 import multi.network.GameServer;
 import multi.network.packet.types.Connect01Packet;
+import multi.network.packet.types.Disconnect02Packet;
 
 /**
  *
@@ -55,11 +57,22 @@ public class NetworkTest extends Canvas implements Runnable{
     {
         System.out.println("Init");
         frame = new JFrame(TITLE);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(this);
         frame.setLocationRelativeTo(null);
         frame.setSize(400, 400);
         frame.setVisible(true);
+        
+        frame.addWindowListener(new WindowAdapter()
+        {
+            @Override
+            public void windowClosing(WindowEvent event)
+            {
+                System.out.println("Window closing!");
+                Disconnect02Packet discPacket = new Disconnect02Packet(client.getUsername());
+                discPacket.writeData(client);
+                System.exit(0);
+            }
+        });
         
         System.out.println("Create and start Client");
         client = new GameClient("localhost");   // Client runs localhost
@@ -99,6 +112,7 @@ public class NetworkTest extends Canvas implements Runnable{
         init();
         
         Connect01Packet packet = new Connect01Packet(JOptionPane.showInputDialog(this, "Please enter a username"));
+        client.setUsername(packet.getUsername());
         packet.writeData(client);
     }
  

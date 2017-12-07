@@ -12,6 +12,7 @@ import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Represents the Client that connects to a Server to play with other Clients.
@@ -41,6 +42,10 @@ public class GameClient extends Thread
      */
     private int serverPort;
     /**
+     * Username of this Client
+     */
+    private String username;
+    /**
      * Constructor. Chooses a random port to hook to and gets the IP Address by the provided String
      * @param address - IP Address to hook to, if able to
      */
@@ -48,9 +53,8 @@ public class GameClient extends Thread
     {
         try
         {
-            // Create Random to randomly choose port
-            Random rand = new Random();
-            this.port = rand.nextInt(9999);
+            // Create Random (local to this thread!) to randomly choose port
+            this.port = ThreadLocalRandom.current().nextInt(2500, 9999);
             // Get the IP Address provided by String address
             this.address = InetAddress.getByName(address.trim());
             // Initialize Socket (chooses random port and random address to hook to)
@@ -150,5 +154,15 @@ public class GameClient extends Thread
     public int getPortOfServer()
     {
         return serverPort;
+    }
+    
+    public void setUsername(String username)
+    {
+        this.username = username;
+    }
+    
+    public String getUsername()
+    {
+        return username;
     }
 }
