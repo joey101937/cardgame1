@@ -12,17 +12,18 @@ import cardgame1.SpriteHandler;
  *
  * @author Joseph
  */
-public class FrostBearMinion extends Minion{
+public class KnightMinion extends Minion{
 
-       public FrostBearMinion(Card parent){
+        
+    public KnightMinion(Card parent){
         this.parent = parent;
         this.owner = parent.getOwner();
         attack = 3;
-        maxHealth = 5;
+        maxHealth = 2;
         health = maxHealth;
-        tribe = Tribe.Beast;
-        name = "Frost Bear";
-        sprite = SpriteHandler.frostBearMinion;
+        tribe = Tribe.knight;
+        name = "Knight";
+        sprite = SpriteHandler.knightMinion;
     }
     
 }

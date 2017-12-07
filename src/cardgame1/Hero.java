@@ -5,6 +5,7 @@
  */
 package cardgame1;
 
+import AI.AI;
 import Minions.Minion;
 import Cards.*;
 import java.awt.Color;
@@ -31,7 +32,10 @@ public class Hero {
     public ArrayList<Card> hand = new ArrayList<>();
     public ArrayList<Card> deck;
     public int id;
+    private int damageTicker = 0; //used to apply the red on damage effect
     public boolean turn = false; //is it our turn?
+    public boolean isAIControlled = false;
+    public AI controller = null;
     //CONSTRUCTOR
     public Hero(String name, ArrayList<Card> deck, BufferedImage portrait){
         this.name = name;
@@ -44,7 +48,25 @@ public class Hero {
         }
         id = idBank++;
     }
-    
+    /**
+     * creates an ai controlled hero
+     * @param portrait image that will be rendered for hero
+     * @param controller ai controller 
+     */
+    public Hero(String name, ArrayList<Card> deck, BufferedImage portrait, AI controller) {
+        this.name = name;
+        this.deck = deck;
+        this.picture = portrait;
+        this.resource = 1;
+        this.maxResource = 1;
+        this.isAIControlled = true;
+        this.controller = controller;
+        for (Card c : deck) {
+            c.setHero(this);
+        }
+        id = idBank++;
+    }
+
     /**
      * Attempts to put card from top of deck into hand. 
      * If hand is too full, the top card of the deck is simply discarded.
@@ -93,6 +115,7 @@ public class Hero {
     
     public void takeDamage(int amount){
         this.health-=amount;
+        this.damageTicker = 20;
     }
     
     /**
@@ -118,7 +141,12 @@ public class Hero {
             }else{
                 g.drawImage(SpriteHandler.fullCrystal, x + (i*50), y, null); //if they are unspent reources
             }
-            
         }
+        if(this.damageTicker > 0){
+        g.setColor(new Color(255,0,0,(this.damageTicker)*12));
+        damageTicker--;
+        g.fillRect(x, y, picture.getWidth(), picture.getHeight());
+        }
+        
     }
 }

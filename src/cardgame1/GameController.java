@@ -25,6 +25,9 @@ public class GameController {
         activeHero = inactiveHero;
         inactiveHero = temp;
         activeHero.onTurnStart();
+        if(activeHero.isAIControlled){
+            
+        }
     }
 
     public void startGame() {

@@ -25,19 +25,4 @@ public class archerMinion extends Minion{
         sprite = SpriteHandler.archerMinion;
     }
     
-    
-    
-    
-    
-    @Override
-    public void tick() {
-        return;
-    }
-    
-
-    @Override
-    public void onSummon() {
-        return;
-    }
-    
 }

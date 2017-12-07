@@ -12,17 +12,19 @@ import cardgame1.SpriteHandler;
  *
  * @author Joseph
  */
-public class FrostBearMinion extends Minion{
-
-       public FrostBearMinion(Card parent){
+public class VengefullKnightMinion extends Minion{ 
+    public VengefullKnightMinion(Card parent){
         this.parent = parent;
         this.owner = parent.getOwner();
-        attack = 3;
-        maxHealth = 5;
+        attack = 4;
+        maxHealth = 2;
         health = maxHealth;
-        tribe = Tribe.Beast;
-        name = "Frost Bear";
-        sprite = SpriteHandler.frostBearMinion;
+        tribe = Tribe.knight;
+        name = "Vengefull Knight";
+        sprite = SpriteHandler.knightChargeMinion;
     }
-    
+    @Override
+    public void onSummon(){
+        this.canAttack = true;
+    }
 }

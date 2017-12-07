@@ -28,6 +28,10 @@ public class SpriteHandler {
     public static BufferedImage frostBearMinion;
     public static BufferedImage archerCard;
     public static BufferedImage archerMinion;
+    public static BufferedImage knightCard;
+    public static BufferedImage knightMinion;
+    public static BufferedImage knightChargeMinion;
+    public static BufferedImage knightChargeCard;
     public static BufferedImage fullCrystal;
     public static BufferedImage emptyCrystal;
     
@@ -44,6 +48,10 @@ public class SpriteHandler {
             frostBearCard = load("frostBearCard.png");
             archerCard = load("archerCard.png");
             archerMinion = load("archerPortrait.png");
+            knightCard = load("KnightCard.png");
+            knightMinion = load("Knight.png");
+            knightChargeMinion = load("KnightCharge.png");
+            knightChargeCard = load("KnightChargeCard.png");
             redX = load("redXsmall.png");
             fullCrystal = load("gemCSmall.png");
             emptyCrystal = load("gemSmall.png");

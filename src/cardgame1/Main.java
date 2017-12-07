@@ -34,12 +34,14 @@ public class Main {
     public static void main(String[] args) {
         setBackgroundImage();
         SpriteHandler.Initialize();
-        for(int i = 0; i < 10 ; i++){
+        for(int i = 0; i < 5 ; i++){
             enemyCards.add(new ArakkoaCard());
             playerCards.add(new ArakkoaCard());
             playerCards.add(new FireBoltCard());
             playerCards.add(new FrostBearCard());
             playerCards.add(new ArcherCard());
+            playerCards.add(new KnightCard());
+            playerCards.add(new VengefullKnightCard());
         }
         
         Hero enemy = new Hero("AI Hero", enemyCards, SpriteHandler.ashePortrait);

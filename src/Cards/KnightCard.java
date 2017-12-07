@@ -5,37 +5,35 @@
  */
 package Cards;
 
-import Minions.FrostBearMinion;
+import Minions.KnightMinion;
 import Minions.Minion;
 import cardgame1.Hero;
 import cardgame1.SpriteHandler;
 
 /**
- * vanilla midrange minion
  *
  * @author Joseph
  */
-public class FrostBearCard extends Card {
+public class KnightCard extends Card{
 
-    public FrostBearCard() {
-        name = "Frost Bear";
+    public KnightCard(){
+        name = "Knight";
         cardType = CardType.Minion;
+        cardPurpose = CardPurpose.VanillaMinion;
         cardText = "";
-        sprite = SpriteHandler.frostBearCard;
-        cost = 4;
-        summon = new FrostBearMinion(this);
+        sprite = SpriteHandler.knightCard;
+        cost = 2;
+        summon = new KnightMinion(this);
     }
-
+    
     @Override
     public int cast(Minion target) {
-        return defaultMinionSummon();
+         return defaultMinionSummon();
     }
 
     @Override
     public int castOnHero(Hero target) {
-       return defaultMinionSummon();
+         return defaultMinionSummon();
     }
-
-
-  
+    
 }

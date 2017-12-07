@@ -38,15 +38,7 @@ public class ArakkoaMinion extends Minion{
         sprite = SpriteHandler.arakkoaMinion;
     }
     
-    @Override
-    public void tick() {
-       
-    }
 
-    @Override
-    public void onSummon() {
-        return;
-    }
 
     
 }

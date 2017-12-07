@@ -18,9 +18,15 @@ import java.util.ArrayList;
 public class AI {
     /* FIELDS     */
     Hero self;
-    
+    Hero enemy;
     public AI(Hero host){
         self = host;
+        if(self == Board.botHero){
+            enemy = Board.topHero;
+        }
+        if(self == Board.topHero){
+            enemy = Board.botHero;
+        }
     }    
     
     /**
@@ -107,8 +113,18 @@ public class AI {
      * @return 
      */
     public static Minion getBestTarget(Minion attacker){
-        //TODO
-        return null;
+        int bestValue = -1;
+        Minion bestTarget = null;
+        if(attacker.owner == Board.topHero){
+            for(Minion m : Board.botHero.minions.getStorage()){
+                if(m == null) continue;
+                if(getTradeValue(attacker, m) > bestValue){
+                    bestValue = getTradeValue(attacker,m);
+                    bestTarget = m;
+                }
+            }
+        }
+        return bestTarget;
     }
     
     /**
@@ -166,6 +182,29 @@ public class AI {
         return rawGains > intrinsicValue;
     }
     /**
+     * if the minion can be traded favorably against by the opponent
+     * @param m
+     * @return 
+     */
+    public static boolean isVulnerable(Minion m){
+        if(m.owner == Board.topHero){
+            for(Minion min : Board.botHero.minions.getStorage()){
+               if(AI.isFavorableTrade(min, m)){
+                   return true;
+               }
+            }
+        }else{
+               for (Minion min : Board.topHero.minions.getStorage()) {
+                if (AI.isFavorableTrade(min, m)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    
+    
+    /**
      * gets the total value of all minions in an arraylist
      * @param input list to evaluate
      * @return sum of all minion's worths
@@ -209,27 +248,82 @@ public class AI {
         }
         //at this point, both arrays are populated
         //TODO evaluate value based on what the card is supposed to do
+        int value = 0;
         switch(c.cardPurpose){
             case VanillaMinion:
-                int value = c.summon.attack + c.summon.health;
+                value = c.summon.attack + c.summon.health;
                 if(c.getOwner().minions.isFull()) return 0; //if there is no place to summon the minion, it has 0 value.
                 for(Minion enemy : enemyMinions){
                     if(AI.isFavorableTrade(enemy, c.summon)) value --; //reducde value slightly if the minion would be favorably traded against
                 }
                 return value;
-            case BattlecryMinion:
+            case BattlecryMinionDamage:
                 if(c.getOwner().minions.isFull()) return 0; //if there is no place to summon the minion, it has 0 value.
-                break;
+                    Minion target = AI.getBestTarget(new SimulatedMinion(c.spellDamage,1));
+                    value += AI.getTradeValue(new SimulatedMinion(c.spellDamage,999), target);
+                    value += c.summon.attack + c.summon.maxHealth;
+                return value;
+            case BattlecryMinionHeal:
+                if(c.getOwner().minions.isFull()) return 0; //if there is no place to summon the minion, it has 0 value.
+                for(Minion m : myMinions){
+                    if(m==null)continue;
+                    if(isVulnerable(m)){  
+                        if(!isVulnerable(new SimulatedMinion(m.attack,m.health+c.spellDamage))){  //if we can save a minion
+                            if(getWorth(m) > value){
+                                value = getWorth(m);    //the value of the card becomes teh value of the minion saved. use the value of the most important minion we can save
+                            }
+                        }
+                    }
+                }
+                if(value == 0) value = c.spellDamage;
+                value += getWorth(c.summon);
+                return value;
             case AOEDamage:
-                break;
+                if (c.getOwner() == Board.botHero) {
+                    for (Minion t : Board.topHero.minions.getStorage()) {
+                        if(t==null)continue;
+                        value += (AI.getWorth(t) - AI.getWorthAfterDamage(t, c.spellDamage));
+                    }
+                } else { //tophero
+                    for (Minion t : Board.botHero.minions.getStorage()) {
+                        if(t==null) continue;
+                        value += (AI.getWorth(t) - AI.getWorthAfterDamage(t, c.spellDamage));
+                    }
+                }
+                return value;
             case DirectDamage:
-                break;
+                if(c.getOwner() == Board.topHero){
+                    for(Minion m : Board.botHero.minions.getStorage()){
+                        int thisValue = getWorth(m) - AI.getWorthAfterDamage(m, c.spellDamage);
+                        if(thisValue > value) value = thisValue;
+                    }
+                }else{
+                    for(Minion m : Board.botHero.minions.getStorage()){
+                        int thisValue = getWorth(m) - AI.getWorthAfterDamage(m, c.spellDamage);
+                        if(thisValue > value) value = thisValue;
+                    }
+                }
+                return value;
             case Debuff:
                 break;
             case AOEHeal:
                 break;
             case DirectHeal:
-                break;
+               //TODO: Analyze hero hp for potential hero heal
+                for (Minion m : myMinions) {
+                    if (m == null) continue;
+                    if (isVulnerable(m)) {
+                        if (!isVulnerable(new SimulatedMinion(m.attack, m.health + c.spellDamage))) {  //if we can save a minion
+                            if (getWorth(m) > value) {
+                                value = getWorth(m);    //the value of the card becomes teh value of the minion saved. use the value of the most important minion we can save
+                            }
+                        }
+                    }
+                }
+                if (value == 0) {
+                    value = c.spellDamage;
+                }
+                return value;
             case Buff:
                 break;
         }

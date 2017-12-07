@@ -21,6 +21,12 @@ public class SimulatedMinion extends Minion{
         this.owner = m.owner;
     }
     
+    public SimulatedMinion(int attack, int health){
+        this.attack = attack;
+        this.health = health;
+        this.maxHealth = health;
+    }
+    
     
     
     @Override

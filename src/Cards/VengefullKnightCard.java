@@ -5,25 +5,25 @@
  */
 package Cards;
 
-import Minions.FrostBearMinion;
 import Minions.Minion;
+import Minions.VengefullKnightMinion;
 import cardgame1.Hero;
 import cardgame1.SpriteHandler;
 
 /**
- * vanilla midrange minion
  *
  * @author Joseph
  */
-public class FrostBearCard extends Card {
+public class VengefullKnightCard extends Card{
 
-    public FrostBearCard() {
-        name = "Frost Bear";
+    public VengefullKnightCard() {
+        name = "Vengefull Knight";
         cardType = CardType.Minion;
-        cardText = "";
-        sprite = SpriteHandler.frostBearCard;
+        cardPurpose = CardPurpose.ChargeMinion;
+        cardText = "Charge";
+        sprite = SpriteHandler.knightChargeCard;
         cost = 4;
-        summon = new FrostBearMinion(this);
+        summon = new VengefullKnightMinion(this);
     }
 
     @Override
@@ -33,9 +33,7 @@ public class FrostBearCard extends Card {
 
     @Override
     public int castOnHero(Hero target) {
-       return defaultMinionSummon();
+        return defaultMinionSummon();
     }
-
-
-  
+    
 }

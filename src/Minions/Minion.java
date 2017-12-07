@@ -40,11 +40,11 @@ public abstract class Minion{
     /**
      * runs every tick
      */
-    public abstract void tick();
+    public void tick(){}
     /**
      * runs when the minion is summoned
      */
-    public abstract void onSummon();
+    public void onSummon(){}
     /**
      * runs whenever the turn ends while the minion is alive on the board
      */

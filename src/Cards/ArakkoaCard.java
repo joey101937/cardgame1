@@ -29,6 +29,7 @@ public class ArakkoaCard extends Card{
     public ArakkoaCard(){
         name = "Arakkoa";
         cardType = CardType.Minion;
+        cardPurpose = CardPurpose.VanillaMinion;
         cardText = "";
         sprite = SpriteHandler.arakkoaCard;
         cost = 1;
