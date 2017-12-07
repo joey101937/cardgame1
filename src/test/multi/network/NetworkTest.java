@@ -6,10 +6,12 @@
 package test.multi.network;
 
 import java.awt.Canvas;
+import java.net.InetAddress;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import multi.network.GameClient;
 import multi.network.GameServer;
+import multi.network.packet.types.Connect01Packet;
 
 /**
  *
@@ -18,8 +20,10 @@ import multi.network.GameServer;
  */
 public class NetworkTest extends Canvas implements Runnable{
     
-    GameServer server;
-    GameClient client;
+    GameServer server = null;
+    GameClient client = null;
+    
+    private static final String TITLE = "Networking Testing";
     
     JFrame frame;
     
@@ -50,24 +54,42 @@ public class NetworkTest extends Canvas implements Runnable{
     private void init()
     {
         System.out.println("Init");
-        frame = new JFrame("Network Testing");
+        frame = new JFrame(TITLE);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(this);
         frame.setLocationRelativeTo(null);
         frame.setSize(400, 400);
         frame.setVisible(true);
         
+        System.out.println("Create and start Client");
+        client = new GameClient("localhost");   // Client runs localhost
+        
         if(JOptionPane.showConfirmDialog(this, "Run the server?") == 0)
         {
             System.out.println("Start Server");
-            server = new GameServer(9456, "localhost");
+            String ipAddress = JOptionPane.showInputDialog(this, "Enter ip address to bind to: ");
+            if(ipAddress.equals("") || ipAddress == null)
+                server = new GameServer("localhost");
+            else
+                server = new GameServer(ipAddress);
+            frame.setTitle(TITLE + " - Server");
             server.start();
             
             System.out.println("Server started on [" + server.getAddress() + ":" + server.getPort() + "]");
+            
+            client.setServerAddress(server.getAddress());
+        } else
+        {
+            String ipAddress = JOptionPane.showInputDialog(this, "Enter IP Address of Server to connect to: ");
+            if(ipAddress.equals("") || ipAddress == null)
+                client.setServerAddress(client.getAddress());
+            else
+                client.setServerAddress(server.getAddress());
+            
+            
         }
         
-        System.out.println("Create and start Client");
-        client = new GameClient("localhost");
+        client.setServerPort(9456); // 9456 will ALWAYS be the Server's port
         client.start();
     }
  
@@ -76,9 +98,18 @@ public class NetworkTest extends Canvas implements Runnable{
     {
         init();
         
- //       System.out.println("Client output");
-        client.sendData("Hello!".getBytes(), server.getPort());
- //       System.out.println("After Client output");
+        Connect01Packet packet = new Connect01Packet(JOptionPane.showInputDialog(this, "Please enter a username"));
+        packet.writeData(client);
+    }
+ 
+    public GameServer getServer()
+    {
+        return server;
+    }
+    
+    public GameClient getClient()
+    {
+        return client;
     }
     
     public static void main(String[] args)
