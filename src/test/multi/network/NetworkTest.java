@@ -84,7 +84,7 @@ public class NetworkTest extends Canvas implements Runnable{
             if(ipAddress.equals("") || ipAddress == null)
                 client.setServerAddress(client.getAddress());
             else
-                client.setServerAddress(server.getAddress());
+                client.setServerAddress(ipAddress);
             
             
         }

@@ -113,6 +113,17 @@ public class GameClient extends Thread
         return address;
     }
     
+    public void setServerAddress(String address)
+    {
+        try
+        {
+            this.serverAddress = InetAddress.getByName(address);
+        } catch(UnknownHostException uhe)
+        {
+            uhe.printStackTrace();
+        }
+    }
+    
     public void setServerAddress(InetAddress address)
     {
         this.serverAddress = address;
