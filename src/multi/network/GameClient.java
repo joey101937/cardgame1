@@ -29,10 +29,17 @@ public class GameClient extends Thread
      */
     private InetAddress address;
     /**
+     * The IP Address of the Server that this Client is connected to.
+     */
+    private InetAddress serverAddress;
+    /**
      * Port of this Client
      */
     private int port;
-    
+    /**
+     * The port of the Server that this Client is connected to
+     */
+    private int serverPort;
     /**
      * Constructor. Chooses a random port to hook to and gets the IP Address by the provided String
      * @param address - IP Address to hook to, if able to
@@ -45,7 +52,7 @@ public class GameClient extends Thread
             Random rand = new Random();
             this.port = rand.nextInt(9999);
             // Get the IP Address provided by String address
-            this.address = InetAddress.getByName(address);
+            this.address = InetAddress.getByName(address.trim());
             // Initialize Socket (chooses random port and random address to hook to)
             this.socket = new DatagramSocket();
         } catch(SocketException se)
@@ -85,10 +92,11 @@ public class GameClient extends Thread
      */
     public void sendData(byte[] data, int port)
     {
-        DatagramPacket packet = new DatagramPacket(data, data.length, address, port);
+        this.serverPort = port;
+        DatagramPacket packet = new DatagramPacket(data, data.length, serverAddress, serverPort);
         try
         {
-            System.out.println("Sending DatagramPacket with data: " + new String(data) + "\nTo: " + address + "\nOn: " + port);
+            System.out.println("Sending DatagramPacket with data: " + new String(data) + "\nTo: " + serverAddress + "\nOn: " + serverPort);
             socket.send(packet);
         } catch(IOException ioe)
         {
@@ -105,6 +113,11 @@ public class GameClient extends Thread
         return address;
     }
     
+    public void setServerAddress(InetAddress address)
+    {
+        this.serverAddress = address;
+    }
+    
     /**
      * Returns this Client's port
      * @return the port of this Client
@@ -112,5 +125,19 @@ public class GameClient extends Thread
     public int getPort()
     {
         return port;
+    }
+    
+    public void setServerPort(int port)
+    {
+        this.serverPort = port;
+    }
+    
+    /**
+     * Returns the port of the Server that this Client is connected to
+     * @return port of Server
+     */
+    public int getPortOfServer()
+    {
+        return serverPort;
     }
 }

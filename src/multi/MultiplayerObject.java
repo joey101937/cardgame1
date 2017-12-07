@@ -16,14 +16,18 @@ public class MultiplayerObject
 {
     /* NOTE: May have this object 'hook' into an InputHandler so each client has a separate InputHandler (prevents P2 controlling P1's cards, etc)
      * Not sure (as of yet) how to hook networking into the actual game and the classes already available
+     *
+     * UPDATE: Most likely chance of this working will be to hook into the Hero class
      */
     private InetAddress address;
     private int port;
+    private String username;
     
-    public MultiplayerObject(InetAddress address, int port)
+    public MultiplayerObject(InetAddress address, int port, String username)
     {
         this.address = address;
         this.port = port;
+        this.username = username;
     }
     
     public InetAddress getAddress()
@@ -34,5 +38,10 @@ public class MultiplayerObject
     public int getPort()
     {
         return port;
+    }
+    
+    public String getUsername()
+    {
+        return username;
     }
 }

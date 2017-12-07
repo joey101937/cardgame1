@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package multi.network.packet;
+package multi.network.packet.types;
 
 /**
  *
@@ -12,7 +12,7 @@ package multi.network.packet;
  */
 public enum PacketType {
     
-    INVALID(-1), CONNECT(00), DISCONNECT(01);
+    INVALID(-1), HANDSHAKE(00), CONNECT(01), DISCONNECT(02), ATTACK(03), MESSAGE(04), PLAY(05);
     
     /**
      * ID of the Packet

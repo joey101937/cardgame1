@@ -5,6 +5,7 @@
  */
 package multi.network.packet;
 
+import multi.network.packet.types.PacketType;
 import multi.network.GameClient;
 import multi.network.GameServer;
 
@@ -24,9 +25,9 @@ public abstract class Packet {
      * Constructor. Takes a byte ID
      * @param id 
      */
-    public Packet(byte id)
+    public Packet(byte[] id)
     {
-        packetID = id;
+        packetID = id[0];
     }
     
     public abstract void writeData(GameClient client);
@@ -34,16 +35,16 @@ public abstract class Packet {
     public abstract byte[] getData();
     
     /**
-     * Parse the byte[] of data that is received and return the ID of the Packet
+     * Parse the byte[] of data that is received and return everything AFTER the ID of the Packet
      * @param data
-     * @return 
+     * @return the contents of the Packet
      */
     public static String readData(byte[] data)
     {
         // Convert data to String representation and remove any trailing or leading whitespace
         String strData = new String(data).trim();
-        // Return only the ID (first 2 characters) of the String
-        return strData.substring(0, 2);
+        // Return everything AFTER the ID
+        return strData.substring(2);
     }
     
     /**

@@ -5,7 +5,7 @@
  */
 package multi.network;
 
-import multi.network.packet.PacketType;
+import multi.network.packet.types.PacketType;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import multi.MultiplayerObject;
 import multi.network.packet.Packet;
+import multi.network.packet.types.Connect01Packet;
 
 /**
  * Represents the Server that the game is running on. GameClients connect to this Server to play
@@ -33,15 +34,15 @@ public class GameServer extends Thread{
     private int port;
     
     /** Constructor. Initializes this Server's DatagramSocket object. 
-     * @param port - The port to run this Server on.
+     * @param address - The address that the Server should bind to
      */
-    public GameServer(int port, String address)
+    public GameServer(String address)
     {
-        this.port = port;
+        this.port = 9456;
         try
         {
             connected = new ArrayList<>();
-            socket = new DatagramSocket(port, InetAddress.getByName(address));
+            socket = new DatagramSocket(port, InetAddress.getByName(address.trim()));
         } catch(SocketException se)
         {
             se.printStackTrace();
@@ -65,6 +66,11 @@ public class GameServer extends Thread{
         switch(type)
         {
             case CONNECT:
+                Connect01Packet packetConnect = new Connect01Packet(data);
+                MultiplayerObject obj = obj = new MultiplayerObject(address, port, packetConnect.getUsername());
+                this.connected.add(obj);
+                System.out.println("<<SERVER>> " + "[" + address.getHostAddress() + ":" + port + "] " + packetConnect.getUsername() + " has connected!");
+                sendDataToAll(("[" + address.getHostAddress() + ":" + port + "] " + packetConnect.getUsername() + " has connected!").getBytes());
                 break;
             case DISCONNECT:
                 break;
@@ -91,12 +97,7 @@ public class GameServer extends Thread{
             {
                 ioe.printStackTrace();
             }
-            String msg = new String(packet.getData()).trim();
-            System.out.println("CLIENT >> " + msg);
-            if(msg.equals("Hello!"))
-                sendData("Why hello there!".getBytes(), packet.getAddress(), packet.getPort());
-            // Determine which PacketType the packet is and continue accordingly
-//                parsePacket(packet.getData(), packet.getAddress(), packet.getPort());
+            parsePacket(packet.getData(), packet.getAddress(), packet.getPort());
         }
     }
     
