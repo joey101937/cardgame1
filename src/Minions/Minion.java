@@ -175,6 +175,6 @@ public abstract class Minion{
     
     @Override
     public String toString(){
-        return (this.name + "  "+ this.attack + "/" + this.health + " " + this.owner.name);
+        return (this.name + "  "+ this.attack + "/" + this.health + " owner:" + this.owner);
     }
 }

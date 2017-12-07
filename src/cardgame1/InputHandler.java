@@ -102,17 +102,23 @@ public class InputHandler extends KeyAdapter implements MouseListener, MouseMoti
         Board.mouseY = (int)(e.getY()/Board.yScale);
     }
     
-    
-    @Override
+       @Override
     public void keyPressed(KeyEvent e) {
-    if(keyTimer > 0) return;
-    if(e.getKeyChar() == ' '){
-        Board.controller.nextTurn();
+        if (keyTimer > 0) {
+            return;
+        }
+        switch (e.getKeyChar()) {
+            case ' ':
+                Board.controller.nextTurn();
+                break;
+            case 'q':
+                for(Card c : Board.playerHero.hand){
+                    System.out.println(c + " == " + AI.AI.getValueOfCard(c));
+                }
+        }
+        keyTimer = 10;
     }
-    keyTimer = 10;
-    }
-    
-    
+
     /**
      * gets the minion that is currently being rendered in the clicked location.
      * @param x x-coordinate of mouse click AFTER ADJUSTING FOR RESOLUTION SCALING

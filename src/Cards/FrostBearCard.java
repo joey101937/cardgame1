@@ -20,6 +20,7 @@ public class FrostBearCard extends Card {
     public FrostBearCard() {
         name = "Frost Bear";
         cardType = CardType.Minion;
+        cardPurpose = CardPurpose.VanillaMinion;
         cardText = "";
         sprite = SpriteHandler.frostBearCard;
         cost = 4;

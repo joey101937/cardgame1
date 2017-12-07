@@ -25,6 +25,7 @@ public class Board extends Canvas implements Runnable {
     public static Hero topHero; //hero on top side of board
     public static Hero botHero; //hero on bottom side of board
     public static Hero playerHero; //user's hero
+    public static Hero nonPlayerHero; //not the user's hero
     public static Minion selectedMinion;
     public static double xScale, yScale; //scale of the window reletive to testing
     public static int mouseX, mouseY;
@@ -48,12 +49,13 @@ public class Board extends Canvas implements Runnable {
         topHero = t;
         botHero = b;
         playerHero = b;
+        nonPlayerHero = t;
         this.addMouseListener(ih);
         this.addMouseMotionListener(ih);
         this.addKeyListener(ih);
         this.visHandler = new VisualEffectHandler(this);
         this.controller = new GameController(this);
-        //setupTest();
+        setupTest();
         controller.startGame();
     }
 
@@ -98,7 +100,11 @@ public class Board extends Canvas implements Runnable {
      * @param g 
      */
     private void renderEnemyHand(Graphics2D g){
-        //TODO
+        for(int i = 0; i < nonPlayerHero.hand.size(); i++){
+            nonPlayerHero.hand.get(i).render(g, 1700, 50 + 125*i, false);
+        }
+        g.setColor(Color.black);
+        g.drawString("Enemy Cards", 1650, 50);
     }
     
     private void renderHeros(Graphics2D g){

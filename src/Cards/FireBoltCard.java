@@ -31,6 +31,7 @@ public class FireBoltCard extends Card{
     public FireBoltCard() {
         name = "FireBolt";
         cardType = CardType.Spell;
+        cardPurpose = CardPurpose.DirectDamage;
         isTargeted = true;
         spellDamage = 2;
         cardText = "Deal " + spellDamage + " damage to \n target minion";

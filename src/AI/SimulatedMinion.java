@@ -6,6 +6,7 @@
 package AI;
 
 import Minions.Minion;
+import cardgame1.Hero;
 
 /**
  * minion placeholder for use in AI class
@@ -14,6 +15,7 @@ import Minions.Minion;
 public class SimulatedMinion extends Minion{
 
     public SimulatedMinion(Minion m){
+        this.name = "sim " + m.name;
         this.attack = m.attack;
         this.health = m.health;
         this.maxHealth = m.maxHealth;
@@ -21,7 +23,9 @@ public class SimulatedMinion extends Minion{
         this.owner = m.owner;
     }
     
-    public SimulatedMinion(int attack, int health){
+    public SimulatedMinion(int attack, int health, Hero owner){
+        this.name = "simulated";
+        this.owner = owner;
         this.attack = attack;
         this.health = health;
         this.maxHealth = health;

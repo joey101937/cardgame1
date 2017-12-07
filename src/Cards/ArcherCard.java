@@ -21,6 +21,7 @@ public class ArcherCard extends Card{
     public ArcherCard() {
         name = "Archer";
         cardType = CardType.Minion;
+        cardPurpose = CardPurpose.BattlecryMinionDamage;
         isTargeted = true;
         cardText = "Deal " + summonDamage + " Damage";
         sprite = SpriteHandler.archerCard;

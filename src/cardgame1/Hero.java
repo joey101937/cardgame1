@@ -147,6 +147,10 @@ public class Hero {
         damageTicker--;
         g.fillRect(x, y, picture.getWidth(), picture.getHeight());
         }
-        
+    }
+    
+    @Override
+    public String toString(){
+        return this.name;
     }
 }
