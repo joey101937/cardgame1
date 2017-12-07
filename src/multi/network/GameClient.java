@@ -20,17 +20,33 @@ import java.util.Random;
  */
 public class GameClient extends Thread
 {
+    /**
+     * Allows the Client to send and receive data
+     */
     private DatagramSocket socket;
+    /**
+     * Address of this Client
+     */
     private InetAddress address;
+    /**
+     * Port of this Client
+     */
     private int port;
     
+    /**
+     * Constructor. Chooses a random port to hook to and gets the IP Address by the provided String
+     * @param address - IP Address to hook to, if able to
+     */
     public GameClient(String address)
     {
         try
         {
+            // Create Random to randomly choose port
             Random rand = new Random();
             this.port = rand.nextInt(9999);
+            // Get the IP Address provided by String address
             this.address = InetAddress.getByName(address);
+            // Initialize Socket (chooses random port and random address to hook to)
             this.socket = new DatagramSocket();
         } catch(SocketException se)
         {
@@ -44,12 +60,16 @@ public class GameClient extends Thread
     @Override
     public void run()
     {
+        // Loop forever and ever and ever...
         while(true)
         {
+            // Byte[] holds the data to be received
             byte[] data = new byte[1024];
+            // Create Packet object to receive some yummy data (yum yum)
             DatagramPacket packet = new DatagramPacket(data, data.length);
             try
             {
+                // Receive previously mentioned Packet object
                 socket.receive(packet);
             } catch(IOException ioe)
             {
@@ -59,11 +79,16 @@ public class GameClient extends Thread
         }
     }
     
-    public void sendData(byte[] data)
+    /**
+     * Sends data with this Client's Socket object.
+     * @param data - Data to send away
+     */
+    public void sendData(byte[] data, int port)
     {
         DatagramPacket packet = new DatagramPacket(data, data.length, address, port);
         try
         {
+            System.out.println("Sending DatagramPacket with data: " + new String(data) + "\nTo: " + address + "\nOn: " + port);
             socket.send(packet);
         } catch(IOException ioe)
         {
@@ -71,11 +96,19 @@ public class GameClient extends Thread
         }
     }
     
+    /**
+     * Returns this Client's IP Addresss
+     * @return the IP Address of the Client
+     */
     public InetAddress getAddress()
     {
         return address;
     }
     
+    /**
+     * Returns this Client's port
+     * @return the port of this Client
+     */
     public int getPort()
     {
         return port;

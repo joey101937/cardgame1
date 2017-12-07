@@ -60,9 +60,12 @@ public class NetworkTest extends Canvas implements Runnable{
         if(JOptionPane.showConfirmDialog(this, "Run the server?") == 0)
         {
             System.out.println("Start Server");
-            server = new GameServer(9456);
+            server = new GameServer(9456, "localhost");
             server.start();
+            
+            System.out.println("Server started on [" + server.getAddress() + ":" + server.getPort() + "]");
         }
+        
         System.out.println("Create and start Client");
         client = new GameClient("localhost");
         client.start();
@@ -73,8 +76,9 @@ public class NetworkTest extends Canvas implements Runnable{
     {
         init();
         
-        System.out.println("Client output");
-        client.sendData("Hello!".getBytes());
+ //       System.out.println("Client output");
+        client.sendData("Hello!".getBytes(), server.getPort());
+ //       System.out.println("After Client output");
     }
     
     public static void main(String[] args)

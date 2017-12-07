@@ -11,13 +11,14 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 import multi.MultiplayerObject;
 import multi.network.packet.Packet;
 
 /**
- * Represents the Server that the game is running on. GameClients connect to this Server
+ * Represents the Server that the game is running on. GameClients connect to this Server to play
  * 
  * @author Knifesurge
  * @since 2017-12-06
@@ -26,7 +27,7 @@ public class GameServer extends Thread{
     
     /** Handles all incoming and outgoing network functions */
     private DatagramSocket socket;
-    /** List of connected clients (Might change MultiplayerObject to GameClient, tbd) */
+ //TODO:   /** List of connected clients (Might change MultiplayerObject to GameClient, tbd) */
     private List<MultiplayerObject> connected;
     /** Port this server is running on */
     private int port;
@@ -34,16 +35,19 @@ public class GameServer extends Thread{
     /** Constructor. Initializes this Server's DatagramSocket object. 
      * @param port - The port to run this Server on.
      */
-    public GameServer(int port)
+    public GameServer(int port, String address)
     {
         this.port = port;
         try
         {
             connected = new ArrayList<>();
-            socket = new DatagramSocket(port);
+            socket = new DatagramSocket(port, InetAddress.getByName(address));
         } catch(SocketException se)
         {
             se.printStackTrace();
+        } catch(UnknownHostException uhe)
+        {
+            uhe.printStackTrace();
         }
     }
     
@@ -122,7 +126,21 @@ public class GameServer extends Thread{
      */
     public void sendDataToAll(byte[] data)
     {
-        // Use a lambda expression to eliminate most of the boilerplate code. Sends data to each Client
+        // Use a dead-ass lambda expression to eliminate most of the boilerplate code *dab*. Sends data to each Client
         connected.forEach(player -> sendData(data, player.getAddress(), player.getPort()));
+    }
+    
+    public InetAddress getAddress()
+    {
+        return socket.getLocalAddress();
+    }
+    
+    /**
+     * Returns the port that this Server is running on
+     * @return the port that the Server is running on
+     */
+    public int getPort()
+    {
+        return port;
     }
 }
