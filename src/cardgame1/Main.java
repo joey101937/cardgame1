@@ -36,8 +36,11 @@ public class Main {
         SpriteHandler.Initialize();
         for(int i = 0; i < 5 ; i++){
             enemyCards.add(new ArakkoaCard());
+            enemyCards.add(new FireBoltCard());
+            enemyCards.add(new FrostBearCard());
             enemyCards.add(new ArcherCard());
             enemyCards.add(new KnightCard());
+            enemyCards.add(new VengefullKnightCard());
             
             playerCards.add(new ArakkoaCard());
             playerCards.add(new FireBoltCard());
@@ -60,6 +63,17 @@ public class Main {
         String output = System.getProperty("user.dir") + File.separator;
         return output;
         
+    }
+    /**
+     * sleeps the thread
+     * @param duration 
+     */
+    public static void wait(int duration){
+        try{
+            Thread.sleep(duration);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     private static void setBackgroundImage() {

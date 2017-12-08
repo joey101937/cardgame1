@@ -19,6 +19,8 @@ public class VisualEffectHandler {
     public Board board = null;
     private int timeMousedOver = 0; //how long the cursor has been on a particular minion, for use in drawMouseOverCard method
     private Minion mousedOverMinion = null; //currently moused over minion, for use in drawMouseOverCard method
+    private static Card currentlyDisplayed = null; //currently presented card used for Ai playing cards
+    private static int timeLeftOnCard = 0;
     VisualEffectHandler(Board b){
         board = b;
     }
@@ -27,6 +29,7 @@ public class VisualEffectHandler {
         drawLineM(g);  //draw line from selected minion
         drawLineC(g);  //draw line from selected card
         drawMouseOverCard(g);
+        drawGivenCard(g);
     }
     
     public void tick(){
@@ -72,6 +75,23 @@ public class VisualEffectHandler {
         g.setColor(Color.yellow);
         g.drawLine(selected.getXCoordinate()+Card.WIDTH/2, selected.getYCoordinate()+Card.HEIGHT/2, Board.mouseX, Board.mouseY);
     }
-
+    /**
+     * 
+     */
+    private void drawGivenCard(Graphics2D g) {
+        if(timeLeftOnCard > 0){
+            timeLeftOnCard--;
+            currentlyDisplayed.render(g, 1700, 200, true);
+        }
+    }
+    /**
+     * displayed a card to the player for a duration
+     * @param c the card
+     * @param duration how long in ticks
+     */
+    public static void displayCard(Card c, int duration){
+            currentlyDisplayed = c;
+            timeLeftOnCard = duration;
+    }
 
 }

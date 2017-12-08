@@ -123,6 +123,11 @@ public class InputHandler extends KeyAdapter implements MouseListener, MouseMoti
                    }
                 }
                 break;
+            case 'c':
+                for(Card c : Board.nonPlayerHero.hand){
+                    System.out.println(c+" : " + AI.getValueOfCard(c) + "/" + c.cost);
+                }
+                break;
         }
         keyTimer = 10;
     }

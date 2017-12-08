@@ -35,7 +35,7 @@ public class Hero {
     private int damageTicker = 0; //used to apply the red on damage effect
     public boolean turn = false; //is it our turn?
     public boolean isAIControlled = false;
-    public AI controller = null;
+       
     //CONSTRUCTOR
     public Hero(String name, ArrayList<Card> deck, BufferedImage portrait){
         this.name = name;
@@ -46,27 +46,16 @@ public class Hero {
         for(Card c: deck){
             c.setHero(this);
         }
+        shuffle();
         id = idBank++;
     }
-    /**
-     * creates an ai controlled hero
-     * @param portrait image that will be rendered for hero
-     * @param controller ai controller 
-     */
-    public Hero(String name, ArrayList<Card> deck, BufferedImage portrait, AI controller) {
-        this.name = name;
-        this.deck = deck;
-        this.picture = portrait;
-        this.resource = 1;
-        this.maxResource = 1;
-        this.isAIControlled = true;
-        this.controller = controller;
-        for (Card c : deck) {
-            c.setHero(this);
-        }
-        id = idBank++;
+    
+    
+    public void setAIControlled(boolean b){
+        this.isAIControlled = b;
     }
-
+    
+    
     /**
      * Attempts to put card from top of deck into hand. 
      * If hand is too full, the top card of the deck is simply discarded.
@@ -89,10 +78,12 @@ public class Hero {
      */
     public void shuffle() {
         ArrayList<Card> temp = new ArrayList<>();
+        Main.wait(10);
         while (!deck.isEmpty()) {
-            temp.add(deck.remove((int) Math.random() * deck.size()));
+            temp.add(deck.remove((int) (Math.random() * deck.size())));
         }
         deck = temp;
+       
     }
     
     public void onTurnStart(){
@@ -103,6 +94,7 @@ public class Hero {
         if(this.maxResource<Hero.MAX_POSSIBLE_RESOURCE) this.maxResource++;
         this.resource=maxResource;
         this.turn = true;
+        if(this.isAIControlled) AI.takeTurn(this);
     }
     
     public void onTurnEnd(){

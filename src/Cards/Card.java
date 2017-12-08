@@ -5,6 +5,7 @@
  */
 package Cards;
 
+import AI.AI;
 import Minions.Minion;
 import cardgame1.Board;
 import cardgame1.Hero;
@@ -19,7 +20,7 @@ import java.awt.image.BufferedImage;
  * Card itself, these are played from the hand to perform functions or generate Minions
  * @author Joseph
  */
-public abstract class Card {
+public abstract class Card implements Comparable{
     public static final Integer WIDTH = 200;
     public static final Integer HEIGHT = 300;
     /*   AI FLAGS       */
@@ -179,5 +180,13 @@ public abstract class Card {
     }
     public Hero getOwner(){
         return owner;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        Card c = (Card)o;
+        Integer myVal = AI.getValueOfCard(this)/this.cost;
+        Integer theirVal = AI.getValueOfCard(c)/c.cost;
+        return myVal.compareTo(theirVal);
     }
 }

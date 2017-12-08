@@ -30,7 +30,7 @@ public class Board extends Canvas implements Runnable {
     public static double xScale, yScale; //scale of the window reletive to testing
     public static int mouseX, mouseY;
     public static int buffer = 50; //extra space between rendered cards in hand
-    public VisualEffectHandler visHandler = null;
+    public static VisualEffectHandler visHandler = null;
     public Window window;  //main window
     private boolean running = false;
     private Thread thread = null;
@@ -50,12 +50,13 @@ public class Board extends Canvas implements Runnable {
         botHero = b;
         playerHero = b;
         nonPlayerHero = t;
+        nonPlayerHero.setAIControlled(true);
         this.addMouseListener(ih);
         this.addMouseMotionListener(ih);
         this.addKeyListener(ih);
         this.visHandler = new VisualEffectHandler(this);
         this.controller = new GameController(this);
-        setupTest();
+        //setupTest();
         controller.startGame();
     }
 

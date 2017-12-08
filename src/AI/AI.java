@@ -6,29 +6,291 @@
 package AI;
 
 import Cards.Card;
+import Cards.CardType;
 import Minions.Minion;
 import cardgame1.Board;
 import cardgame1.Hero;
+import cardgame1.Main;
+import cardgame1.PlayArea;
+import cardgame1.VisualEffectHandler;
 import java.util.ArrayList;
 
 /**
  * Driver for computer players
  * @author Joseph
  */
-public class AI {
-    /* FIELDS     */
-    Hero self;
-    Hero enemy;
-    public AI(Hero host){
-        self = host;
-        if(self == Board.botHero){
+public abstract class AI {
+    private static int speed = 700; //how long to wait between making moves so the player is able to follow along
+    
+    /**
+     * core of the AI player, makes plays and casts cards the most efficient way possible and ends turn when done
+     * @param h 
+     */
+    
+    public static void takeTurn(Hero h) {
+        Hero enemy = null;
+        if(h==Board.topHero) enemy = Board.botHero;
+        else enemy = Board.topHero;
+        
+        tradeOnBoard(h,false);
+        playOutHand(h);
+        Main.wait(speed);
+        tradeOnBoard(h,false);
+        for(Minion m : h.minions.getStorage()){
+            if(m==null) continue;
+            Main.wait(speed);
+            m.attack(enemy);
+        }
+        Main.wait(speed);
+        Board.controller.nextTurn();
+        /*
+        for(Card c : h.hand){
+            System.out.println(c + " == " + AI.getValueOfCard(c));
+        }
+        */
+    }
+    
+    /**
+     * plays all cards we can in the best way possible
+     */
+    public static void playOutHand(Hero h){
+        boolean playOver = true;
+        for(Card c : h.hand){
+            if(c.canAfford() && AI.getValueOfCard(c) > 0) playOver = false; //there is something we want to play
+        }
+        if(playOver)return;
+        ArrayList<Card> playable = new ArrayList<>();
+        for(Card c : h.hand){
+            if(c.canAfford()) playable.add(c);
+        }
+        playable.sort(null);
+        VisualEffectHandler.displayCard(playable.get(playable.size()-1), 100);
+        Main.wait(speed*2);
+        AI.playCard(playable.get(playable.size()-1));
+        playOutHand(h);
+    }
+    
+    /**
+     * plays card with minion target
+     * @param c
+     * @param target 
+     */
+    public static void playCard(Card c){
+        System.out.println("casting " + c);
+        if(!c.canAfford()){
+            System.out.println("cannot play " + c + "; cannot afford");
+            return;
+        }
+        Hero enemy = null;
+        if (c.getOwner() == Board.topHero) {
+            enemy = Board.botHero;
+        } else {
+           enemy = Board.topHero;
+        }
+        int value = 0;
+        switch(c.cardPurpose){
+            case VanillaMinion:
+            case ChargeMinion:
+            case AOEDamage:
+            case AOEHeal:
+                c.cast(null);
+                break;
+            case BattlecryMinionDamage:
+                Minion bestTarget = AI.getBestTarget(new SimulatedMinion(c.spellDamage,1,c.getOwner()));
+                if(bestTarget!=null) {
+                    System.out.println("casting " + c + "on " + bestTarget);
+                    c.cast(bestTarget);
+                }
+                else{
+                    c.castOnHero(enemy);
+                }
+                break;
+            case BattlecryMinionHeal:
+                value = -999;
+                Minion bestHealTarget = null;
+                for (Minion m : c.getOwner().minions.getStorage()) {
+                    if (m == null)continue;
+                    if (isVulnerable(m)) {
+                        if (!isVulnerable(new SimulatedMinion(m.attack, m.health + c.spellDamage, c.getOwner()))) {  //if we can save a minion
+                            if (getWorth(m) > value) {
+                                value = getWorth(m);    //the value of the card becomes teh value of the minion saved. use the value of the most important minion we can save
+                                bestHealTarget = m;
+                            }
+                        }
+                    }
+                }
+                if(bestHealTarget!=null) c.cast(bestHealTarget);
+                else c.castOnHero(c.getOwner());
+                break;
+            case BattleCryMinionBuff:
+                value = 0;
+                Minion BestFit = null;
+                 for (Minion m : c.getOwner().minions.getStorage()) {
+                    if (!AI.canFavorablyTrade(m)) {
+                        if (canFavorablyTrade(new SimulatedMinion(m.attack + c.spellDamage, m.health, m.owner))) {
+                            if(AI.getTradeValue(new SimulatedMinion(m.attack + c.spellDamage, m.health, m.owner), AI.getBestTarget(new SimulatedMinion(m.attack + c.spellDamage, m.health, m.owner))) > value){
+                             value = AI.getTradeValue(new SimulatedMinion(m.attack + c.spellDamage, m.health, m.owner), AI.getBestTarget(new SimulatedMinion(m.attack + c.spellDamage, m.health, m.owner)));
+                             BestFit = m;
+                            }                          
+                        }
+                    }
+                    if(BestFit != null){
+                        c.cast(BestFit);
+                    }
+                    else{
+                        if(c.getOwner().minions.numOccupants() > 0){
+                            c.cast(AI.getBiggestThreatOf(c.getOwner()));
+                        }
+                    }
+                }
+                    break;
+            case DirectDamage:
+                if(enemy.health <= c.spellDamage){
+                    c.castOnHero(enemy);
+                }
+                Minion target = AI.getBestTarget(new SimulatedMinion(c.spellDamage,1,c.getOwner()));
+                if(target != null){
+                    System.out.println("casting " + c + "on " + target);
+                    c.cast(target);
+                    break;
+                }else{
+                    System.out.println("no target for " + c);
+                    break;
+                }
+            case Debuff:
+                break;
+            case DirectHeal:
+                if(isHeroVulnerable(c.getOwner())){
+                    c.castOnHero(c.getOwner());
+                    break;
+                }else{
+                    Minion potential = null;
+                    int valGained = 0;
+                    for(Minion m : c.getOwner().minions.getStorage()){
+                        if(m==null)continue;
+                        if(isVulnerable(m)){
+                            if(!isVulnerable(new SimulatedMinion(m.attack,m.health+c.spellDamage,m.owner))){
+                                if(getWorth(m) > valGained){
+                                    valGained = getWorth(m);
+                                    potential = m;
+                                }
+                            }
+                        }
+                    }
+                    if(valGained!=0) {
+                        c.cast(potential);
+                        break;
+                    }
+                    if(AI.getBiggestThreatOf(c.getOwner())!= null) {
+                        c.cast(getBiggestThreatOf(c.getOwner()));
+                        break;
+                    }else{
+                        c.castOnHero(c.getOwner());
+                        break;
+                    }
+                }
+            case Buff:
+                int best = 0;
+                Minion buffTarget = null;
+                for(Minion m : c.getOwner().minions.getStorage()){
+                    if(m==null)continue;
+                    if(!canTradeUp(m)){
+                        if(canTradeUp(new SimulatedMinion(m.attack+c.spellDamage,m.health,m.owner))){
+                            if(m.attack + c.spellDamage > best){
+                                best = m.attack + c.spellDamage;
+                                buffTarget = m;
+                            }
+                        }
+                    }
+                }
+                if(buffTarget != null){
+                    c.cast(buffTarget);
+                    break;
+                }
+                for(Minion m : c.getOwner().minions.getStorage()){
+                    if(m==null)continue;
+                    if(!canFavorablyTrade(m)){
+                        if(canFavorablyTrade(new SimulatedMinion(m.attack + c.spellDamage,m.health,m.owner))){
+                            if(getWorth(m) > best){
+                                best = getWorth(m);
+                                buffTarget = m;
+                            }
+                        }
+                    }
+                }
+                if(buffTarget != null){
+                    c.cast(buffTarget);
+                    break;
+                }
+                if(c.getOwner().minions.numOccupants() > 0){
+                    c.cast(getBiggestThreatOf(c.getOwner()));
+                    break;
+                }else{
+                    System.out.println("No target for " + c);
+                }
+                break;
+        }
+    }
+    
+    /**
+     * returns true if the given hero would be killed by an attack from each of the opponents minions
+     * @param h hero to evaluate
+     * @return result
+     */
+    public static boolean isHeroVulnerable(Hero h){
+        Hero enemy = null;
+        if(h == Board.topHero){
+            enemy = Board.botHero;
+        }else{
             enemy = Board.topHero;
         }
-        if(self == Board.topHero){
-            enemy = Board.botHero;
+        int damagePotential = 0;
+        for(Minion m : enemy.minions.getStorage()){
+            if(m==null)continue;
+            damagePotential += m.attack;
         }
-    }    
+        return damagePotential >= h.health;
+    }
     
+    /**
+     * makes favorable trades on the board until there are no more favorable trades
+     * @param should we wait between making plays so the player can see whats going on?
+     * @param h 
+     */
+    private static void tradeOnBoard(Hero h, boolean instant){
+        boolean doneTrading = false;
+        while (!doneTrading) {
+            doneTrading = true;
+            for (Minion m : h.minions.getStorage()) {
+                if (m == null) continue;
+                if (AI.canFavorablyTrade(m) && m.canAttack) {
+                    if(!instant)Main.wait(speed);
+                    m.attack(AI.getBestTarget(m));
+                    doneTrading = false;
+                }
+            }
+        }
+        if(h == Board.topHero){
+            if(Board.botHero.minions.numOccupants()==0){
+                for(Minion m : h.minions.getStorage()){
+                    if(m==null || !m.canAttack) continue;
+                     if(!instant)Main.wait(speed);
+                    m.attack(Board.botHero);
+                }
+            }
+        }else{
+            //we are playing as bothero
+             if(Board.topHero.minions.numOccupants()==0){
+                for(Minion m : h.minions.getStorage()){
+                    if(m==null || !m.canAttack) continue;
+                     if(!instant)Main.wait(speed);
+                    m.attack(Board.topHero);
+                }
+            }
+        }
+    }
+
+
     /**
      * calculates the worth of a minion for purposes of making plays
      * @param m minion to evaluate
@@ -36,8 +298,23 @@ public class AI {
      */
     public static int getWorth(Minion m){
         int sumStats = m.health + m.attack; 
+        if(m.attack < m.health) sumStats--; //low attack is slightly worse than high atk
         if(m.health <= 0){
             return 0; //worthless if dead
+        }
+        if(m.owner.minions.isFull()){
+            for(Minion min: m.owner.minions.getStorage()){
+                if(m==null)continue;
+                if(sumStats > min.attack + min.health){
+                    return sumStats;
+                }
+            }
+            //this is the smallest minion on full field
+            for(Card c : m.owner.hand){
+                if(AI.getValueOfCard(c) > sumStats && c.canAfford() && c.cardType == CardType.Minion){
+                    return 0; //the minion is taking a slot that a largert minion should have
+                }
+            }
         }
         return sumStats;
     }
@@ -74,6 +351,7 @@ public class AI {
     public static boolean isFavorableTrade(Minion attacker, Minion defender){
         int myDif = AI.getWorthAfterCombat(attacker, defender) - AI.getWorth(attacker);
         int theirDif = AI.getWorthAfterCombat(defender, attacker) - AI.getWorth(defender);
+        if(myDif == theirDif) return attacker.attack < defender.attack;
         return myDif > theirDif;
     }
     
@@ -107,6 +385,16 @@ public class AI {
         return false;
     }
    
+    /**
+     * if there is a favorable trade on the board for a minion
+     * @param m
+     * @return 
+     */
+    public static boolean canFavorablyTrade(Minion m){
+        if(AI.getBestTarget(m) == null) return false;
+        return(AI.getTradeValue(m, AI.getBestTarget(m)) > 0);
+    }
+    
     /**
      * returns the best target for the given minion
      * @param attacker
@@ -147,12 +435,9 @@ public class AI {
         int myNewValue = AI.getWorthAfterCombat(attacker, defender);
         int theirNewValue = AI.getWorthAfterCombat(defender, attacker);
         int ValueGained = (theirPreviousValue-theirNewValue) - (myPreviousValue-myNewValue);
+        if(attacker.attack < defender.attack) ValueGained++; //minions with higher attack are worth a tad more
+        if(theirNewValue == 0 && attacker.owner.health < defender.owner.health) ValueGained++; 
         return ValueGained;
-    }
-    
-    
-    public static void tradeUp(Minion m){
-        //TODO
     }
     
     /**
@@ -234,11 +519,20 @@ public class AI {
      * @return the value playing the card presents
      */
     public static int getValueOfCard(Card c){
- 
+        Hero enemy;
+        if(c.getOwner() == Board.topHero){
+            enemy = Board.botHero;
+        }else{
+            enemy = Board.topHero;
+        }
+        
         int value = 0;
         switch(c.cardPurpose){
             case VanillaMinion:
                 value = c.summon.attack + c.summon.health;
+                if(c.cost < c.getOwner().minions.numOccupants()){
+                    value -= c.cost-c.getOwner().minions.numOccupants(); //small minions are penalized for taking a board slot
+                }
                 if(c.getOwner().minions.isFull()) return 0; //if there is no place to summon the minion, it has 0 value.
                 if(isVulnerable(c.summon)){
                     value = c.summon.attack;
@@ -246,11 +540,15 @@ public class AI {
                 return value;
             case BattlecryMinionDamage:
                 if(c.getOwner().minions.isFull()) return 0; //if there is no place to summon the minion, it has 0 value.
-                    Minion target = AI.getBestTarget(new SimulatedMinion(c.spellDamage,99,c.getOwner()));
-                    System.out.println("best target for " + c + " is " + target);
+                    Minion target = AI.getBestTarget(new SimulatedMinion(c.spellDamage,1,c.getOwner()));
+                    //System.out.println("best target for " + c + " is " + target);
                     if(target!=null)value += getWorth(target) -AI.getWorthAfterDamage(target, c.spellDamage);
                     else value+=c.spellDamage/2; //there are no minions to use it on so this is the value of using the damage on the opponent's hero
-                    value += c.summon.attack + c.summon.maxHealth;
+                    if(isVulnerable(c.summon)){
+                        value+=c.summon.attack;
+                    }else{
+                        value += c.summon.attack + c.summon.maxHealth;
+                    } 
                 return value;
             case BattlecryMinionHeal:
                 if(c.getOwner().minions.isFull()) return 0; //if there is no place to summon the minion, it has 0 value.
@@ -281,25 +579,33 @@ public class AI {
                 }
                 return value;
             case DirectDamage:
+                Minion optimalTarget = null;
                 if(c.getOwner() == Board.topHero){
                     for(Minion m : Board.botHero.minions.getStorage()){
                         if(m==null)continue;
                         int thisValue = getWorth(m) - AI.getWorthAfterDamage(m, c.spellDamage);
-                        if(thisValue > value) value = thisValue;
+                        if(thisValue > value) {
+                            value = thisValue;
+                            optimalTarget = m;
+                        }
                     }
                 }else{
                     for(Minion m : Board.topHero.minions.getStorage()){
                         if(m==null)continue;
                         int thisValue = getWorth(m) - AI.getWorthAfterDamage(m, c.spellDamage);
-                        if(thisValue > value) value = thisValue;
+                        if(thisValue > value){
+                            value = thisValue;
+                            optimalTarget = m;
+                        }
                     }
                 }
+                //System.out.println("best target for " + c + " is " + optimalTarget);
                 return value;
             case Debuff:
                 if(c.getOwner() == Board.botHero){
                     if(Board.topHero.minions.numOccupants() == 0) return -1;
-                    if(AI.canTradeUp(AI.getBiggestThreatOf(Board.topHero))){
-                        if(!canTradeUp(new SimulatedMinion(getBiggestThreatOf(Board.topHero).attack-c.spellDamage,getBiggestThreatOf(Board.topHero).health,c.getOwner()))){
+                    if(AI.canFavorablyTrade(AI.getBiggestThreatOf(Board.topHero))){
+                        if(!canFavorablyTrade(new SimulatedMinion(getBiggestThreatOf(Board.topHero).attack-c.spellDamage,getBiggestThreatOf(Board.topHero).health,c.getOwner()))){
                             //if the enemy's biggest threat can no longer trade up
                             value += 1;
                         }
@@ -317,8 +623,8 @@ public class AI {
                     }
                 }else{
                      if(Board.botHero.minions.numOccupants() == 0) return -1;
-                    if(AI.canTradeUp(AI.getBiggestThreatOf(Board.botHero))){
-                        if(!canTradeUp(new SimulatedMinion(getBiggestThreatOf(Board.botHero).attack-c.spellDamage,getBiggestThreatOf(Board.botHero).health,c.getOwner()))){
+                    if(AI.canFavorablyTrade(AI.getBiggestThreatOf(Board.botHero))){
+                        if(!canFavorablyTrade(new SimulatedMinion(getBiggestThreatOf(Board.botHero).attack-c.spellDamage,getBiggestThreatOf(Board.botHero).health,c.getOwner()))){
                             //if the enemy's biggest threat can no longer trade up
                             value += 1;
                         }
@@ -362,21 +668,41 @@ public class AI {
                 if (value == 0) {
                     value = c.spellDamage;
                 }
+                if(AI.isHeroVulnerable(c.getOwner())){
+                    int damagePotential = 0;
+                    for(Minion m : enemy.minions.getStorage()){
+                        if(m==null)continue;
+                        damagePotential += m.attack;
+                    }
+                    if(damagePotential < c.getOwner().health + c.spellDamage) return 30; //if this heal would take the hero out of lethal range, its worth alot
+                }
                 return value;
             case Buff:
                 for(Minion m : c.getOwner().minions.getStorage()){
-                    if(!canTradeUp(m)){
-                        if(canTradeUp(new SimulatedMinion(m.attack+c.spellDamage,m.health,m.owner))){
+                    if(!canFavorablyTrade(m)){
+                        if(canFavorablyTrade(new SimulatedMinion(m.attack+c.spellDamage,m.health,m.owner))){
                             value += AI.getTradeValue(new SimulatedMinion(m.attack+c.spellDamage,m.health,m.owner), AI.getBestTarget(new SimulatedMinion(m.attack+c.spellDamage,m.health,m.owner)));
                         }
                     }
                 }
-                if(value == 0) value = c.spellDamage;
+                if(value == 0) value = c.spellDamage-1;
+                return value;
+            case BattleCryMinionBuff:
+                for (Minion m : c.getOwner().minions.getStorage()) {
+                    if (!canFavorablyTrade(m)) {
+                        if (canFavorablyTrade(new SimulatedMinion(m.attack + c.spellDamage, m.health, m.owner))) {
+                            value += AI.getTradeValue(new SimulatedMinion(m.attack + c.spellDamage, m.health, m.owner), AI.getBestTarget(new SimulatedMinion(m.attack + c.spellDamage, m.health, m.owner)));
+                        }
+                    }
+                }
+                if(value==0) value = c.spellDamage-1;
+                value+=AI.getWorth(c.summon);
                 return value;
             case ChargeMinion:
                 if(getBestTarget(c.summon) == null) return getWorth(c.summon);
                 value += getTradeValue(new SimulatedMinion(c.summon),getBestTarget(new SimulatedMinion(c.summon))) + AI.getWorthAfterCombat(c.summon,getBestTarget(c.summon));
-                System.out.println("best target for " + c + " is " + getBestTarget(new SimulatedMinion(c.summon)));
+               // System.out.println("best target for " + c + " is " + getBestTarget(new SimulatedMinion(c.summon)));
+                if(value < 1) return getWorth(c.summon);
                 return value;
         }
         return value;
