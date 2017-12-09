@@ -6,10 +6,10 @@
 package cardgame1;
 
 import Cards.Card;
-import Cards.CardType;
 import Minions.Minion;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.util.LinkedList;
 
 /**
  *
@@ -21,6 +21,7 @@ public class VisualEffectHandler {
     private Minion mousedOverMinion = null; //currently moused over minion, for use in drawMouseOverCard method
     private static Card currentlyDisplayed = null; //currently presented card used for Ai playing cards
     private static int timeLeftOnCard = 0;
+    public static LinkedList<Sticker> stickers = new LinkedList<>();
     VisualEffectHandler(Board b){
         board = b;
     }
@@ -30,12 +31,18 @@ public class VisualEffectHandler {
         drawLineC(g);  //draw line from selected card
         drawMouseOverCard(g);
         drawGivenCard(g);
+        renderStickers(g);
     }
     
     public void tick(){
         
     }
     
+    public void renderStickers(Graphics2D g){
+        for(Sticker s : stickers){
+            s.render(g);
+        }
+    }
     /**
      * draws the (card) parent of the currently moused over minion if the cursor has been sitting on that minion for a period of time
      * @param g graphics object to draw with

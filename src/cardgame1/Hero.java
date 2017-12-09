@@ -149,4 +149,22 @@ public class Hero {
     public String toString(){
         return this.name;
     }
+    
+    /**
+     * gets the x axis coordinate that the hero is being rendered at
+     * @return 
+     */
+    public int getXCoordinate(){
+        return 400;
+    }
+    /**
+     * gets the y coordinate the hero is being rendered at.
+     * -1 if error
+     * @return 
+     */
+    public int getYCoordinate(){
+        if(this == Board.topHero) return 0;
+        if(this == Board.botHero) return 850;
+        return -1;
+    }
 }

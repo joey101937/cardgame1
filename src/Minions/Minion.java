@@ -8,6 +8,8 @@ package Minions;
 import Cards.Card;
 import cardgame1.Board;
 import cardgame1.Hero;
+import cardgame1.SpriteHandler;
+import cardgame1.Sticker;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -25,6 +27,8 @@ public abstract class Minion{
     public Tribe tribe;             //"classification" or "type"
     public BufferedImage sprite;    //visual representation
     public int damagedTicker = 0; //set to positive value when damaged, passively ticks down to 0 over time.
+    public int intrinsicValue = 0; //bonus value, used by AI to evaluate worth
+    private int procTimer = 0; //used for rendering the proc animation
     public boolean canAttack = false; //has it attacked already this turn?
     public Card parent; //card that summoned it, used for righclick for details.
     public Hero owner;  //hero controling this minion
@@ -50,6 +54,12 @@ public abstract class Minion{
      */
     public void onTurnEnd(){};
     /**
+     * triggers whenever the minion is killed
+     */
+    public void onDeath(){
+    Sticker s = new Sticker(SpriteHandler.skullMedium,this,60);
+    }
+    /**
      * runs whenever the turn begins while the minion is alive on the board
      */
     public void onTurnStart(){
@@ -73,6 +83,11 @@ public abstract class Minion{
         }
         if(!canAttack){ //makes them dark if unable to attack
             g.setColor(new Color(10,10,10,130));
+            g.fillRect(x, y, Minion.WIDTH, Minion.HEIGHT);
+        }
+        if(this.procTimer>0){
+            procTimer--;
+            g.setColor(new Color(0,255,0,procTimer*10));
             g.fillRect(x, y, Minion.WIDTH, Minion.HEIGHT);
         }
     }
@@ -105,12 +120,14 @@ public abstract class Minion{
     public void destroy(){
         for(Minion m : Board.topHero.minions.getStorage()){
             if(m == this){
+                this.onDeath();
                 Board.topHero.minions.remove(m);
                 return;
             }
         }
         for(Minion m : Board.botHero.minions.getStorage()){
             if(m == this){
+                this.onDeath();
                 Board.botHero.minions.remove(m);
                 return;
             }
@@ -129,7 +146,12 @@ public abstract class Minion{
             this.destroy();
         }
     }
-    
+    /**
+     * 'proc's the minion, displaying the green animation
+     */
+    public void proc(){
+        procTimer = 20;
+    }
     
     /**
      * attacks enemy hero/lifepoints directly
@@ -177,4 +199,5 @@ public abstract class Minion{
     public String toString(){
         return (this.name + "  "+ this.attack + "/" + this.health + " owner:" + this.owner);
     }
+    
 }

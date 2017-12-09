@@ -35,6 +35,11 @@ public class SpriteHandler {
     public static BufferedImage fullCrystal;
     public static BufferedImage emptyCrystal;
     public static BufferedImage leftArrow;
+    public static BufferedImage skullLarge;
+    public static BufferedImage skullMedium;
+    public static BufferedImage blastEffectLarge;
+    public static BufferedImage blastEffectSmall;
+    public static BufferedImage slashEffect;
     
     public static void Initialize() {
         try {
@@ -57,6 +62,12 @@ public class SpriteHandler {
             fullCrystal = load("gemCSmall.png");
             emptyCrystal = load("gemSmall.png");
             leftArrow = load("arrow-left.png");
+            skullLarge = load("skullLarge.png");
+            skullMedium = load("skullMedium.png");
+            blastEffectLarge = load("blastEffectLarge.png");
+            blastEffectSmall = load("blastEffectSmall.png");
+            slashEffect = load("slashEffect.png");
+            
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -8,6 +8,7 @@ package Cards;
 import Minions.Minion;
 import cardgame1.Hero;
 import cardgame1.SpriteHandler;
+import cardgame1.Sticker;
 
 /**
  *
@@ -49,6 +50,7 @@ public class FireBoltCard extends Card{
         if(target == null) return -1;
         if(!canAfford()) return 0; //reutrn 0 if unaffordable
         target.takeDamage(spellDamage);
+        Sticker impactEffect = new Sticker(SpriteHandler.blastEffectSmall,target,20);
         owner.resource -= cost;
         owner.hand.remove(this);
         return 1;
@@ -64,6 +66,7 @@ public class FireBoltCard extends Card{
         if(target == null) return -1;
         if(!canAfford()) return 0; //reutrn 0 if unaffordable
         target.takeDamage(spellDamage);
+        Sticker impactEffect = new Sticker(SpriteHandler.blastEffectSmall,target,20);
         owner.resource -= cost;
         owner.hand.remove(this);
         return 1; 

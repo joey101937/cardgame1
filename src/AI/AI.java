@@ -93,6 +93,7 @@ public abstract class AI {
             case ChargeMinion:
             case AOEDamage:
             case AOEHeal:
+            case BattlecryMinionDraw:
                 c.cast(null);
                 break;
             case BattlecryMinionDamage:
@@ -147,6 +148,7 @@ public abstract class AI {
             case DirectDamage:
                 if(enemy.health <= c.spellDamage){
                     c.castOnHero(enemy);
+                    break;
                 }
                 Minion target = AI.getBestTarget(new SimulatedMinion(c.spellDamage,1,c.getOwner()));
                 if(target != null){
@@ -297,7 +299,8 @@ public abstract class AI {
      * @return how much a minion is worth, higher is better
      */
     public static int getWorth(Minion m){
-        int sumStats = m.health + m.attack; 
+        int sumStats = m.health + m.attack;
+        sumStats += m.intrinsicValue;
         if(m.attack < m.health) sumStats--; //low attack is slightly worse than high atk
         if(m.health <= 0){
             return 0; //worthless if dead
@@ -530,6 +533,18 @@ public abstract class AI {
         switch(c.cardPurpose){
             case VanillaMinion:
                 value = c.summon.attack + c.summon.health;
+                for(Card card : c.getOwner().hand){
+                    if(card.canAfford() && card.cardType == CardType.Minion){
+                        if(getWorth(card.summon) > getWorth(c.summon)){
+                            //we are holding a larger minion that we can afford
+                            if(card == c) continue;
+                            if(card.cost > c.getOwner().resource - c.cost){
+                                //reduce value if this would prevent us from playing a larger minion
+                                value-=2;
+                            }
+                        }
+                    }
+                }
                 if(c.cost < c.getOwner().minions.numOccupants()){
                     value -= c.cost-c.getOwner().minions.numOccupants(); //small minions are penalized for taking a board slot
                 }
@@ -704,6 +719,9 @@ public abstract class AI {
                // System.out.println("best target for " + c + " is " + getBestTarget(new SimulatedMinion(c.summon)));
                 if(value < 1) return getWorth(c.summon);
                 return value;
+            case BattlecryMinionDraw:
+                //TODO
+                break;
         }
         return value;
     }
