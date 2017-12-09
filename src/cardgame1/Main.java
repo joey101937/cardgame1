@@ -118,10 +118,10 @@ public class Main {
             return takeWindowSize();
         }
         if (input <= 700) {
-            return new Dimension(700,700);
+            return new Dimension(700,500);
         }
         if (input >= 1900) {
-            return new Dimension(1900,1050);
+            return new Dimension(1920,1080);
         }
         while (input % 50 != 0) {
             input--;    //always multiple of 50

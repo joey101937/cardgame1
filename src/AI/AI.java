@@ -64,8 +64,8 @@ public abstract class AI {
             if(c.canAfford()) playable.add(c);
         }
         playable.sort(null);
-        VisualEffectHandler.displayCard(playable.get(playable.size()-1), 100);
-        Main.wait(speed*2);
+        VisualEffectHandler.displayCard(playable.get(playable.size()-1), 150);
+        Main.wait(speed*3);
         AI.playCard(playable.get(playable.size()-1));
         playOutHand(h);
     }
@@ -260,6 +260,21 @@ public abstract class AI {
      * @param h 
      */
     private static void tradeOnBoard(Hero h, boolean instant){
+        int damagePotential = 0;
+        Hero enemy;
+        if(h == Board.topHero) enemy = Board.botHero;
+        else enemy = Board.topHero;
+        for(Minion m : h.minions.getStorage()){
+            if(m==null || !m.canAttack) continue;
+            damagePotential += m.attack;
+        }
+        if(damagePotential >= enemy.health){
+            for(Minion m : h.minions.getStorage()){
+                if(m==null)continue;
+                if(!instant) Main.wait(speed);
+                m.attack(enemy);
+            }
+        }
         boolean doneTrading = false;
         while (!doneTrading) {
             doneTrading = true;
@@ -534,7 +549,7 @@ public abstract class AI {
             case VanillaMinion:
                 value = c.summon.attack + c.summon.health;
                 for(Card card : c.getOwner().hand){
-                    if(card.canAfford() && card.cardType == CardType.Minion){
+                    if(card != c && card.canAfford() && card.cardType == CardType.Minion){
                         if(getWorth(card.summon) > getWorth(c.summon)){
                             //we are holding a larger minion that we can afford
                             if(card == c) continue;

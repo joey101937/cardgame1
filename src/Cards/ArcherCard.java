@@ -36,7 +36,7 @@ public class ArcherCard extends Card{
     public int cast(Minion target) {
         int outcome = defaultMinionSummon();
         if(outcome == 1){
-            Sticker s = new Sticker(SpriteHandler.slashEffect,target,20);
+            Sticker s = new Sticker(SpriteHandler.slashEffect,target,300);
             target.takeDamage(summonDamage);
         }
         return outcome;
@@ -47,7 +47,7 @@ public class ArcherCard extends Card{
         int outcome = defaultMinionSummon();
         if(outcome == 1){
             target.takeDamage(summonDamage);
-            Sticker s = new Sticker(SpriteHandler.slashEffect,target,20);
+            Sticker s = new Sticker(SpriteHandler.slashEffect,target,300);
 
         }
         return outcome;

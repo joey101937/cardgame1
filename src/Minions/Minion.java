@@ -57,7 +57,7 @@ public abstract class Minion{
      * triggers whenever the minion is killed
      */
     public void onDeath(){
-    Sticker s = new Sticker(SpriteHandler.skullMedium,this,60);
+    Sticker s = new Sticker(SpriteHandler.skullMedium,this,600);
     }
     /**
      * runs whenever the turn begins while the minion is alive on the board
