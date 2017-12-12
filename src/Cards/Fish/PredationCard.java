@@ -45,7 +45,7 @@ public class PredationCard extends Card {
     
     @Override
     public int cast(Minion target){
-        if(target == null) return -1;
+        if(target == null || spellDamage < 1) return -1;
         if(!canAfford()) return 0; //reutrn 0 if unaffordable
         target.takeDamage(spellDamage);
         Sticker impactEffect = new Sticker(SpriteHandler.bloodMedium,target,300);
@@ -56,7 +56,7 @@ public class PredationCard extends Card {
     
     @Override
     public int castOnHero(Hero target){
-        if(target == null) return -1;
+        if(target == null || spellDamage < 1) return -1;
         if(!canAfford()) return 0; //reutrn 0 if unaffordable
         target.takeDamage(spellDamage);
         Sticker impactEffect = new Sticker(SpriteHandler.bloodMedium,target,300);

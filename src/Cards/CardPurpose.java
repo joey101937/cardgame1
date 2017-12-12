@@ -10,5 +10,5 @@ package Cards;
  * @author Joseph
  */
 public enum CardPurpose {
-    VanillaMinion, ChargeMinion, BattlecryMinionDamage, BattlecryMinionHeal, BattleCryMinionBuff, BattlecryMinionDraw, AOEDamage, AOEBuff, DirectDamage, Debuff, AOEHeal, DirectHeal, Buff;
+    VanillaMinion, ChargeMinion, BattlecryMinionDamage, BattlecryMinionHeal, BattleCryMinionBuff, BattlecryMinionDraw, AOEDamage, DirectDamage, Debuff, AOEHeal, DirectHeal, Buff, Special;
 }

@@ -13,6 +13,7 @@ import Cards.Base.KnightCard;
 import Cards.Base.ArakkoaCard;
 import Cards.*;
 import Cards.Fish.*;
+import GUI.OpeningGUI;
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -41,31 +42,31 @@ public class Main {
     public static void main(String[] args) {
         setBackgroundImage();
         SpriteHandler.Initialize();
-        for(int i = 0; i < 5 ; i++){
+        OpeningGUI og = new OpeningGUI();
+    }
+
+    /**
+     * old main method commands for referance
+     */
+    private void legacyMain(){
+        setBackgroundImage();
+        SpriteHandler.Initialize();
+        for (int i = 0; i < 5; i++) {
             enemyCards.add(new ArakkoaCard());
             enemyCards.add(new FireBoltCard());
             enemyCards.add(new FrostBearCard());
             enemyCards.add(new ArcherCard());
             enemyCards.add(new KnightCard());
             enemyCards.add(new VengefullKnightCard());
-            
-            //playerCards.add(new ArakkoaCard());
-           // playerCards.add(new BaitfishCard());
-           // playerCards.add(new ThrasherCard());
-           // playerCards.add(new CarnifishCard());
-           // playerCards.add(new FireBoltCard());
-           // playerCards.add(new FrenzyCard());
-           // playerCards.add(new FrostBearCard());
-            //playerCards.add(new ArcherCard());
-          //  playerCards.add(new KnightCard());
-            //playerCards.add(new VengefullKnightCard());
+
         }
         giveFishPackage();
         Hero enemy = new Hero("AI Hero", enemyCards, SpriteHandler.ashePortrait);
         Hero player = new Hero("Player Hero", playerCards, SpriteHandler.ashePortrait);
         mainBoard = new Board(enemy, player);
     }
-
+    
+    
     /**
      * fills the player deck with a fish deck
      * @param h 
@@ -108,6 +109,7 @@ public class Main {
             BackgroundImage = ImageIO.read(new File(Main.getDir() + Main.assets + "paper.png"));
         } catch (Exception e) {
             e.printStackTrace();
+            display("Missing Asset: paper.png\n Please Verify assets folder.");
         }
     }
 

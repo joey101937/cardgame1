@@ -93,6 +93,7 @@ public class SpriteHandler {
             predationCard = load("predationCard.png");
         } catch (Exception e) {
             e.printStackTrace();
+            Main.display("Error loading all assets. Please Verify Assets folder.");
         }
     }
     /**

@@ -38,4 +38,14 @@ public class CarnifishMinion extends Minion{
             }
         }
     }
+    
+    @Override
+    public void tick(){
+        this.intrinsicValue = 0;
+        for(Minion m : owner.minions.getOccupants()){
+            if(m.name.equals("Baitfish")){
+                this.intrinsicValue++;
+            }
+        }
+    }
 }

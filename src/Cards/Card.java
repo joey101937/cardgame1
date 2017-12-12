@@ -161,6 +161,11 @@ public abstract class Card implements Comparable{
     public void destroy(){
         //TODO
     }
+    /**
+     * special method for specialist card-purpose. used by ai to get value
+     * @return 
+     */
+    public int getValue(){return 0;}
     
     /**
      * default method to use for simple summon cards

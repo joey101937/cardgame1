@@ -43,6 +43,11 @@ public class Board extends Canvas implements Runnable {
     private static Board mainBoard = null;
     /* CONSTRUCTOR */
 
+    /**
+     * retired constructor that prompts user for single dimension parameter
+     * @param t top hero
+     * @param b bottom hero
+     */
     public Board(Hero t, Hero b) {
         mainBoard = this;
         d = Main.takeWindowSize();
@@ -66,6 +71,37 @@ public class Board extends Canvas implements Runnable {
         //setupTest();
         controller.startGame();
     }
+    
+    /**
+     * Creates Board with given heros and given dimension.
+     * THIS IS THE CONSTRUCTOR TO BE USED WITH GUI
+     * @param t top hero
+     * @param b bottom hero
+     * @param d dimension of window
+     */
+    public Board(Hero t, Hero b, Dimension d){
+        mainBoard = this;
+        xScale = (d.getWidth()/1920);
+        yScale = d.getHeight()/1080;
+        System.out.println("Scale; " + xScale + ", " + yScale);
+        System.out.println("Dimenstion: " + d.toString());
+        Window window = new Window(d.width, d.height, "Card Game", this);
+        topHero = t;
+        botHero = b;
+        playerHero = b;
+        t.opponent=b;
+        b.opponent=t;
+        nonPlayerHero = t;
+        nonPlayerHero.setAIControlled(true);
+        this.addMouseListener(ih);
+        this.addMouseMotionListener(ih);
+        this.addKeyListener(ih);
+        this.visHandler = new VisualEffectHandler(this);
+        this.controller = new GameController(this);
+        //setupTest();
+        controller.startGame();
+    }
+    
     public static Board getMainBoard(){
         return mainBoard;
     }

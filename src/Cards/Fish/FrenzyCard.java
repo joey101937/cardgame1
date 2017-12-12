@@ -21,7 +21,7 @@ public class FrenzyCard extends Card {
     public FrenzyCard() {
         name = "Frenzy";
         cardType = CardType.Spell;
-        cardPurpose = CardPurpose.AOEBuff;
+        cardPurpose = CardPurpose.Special;
         isTargeted = false;
         spellDamage = 3;
         cardText = "Give all friendly \n Baitfish +3 attck";
@@ -49,5 +49,16 @@ public class FrenzyCard extends Card {
     @Override
     public int castOnHero(Hero target){
        return cast(null); 
+    }
+    
+    @Override
+    public int getValue(){
+        int output = 0;
+        for(Minion m : owner.minions.getOccupants()){
+            if(m.name.equals("Baitfish")){
+                output+=3;
+            }
+        }
+        return output;
     }
 }
