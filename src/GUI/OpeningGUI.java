@@ -23,6 +23,7 @@ public class OpeningGUI extends javax.swing.JFrame {
     /*    FIELDS      */
     private ArrayList<Card> AIDeck;
     private ArrayList<Card> PlayerDeck;
+    private static SettingsPane settings = null;
     /**
      * Creates new form OpeningGUI
      */
@@ -149,6 +150,11 @@ public class OpeningGUI extends javax.swing.JFrame {
         });
 
         settingsButton.setText("Settings...");
+        settingsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                settingsButtonActionPerformed(evt);
+            }
+        });
 
         playButton.setText("Play!");
         playButton.addActionListener(new java.awt.event.ActionListener() {
@@ -274,9 +280,17 @@ public class OpeningGUI extends javax.swing.JFrame {
             Main.display("Warning, window too small");
             return;
         }
+        if(x > 2560 || y > 2560){
+            Main.display("Warning, window too big");
+            return;
+        }
         Board b = new Board(enemy, player, new Dimension(x,y));
         this.dispose();
     }//GEN-LAST:event_playButtonActionPerformed
+
+    private void settingsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_settingsButtonActionPerformed
+        settings = new SettingsPane();
+    }//GEN-LAST:event_settingsButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

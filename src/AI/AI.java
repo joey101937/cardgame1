@@ -19,7 +19,7 @@ import java.util.ArrayList;
  * @author Joseph
  */
 public abstract class AI {
-    private static int speed = 800; //how long to wait between making moves so the player is able to follow along
+    public static int speed = 800; //how long to wait between making moves so the player is able to follow along
     
     /**
      * core of the AI player, makes plays and casts cards the most efficient way possible and ends turn when done
