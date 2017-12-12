@@ -28,6 +28,7 @@ public class OpeningGUI extends javax.swing.JFrame {
      */
     public OpeningGUI() {
         initComponents();
+        populateCombo();
         this.setVisible(true);
     }
     
@@ -162,10 +163,7 @@ public class OpeningGUI extends javax.swing.JFrame {
         opponentDeckLabel.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
         opponentDeckLabel.setText("AI Deck");
 
-        yourDeckCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Base Deck", "Ocean Depths Theme" }));
         yourDeckCombo.setToolTipText("");
-
-        AIDeckCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Base Deck", "Ocean Depths Theme" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -277,6 +275,7 @@ public class OpeningGUI extends javax.swing.JFrame {
             return;
         }
         Board b = new Board(enemy, player, new Dimension(x,y));
+        this.dispose();
     }//GEN-LAST:event_playButtonActionPerformed
 
 

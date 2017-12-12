@@ -11,7 +11,6 @@ import Minions.Minion;
 import cardgame1.Board;
 import cardgame1.Hero;
 import cardgame1.Main;
-import cardgame1.PlayArea;
 import cardgame1.VisualEffectHandler;
 import java.util.ArrayList;
 
@@ -31,7 +30,6 @@ public abstract class AI {
         Hero enemy = null;
         if(h==Board.topHero) enemy = Board.botHero;
         else enemy = Board.topHero;
-        
         tradeOnBoard(h,false);
         playOutHand(h);
         Main.wait(speed);
@@ -66,6 +64,7 @@ public abstract class AI {
         playable.sort(null);
         VisualEffectHandler.displayCard(playable.get(playable.size()-1), 150);
         Main.wait(speed*3);
+        System.out.println("attempting to play: " + playable.get(playable.size()-1));
         AI.playCard(playable.get(playable.size()-1));
         playOutHand(h);
     }
@@ -231,6 +230,14 @@ public abstract class AI {
                     System.out.println("No target for " + c);
                 }
                 break;
+            case Special:
+                if(!c.isTargeted){
+                    c.cast(null);
+                }else{
+                    System.out.println("unplanned special targeted card!");
+                    return;
+                }
+                break;
         }
     }
     
@@ -280,7 +287,7 @@ public abstract class AI {
             doneTrading = true;
             for (Minion m : h.minions.getStorage()) {
                 if (m == null) continue;
-                if (AI.canFavorablyTrade(m) && m.canAttack) {
+                if (AI.canFavorablyTrade(m) && m.canAttack && m.attack>0) {
                     if(!instant)Main.wait(speed);
                     m.attack(AI.getBestTarget(m));
                     doneTrading = false;
@@ -726,6 +733,9 @@ public abstract class AI {
             case BattlecryMinionDraw:
                 //TODO
                 break;
+            case Special:
+                value = c.getValue();
+                return value;
         }
         return value;
     }
