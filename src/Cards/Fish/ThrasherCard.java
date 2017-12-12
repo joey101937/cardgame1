@@ -8,26 +8,22 @@ package Cards.Fish;
 import Cards.Card;
 import Cards.CardPurpose;
 import Cards.CardType;
-import Minions.Fish.BaitfishMinion;
-import Minions.Minion;
-import cardgame1.Hero;
+import Minions.Fish.ThrasherMinion;
 import cardgame1.SpriteHandler;
 
 /**
  *
  * @author Joseph
  */
-public class BaitfishCard extends Card{
-    
-    public BaitfishCard(){
-         name = "Baitfish";
+public class ThrasherCard extends Card {
+
+    public ThrasherCard() {
+        name = "Thrasher";
         cardType = CardType.Minion;
         cardPurpose = CardPurpose.VanillaMinion;
-        cardText = "On Death: \n Give Friendly a Fish \n +1/+1 and \n return to hand";
-        intrinsicValue = 2; //more than a 0/2 to AI
-        sprite = SpriteHandler.baitfishCard;
-        cost = 1;
-        summon = new BaitfishMinion(this);
+        cardText = "At the end of \n each turn, attack \n a random enemy";
+        sprite = SpriteHandler.thrasherCard;
+        cost = 2;
+        summon = new ThrasherMinion(this);
     }
-    
 }

@@ -43,8 +43,10 @@ public class Main {
             enemyCards.add(new KnightCard());
             enemyCards.add(new VengefullKnightCard());
             
-            playerCards.add(new ArakkoaCard());
+            //playerCards.add(new ArakkoaCard());
             playerCards.add(new BaitfishCard());
+            playerCards.add(new ThrasherCard());
+            playerCards.add(new CarnifishCard());
             playerCards.add(new FireBoltCard());
            // playerCards.add(new FrostBearCard());
             //playerCards.add(new ArcherCard());

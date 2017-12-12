@@ -11,6 +11,7 @@ import Minions.Minion;
 import Minions.Tribe;
 import cardgame1.Main;
 import cardgame1.SpriteHandler;
+import cardgame1.Sticker;
 import java.util.ArrayList;
 
 /**
@@ -32,6 +33,7 @@ public class BaitfishMinion extends Minion{
        
        @Override
        public void onDeath(){
+           Sticker s = new Sticker(SpriteHandler.skullMedium,this,600);
            ArrayList<Minion> targets = new ArrayList<>();
            for(Minion m : owner.minions.getOccupants()){
            if(m.tribe==Tribe.Fish && m!=this)targets.add(m);

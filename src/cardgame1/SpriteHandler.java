@@ -40,9 +40,16 @@ public class SpriteHandler {
     public static BufferedImage blastEffectLarge;
     public static BufferedImage blastEffectSmall;
     public static BufferedImage slashEffect;
+    public static BufferedImage lightbulb;
     //fish
     public static BufferedImage baitfishCard;
     public static BufferedImage baitfishMinion;
+    public static BufferedImage thrasherMinion;
+    public static BufferedImage thrasherCard;
+    public static BufferedImage carnifishMinion;
+    public static BufferedImage carnifishCard;
+    public static BufferedImage bloodLarge;
+    public static BufferedImage bloodMedium;
     
     public static void Initialize() {
         try {
@@ -70,9 +77,16 @@ public class SpriteHandler {
             blastEffectLarge = load("blastEffectLarge.png");
             blastEffectSmall = load("blastEffectSmall.png");
             slashEffect = load("slashEffect.png");
+            lightbulb = load("lightbulb.png");
+            bloodLarge = load("blood.png");
+            bloodMedium = load("bloodMed.png");
             //fish
             baitfishCard = load("baitFishCard.png");
             baitfishMinion = load("baitfish.png");
+            thrasherMinion = load("thrasher.png");
+            thrasherCard = load("thrasherCard.png");
+            carnifishMinion = load("carnifish.png");
+            carnifishCard = load("carnifishCard.png");
             
         } catch (Exception e) {
             e.printStackTrace();

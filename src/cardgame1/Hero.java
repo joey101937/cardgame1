@@ -10,6 +10,7 @@ import Minions.Minion;
 import Cards.*;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
@@ -32,6 +33,7 @@ public class Hero {
     public ArrayList<Card> hand = new ArrayList<>();
     public ArrayList<Card> deck;
     public int id;
+    public Hero opponent;
     private int damageTicker = 0; //used to apply the red on damage effect
     public boolean turn = false; //is it our turn?
     public boolean isAIControlled = false;
@@ -100,6 +102,7 @@ public class Hero {
     }
     
     public void onTurnStart(){
+        System.out.println("on turn start: " + this);
         for(Minion m : minions.getStorage()){
             if(m!=null)m.onTurnStart();
         }
@@ -107,7 +110,9 @@ public class Hero {
         if(this.maxResource<Hero.MAX_POSSIBLE_RESOURCE) this.maxResource++;
         this.resource=maxResource;
         this.turn = true;
-        if(this.isAIControlled) AI.takeTurn(this);
+        if(this.isAIControlled){
+            AI.takeTurn(this);
+        }
     }
     
     public void onTurnEnd(){

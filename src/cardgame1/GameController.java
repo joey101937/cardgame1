@@ -5,6 +5,9 @@
  */
 package cardgame1;
 
+import AI.AI;
+import java.awt.event.MouseListener;
+
 /**
  * controls meta gameplay and turn order
  * @author Joseph
@@ -25,9 +28,6 @@ public class GameController {
         activeHero = inactiveHero;
         inactiveHero = temp;
         activeHero.onTurnStart();
-        if(activeHero.isAIControlled){
-            
-        }
     }
 
     public void startGame() {

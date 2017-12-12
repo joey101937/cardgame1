@@ -37,9 +37,11 @@ public class Board extends Canvas implements Runnable {
     public Dimension d;
     public InputHandler ih = new InputHandler();
     public static GameController controller;
+    private static Board mainBoard = null;
     /* CONSTRUCTOR */
 
     public Board(Hero t, Hero b) {
+        mainBoard = this;
         d = Main.takeWindowSize();
         xScale = (d.getWidth()/1920);
         yScale = d.getHeight()/1080;
@@ -49,6 +51,8 @@ public class Board extends Canvas implements Runnable {
         topHero = t;
         botHero = b;
         playerHero = b;
+        t.opponent=b;
+        b.opponent=t;
         nonPlayerHero = t;
         nonPlayerHero.setAIControlled(true);
         this.addMouseListener(ih);
@@ -59,7 +63,10 @@ public class Board extends Canvas implements Runnable {
         //setupTest();
         controller.startGame();
     }
-
+    public static Board getMainBoard(){
+        return mainBoard;
+    }
+    
     /**
      * prepopulates the board and makes heros draw for testing purposes
      */
@@ -154,6 +161,12 @@ public class Board extends Canvas implements Runnable {
     public void tick() {
         this.visHandler.tick();
         InputHandler.tick();
+        for(Card c : topHero.hand){
+            c.tick();
+        }
+        for(Card c : botHero.hand){
+            c.tick();
+        }
         for(Minion m : topHero.minions.getOccupants()){
             m.tick();
         }

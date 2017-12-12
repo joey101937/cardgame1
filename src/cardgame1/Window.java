@@ -27,6 +27,9 @@ public class Window extends Canvas {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setTitle(title);
         frame.add(board);
+
+        
+        
         board.setBounds(0, 0, width, height);
 
         board.start();

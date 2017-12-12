@@ -24,6 +24,7 @@ public class InputHandler extends KeyAdapter implements MouseListener, MouseMoti
     public static Minion selectedMinion = null;
     public static Card selectedCard = null;
     private static int keyTimer = 0; // used to prevent too many key presses in quick succession
+    public static boolean enabled = true;
     /**
      * ticks every gametime second
      */
@@ -36,7 +37,7 @@ public class InputHandler extends KeyAdapter implements MouseListener, MouseMoti
     @Override
     public void mouseClicked(MouseEvent e) {
         System.out.println(e.getX()/Board.xScale + ", " + e.getY()/Board.yScale);
-        if(!Board.playerHero.turn) return;  //if its not our turn, ignore it
+        if(!Board.playerHero.turn || !enabled) return;  //if its not our turn, ignore it
         Card clickedCard = InputHandler.getCardAt(e.getX()/Board.xScale, e.getY()/Board.yScale);
         if(clickedCard != null && clickedCard.isTargeted == false){
             clickedCard.cast(null); //cast with null param becuase there is no target
@@ -49,7 +50,7 @@ public class InputHandler extends KeyAdapter implements MouseListener, MouseMoti
         double y = e.getY() / Board.yScale;
         System.out.println(getMinionAt(x,y));
         System.out.println(getCardAt(x,y));
-        if(!Board.playerHero.turn) return;
+        if(!Board.playerHero.turn || !enabled) return;
         if(getMinionAt(x,y) !=null){
          if(getMinionAt(x,y).owner == Board.playerHero)InputHandler.selectedMinion = getMinionAt(x,y);   
         }
@@ -61,7 +62,7 @@ public class InputHandler extends KeyAdapter implements MouseListener, MouseMoti
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        if(!Board.playerHero.turn) return;
+        if(!Board.playerHero.turn || !enabled) return;
         Minion target = getMinionAt(e.getX()/Board.xScale,e.getY()/Board.yScale);
         Hero targetH = getHeroAt(e.getX()/Board.xScale,e.getY()/Board.yScale);
         if(target != null && selectedMinion != null && selectedMinion.owner != target.owner){

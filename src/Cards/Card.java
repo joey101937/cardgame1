@@ -7,6 +7,7 @@ package Cards;
 
 import AI.AI;
 import Minions.Minion;
+import Minions.Tribe;
 import cardgame1.Board;
 import cardgame1.Hero;
 import cardgame1.InputHandler;
@@ -71,8 +72,10 @@ public abstract class Card implements Comparable{
            g.drawImage(SpriteHandler.cardback, x, y, null);    //if we arent the owner of the card, we see the cardback, not the card itself
        }
     }
-    
-    
+    /**
+     * every tick while in hand
+     */
+    public void tick(){};
     
     
     private void renderCardText(Graphics2D g, int x , int y){
@@ -83,6 +86,10 @@ public abstract class Card implements Comparable{
         String[] lines = cardText.split(" \n ");
         for(int i = 0; i < lines.length; i++){
             g.drawString(lines[i], x + 10, y + 165 + (i * 20));
+        }
+        if(summon!=null && summon.tribe!= Tribe.none){
+        g.setColor(Color.white);
+        g.drawString(summon.tribe.toString(), x+100 - summon.tribe.toString().length()*5, y+Card.HEIGHT-10);
         }
         g.setFont(original);
     }
@@ -131,7 +138,9 @@ public abstract class Card implements Comparable{
      * 0 for success
      * 1 for not cast (not enough mana, etc)
      */
-    public abstract int cast(Minion target);
+    public int cast(Minion target){
+    return defaultMinionSummon();
+    }
     /**
      * what happens when the card is played from the hand onto a hero.
      * @param target
@@ -139,7 +148,9 @@ public abstract class Card implements Comparable{
      * 0 for success
      * 1 for not cast (not enough mana, cant target heros, etc)
      */
-    public abstract int castOnHero(Hero target);
+    public int castOnHero(Hero target){
+    return defaultMinionSummon();
+    }
     /**
      * if the owner has enough resources left to afford the cast cost of this card
      * @return 
