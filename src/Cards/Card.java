@@ -77,12 +77,12 @@ public abstract class Card implements Comparable{
     
     private void renderCardText(Graphics2D g, int x , int y){
         Font original = g.getFont();
-        Font toUse = new Font("TimesRoman", Font.BOLD, 20);
+        Font toUse = new Font("TimesRoman", Font.BOLD, 18);
         g.setColor(Color.black);
         g.setFont(toUse);
         String[] lines = cardText.split(" \n ");
         for(int i = 0; i < lines.length; i++){
-            g.drawString(lines[i], x + 10, y + 175 + (i * 20));
+            g.drawString(lines[i], x + 10, y + 165 + (i * 20));
         }
         g.setFont(original);
     }

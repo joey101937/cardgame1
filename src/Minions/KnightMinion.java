@@ -21,7 +21,7 @@ public class KnightMinion extends Minion{
         attack = 3;
         maxHealth = 2;
         health = maxHealth;
-        tribe = Tribe.knight;
+        tribe = Tribe.Knight;
         name = "Knight";
         sprite = SpriteHandler.knightMinion;
     }

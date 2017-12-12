@@ -6,6 +6,7 @@
 package cardgame1;
 
 import Cards.*;
+import Cards.Fish.*;
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -43,11 +44,12 @@ public class Main {
             enemyCards.add(new VengefullKnightCard());
             
             playerCards.add(new ArakkoaCard());
+            playerCards.add(new BaitfishCard());
             playerCards.add(new FireBoltCard());
-            playerCards.add(new FrostBearCard());
-            playerCards.add(new ArcherCard());
-            playerCards.add(new KnightCard());
-            playerCards.add(new VengefullKnightCard());
+           // playerCards.add(new FrostBearCard());
+            //playerCards.add(new ArcherCard());
+          //  playerCards.add(new KnightCard());
+            //playerCards.add(new VengefullKnightCard());
         }
         
         Hero enemy = new Hero("AI Hero", enemyCards, SpriteHandler.ashePortrait);

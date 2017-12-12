@@ -25,6 +25,15 @@ public class PlayArea<E>{
         return storage;
     }
     
+    public ArrayList<E> getOccupants(){
+        ArrayList<E> output = new ArrayList<>();
+        for(E e : storage){
+            if(e==null)continue;
+            output.add(e);
+        }
+        return output;
+    }
+    
     public int indexOf(E e){
         return storage.indexOf(e);
     }

@@ -548,18 +548,6 @@ public abstract class AI {
         switch(c.cardPurpose){
             case VanillaMinion:
                 value = c.summon.attack + c.summon.health;
-                for(Card card : c.getOwner().hand){
-                    if(card != c && card.canAfford() && card.cardType == CardType.Minion){
-                        if(getWorth(card.summon) > getWorth(c.summon)){
-                            //we are holding a larger minion that we can afford
-                            if(card == c) continue;
-                            if(card.cost > c.getOwner().resource - c.cost){
-                                //reduce value if this would prevent us from playing a larger minion
-                                value-=2;
-                            }
-                        }
-                    }
-                }
                 if(c.cost < c.getOwner().minions.numOccupants()){
                     value -= c.cost-c.getOwner().minions.numOccupants(); //small minions are penalized for taking a board slot
                 }
@@ -729,6 +717,7 @@ public abstract class AI {
                 value+=AI.getWorth(c.summon);
                 return value;
             case ChargeMinion:
+                if(c.getOwner().minions.isFull()) return 0;
                 if(getBestTarget(c.summon) == null) return getWorth(c.summon);
                 value += getTradeValue(new SimulatedMinion(c.summon),getBestTarget(new SimulatedMinion(c.summon))) + AI.getWorthAfterCombat(c.summon,getBestTarget(c.summon));
                // System.out.println("best target for " + c + " is " + getBestTarget(new SimulatedMinion(c.summon)));

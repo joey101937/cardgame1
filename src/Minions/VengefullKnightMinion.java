@@ -19,7 +19,7 @@ public class VengefullKnightMinion extends Minion{
         attack = 4;
         maxHealth = 2;
         health = maxHealth;
-        tribe = Tribe.knight;
+        tribe = Tribe.Knight;
         name = "Vengefull Knight";
         sprite = SpriteHandler.knightChargeMinion;
     }

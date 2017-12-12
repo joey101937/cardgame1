@@ -99,7 +99,7 @@ public abstract class Minion{
      * @param target 
      */
     public void attack(Minion target){
-        if(!canAttack) return;
+        if(!canAttack || attack == 0) return;
         target.takeDamage(this.attack);
         this.takeDamage(target.attack);
         this.canAttack = false;
@@ -110,7 +110,7 @@ public abstract class Minion{
      * @param target 
      */
     public void attack(Hero target){
-        if(!canAttack) return;
+        if(!canAttack || attack==0) return;
         target.takeDamage(this.attack);
         this.canAttack = false;
     }

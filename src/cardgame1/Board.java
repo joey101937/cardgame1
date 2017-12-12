@@ -154,6 +154,12 @@ public class Board extends Canvas implements Runnable {
     public void tick() {
         this.visHandler.tick();
         InputHandler.tick();
+        for(Minion m : topHero.minions.getOccupants()){
+            m.tick();
+        }
+        for(Minion m : botHero.minions.getOccupants()){
+            m.tick();
+        }
     }
 
     //Core game loop 

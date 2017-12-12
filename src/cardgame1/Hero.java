@@ -72,6 +72,19 @@ public class Hero {
         }
         System.out.println("deck size: " + deck.size());
     }
+    /**
+     * attempts to draw specific card
+     * @param c 
+     */
+    public void draw(Card c){
+        if(hand.size() >= maxHandSize){
+             System.out.println("hand too full to draw " + c);
+            return;
+        }else{
+            c.setHero(this);
+            hand.add(c);
+        }
+    }
     
     /**
      * randomizes the card order

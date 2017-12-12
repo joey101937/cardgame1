@@ -40,6 +40,9 @@ public class SpriteHandler {
     public static BufferedImage blastEffectLarge;
     public static BufferedImage blastEffectSmall;
     public static BufferedImage slashEffect;
+    //fish
+    public static BufferedImage baitfishCard;
+    public static BufferedImage baitfishMinion;
     
     public static void Initialize() {
         try {
@@ -67,6 +70,9 @@ public class SpriteHandler {
             blastEffectLarge = load("blastEffectLarge.png");
             blastEffectSmall = load("blastEffectSmall.png");
             slashEffect = load("slashEffect.png");
+            //fish
+            baitfishCard = load("baitFishCard.png");
+            baitfishMinion = load("baitfish.png");
             
         } catch (Exception e) {
             e.printStackTrace();
