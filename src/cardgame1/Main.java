@@ -44,21 +44,37 @@ public class Main {
             enemyCards.add(new VengefullKnightCard());
             
             //playerCards.add(new ArakkoaCard());
-            playerCards.add(new BaitfishCard());
-            playerCards.add(new ThrasherCard());
-            playerCards.add(new CarnifishCard());
-            playerCards.add(new FireBoltCard());
+           // playerCards.add(new BaitfishCard());
+           // playerCards.add(new ThrasherCard());
+           // playerCards.add(new CarnifishCard());
+           // playerCards.add(new FireBoltCard());
+           // playerCards.add(new FrenzyCard());
            // playerCards.add(new FrostBearCard());
             //playerCards.add(new ArcherCard());
           //  playerCards.add(new KnightCard());
             //playerCards.add(new VengefullKnightCard());
         }
-        
+        giveFishPackage();
         Hero enemy = new Hero("AI Hero", enemyCards, SpriteHandler.ashePortrait);
         Hero player = new Hero("Player Hero", playerCards, SpriteHandler.ashePortrait);
         mainBoard = new Board(enemy, player);
     }
 
+    /**
+     * fills the player deck with a fish deck
+     * @param h 
+     */
+    private static void giveFishPackage(){
+        for(int i = 0; i<4 ; i++){
+            playerCards.add(new BaitfishCard());
+            playerCards.add(new ThrasherCard());
+            playerCards.add(new CarnifishCard());
+            //playerCards.add(new FireBoltCard());
+            playerCards.add(new FrenzyCard());
+            playerCards.add(new PredationCard());
+        }
+
+    }
     
     
     

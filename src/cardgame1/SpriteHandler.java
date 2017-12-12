@@ -50,6 +50,8 @@ public class SpriteHandler {
     public static BufferedImage carnifishCard;
     public static BufferedImage bloodLarge;
     public static BufferedImage bloodMedium;
+    public static BufferedImage frenzyCard;
+    public static BufferedImage predationCard;
     
     public static void Initialize() {
         try {
@@ -87,7 +89,8 @@ public class SpriteHandler {
             thrasherCard = load("thrasherCard.png");
             carnifishMinion = load("carnifish.png");
             carnifishCard = load("carnifishCard.png");
-            
+            frenzyCard = load("frenzyCard.png");
+            predationCard = load("predationCard.png");
         } catch (Exception e) {
             e.printStackTrace();
         }
