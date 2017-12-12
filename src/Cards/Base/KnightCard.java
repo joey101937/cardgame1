@@ -3,9 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Cards;
+package Cards.Base;
 
-import Minions.KnightMinion;
+import Cards.Card;
+import Cards.CardPurpose;
+import Cards.CardType;
+import Minions.Base.KnightMinion;
 import Minions.Minion;
 import cardgame1.Hero;
 import cardgame1.SpriteHandler;

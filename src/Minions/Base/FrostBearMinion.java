@@ -3,9 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Minions;
+package Minions.Base;
 
 import Cards.Card;
+import Minions.Minion;
+import Minions.Tribe;
 import cardgame1.SpriteHandler;
 
 /**

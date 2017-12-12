@@ -3,26 +3,29 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Minions;
+package Minions.Base;
 
 import Cards.Card;
+import Minions.Minion;
+import Minions.Tribe;
 import cardgame1.SpriteHandler;
 
 /**
  *
  * @author Joseph
  */
-public class archerMinion extends Minion{
+public class KnightMinion extends Minion{
 
-       public archerMinion(Card parent){
+        
+    public KnightMinion(Card parent){
         this.parent = parent;
         this.owner = parent.getOwner();
-        attack = 2;
-        maxHealth = 1;
+        attack = 3;
+        maxHealth = 2;
         health = maxHealth;
-        tribe = Tribe.none;
-        name = "Archer";
-        sprite = SpriteHandler.archerMinion;
+        tribe = Tribe.Knight;
+        name = "Knight";
+        sprite = SpriteHandler.knightMinion;
     }
     
 }

@@ -5,6 +5,9 @@
  */
 package cardgame1;
 
+import Minions.Base.ArakkoaMinion;
+import Minions.Base.FrostBearMinion;
+import Cards.Base.FrostBearCard;
 import Cards.*;
 import Minions.*;
 import java.awt.Canvas;

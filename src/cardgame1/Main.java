@@ -5,6 +5,12 @@
  */
 package cardgame1;
 
+import Cards.Base.FireBoltCard;
+import Cards.Base.FrostBearCard;
+import Cards.Base.VengefullKnightCard;
+import Cards.Base.ArcherCard;
+import Cards.Base.KnightCard;
+import Cards.Base.ArakkoaCard;
 import Cards.*;
 import Cards.Fish.*;
 import java.awt.Dimension;

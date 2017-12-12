@@ -3,28 +3,28 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Minions;
+package Minions.Base;
 
 import Cards.Card;
+import Minions.Minion;
+import Minions.Tribe;
 import cardgame1.SpriteHandler;
 
 /**
  *
  * @author Joseph
  */
-public class VengefullKnightMinion extends Minion{ 
-    public VengefullKnightMinion(Card parent){
+public class archerMinion extends Minion{
+
+       public archerMinion(Card parent){
         this.parent = parent;
         this.owner = parent.getOwner();
-        attack = 4;
-        maxHealth = 2;
+        attack = 2;
+        maxHealth = 1;
         health = maxHealth;
-        tribe = Tribe.Knight;
-        name = "Vengefull Knight";
-        sprite = SpriteHandler.knightChargeMinion;
+        tribe = Tribe.none;
+        name = "Archer";
+        sprite = SpriteHandler.archerMinion;
     }
-    @Override
-    public void onSummon(){
-        this.canAttack = true;
-    }
+    
 }
