@@ -18,20 +18,9 @@ public class SpriteHandler {
 
     public static BufferedImage cardback; //the back of a card. see this instead of enemy card.
     public static BufferedImage cardbackL; //large cardback
-    public static BufferedImage arakkoaMinion;
     public static BufferedImage cardback2; //example sprite for use as the image of a card
     public static BufferedImage ashePortrait;
-    public static BufferedImage arakkoaCard;
-    public static BufferedImage fireBoltCard;
     public static BufferedImage redX;
-    public static BufferedImage frostBearCard;
-    public static BufferedImage frostBearMinion;
-    public static BufferedImage archerCard;
-    public static BufferedImage archerMinion;
-    public static BufferedImage knightCard;
-    public static BufferedImage knightMinion;
-    public static BufferedImage knightChargeMinion;
-    public static BufferedImage knightChargeCard;
     public static BufferedImage fullCrystal;
     public static BufferedImage emptyCrystal;
     public static BufferedImage leftArrow;
@@ -41,7 +30,7 @@ public class SpriteHandler {
     public static BufferedImage blastEffectSmall;
     public static BufferedImage slashEffect;
     public static BufferedImage lightbulb;
-    //fish
+    //advanced fish
     public static BufferedImage baitfishCard;
     public static BufferedImage baitfishMinion;
     public static BufferedImage thrasherMinion;
@@ -52,24 +41,27 @@ public class SpriteHandler {
     public static BufferedImage bloodMedium;
     public static BufferedImage frenzyCard;
     public static BufferedImage predationCard;
-    
+    //neutral
+    public static BufferedImage frostBearCard;
+    public static BufferedImage frostBearMinion;
+    public static BufferedImage archerCard;
+    public static BufferedImage archerMinion;
+    public static BufferedImage knightCard;
+    public static BufferedImage knightMinion;
+    public static BufferedImage knightChargeMinion;
+    public static BufferedImage knightChargeCard;
+    public static BufferedImage arakkoaCard;
+    public static BufferedImage arakkoaMinion;
+    public static BufferedImage fireBoltCard;
+    public static BufferedImage kelpieCard;
+    public static BufferedImage kelpieMinion;
+
     public static void Initialize() {
         try {
             cardback = ImageIO.read(new File(Main.assets + "cardBack.png"));
             cardbackL = ImageIO.read(new File(Main.assets + "cardBackL.png"));
-            arakkoaMinion = ImageIO.read(new File(Main.assets + "arakkoaMinionL.png"));
-            arakkoaCard = ImageIO.read(new File(Main.assets + "arakkoaCard.png"));
             cardback2 = ImageIO.read(new File(Main.assets + "cardBack2.png"));
             ashePortrait = ImageIO.read(new File(Main.assets + "ashePortrait.png"));
-            fireBoltCard = ImageIO.read((new File(Main.assets + "fireBoltCard.png")));
-            frostBearMinion = load("frostBear.png");
-            frostBearCard = load("frostBearCard.png");
-            archerCard = load("archerCard.png");
-            archerMinion = load("archerPortrait.png");
-            knightCard = load("KnightCard.png");
-            knightMinion = load("Knight.png");
-            knightChargeMinion = load("KnightCharge.png");
-            knightChargeCard = load("KnightChargeCard.png");
             redX = load("redXsmall.png");
             fullCrystal = load("gemCSmall.png");
             emptyCrystal = load("gemSmall.png");
@@ -82,7 +74,7 @@ public class SpriteHandler {
             lightbulb = load("lightbulb.png");
             bloodLarge = load("blood.png");
             bloodMedium = load("bloodMed.png");
-            //fish
+            //Advanced Fish
             baitfishCard = load("baitFishCard.png");
             baitfishMinion = load("baitfish.png");
             thrasherMinion = load("thrasher.png");
@@ -91,6 +83,21 @@ public class SpriteHandler {
             carnifishCard = load("carnifishCard.png");
             frenzyCard = load("frenzyCard.png");
             predationCard = load("predationCard.png");
+            //Neutral Cards
+            fireBoltCard = ImageIO.read((new File(Main.assets + "fireBoltCard.png")));
+            frostBearMinion = load("frostBear.png");
+            frostBearCard = load("frostBearCard.png");
+            archerCard = load("archerCard.png");
+            archerMinion = load("archerPortrait.png");
+            knightCard = load("KnightCard.png");
+            knightMinion = load("Knight.png");
+            knightChargeMinion = load("KnightCharge.png");
+            knightChargeCard = load("KnightChargeCard.png");
+            arakkoaMinion = ImageIO.read(new File(Main.assets + "arakkoaMinionL.png"));
+            arakkoaCard = ImageIO.read(new File(Main.assets + "arakkoaCard.png"));
+            kelpieCard = load("kelpieCard.png");
+            kelpieMinion = load("kelpiePortrait.png");
+            
         } catch (Exception e) {
             e.printStackTrace();
             Main.display("Error loading all assets. Please Verify Assets folder.");

@@ -149,7 +149,7 @@ public abstract class AI {
                     c.castOnHero(enemy);
                     break;
                 }
-                Minion target = AI.getBestTarget(new SimulatedMinion(c.spellDamage,1,c.getOwner()));
+                Minion target = AI.getBestTarget(new SimulatedMinion(c.spellDamage,0,c.getOwner()));
                 if(target != null){
                     System.out.println("casting " + c + "on " + target);
                     c.cast(target);
@@ -352,7 +352,7 @@ public abstract class AI {
      */
     public static int getWorthAfterCombat(Minion attacker, Minion defender){
         if((attacker.health - defender.attack) <= 0) return 0;  //if the minion would die from combat, its worth would become 0
-        int sumNewStats = attacker.health - defender.attack + attacker.attack;
+        int sumNewStats = attacker.health - defender.attack + attacker.attack + attacker.intrinsicValue;
         return sumNewStats;
     }
     
@@ -364,7 +364,7 @@ public abstract class AI {
      */
     public static int getWorthAfterDamage(Minion target, int damage){
         if(target.health <= damage) return 0;
-        return target.health - damage + target.attack;
+        return target.health - damage + target.attack + target.intrinsicValue;
     }
     
     /**
@@ -565,7 +565,7 @@ public abstract class AI {
                 return value;
             case BattlecryMinionDamage:
                 if(c.getOwner().minions.isFull()) return 0; //if there is no place to summon the minion, it has 0 value.
-                    Minion target = AI.getBestTarget(new SimulatedMinion(c.spellDamage,1,c.getOwner()));
+                    Minion target = AI.getBestTarget(new SimulatedMinion(c.spellDamage,0,c.getOwner()));
                     //System.out.println("best target for " + c + " is " + target);
                     if(target!=null)value += getWorth(target) -AI.getWorthAfterDamage(target, c.spellDamage);
                     else value+=c.spellDamage/2; //there are no minions to use it on so this is the value of using the damage on the opponent's hero
@@ -605,6 +605,7 @@ public abstract class AI {
                 return value+ c.intrinsicValue;
             case DirectDamage:
                 Minion optimalTarget = null;
+                if(c.spellDamage == 0) return 0;
                 if(c.getOwner() == Board.topHero){
                     for(Minion m : Board.botHero.minions.getStorage()){
                         if(m==null)continue;

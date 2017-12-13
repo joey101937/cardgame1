@@ -38,6 +38,8 @@ public class OpeningGUI extends javax.swing.JFrame {
         this.yourDeckCombo.addItem("Ocean Depths Theme");
         this.AIDeckCombo.addItem("Base Deck");
         this.AIDeckCombo.addItem("Ocean Depths Theme");
+        this.AIDeckCombo.addItem("Experimental");
+        this.yourDeckCombo.addItem("Experimental");
         repaint();
     }
 
@@ -67,27 +69,46 @@ public class OpeningGUI extends javax.swing.JFrame {
         }
         return BaseDeck;
     }
+        
+     private ArrayList<Card> getExperimentalDeck() {
+        ArrayList<Card> BaseDeck = new ArrayList<>();
+        for (int i = 0; i < 4; i++) {
+            BaseDeck.add(new BaitfishCard());
+            BaseDeck.add(new CarnifishCard());
+            BaseDeck.add(new KelpieCard());
+            BaseDeck.add(new PredationCard());
+            BaseDeck.add(new FrenzyCard());
+        }
+        return BaseDeck;
+        }
         /**
-         * sets the decks based on combo boxes
-         */
-        private void assignDecks(){
-                    switch(this.AIDeckCombo.getSelectedIndex()){
-            case 0:
+     * sets the decks based on combo boxes
+     */
+    private void assignDecks() {
+        switch (this.AIDeckCombo.getSelectedIndex()) {
+            case 0: //base
                 AIDeck = this.getBaseDeck();
                 break;
-            case 1:
+            case 1: //fish
                 AIDeck = this.getFishDeck();
                 break;
+            case 2: //experimental
+                AIDeck = this.getExperimentalDeck();
+                break;
         }
-        switch(this.yourDeckCombo.getSelectedIndex()){
-            case 0:
+        switch (this.yourDeckCombo.getSelectedIndex()) {
+            case 0: //base
                 PlayerDeck = this.getBaseDeck();
                 break;
-            case 1:
+            case 1: //fish
                 PlayerDeck = this.getFishDeck();
                 break;
+            case 2: //experiemental
+                PlayerDeck = this.getExperimentalDeck();
+                break;
         }
-        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -257,8 +278,8 @@ public class OpeningGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_button1080ActionPerformed
 
     private void button720ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button720ActionPerformed
-        this.resX.setText("720");
-        this.resY.setText("1280");
+        this.resX.setText("1280");
+        this.resY.setText("720");
     }//GEN-LAST:event_button720ActionPerformed
 
     private void playButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playButtonActionPerformed
@@ -289,6 +310,7 @@ public class OpeningGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_playButtonActionPerformed
 
     private void settingsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_settingsButtonActionPerformed
+        if(settings!=null)settings.dispose();
         settings = new SettingsPane();
     }//GEN-LAST:event_settingsButtonActionPerformed
 

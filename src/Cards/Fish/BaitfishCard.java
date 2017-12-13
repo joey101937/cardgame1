@@ -11,6 +11,7 @@ import Cards.CardType;
 import Minions.Fish.BaitfishMinion;
 import Minions.Minion;
 import cardgame1.Hero;
+import cardgame1.PlayArea;
 import cardgame1.SpriteHandler;
 
 /**
@@ -28,6 +29,24 @@ public class BaitfishCard extends Card{
         sprite = SpriteHandler.baitfishCard;
         cost = 1;
         summon = new BaitfishMinion(this);
+    }
+    
+    @Override
+    public void tick(){
+        intrinsicValue = 1;
+        if(owner.minions.numOccupants() == PlayArea.MAX_SIZE-1){
+        for(Minion m : owner.minions.getOccupants()){
+                if(!m.name.equals("Baitfish") || m.attack > 1){
+                return;
+                }
+            }
+            //3 of 4 boardslots are taken up with baitfish
+            for(Card c : owner.hand){
+                if(c.name.equals("frenzy"))return;
+            }
+            //only one slot left and we have all inactive baitfish so we cant play another
+            intrinsicValue = -10;
+        }
     }
     
 }
