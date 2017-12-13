@@ -234,7 +234,7 @@ public abstract class AI {
                 if(!c.isTargeted){
                     c.cast(null);
                 }else{
-                    System.out.println("unplanned special targeted card!");
+                    c.smartCast();
                     return;
                 }
                 break;
@@ -554,7 +554,7 @@ public abstract class AI {
         int value = 0;
         switch(c.cardPurpose){
             case VanillaMinion:
-                value = c.summon.attack + c.summon.health;
+                value = c.summon.attack + c.summon.health + c.intrinsicValue;
                 if(c.cost < c.getOwner().minions.numOccupants()){
                     value -= c.cost-c.getOwner().minions.numOccupants(); //small minions are penalized for taking a board slot
                 }
@@ -574,7 +574,7 @@ public abstract class AI {
                     }else{
                         value += c.summon.attack + c.summon.maxHealth;
                     } 
-                return value;
+                return value+ c.intrinsicValue;
             case BattlecryMinionHeal:
                 if(c.getOwner().minions.isFull()) return 0; //if there is no place to summon the minion, it has 0 value.
                 for(Minion m : c.getOwner().minions.getStorage()){
@@ -589,7 +589,7 @@ public abstract class AI {
                 }
                 if(value == 0) value = c.spellDamage;
                 value += getWorth(c.summon);
-                return value;
+                return value+ c.intrinsicValue;
             case AOEDamage:
                 if (c.getOwner() == Board.botHero) {
                     for (Minion t : Board.topHero.minions.getStorage()) {
@@ -602,7 +602,7 @@ public abstract class AI {
                         value += (AI.getWorth(t) - AI.getWorthAfterDamage(t, c.spellDamage));
                     }
                 }
-                return value;
+                return value+ c.intrinsicValue;
             case DirectDamage:
                 Minion optimalTarget = null;
                 if(c.getOwner() == Board.topHero){
@@ -625,7 +625,7 @@ public abstract class AI {
                     }
                 }
                 //System.out.println("best target for " + c + " is " + optimalTarget);
-                return value;
+                return value+ c.intrinsicValue;
             case Debuff:
                 if(c.getOwner() == Board.botHero){
                     if(Board.topHero.minions.numOccupants() == 0) return -1;
@@ -666,7 +666,7 @@ public abstract class AI {
                         value += c.spellDamage;
                     }  
                 }
-            return value;
+            return value+ c.intrinsicValue;
             case AOEHeal:
                 for(Minion m : c.getOwner().minions.getStorage()){
                     if(m==null)continue;
@@ -677,7 +677,7 @@ public abstract class AI {
                         value += missingHealth;
                     }
                 }
-            return value;
+            return value+ c.intrinsicValue;
             case DirectHeal:
                //TODO: Analyze hero hp for potential hero heal
                 for (Minion m : c.getOwner().minions.getStorage()) {
@@ -701,7 +701,7 @@ public abstract class AI {
                     }
                     if(damagePotential < c.getOwner().health + c.spellDamage) return 30; //if this heal would take the hero out of lethal range, its worth alot
                 }
-                return value;
+                return value+ c.intrinsicValue;
             case Buff:
                 for(Minion m : c.getOwner().minions.getStorage()){
                     if(!canFavorablyTrade(m)){
@@ -722,21 +722,21 @@ public abstract class AI {
                 }
                 if(value==0) value = c.spellDamage-1;
                 value+=AI.getWorth(c.summon);
-                return value;
+                return value+ c.intrinsicValue;
             case ChargeMinion:
                 if(c.getOwner().minions.isFull()) return 0;
                 if(getBestTarget(c.summon) == null) return getWorth(c.summon);
                 value += getTradeValue(new SimulatedMinion(c.summon),getBestTarget(new SimulatedMinion(c.summon))) + AI.getWorthAfterCombat(c.summon,getBestTarget(c.summon));
                // System.out.println("best target for " + c + " is " + getBestTarget(new SimulatedMinion(c.summon)));
                 if(value < 1) return getWorth(c.summon);
-                return value;
+                return value+ c.intrinsicValue;
             case BattlecryMinionDraw:
                 //TODO
                 break;
             case Special:
                 value = c.getValue();
-                return value;
+                return value+ c.intrinsicValue;
         }
-        return value;
+        return value+ c.intrinsicValue;
     }
 }

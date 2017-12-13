@@ -5,6 +5,8 @@
  */
 package GUI;
 
+import Cards.Card;
+import Minions.Minion;
 import cardgame1.Main;
 
 /**
@@ -35,6 +37,8 @@ public class SettingsPane extends javax.swing.JFrame {
         aiSPeedLabel = new javax.swing.JLabel();
         aiSpeedField = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        showValueButton = new javax.swing.JRadioButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -43,6 +47,7 @@ public class SettingsPane extends javax.swing.JFrame {
 
         aiSPeedLabel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         aiSPeedLabel.setText("AI Speed");
+        aiSPeedLabel.setToolTipText("How long the pauses between AI moves are");
 
         aiSpeedField.setText("800");
 
@@ -53,16 +58,23 @@ public class SettingsPane extends javax.swing.JFrame {
             }
         });
 
+        showValueButton.setText("Show Value");
+        showValueButton.setToolTipText("Displays how valuable a card is to the AI, mainly for debugging. May Hurt Performance");
+        showValueButton.setAutoscrolls(true);
+        showValueButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showValueButtonActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel1.setText("Display AI-Assessed Value on cards");
+        jLabel1.setToolTipText("Displays how valuable a card is to the AI, mainly for debugging.\nMay Hurt Performance");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(aiSPeedLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(aiSpeedField, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(65, 65, 65))
             .addGroup(layout.createSequentialGroup()
                 .addGap(137, 137, 137)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -71,6 +83,16 @@ public class SettingsPane extends javax.swing.JFrame {
                         .addGap(20, 20, 20)
                         .addComponent(jButton1)))
                 .addContainerGap(141, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(aiSPeedLabel)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(showValueButton)
+                    .addComponent(aiSpeedField, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -81,7 +103,11 @@ public class SettingsPane extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(aiSPeedLabel)
                     .addComponent(aiSpeedField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(showValueButton)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addContainerGap())
         );
@@ -97,14 +123,22 @@ public class SettingsPane extends javax.swing.JFrame {
            Main.display("invalid number for AI speed");
            return;
        }
+       Card.showValue = showValueButton.isSelected();
+       Minion.showValue = showValueButton.isSelected();
        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void showValueButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showValueButtonActionPerformed
+
+    }//GEN-LAST:event_showValueButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel aiSPeedLabel;
     private javax.swing.JTextField aiSpeedField;
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JRadioButton showValueButton;
     private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
 }

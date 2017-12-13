@@ -57,7 +57,7 @@ public class BaitfishMinion extends Minion{
     public void tick() {
         for (Minion m : owner.minions.getOccupants()) {
             if (m.tribe == Tribe.Fish && m != this) {
-                this.intrinsicValue = -2;
+                this.intrinsicValue = -3;
                 return;
             }
         }

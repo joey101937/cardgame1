@@ -39,6 +39,7 @@ public abstract class Minion{
     public static final Integer SPACER_SIZE = 100; //this plus WIDTH is how far apart to render each minion
     public static Color attackRed = new Color(250,20,20,255);
     public static Color healthGreen = new Color(30,200,0,255);
+    public static boolean showValue = false; //render the intrinsic value on cards, for AI usage
     public Minion(){
     }
     /**
@@ -89,6 +90,10 @@ public abstract class Minion{
             procTimer--;
             g.setColor(new Color(0,255,0,procTimer*10));
             g.fillRect(x, y, Minion.WIDTH, Minion.HEIGHT);
+        }
+        if(showValue){
+            g.setColor(Color.gray);
+            g.drawString(String.valueOf(AI.AI.getWorth(this)), x, y);
         }
     }
     

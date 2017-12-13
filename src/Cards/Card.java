@@ -40,6 +40,7 @@ public abstract class Card implements Comparable{
     public int cost;            //casting cost
     public BufferedImage sprite; //visual representation of the card
     protected Hero owner;
+    public static boolean showValue = false;
     
     /**
      * renders a particular card, cardback if its an enemy's card.
@@ -71,12 +72,19 @@ public abstract class Card implements Comparable{
        }else{
            g.drawImage(SpriteHandler.cardback, x, y, null);    //if we arent the owner of the card, we see the cardback, not the card itself
        }
+            if(showValue){
+            g.setColor(Color.gray);
+            g.drawString(String.valueOf(AI.getValueOfCard(this)), x, y);
+        }
     }
     /**
      * every tick while in hand
      */
     public void tick(){};
-    
+    /**
+     * used if this is considered a special card by ai, used as cast method
+     */
+    public void smartCast(){};
     
     private void renderCardText(Graphics2D g, int x , int y){
         Font original = g.getFont();

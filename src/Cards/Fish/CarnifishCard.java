@@ -18,7 +18,7 @@ import cardgame1.SpriteHandler;
  */
 public class CarnifishCard extends Card{
     public CarnifishCard(){
-        name = "Baitfish";
+        name = "Carnifish";
         cardType = CardType.Minion;
         cardPurpose = CardPurpose.VanillaMinion;
         cardText = "On Summon: \n Kill all friendly \n Baitfish";
@@ -27,15 +27,15 @@ public class CarnifishCard extends Card{
         cost = 2;
         summon = new CarnifishMinion(this);
     }
-    
+        
     @Override
     public void tick(){
-        int numBait = 0;
+        this.intrinsicValue = 0;
         for(Minion m : owner.minions.getOccupants()){
             if(m.name.equals("Baitfish")){
-                numBait++;
+                this.intrinsicValue++;
+                if(m.attack!=0)intrinsicValue-=(m.attack-1);
             }
         }
-        this.intrinsicValue = 2 * numBait;
     }
 }
