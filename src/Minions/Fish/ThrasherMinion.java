@@ -41,6 +41,7 @@ public class ThrasherMinion extends Minion{
         Minion target = owner.opponent.minions.getOccupants().get(Main.generateRandom(0, owner.opponent.minions.getOccupants().size()));  
         target.takeDamage(this.attack);
         this.takeDamage(target.attack);
+        Main.wait(300);
     }
     
 }

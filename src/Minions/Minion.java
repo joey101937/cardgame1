@@ -85,6 +85,12 @@ public abstract class Minion{
         if(!canAttack){ //makes them dark if unable to attack
             g.setColor(new Color(10,10,10,130));
             g.fillRect(x, y, Minion.WIDTH, Minion.HEIGHT);
+          } else {
+            if (attack > 0) {
+                //can attack and has attack value of 1 or more
+                g.drawImage(SpriteHandler.swordsSmall, x + Minion.WIDTH / 2 - SpriteHandler.swordsSmall.getWidth() / 2, y - SpriteHandler.swordsSmall.getHeight() / 2, null);
+
+            }
         }
         if(this.procTimer>0){
             procTimer--;

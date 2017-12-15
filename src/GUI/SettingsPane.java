@@ -46,7 +46,7 @@ public class SettingsPane extends javax.swing.JFrame {
         titleLabel.setText("SETTINGS");
 
         aiSPeedLabel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        aiSPeedLabel.setText("AI Speed");
+        aiSPeedLabel.setText("AI Delay");
         aiSPeedLabel.setToolTipText("How long the pauses between AI moves are");
 
         aiSpeedField.setText("800");

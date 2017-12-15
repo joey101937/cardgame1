@@ -95,9 +95,12 @@ public abstract class Card implements Comparable{
         for(int i = 0; i < lines.length; i++){
             g.drawString(lines[i], x + 10, y + 165 + (i * 20));
         }
+        g.setColor(Color.black);
+        g.drawString(name,x+40, y+20);
         if(summon!=null && summon.tribe!= Tribe.none){
+        g.setFont(new Font("TimesRoman", Font.BOLD,15));
         g.setColor(Color.white);
-        g.drawString(summon.tribe.toString(), x+100 - summon.tribe.toString().length()*5, y+Card.HEIGHT-10);
+        g.drawString(summon.tribe.toString(), x+110 - summon.tribe.toString().length()*5, y+Card.HEIGHT-10);
         }
         g.setFont(original);
     }

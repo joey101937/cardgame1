@@ -30,6 +30,8 @@ public class SpriteHandler {
     public static BufferedImage blastEffectSmall;
     public static BufferedImage slashEffect;
     public static BufferedImage lightbulb;
+    public static BufferedImage swords;
+    public static BufferedImage swordsSmall;
     //advanced fish
     public static BufferedImage baitfishCard;
     public static BufferedImage baitfishMinion;
@@ -41,6 +43,8 @@ public class SpriteHandler {
     public static BufferedImage bloodMedium;
     public static BufferedImage frenzyCard;
     public static BufferedImage predationCard;
+    public static BufferedImage seaWitchCard;
+    public static BufferedImage seaWitchMinion;
     //neutral
     public static BufferedImage frostBearCard;
     public static BufferedImage frostBearMinion;
@@ -74,6 +78,8 @@ public class SpriteHandler {
             lightbulb = load("lightbulb.png");
             bloodLarge = load("blood.png");
             bloodMedium = load("bloodMed.png");
+            swords = load("swords.png");
+            swordsSmall = load("swordsSmall.png");
             //Advanced Fish
             baitfishCard = load("baitFishCard.png");
             baitfishMinion = load("baitfish.png");
@@ -83,6 +89,8 @@ public class SpriteHandler {
             carnifishCard = load("carnifishCard.png");
             frenzyCard = load("frenzyCard.png");
             predationCard = load("predationCard.png");
+            seaWitchCard = load("seaWitchCard.png");
+            seaWitchMinion = load("seaWitchPortrait.png");
             //Neutral Cards
             fireBoltCard = ImageIO.read((new File(Main.assets + "fireBoltCard.png")));
             frostBearMinion = load("frostBear.png");
@@ -97,6 +105,7 @@ public class SpriteHandler {
             arakkoaCard = ImageIO.read(new File(Main.assets + "arakkoaCard.png"));
             kelpieCard = load("kelpieCard.png");
             kelpieMinion = load("kelpiePortrait.png");
+            
             
         } catch (Exception e) {
             e.printStackTrace();

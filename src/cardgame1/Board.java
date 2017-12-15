@@ -136,10 +136,10 @@ public class Board extends Canvas implements Runnable {
         g.setColor(Color.white);
         g.drawImage(Main.BackgroundImage, 0, 0, null);
         g.setFont(new Font("TimesRoman", Font.BOLD, 35));
+        renderHeros(g);
         renderMinions(g);
         renderPlayerHand(g);
-        renderEnemyHand(g);
-        renderHeros(g);
+        renderEnemyHand(g);       
         this.visHandler.render(g);
         g.dispose();
         bs.show();

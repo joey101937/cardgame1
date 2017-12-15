@@ -604,6 +604,7 @@ public abstract class AI {
                 }
                 return value+ c.intrinsicValue;
             case DirectDamage:
+                value = 0;
                 Minion optimalTarget = null;
                 if(c.spellDamage == 0) return 0;
                 if(c.getOwner() == Board.topHero){

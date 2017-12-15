@@ -85,7 +85,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="12" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="AI Speed"/>
+        <Property name="text" type="java.lang.String" value="AI Delay"/>
         <Property name="toolTipText" type="java.lang.String" value="How long the pauses between AI moves are"/>
       </Properties>
     </Component>
