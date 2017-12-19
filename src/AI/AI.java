@@ -52,6 +52,7 @@ public abstract class AI {
      * plays all cards we can in the best way possible
      */
     public static void playOutHand(Hero h){
+        Board.getMainBoard().tick();
         boolean playOver = true;
         for(Card c : h.hand){
             if(c.canAfford() && AI.getValueOfCard(c) > 0) playOver = false; //there is something we want to play
@@ -75,6 +76,7 @@ public abstract class AI {
      * @param target 
      */
     public static void playCard(Card c){
+        Board.getMainBoard().tick();
         System.out.println("casting " + c);
         if(!c.canAfford()){
             System.out.println("cannot play " + c + "; cannot afford");
@@ -334,9 +336,9 @@ public abstract class AI {
                     return sumStats;
                 }
             }
-            //this is the smallest minion on full field
+            //this is the smallest minion on a full field
             for(Card c : m.owner.hand){
-                if(AI.getValueOfCard(c) > sumStats && c.canAfford() && c.cardType == CardType.Minion){
+                if(c.canAfford() && c.cardType == CardType.Minion && AI.getWorth(c.summon)> sumStats){
                     return 0; //the minion is taking a slot that a largert minion should have
                 }
             }
@@ -560,7 +562,7 @@ public abstract class AI {
                 }
                 if(c.getOwner().minions.isFull()) return 0; //if there is no place to summon the minion, it has 0 value.
                 if(isVulnerable(c.summon)){
-                    value = c.summon.attack;
+                    value = c.summon.attack + c.intrinsicValue;
                 }
                 return value;
             case BattlecryMinionDamage:
@@ -591,16 +593,10 @@ public abstract class AI {
                 value += getWorth(c.summon);
                 return value+ c.intrinsicValue;
             case AOEDamage:
-                if (c.getOwner() == Board.botHero) {
-                    for (Minion t : Board.topHero.minions.getStorage()) {
-                        if(t==null)continue;
-                        value += (AI.getWorth(t) - AI.getWorthAfterDamage(t, c.spellDamage));
-                    }
-                } else { //tophero
-                    for (Minion t : Board.botHero.minions.getStorage()) {
-                        if(t==null) continue;
-                        value += (AI.getWorth(t) - AI.getWorthAfterDamage(t, c.spellDamage));
-                    }
+                value = 0;
+                for(Minion m : c.getOwner().opponent.minions.getOccupants()){
+                    if(m.health <= c.spellDamage) value += getWorth(m) +1;
+                    else value += c.spellDamage;
                 }
                 return value+ c.intrinsicValue;
             case DirectDamage:

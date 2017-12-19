@@ -54,6 +54,7 @@ public class OpeningGUI extends javax.swing.JFrame {
             BaseDeck.add(new FrostBearCard());
             BaseDeck.add(new KnightCard());
             BaseDeck.add(new VengefullKnightCard());
+            BaseDeck.add(new VolcanoCard());
         }
         return BaseDeck;
     }
@@ -76,11 +77,14 @@ public class OpeningGUI extends javax.swing.JFrame {
         for (int i = 0; i < 4; i++) {
             BaseDeck.add(new BaitfishCard());
             BaseDeck.add(new CarnifishCard());
-            BaseDeck.add(new KelpieCard());
             BaseDeck.add(new PredationCard());
             BaseDeck.add(new FrenzyCard());
-            BaseDeck.add(new SeaWitchCard());
         }
+        for(int i = 0; i < 2; i++) {
+             //BaseDeck.add(new SeaWitchCard());
+             BaseDeck.add(new KelpieCard());
+             BaseDeck.add(new JellyfishCard());
+         }
         return BaseDeck;
         }
         /**

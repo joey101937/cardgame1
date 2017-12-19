@@ -32,16 +32,23 @@ public class ThrasherMinion extends Minion{
     public void onTurnEnd(){
         Sticker s = new Sticker(SpriteHandler.bloodMedium,this,300);
         Main.wait(300);
+        
         int roll = (int)(Math.random()*owner.opponent.minions.numOccupants()+1);
-        if (roll > owner.opponent.minions.numOccupants()){
+        if (roll >= owner.opponent.minions.numOccupants()){
             owner.opponent.takeDamage(attack);
             return;
         }
-        if(owner.opponent.minions.getOccupants().isEmpty()) return;
-        Minion target = owner.opponent.minions.getOccupants().get(Main.generateRandom(0, owner.opponent.minions.getOccupants().size()));  
-        target.takeDamage(this.attack);
-        this.takeDamage(target.attack);
+        Minion target = owner.opponent.minions.getOccupants().get(roll);
+        this.canAttack = true;
+        this.attack(target);
+        //target.takeDamage(this.attack);
+        //this.takeDamage(target.attack);
         Main.wait(300);
     }
     
+    public static void main(String[] args) {
+        for(int i =0; i<100;i++){
+            System.out.println((int)(Math.random() * (3 + 2)));
+        }
+    }
 }

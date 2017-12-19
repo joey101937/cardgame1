@@ -61,6 +61,10 @@ public abstract class Minion{
     Sticker s = new Sticker(SpriteHandler.skullMedium,this,600);
     }
     /**
+     * whenever this minion is attacked
+     */
+    public void onAttacked(Minion attacker){}
+    /**
      * runs whenever the turn begins while the minion is alive on the board
      */
     public void onTurnStart(){
@@ -114,6 +118,7 @@ public abstract class Minion{
         target.takeDamage(this.attack);
         this.takeDamage(target.attack);
         this.canAttack = false;
+        target.onAttacked(this);
     }
     
     /**

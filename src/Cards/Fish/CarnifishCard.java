@@ -10,6 +10,7 @@ import Cards.CardPurpose;
 import Cards.CardType;
 import Minions.Fish.CarnifishMinion;
 import Minions.Minion;
+import cardgame1.Board;
 import cardgame1.SpriteHandler;
 
 /**
@@ -34,7 +35,9 @@ public class CarnifishCard extends Card{
         for(Minion m : owner.minions.getOccupants()){
             if(m.name.equals("Baitfish")){
                 this.intrinsicValue++;
-                if(m.attack!=0)intrinsicValue-=(m.attack-1);
+                if(m.attack>1){                    
+                    intrinsicValue-=(m.attack+m.health+1);
+                }
             }
         }
     }

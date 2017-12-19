@@ -45,6 +45,8 @@ public class SpriteHandler {
     public static BufferedImage predationCard;
     public static BufferedImage seaWitchCard;
     public static BufferedImage seaWitchMinion;
+    public static BufferedImage jellyfishMinion;
+    public static BufferedImage jellyfishCard;
     //neutral
     public static BufferedImage frostBearCard;
     public static BufferedImage frostBearMinion;
@@ -59,6 +61,7 @@ public class SpriteHandler {
     public static BufferedImage fireBoltCard;
     public static BufferedImage kelpieCard;
     public static BufferedImage kelpieMinion;
+    public static BufferedImage volcanoCard;
 
     public static void Initialize() {
         try {
@@ -91,6 +94,8 @@ public class SpriteHandler {
             predationCard = load("predationCard.png");
             seaWitchCard = load("seaWitchCard.png");
             seaWitchMinion = load("seaWitchPortrait.png");
+            jellyfishMinion = load("jellyPortrait.png");
+            jellyfishCard = load("jellyCard.png");
             //Neutral Cards
             fireBoltCard = ImageIO.read((new File(Main.assets + "fireBoltCard.png")));
             frostBearMinion = load("frostBear.png");
@@ -105,7 +110,8 @@ public class SpriteHandler {
             arakkoaCard = ImageIO.read(new File(Main.assets + "arakkoaCard.png"));
             kelpieCard = load("kelpieCard.png");
             kelpieMinion = load("kelpiePortrait.png");
-            
+            volcanoCard = load("volcanoCard.png");
+
             
         } catch (Exception e) {
             e.printStackTrace();
