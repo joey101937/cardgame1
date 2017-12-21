@@ -53,8 +53,9 @@ public class FireBoltCard extends Card{
     public int cast(Minion target) {
         if(target == null) return -1;
         if(!canAfford()) return 0; //reutrn 0 if unaffordable
+        Sticker impactEffect = new Sticker(SpriteHandler.blastEffectSmall, target, 300);
+        Main.wait(300);
         target.takeDamage(spellDamage);
-        Sticker impactEffect = new Sticker(SpriteHandler.blastEffectSmall,target,300);
         owner.resource -= cost;
         owner.hand.remove(this);
         return 1;
