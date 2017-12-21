@@ -338,7 +338,7 @@ public abstract class AI {
             }
             //this is the smallest minion on a full field
             for(Card c : m.owner.hand){
-                if(c.canAfford() && c.cardType == CardType.Minion && AI.getWorth(c.summon)> sumStats){
+                if(c.canAfford() && c.cardType == CardType.Minion && (c.summon.attack + c.summon.health + c.intrinsicValue)> sumStats){
                     return 0; //the minion is taking a slot that a largert minion should have
                 }
             }
