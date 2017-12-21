@@ -30,6 +30,11 @@ public class ThrasherMinion extends Minion{
     
     @Override
     public void onTurnEnd(){
+        if(isFrozen){
+            //do not attack if frozen
+            isFrozen = false;
+            return;
+        }
         Sticker s = new Sticker(SpriteHandler.bloodMedium,this,300);
         Main.wait(300);
         
@@ -39,10 +44,8 @@ public class ThrasherMinion extends Minion{
             return;
         }
         Minion target = owner.opponent.minions.getOccupants().get(roll);
-        this.canAttack = true;
+        this.refresh();
         this.attack(target);
-        //target.takeDamage(this.attack);
-        //this.takeDamage(target.attack);
         Main.wait(300);
     }
     

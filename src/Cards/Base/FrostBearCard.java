@@ -24,22 +24,10 @@ public class FrostBearCard extends Card {
         name = "Frost Bear";
         cardType = CardType.Minion;
         cardPurpose = CardPurpose.VanillaMinion;
-        cardText = "";
+        cardText = "Cannot be frozen";
         sprite = SpriteHandler.frostBearCard;
         cost = 4;
         summon = new FrostBearMinion(this);
     }
-
-    @Override
-    public int cast(Minion target) {
-        return defaultMinionSummon();
-    }
-
-    @Override
-    public int castOnHero(Hero target) {
-       return defaultMinionSummon();
-    }
-
-
   
 }

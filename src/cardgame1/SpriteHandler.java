@@ -15,7 +15,7 @@ import javax.imageio.ImageIO;
  * @author Joseph
  */
 public class SpriteHandler {
-
+    //misc
     public static BufferedImage cardback; //the back of a card. see this instead of enemy card.
     public static BufferedImage cardbackL; //large cardback
     public static BufferedImage cardback2; //example sprite for use as the image of a card
@@ -32,6 +32,8 @@ public class SpriteHandler {
     public static BufferedImage lightbulb;
     public static BufferedImage swords;
     public static BufferedImage swordsSmall;
+    public static BufferedImage snowflakeSmall;
+    public static BufferedImage snowflakeLarge;
     //advanced fish
     public static BufferedImage baitfishCard;
     public static BufferedImage baitfishMinion;
@@ -62,7 +64,9 @@ public class SpriteHandler {
     public static BufferedImage kelpieCard;
     public static BufferedImage kelpieMinion;
     public static BufferedImage volcanoCard;
-
+    public static BufferedImage frostDragonMinion;
+    public static BufferedImage frostDragonCard;
+    
     public static void Initialize() {
         try {
             cardback = ImageIO.read(new File(Main.assets + "cardBack.png"));
@@ -83,6 +87,8 @@ public class SpriteHandler {
             bloodMedium = load("bloodMed.png");
             swords = load("swords.png");
             swordsSmall = load("swordsSmall.png");
+            snowflakeSmall = load("snowflakeEffect.png");
+            snowflakeLarge = load("snowflakeLarge.png");
             //Advanced Fish
             baitfishCard = load("baitFishCard.png");
             baitfishMinion = load("baitfish.png");
@@ -111,7 +117,8 @@ public class SpriteHandler {
             kelpieCard = load("kelpieCard.png");
             kelpieMinion = load("kelpiePortrait.png");
             volcanoCard = load("volcanoCard.png");
-
+            frostDragonMinion = load("frostDragonPortrait.png");
+            frostDragonCard = load("frostDragonCard.png");
             
         } catch (Exception e) {
             e.printStackTrace();

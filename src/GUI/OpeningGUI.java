@@ -55,6 +55,7 @@ public class OpeningGUI extends javax.swing.JFrame {
             BaseDeck.add(new KnightCard());
             BaseDeck.add(new VengefullKnightCard());
             BaseDeck.add(new VolcanoCard());
+            BaseDeck.add(new FrostDragonCard());
         }
         return BaseDeck;
     }

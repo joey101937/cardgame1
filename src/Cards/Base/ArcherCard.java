@@ -12,6 +12,7 @@ import Minions.Minion;
 import cardgame1.SpriteHandler;
 import Minions.Base.archerMinion;
 import cardgame1.Hero;
+import cardgame1.Main;
 import cardgame1.Sticker;
 
 /**
@@ -40,6 +41,7 @@ public class ArcherCard extends Card{
         int outcome = defaultMinionSummon();
         if(outcome == 1){
             Sticker s = new Sticker(SpriteHandler.slashEffect,target,300);
+            Main.wait(300);
             target.takeDamage(summonDamage);
         }
         return outcome;
@@ -49,9 +51,9 @@ public class ArcherCard extends Card{
     public int castOnHero(Hero target) {
         int outcome = defaultMinionSummon();
         if(outcome == 1){
-            target.takeDamage(summonDamage);
             Sticker s = new Sticker(SpriteHandler.slashEffect,target,300);
-
+            Main.wait(300);
+            target.takeDamage(summonDamage);
         }
         return outcome;
     }

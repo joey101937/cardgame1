@@ -274,7 +274,7 @@ public abstract class AI {
         if(h == Board.topHero) enemy = Board.botHero;
         else enemy = Board.topHero;
         for(Minion m : h.minions.getStorage()){
-            if(m==null || !m.canAttack) continue;
+            if(m==null || !m.canAttack()) continue;
             damagePotential += m.attack;
         }
         if(damagePotential >= enemy.health){
@@ -289,7 +289,7 @@ public abstract class AI {
             doneTrading = true;
             for (Minion m : h.minions.getStorage()) {
                 if (m == null) continue;
-                if (AI.canFavorablyTrade(m) && m.canAttack && m.attack>0) {
+                if (AI.canFavorablyTrade(m) && m.canAttack() && m.attack>0) {
                     if(!instant)Main.wait(speed);
                     m.attack(AI.getBestTarget(m));
                     doneTrading = false;
@@ -299,7 +299,7 @@ public abstract class AI {
         if(h == Board.topHero){
             if(Board.botHero.minions.numOccupants()==0){
                 for(Minion m : h.minions.getStorage()){
-                    if(m==null || !m.canAttack) continue;
+                    if(m==null || !m.canAttack()) continue;
                      if(!instant)Main.wait(speed);
                     m.attack(Board.botHero);
                 }
@@ -308,7 +308,7 @@ public abstract class AI {
             //we are playing as bothero
              if(Board.topHero.minions.numOccupants()==0){
                 for(Minion m : h.minions.getStorage()){
-                    if(m==null || !m.canAttack) continue;
+                    if(m==null || !m.canAttack()) continue;
                      if(!instant)Main.wait(speed);
                     m.attack(Board.topHero);
                 }

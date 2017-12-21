@@ -10,6 +10,7 @@ import Cards.CardPurpose;
 import Cards.CardType;
 import Minions.Minion;
 import cardgame1.Hero;
+import cardgame1.Main;
 import cardgame1.SpriteHandler;
 import cardgame1.Sticker;
 
@@ -41,8 +42,11 @@ public class VolcanoCard extends Card{
         if(owner.opponent.minions.numOccupants() == 0) return -1;
         if(!canAfford()) return 0; //reutrn 0 if unaffordable
         for(Minion target : owner.opponent.minions.getOccupants()){
-            target.takeDamage(spellDamage);
             Sticker impactEffect = new Sticker(SpriteHandler.blastEffectSmall,target,300);
+        } //first put the fire sticker on all targets, then apply damage. easier to follow this way.
+        Main.wait(300);
+        for(Minion target : owner.opponent.minions.getOccupants()){
+            target.takeDamage(spellDamage);
         }
         owner.resource -= cost;
         owner.hand.remove(this);

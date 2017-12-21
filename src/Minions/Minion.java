@@ -29,7 +29,8 @@ public abstract class Minion{
     public int damagedTicker = 0; //set to positive value when damaged, passively ticks down to 0 over time.
     public int intrinsicValue = 0; //bonus value, used by AI to evaluate worth
     private int procTimer = 0; //used for rendering the proc animation
-    public boolean canAttack = false; //has it attacked already this turn?
+    private boolean attackReady = false; //inherit one attack per turn flag. true = able to attack
+    public boolean isFrozen = false;
     public Card parent; //card that summoned it, used for righclick for details.
     public Hero owner;  //hero controling this minion
     public static final Integer WIDTH = 150; //width of minion in pixel
@@ -53,7 +54,9 @@ public abstract class Minion{
     /**
      * runs whenever the turn ends while the minion is alive on the board
      */
-    public void onTurnEnd(){};
+    public void onTurnEnd(){
+    this.isFrozen = false;
+    };
     /**
      * triggers whenever the minion is killed
      */
@@ -68,7 +71,7 @@ public abstract class Minion{
      * runs whenever the turn begins while the minion is alive on the board
      */
     public void onTurnStart(){
-    this.canAttack = true;
+    this.attackReady = true;
     };
     /**
      * runs every render
@@ -86,14 +89,16 @@ public abstract class Minion{
         damagedTicker--;
         g.fillRect(x, y, Minion.WIDTH, Minion.HEIGHT);
         }
-        if(!canAttack){ //makes them dark if unable to attack
+        if(!canAttack()){ //makes them dark if unable to attack
             g.setColor(new Color(10,10,10,130));
             g.fillRect(x, y, Minion.WIDTH, Minion.HEIGHT);
+            if(isFrozen){
+                g.drawImage(SpriteHandler.snowflakeSmall, x + Minion.WIDTH / 2 - SpriteHandler.swordsSmall.getWidth() / 2, y - SpriteHandler.swordsSmall.getHeight() / 2, null);
+            }
           } else {
-            if (attack > 0) {
+            if (attack > 0 && owner.turn) {
                 //can attack and has attack value of 1 or more
                 g.drawImage(SpriteHandler.swordsSmall, x + Minion.WIDTH / 2 - SpriteHandler.swordsSmall.getWidth() / 2, y - SpriteHandler.swordsSmall.getHeight() / 2, null);
-
             }
         }
         if(this.procTimer>0){
@@ -114,10 +119,10 @@ public abstract class Minion{
      * @param target 
      */
     public void attack(Minion target){
-        if(!canAttack || attack == 0) return;
+        if(!attackReady || attack == 0) return;
         target.takeDamage(this.attack);
         this.takeDamage(target.attack);
-        this.canAttack = false;
+        this.attackReady = false;
         target.onAttacked(this);
     }
     
@@ -126,9 +131,9 @@ public abstract class Minion{
      * @param target 
      */
     public void attack(Hero target){
-        if(!canAttack || attack==0) return;
+        if(!canAttack() || attack==0) return;
         target.takeDamage(this.attack);
-        this.canAttack = false;
+        this.attackReady = false;
     }
     /**
      * removes from the game
@@ -210,6 +215,29 @@ public abstract class Minion{
         }
         return -1;
     }
+    
+    /**
+     * resets the minion's attackReady field to true, allowing it to attack
+     */
+    public void refresh(){
+        this.attackReady = true;
+    }
+    /**
+     * freezes the minion making it unable to attack for a turn.
+     */
+    public void freeze(){
+        this.isFrozen = true;
+    }
+    /**
+     * Is it legal for the minion to make an attack
+     * based on weather it has attacked this turn and weather or not it has been frozen
+     * @return 
+     */
+    public boolean canAttack(){
+     if(!attackReady || isFrozen) return false;
+     return true;
+    }
+    
     
     @Override
     public String toString(){

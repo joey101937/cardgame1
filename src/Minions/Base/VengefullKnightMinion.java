@@ -27,6 +27,6 @@ public class VengefullKnightMinion extends Minion{
     }
     @Override
     public void onSummon(){
-        this.canAttack = true;
+        this.refresh();
     }
 }

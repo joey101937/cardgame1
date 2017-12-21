@@ -27,4 +27,8 @@ public class FrostBearMinion extends Minion{
         sprite = SpriteHandler.frostBearMinion;
     }
     
+       @Override
+       public void freeze(){
+           this.proc();// this minion cannot be frozen
+       }
 }

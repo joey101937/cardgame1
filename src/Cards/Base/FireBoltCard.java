@@ -10,6 +10,7 @@ import Cards.CardPurpose;
 import Cards.CardType;
 import Minions.Minion;
 import cardgame1.Hero;
+import cardgame1.Main;
 import cardgame1.SpriteHandler;
 import cardgame1.Sticker;
 
@@ -68,8 +69,9 @@ public class FireBoltCard extends Card{
     public int castOnHero(Hero target) {
         if(target == null) return -1;
         if(!canAfford()) return 0; //reutrn 0 if unaffordable
-        target.takeDamage(spellDamage);
         Sticker impactEffect = new Sticker(SpriteHandler.blastEffectSmall,target,300);
+        Main.wait(300);
+        target.takeDamage(spellDamage);
         owner.resource -= cost;
         owner.hand.remove(this);
         return 1; 

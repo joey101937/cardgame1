@@ -25,7 +25,6 @@ public class JellyfishMinion extends Minion{
         this.tribe = Tribe.Fish;
         this.name="Jellyfish";
         this.owner = parent.getOwner();
-        this.canAttack=false;
         this.sprite = SpriteHandler.jellyfishMinion;
     }
     
