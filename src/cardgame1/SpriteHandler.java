@@ -34,6 +34,9 @@ public class SpriteHandler {
     public static BufferedImage swordsSmall;
     public static BufferedImage snowflakeSmall;
     public static BufferedImage snowflakeLarge;
+    public static BufferedImage trapSymbol;
+    public static BufferedImage trapPlaceholder;
+    public static BufferedImage swollowTrap;
     //advanced fish
     public static BufferedImage baitfishCard;
     public static BufferedImage baitfishMinion;
@@ -89,6 +92,8 @@ public class SpriteHandler {
             swordsSmall = load("swordsSmall.png");
             snowflakeSmall = load("snowflakeEffect.png");
             snowflakeLarge = load("snowflakeLarge.png");
+            trapSymbol = load("warningSign.png");
+            trapPlaceholder = load("MysteryTrap.png");
             //Advanced Fish
             baitfishCard = load("baitFishCard.png");
             baitfishMinion = load("baitfish.png");
@@ -102,6 +107,7 @@ public class SpriteHandler {
             seaWitchMinion = load("seaWitchPortrait.png");
             jellyfishMinion = load("jellyPortrait.png");
             jellyfishCard = load("jellyCard.png");
+            swollowTrap = load("swollowTrap.png");
             //Neutral Cards
             fireBoltCard = ImageIO.read((new File(Main.assets + "fireBoltCard.png")));
             frostBearMinion = load("frostBear.png");

@@ -8,6 +8,7 @@ package Minions.Fish;
 import Cards.Card;
 import Minions.Minion;
 import Minions.Tribe;
+import Traps.TrapListener;
 import cardgame1.SpriteHandler;
 import cardgame1.Sticker;
 
@@ -39,6 +40,7 @@ public class JellyfishMinion extends Minion{
         if(m.attack>0){
         m.attack--;
         Sticker s = new Sticker(SpriteHandler.bloodMedium,m,400);
+        TrapListener.onAttack(this, m);
         }
     }
 }

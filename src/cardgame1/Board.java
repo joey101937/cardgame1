@@ -10,6 +10,7 @@ import Minions.Base.FrostBearMinion;
 import Cards.Base.FrostBearCard;
 import Cards.*;
 import Minions.*;
+import Traps.Trap;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -139,7 +140,8 @@ public class Board extends Canvas implements Runnable {
         renderHeros(g);
         renderMinions(g);
         renderPlayerHand(g);
-        renderEnemyHand(g);       
+        renderEnemyHand(g);   
+        renderTraps(g);
         this.visHandler.render(g);
         g.dispose();
         bs.show();
@@ -159,6 +161,15 @@ public class Board extends Canvas implements Runnable {
     private void renderHeros(Graphics2D g){
         Board.topHero.render(g, 400,0);
         Board.botHero.render(g, 400, 850);
+    }
+    
+    private void renderTraps(Graphics2D g){
+        for(Trap t : topHero.traps.getOccupants()){
+            t.render(g, t.getXCoordinate(), t.getYCoordinate());
+        }
+        for(Trap t : botHero.traps.getOccupants()){
+            t.render(g, t.getXCoordinate(), t.getYCoordinate());
+        }
     }
     
     private void renderPlayerHand(Graphics2D g){
@@ -211,6 +222,12 @@ public class Board extends Canvas implements Runnable {
         }
         for(Minion m : botHero.minions.getOccupants()){
             m.tick();
+        }
+        for(Trap t : topHero.traps.getOccupants()){
+            t.tick();
+        }
+        for(Trap t : botHero.traps.getOccupants()){
+            t.tick();
         }
     }
 

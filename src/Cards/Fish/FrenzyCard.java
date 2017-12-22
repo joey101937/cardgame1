@@ -9,6 +9,7 @@ import Cards.Card;
 import Cards.CardPurpose;
 import Cards.CardType;
 import Minions.Minion;
+import Traps.TrapListener;
 import cardgame1.Hero;
 import cardgame1.SpriteHandler;
 
@@ -41,6 +42,7 @@ public class FrenzyCard extends Card {
             }
                 owner.resource-=cost;
                 owner.hand.remove(this);
+                TrapListener.onPlay(this);
                 return 1;
         }
         return 0;

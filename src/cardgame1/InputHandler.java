@@ -8,6 +8,8 @@ package cardgame1;
 import AI.AI;
 import Cards.Card;
 import Minions.Minion;
+import Traps.Trap;
+import Traps.TrapHolder;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -199,6 +201,32 @@ public class InputHandler extends KeyAdapter implements MouseListener, MouseMoti
         }
         if(x > 400 && x < 400 + Board.botHero.picture.getWidth() && y > 850 && y < 850 + Board.botHero.picture.getHeight()){
             return Board.botHero;
+        }
+        return null;
+    }
+    /**
+     * returns the trap being rendered at the specified coordinates
+     * @param x x-coordinate of mouse click AFTER ADJUSTING FOR RESOLUTION SCALING
+     * @param y x-coordinate of mouse click AFTER ADJUSTING FOR RESOLUTION SCALING
+     * @return Trap at location. null if none
+     */
+    public static Trap getTrapAt(double x, double y){
+        if(y>100 && y < 50+SpriteHandler.trapSymbol.getHeight()){
+            //top hero area
+            for(int i = 0; i < TrapHolder.MAX_SIZE; i++){
+                int pos = 100 + (SpriteHandler.trapSymbol.getWidth() * i) + ((i * Board.buffer)); //x-coordinate of the top left corner of the trap
+                if(x > pos && x < pos + SpriteHandler.trapSymbol.getWidth()){
+                    return Board.topHero.traps.get(i);
+                }
+            }
+        } else if (y > 925 && y < 925 + SpriteHandler.trapSymbol.getHeight()) {
+            //botHero area
+            for (int i = 0; i < TrapHolder.MAX_SIZE; i++) {
+                int pos = 100 + (SpriteHandler.trapSymbol.getWidth() * i) + ((i * Board.buffer)); //x-coordinate of the top left corner of the trap
+                if (x > pos && x < pos + SpriteHandler.trapSymbol.getWidth()) {
+                    return Board.botHero.traps.get(i);
+                }
+            }
         }
         return null;
     }

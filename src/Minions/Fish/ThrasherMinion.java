@@ -35,8 +35,8 @@ public class ThrasherMinion extends Minion{
             isFrozen = false;
             return;
         }
-        Sticker s = new Sticker(SpriteHandler.bloodMedium,this,300);
-        Main.wait(300);
+        Sticker s = new Sticker(SpriteHandler.bloodMedium,this,AI.AI.speed/2);
+        Main.wait(AI.AI.speed/2);
         
         int roll = (int)(Math.random()*owner.opponent.minions.numOccupants()+1);
         if (roll >= owner.opponent.minions.numOccupants()){
@@ -46,7 +46,7 @@ public class ThrasherMinion extends Minion{
         Minion target = owner.opponent.minions.getOccupants().get(roll);
         this.refresh();
         this.attack(target);
-        Main.wait(300);
+        Main.wait(AI.AI.speed/2);
     }
     
     public static void main(String[] args) {

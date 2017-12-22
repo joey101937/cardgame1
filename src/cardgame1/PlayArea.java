@@ -6,6 +6,7 @@
 package cardgame1;
 
 import Minions.Minion;
+import Traps.TrapListener;
 import java.util.ArrayList;
 
 /**
@@ -51,10 +52,15 @@ public class PlayArea<E>{
         for(int i = 0; i < storage.size(); i++){
             if(storage.get(i) == null){
                 storage.set(i, m);
+                TrapListener.onSummon((Minion)m);
                 return true;
             }
         }
-        return storage.add(m);
+        boolean isSuccess = storage.add(m);
+        if(isSuccess) {
+            TrapListener.onSummon((Minion)m);
+        }
+        return isSuccess;
     }
     
     /**
@@ -83,7 +89,7 @@ public class PlayArea<E>{
      * removes minion at given index and sets it to null.
      * @param i index
      */
-    public void remove(int i){
+    private void remove(int i){
         storage.set(i, null);
     }
     /**
@@ -95,6 +101,7 @@ public class PlayArea<E>{
         for(E min : storage){
             if(m == min){
                 this.remove(storage.indexOf(min));
+                TrapListener.onMinionDeath((Minion)m);
                 return true;
             }
         }

@@ -9,6 +9,7 @@ import Cards.Card;
 import Cards.CardPurpose;
 import Cards.CardType;
 import Minions.Minion;
+import Traps.TrapListener;
 import cardgame1.Hero;
 import cardgame1.Main;
 import cardgame1.SpriteHandler;
@@ -53,11 +54,12 @@ public class FireBoltCard extends Card{
     public int cast(Minion target) {
         if(target == null) return -1;
         if(!canAfford()) return 0; //reutrn 0 if unaffordable
-        Sticker impactEffect = new Sticker(SpriteHandler.blastEffectSmall, target, 300);
-        Main.wait(300);
+        Sticker impactEffect = new Sticker(SpriteHandler.blastEffectSmall, target, AI.AI.speed/3);
+        Main.wait(AI.AI.speed/3);
         target.takeDamage(spellDamage);
         owner.resource -= cost;
         owner.hand.remove(this);
+        TrapListener.onPlay(this);
         return 1;
     }
     
@@ -70,11 +72,12 @@ public class FireBoltCard extends Card{
     public int castOnHero(Hero target) {
         if(target == null) return -1;
         if(!canAfford()) return 0; //reutrn 0 if unaffordable
-        Sticker impactEffect = new Sticker(SpriteHandler.blastEffectSmall,target,300);
-        Main.wait(300);
+        Sticker impactEffect = new Sticker(SpriteHandler.blastEffectSmall,target,AI.AI.speed/3);
+        Main.wait(AI.AI.speed/3);
         target.takeDamage(spellDamage);
         owner.resource -= cost;
         owner.hand.remove(this);
+        TrapListener.onPlay(this);
         return 1; 
     }
 }

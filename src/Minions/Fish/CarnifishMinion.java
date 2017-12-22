@@ -32,8 +32,8 @@ public class CarnifishMinion extends Minion{
     public void onSummon(){
         for(Minion m : owner.minions.getOccupants()){
             if(m.name.equals("Baitfish")){
-                Sticker s = new Sticker(SpriteHandler.bloodMedium,this,800);
-                Main.wait(800);
+                Sticker s = new Sticker(SpriteHandler.bloodMedium,this,AI.AI.speed);
+                Main.wait(AI.AI.speed);
                 m.destroy();
             }
         }

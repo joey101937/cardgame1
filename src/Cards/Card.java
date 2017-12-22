@@ -8,6 +8,7 @@ package Cards;
 import AI.AI;
 import Minions.Minion;
 import Minions.Tribe;
+import Traps.TrapListener;
 import cardgame1.Board;
 import cardgame1.Hero;
 import cardgame1.InputHandler;
@@ -146,8 +147,8 @@ public abstract class Card implements Comparable{
      * what happens when the card is played from the hand.
      * @param target target minion if applicable. may be null
      * returns an int reflecting the outcome. 
-     * 0 for success
-     * 1 for not cast (not enough mana, etc)
+     * 1 for success
+     * 0 for not cast (not enough mana, etc)
      */
     public int cast(Minion target){
     return defaultMinionSummon();
@@ -156,8 +157,8 @@ public abstract class Card implements Comparable{
      * what happens when the card is played from the hand onto a hero.
      * @param target
      * @return an int reflecting outcome
-     * 0 for success
-     * 1 for not cast (not enough mana, cant target heros, etc)
+     * 1 for success
+     * 0 for not cast (not enough mana, cant target heros, etc)
      */
     public int castOnHero(Hero target){
     return defaultMinionSummon();
@@ -188,6 +189,7 @@ public abstract class Card implements Comparable{
                 owner.resource -= cost;
                 owner.hand.remove(this);
                 summon.onSummon();
+                TrapListener.onPlay(this);
                 return 1;
             } else {
                 //could not legally summon. likely not enough board slots

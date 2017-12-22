@@ -8,9 +8,9 @@ package cardgame1;
 import AI.AI;
 import Minions.Minion;
 import Cards.*;
+import Traps.TrapHolder;
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
@@ -30,6 +30,7 @@ public class Hero {
     public BufferedImage picture; //visual representation
     public String name;
     public PlayArea<Minion> minions = new PlayArea<Minion>();
+    public TrapHolder traps = new TrapHolder();
     public ArrayList<Card> hand = new ArrayList<>();
     public ArrayList<Card> deck;
     public int id;

@@ -6,6 +6,7 @@
 package Minions;
 
 import Cards.Card;
+import Traps.TrapListener;
 import cardgame1.Board;
 import cardgame1.Hero;
 import cardgame1.SpriteHandler;
@@ -124,6 +125,7 @@ public abstract class Minion{
         this.takeDamage(target.attack);
         this.attackReady = false;
         target.onAttacked(this);
+        TrapListener.onAttack(this, target);
     }
     
     /**
@@ -134,6 +136,7 @@ public abstract class Minion{
         if(!canAttack() || attack==0) return;
         target.takeDamage(this.attack);
         this.attackReady = false;
+        TrapListener.onAttackHero(this, target);
     }
     /**
      * removes from the game

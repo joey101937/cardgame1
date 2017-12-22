@@ -6,12 +6,16 @@
 package AI;
 
 import Cards.Card;
+import Cards.CardPurpose;
+import static Cards.CardPurpose.Trap;
 import Cards.CardType;
 import Minions.Minion;
+import Traps.Trap;
 import cardgame1.Board;
 import cardgame1.Hero;
 import cardgame1.Main;
-import cardgame1.VisualEffectHandler;
+import cardgame1.SpriteHandler;
+import cardgame1.Sticker;
 import java.util.ArrayList;
 
 /**
@@ -63,7 +67,11 @@ public abstract class AI {
             if(c.canAfford()) playable.add(c);
         }
         playable.sort(null);
-        VisualEffectHandler.displayCard(playable.get(playable.size()-1), 150);
+        if(playable.get(playable.size()-1).cardPurpose == CardPurpose.Trap){
+            Sticker s = new Sticker(SpriteHandler.trapPlaceholder,1700,200,speed*3);
+        }else{
+            Sticker s = new Sticker(playable.get(playable.size()-1),1700,200,speed*3);
+        }
         Main.wait(speed*3);
         System.out.println("attempting to play: " + playable.get(playable.size()-1));
         AI.playCard(playable.get(playable.size()-1));
@@ -95,6 +103,7 @@ public abstract class AI {
             case AOEDamage:
             case AOEHeal:
             case BattlecryMinionDraw:
+            case Trap:
                 c.cast(null);
                 break;
             case BattlecryMinionDamage:
@@ -734,7 +743,16 @@ public abstract class AI {
             case Special:
                 value = c.getValue();
                 return value+ c.intrinsicValue;
+            case Trap:
+                for (Trap t : c.getOwner().traps.getOccupants()) {
+                    if (t.name.equals(c.name)) {
+                        return 0;
+                    }
+                }
+                value = c.getValue();
+                return value + c.intrinsicValue;
         }
+        System.out.println("error finding value for " + c);
         return value+ c.intrinsicValue;
     }
 }

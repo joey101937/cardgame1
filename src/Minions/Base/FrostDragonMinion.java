@@ -30,8 +30,8 @@ public class FrostDragonMinion extends Minion{
      
      @Override
      public void onSummon(){
-         Sticker s = new Sticker(SpriteHandler.snowflakeLarge,this.getXCordinate() + Minion.WIDTH/2, this.getYcoordinate()+Minion.HEIGHT/2, 400);
-         Main.wait(400);
+         Sticker s = new Sticker(SpriteHandler.snowflakeLarge,this.getXCordinate() + Minion.WIDTH/2, this.getYcoordinate()+Minion.HEIGHT/2, AI.AI.speed);
+         Main.wait(AI.AI.speed);
          for(Minion m : owner.opponent.minions.getOccupants()){
              m.freeze();
          }

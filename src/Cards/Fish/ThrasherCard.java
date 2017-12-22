@@ -21,7 +21,7 @@ public class ThrasherCard extends Card {
         name = "Thrasher";
         cardType = CardType.Minion;
         cardPurpose = CardPurpose.VanillaMinion;
-        cardText = "At the end of \n each turn, attack \n a random enemy";
+        cardText = "At the end of \n your turn, attack \n a random enemy";
         sprite = SpriteHandler.thrasherCard;
         cost = 2;
         summon = new ThrasherMinion(this);

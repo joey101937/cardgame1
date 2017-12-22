@@ -35,58 +35,55 @@ public class OpeningGUI extends javax.swing.JFrame {
     
     private void populateCombo(){
         this.yourDeckCombo.addItem("Base Deck");
-        this.yourDeckCombo.addItem("From The Depths Theme");
+        this.yourDeckCombo.addItem("Feeding Frenzy");
         this.yourDeckCombo.addItem("Experimental");
                 
         this.AIDeckCombo.addItem("Base Deck");
-        this.AIDeckCombo.addItem("From The Depths Theme");
+        this.AIDeckCombo.addItem("Feeding Frenzy");
         this.AIDeckCombo.addItem("Experimental");
         repaint();
     }
 
     private ArrayList<Card> getBaseDeck(){
         //Base
-        ArrayList<Card> BaseDeck = new ArrayList<>();
+        ArrayList<Card> deck = new ArrayList<>();
         for(int i = 0; i < 4; i++){
-            BaseDeck.add(new ArakkoaCard());
-            BaseDeck.add(new ArcherCard());
-            BaseDeck.add(new FireBoltCard());
-            BaseDeck.add(new FrostBearCard());
-            BaseDeck.add(new KnightCard());
-            BaseDeck.add(new VengefullKnightCard());
-            BaseDeck.add(new VolcanoCard());
-            BaseDeck.add(new FrostDragonCard());
+            deck.add(new ArakkoaCard());
+            deck.add(new ArcherCard());
+            deck.add(new FireBoltCard());
+            deck.add(new FrostBearCard());
+            deck.add(new KnightCard());
+            deck.add(new VengefullKnightCard());
+            deck.add(new VolcanoCard());
+            deck.add(new FrostDragonCard());
         }
-        return BaseDeck;
+        return deck;
     }
     
         private ArrayList<Card> getFishDeck(){
         //Base
-        ArrayList<Card> BaseDeck = new ArrayList<>();
+        ArrayList<Card> deck = new ArrayList<>();
         for(int i = 0; i < 4; i++){
-            BaseDeck.add(new BaitfishCard());
-            BaseDeck.add(new CarnifishCard());
-            BaseDeck.add(new ThrasherCard());
-            BaseDeck.add(new PredationCard());
-            BaseDeck.add(new FrenzyCard());
+            deck.add(new BaitfishCard());
+            deck.add(new CarnifishCard());
+            deck.add(new ThrasherCard());
+            deck.add(new PredationCard());
+            deck.add(new FrenzyCard());
         }
-        return BaseDeck;
+        return deck;
     }
         
      private ArrayList<Card> getExperimentalDeck() {
-        ArrayList<Card> BaseDeck = new ArrayList<>();
+        ArrayList<Card> deck = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
-            BaseDeck.add(new BaitfishCard());
-            BaseDeck.add(new CarnifishCard());
-            BaseDeck.add(new PredationCard());
-            BaseDeck.add(new FrenzyCard());
+            deck.add(new KelpieCard());
+            deck.add(new PredationCard());
+            deck.add(new ThrasherCard());
         }
         for(int i = 0; i < 2; i++) {
-             //BaseDeck.add(new SeaWitchCard());
-             BaseDeck.add(new KelpieCard());
-             BaseDeck.add(new JellyfishCard());
+            deck.add(new SwollowCard());
          }
-        return BaseDeck;
+        return deck;
         }
         /**
      * sets the decks based on combo boxes

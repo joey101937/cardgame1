@@ -7,6 +7,7 @@ package cardgame1;
 
 import Cards.Card;
 import Minions.Minion;
+import Traps.Trap;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.LinkedList;
@@ -19,6 +20,7 @@ public class VisualEffectHandler {
     public Board board = null;
     private int timeMousedOver = 0; //how long the cursor has been on a particular minion, for use in drawMouseOverCard method
     private Minion mousedOverMinion = null; //currently moused over minion, for use in drawMouseOverCard method
+    private Trap mousedOverTrap = null;
     private static Card currentlyDisplayed = null; //currently presented card used for Ai playing cards
     private static int timeLeftOnCard = 0;
     public static LinkedList<Sticker> stickers = new LinkedList<>();
@@ -30,6 +32,7 @@ public class VisualEffectHandler {
         drawLineM(g);  //draw line from selected minion
         drawLineC(g);  //draw line from selected card
         drawMouseOverCard(g);
+        drawMouseOverTrap(g);
         drawGivenCard(g);
         renderStickers(g);
     }
@@ -61,6 +64,26 @@ public class VisualEffectHandler {
         }
     }
     
+    public void drawMouseOverTrap(Graphics2D g){
+        int NUM_TICKS_TO_WAIT = 45; //how many frames to wait before we render the moused over trap
+        if(mousedOverTrap != InputHandler.getTrapAt(Board.mouseX, Board.mouseY)){
+        mousedOverTrap = InputHandler.getTrapAt(Board.mouseX, Board.mouseY);
+        timeMousedOver = 0;
+        }
+        if(mousedOverTrap!= null && mousedOverTrap == InputHandler.getTrapAt(Board.mouseX, Board.mouseY)){
+            timeMousedOver++;
+        }
+        if(timeMousedOver > NUM_TICKS_TO_WAIT && mousedOverTrap!=null){
+            //time to render the card, but only reveal what it is if it is the player's
+            int toRenderY = Board.mouseY;
+            if(mousedOverTrap.owner == Board.botHero) toRenderY -= Card.HEIGHT; //draw it higher than usual if its on the bottom of the screen
+            if(mousedOverTrap.owner == Board.playerHero){
+                mousedOverTrap.renderRevealed(g, Board.mouseX, toRenderY);
+            }else{
+                g.drawImage(SpriteHandler.trapPlaceholder,Board.mouseX,toRenderY,null);
+            }
+        }
+    }
     
     /**
      * draws line from selected minion to location of the mouse
@@ -86,7 +109,7 @@ public class VisualEffectHandler {
      * 
      */
     private void drawGivenCard(Graphics2D g) {
-        if(timeLeftOnCard > 0){
+        if(timeLeftOnCard > 0 && currentlyDisplayed !=null){
             timeLeftOnCard--;
             currentlyDisplayed.render(g, 1700, 200, true);
         }

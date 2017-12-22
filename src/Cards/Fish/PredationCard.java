@@ -10,6 +10,7 @@ import Cards.CardPurpose;
 import Cards.CardType;
 import Minions.Minion;
 import Minions.Tribe;
+import Traps.TrapListener;
 import cardgame1.Hero;
 import cardgame1.SpriteHandler;
 import cardgame1.Sticker;
@@ -51,6 +52,7 @@ public class PredationCard extends Card {
         Sticker impactEffect = new Sticker(SpriteHandler.bloodMedium,target,300);
         owner.resource -= cost;
         owner.hand.remove(this);
+        TrapListener.onPlay(this);
         return 1;
     }
     
@@ -62,6 +64,7 @@ public class PredationCard extends Card {
         Sticker impactEffect = new Sticker(SpriteHandler.bloodMedium,target,300);
         owner.resource -= cost;
         owner.hand.remove(this);
+        TrapListener.onPlay(this);
         return 1;
     }
 }
