@@ -77,11 +77,13 @@ public class OpeningGUI extends javax.swing.JFrame {
         ArrayList<Card> deck = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
             deck.add(new KelpieCard());
-            deck.add(new PredationCard());
             deck.add(new ThrasherCard());
+            deck.add(new FireBoltCard());
+            deck.add(new SeaWitchCard());
         }
         for(int i = 0; i < 2; i++) {
             deck.add(new SwollowCard());
+            deck.add(new PredationCard());
          }
         return deck;
         }

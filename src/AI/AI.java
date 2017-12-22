@@ -170,6 +170,7 @@ public abstract class AI {
                     break;
                 }
             case Debuff:
+                //TODO
                 break;
             case DirectHeal:
                 if(isHeroVulnerable(c.getOwner())){
@@ -738,8 +739,11 @@ public abstract class AI {
                 if(value < 1) return getWorth(c.summon);
                 return value+ c.intrinsicValue;
             case BattlecryMinionDraw:
-                //TODO
-                break;
+                value = getWorth(c.summon) + c.intrinsicValue;
+                int numDrawable = Hero.maxHandSize - c.getOwner().hand.size(); //number of cards we can draw.
+                if(c.spellDamage>numDrawable) value -= (c.spellDamage-numDrawable)*2;  //reduce value if it will cause overdraw
+                else value += (numDrawable - c.spellDamage);
+                return value;
             case Special:
                 value = c.getValue();
                 return value+ c.intrinsicValue;

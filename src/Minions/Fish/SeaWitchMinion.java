@@ -6,9 +6,14 @@
 package Minions.Fish;
 
 import Cards.Card;
+import Cards.Fish.FrenzyCard;
+import Cards.Fish.PredationCard;
+import Cards.Fish.SwollowCard;
 import Minions.Minion;
 import Minions.Tribe;
+import cardgame1.Main;
 import cardgame1.SpriteHandler;
+import java.util.ArrayList;
 
 /**
  *
@@ -18,7 +23,7 @@ public class SeaWitchMinion extends Minion{
         public SeaWitchMinion(Card parent){
         this.parent = parent;
         this.owner = parent.getOwner();
-        attack = 1;
+        attack = 3;
         tribe = Tribe.none;
         maxHealth = 4;
         health = maxHealth;
@@ -28,12 +33,14 @@ public class SeaWitchMinion extends Minion{
         
         @Override
         public void onSummon() {
-        int highest = 0;
-        for (Minion m : owner.minions.getOccupants()) {
-            if(m.tribe == Tribe.Fish && m.attack > highest && m!=this){
-                highest = m.attack;
-            }
-        }
-        this.attack += highest;
+        ArrayList<Card> options = new ArrayList<>();
+        //possible draw options
+        options.add(new FrenzyCard());
+        options.add(new PredationCard());
+        options.add(new SwollowCard());
+        //
+        this.proc();
+        Main.wait(AI.AI.speed/3);
+        owner.draw(options.get((int)(Math.random()*options.size())));
         }
 }

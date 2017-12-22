@@ -27,7 +27,9 @@ public class VisualEffectHandler {
     VisualEffectHandler(Board b){
         board = b;
     }
-    
+    public void resetMouseOverTime(){
+        timeMousedOver= 0;
+    }
     public void render(Graphics2D g){
         drawLineM(g);  //draw line from selected minion
         drawLineC(g);  //draw line from selected card
@@ -59,7 +61,7 @@ public class VisualEffectHandler {
         if(mousedOverMinion!= null && mousedOverMinion == InputHandler.getMinionAt(Board.mouseX, Board.mouseY)){
             timeMousedOver++;
         }
-        if(timeMousedOver > NUM_TICKS_TO_WAIT && mousedOverMinion!=null){
+        if(timeMousedOver > NUM_TICKS_TO_WAIT && mousedOverMinion!=null && Board.playerHero.turn){
             mousedOverMinion.parent.render(g, Board.mouseX, Board.mouseY, true);
         }
     }
@@ -73,7 +75,7 @@ public class VisualEffectHandler {
         if(mousedOverTrap!= null && mousedOverTrap == InputHandler.getTrapAt(Board.mouseX, Board.mouseY)){
             timeMousedOver++;
         }
-        if(timeMousedOver > NUM_TICKS_TO_WAIT && mousedOverTrap!=null){
+        if(timeMousedOver > NUM_TICKS_TO_WAIT && mousedOverTrap!=null && Board.playerHero.turn){
             //time to render the card, but only reveal what it is if it is the player's
             int toRenderY = Board.mouseY;
             if(mousedOverTrap.owner == Board.botHero) toRenderY -= Card.HEIGHT; //draw it higher than usual if its on the bottom of the screen

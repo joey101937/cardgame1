@@ -18,7 +18,7 @@ public class SwollowCard extends TrapCard{
         public SwollowCard(){
         super();
         name = "Swollow Trap";
-        cardText = "Whenever your \n opponent summons a \n minion with less \n than 4 health, \n destroy it";
+        cardText = "Whenever your \n opponent summons \n a minion with less \n than 4 health, \n destroy it";
         sprite = SpriteHandler.swollowTrap;
         cost = 2;
         myTrap = new SwollowTrap(this);

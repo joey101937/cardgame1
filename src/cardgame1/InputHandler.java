@@ -112,6 +112,7 @@ public class InputHandler extends KeyAdapter implements MouseListener, MouseMoti
         }
         switch (e.getKeyChar()) {
             case ' ':
+                Board.visHandler.resetMouseOverTime();
                 Board.controller.nextTurn();
                 break;
             case 'q':

@@ -8,6 +8,7 @@ package Traps.Fish;
 import Cards.Card;
 import Minions.Minion;
 import Traps.Trap;
+import cardgame1.Board;
 import cardgame1.Main;
 import cardgame1.SpriteHandler;
 import cardgame1.Sticker;
@@ -30,9 +31,13 @@ public class SwollowTrap extends Trap{
     public void onSummon(Minion m){
         System.out.println("i saw a minion summoned");
         if(m.owner!=owner && m.health < 4){
-            Sticker reveal = new Sticker(parent,1700,200,AI.AI.speed*4);
-            Sticker s = new Sticker(SpriteHandler.bloodMedium,m,AI.AI.speed*4);
-            Main.wait(AI.AI.speed*4);
+            Sticker s = new Sticker(SpriteHandler.bloodMedium, m, AI.AI.speed * 4);
+            if(owner==Board.topHero){
+                Sticker reveal = new Sticker(parent, this.getXCoordinate(), this.getYCoordinate(), AI.AI.speed * 4);
+            }else{
+                Sticker reveal = new Sticker(parent, this.getXCoordinate(), this.getYCoordinate()+Card.HEIGHT, AI.AI.speed * 4);
+            }
+            Main.wait(AI.AI.speed * 4);
             m.destroy();
             owner.traps.remove(this);
             m.destroy();

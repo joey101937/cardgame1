@@ -22,7 +22,7 @@ public class JellyfishCard extends Card{
         cardPurpose = CardPurpose.VanillaMinion;
         cardText = "When this damages \n another minion, \n reduce its attack \n by 1";
         sprite = SpriteHandler.jellyfishCard;
-        cost = 3;
+        cost = 2;
         summon = new JellyfishMinion(this);
     }
 }
