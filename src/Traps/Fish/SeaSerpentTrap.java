@@ -6,7 +6,7 @@
 package Traps.Fish;
 
 import Cards.Card;
-import Minions.Fish.SeaSerpentMinion;
+import Cards.Fish.SeaSerpentCard;
 import Minions.Minion;
 import Minions.Tribe;
 import Traps.Trap;
@@ -38,13 +38,14 @@ public class SeaSerpentTrap extends Trap{
                 Sticker reveal = new Sticker(parent, 1700, 200, AI.AI.speed * 6);
                 Sticker blood = new Sticker(SpriteHandler.bloodMedium,m,AI.AI.speed*6);
                 Main.wait(AI.AI.speed*6);
-                owner.minions.add(new SeaSerpentMinion(this.parent));
+                //owner.minions.add(new SeaSerpentMinion(this.parent));
+                owner.draw(new SeaSerpentCard());
                 owner.traps.remove(this);
             }
         }
     
         @Override
         public void tick(){
-            parent.cardText = "After playing three \n 2+ cost fish, summon \n a 6/5 Sea Serpent \n (" + this.numSummoned + ")";
+            parent.cardText = "After playing three \n 2+ cost fish, put \n a Sea Serpent card \n into your hand \n (" + this.numSummoned + ")";
         }
 }

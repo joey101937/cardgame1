@@ -35,5 +35,6 @@ public class SkelemancerMinion extends Minion {
         Sticker s = new Sticker(SpriteHandler.skullEffect,this,AI.AI.speed/2);
         Main.wait(AI.AI.speed/2);
         owner.minions.add(new SkeletonMinion(this.parent));
+        this.refresh();
     }
 }

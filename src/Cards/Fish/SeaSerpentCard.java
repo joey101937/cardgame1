@@ -8,23 +8,23 @@ package Cards.Fish;
 import Cards.Card;
 import Cards.CardPurpose;
 import Cards.CardType;
-import Minions.Fish.JellyfishMinion;
+import Minions.Fish.SeaSerpentMinion;
 import cardgame1.SpriteHandler;
 
 /**
- *
+ * this is the card reward from completing the trap quest
  * @author Joseph
  */
-public class JellyfishCard extends Card{
-        public JellyfishCard() {
-        name = "Jellyfish";
+public class SeaSerpentCard extends Card {
+
+    public SeaSerpentCard() {
+        name = "Sea Serpent";
         cardType = CardType.Minion;
         cardPurpose = CardPurpose.VanillaMinion;
-        cardText = "When this damages \n another minion, \n reduce its attack \n by 1";
-        this.intrinsicValue = 1;
-        cardText = "";
-        sprite = SpriteHandler.jellyfishCard;
-        cost = 3;
-        summon = new JellyfishMinion(this);
+        spellDamage = 1;
+        cardText = "On Summon: \n Deal " + spellDamage + " damage to \n all non-fish minions";
+        sprite = SpriteHandler.seaSerphantCard;
+        cost = 1;
+        summon = new SeaSerpentMinion(this);
     }
 }

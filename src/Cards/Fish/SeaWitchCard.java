@@ -24,7 +24,7 @@ public class SeaWitchCard extends Card{
         cardPurpose = CardPurpose.BattlecryMinionDraw;
         cardText = "On Summon: \n Put a Random Fish \n Related Card Into \n Your Hand";
         sprite = SpriteHandler.seaWitchCard;
-        cost = 5;
+        cost = 4;
         summon = new SeaWitchMinion(this);
         this.spellDamage = 1; //spell damage represents number of cards drawn for a battlecryminiondraw
     }

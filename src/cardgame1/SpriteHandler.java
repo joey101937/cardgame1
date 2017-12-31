@@ -73,6 +73,7 @@ public class SpriteHandler {
     public static BufferedImage volcanoCard;
     public static BufferedImage frostDragonMinion;
     public static BufferedImage frostDragonCard;
+    public static BufferedImage spellBookCard;
     //undead
     public static BufferedImage zombieCard;
     public static BufferedImage swampZombieMinion;
@@ -143,6 +144,7 @@ public class SpriteHandler {
             volcanoCard = load("volcanoCard.png");
             frostDragonMinion = load("frostDragonPortrait.png");
             frostDragonCard = load("frostDragonCard.png");
+            spellBookCard = load("spellBookCard.png");
             //undead
             zombieCard = load("zombieCard.png");
             zombieTrap = load("zombieTrap.png");

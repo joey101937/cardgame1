@@ -22,13 +22,13 @@ public class JellyfishMinion extends Minion{
         this.attack=2;
         this.health=5;
         this.maxHealth=health;
-       //this.intrinsicValue=2;
+       this.intrinsicValue=2;
         this.tribe = Tribe.Fish;
         this.name="Jellyfish";
         this.owner = parent.getOwner();
         this.sprite = SpriteHandler.jellyfishMinion;
     }
-  /*  
+   
     @Override
     public void onAttacked(Minion m){
         m.attack-=1;
@@ -45,5 +45,5 @@ public class JellyfishMinion extends Minion{
         TrapListener.onAttack(this, m);
         }
     }
-    */
+    
 }

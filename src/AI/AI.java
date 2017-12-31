@@ -106,6 +106,7 @@ public abstract class AI {
             case AOEHeal:
             case BattlecryMinionDraw:
             case Trap:
+            case Draw:
                 c.cast(null);
                 break;
             case BattlecryMinionDamage:
@@ -742,10 +743,17 @@ public abstract class AI {
                 if(value < 1) return getWorth(c.summon);
                 return value+ c.intrinsicValue;
             case BattlecryMinionDraw:
+                if(c.getOwner().minions.isFull()) return 0;
                 value = getWorth(c.summon) + c.intrinsicValue;
                 int numDrawable = Hero.maxHandSize - c.getOwner().hand.size(); //number of cards we can draw.
                 if(c.spellDamage>numDrawable) value -= (c.spellDamage-numDrawable)*2;  //reduce value if it will cause overdraw
                 else value += (numDrawable - c.spellDamage);
+                return value;
+            case Draw:
+                value = c.intrinsicValue;
+                int amountDrawable = Hero.maxHandSize - c.getOwner().hand.size() + 1; //number of cards we can draw.
+                if(c.spellDamage>amountDrawable) value -= (c.spellDamage-amountDrawable)*2;  //reduce value if it will cause overdraw
+                else value += (amountDrawable - c.spellDamage);
                 return value;
             case Special:
                 value = c.getValue();

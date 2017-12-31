@@ -60,8 +60,9 @@ public class OpeningGUI extends javax.swing.JFrame {
             deck.add(new KnightCard());
             deck.add(new VengefullKnightCard());
             deck.add(new VolcanoCard());
-            deck.add(new FrostDragonCard());
+            deck.add(new FrostDragonCard());  
         }
+            deck.add(new SpellBookCard());
         return deck;
     }
     
@@ -88,7 +89,8 @@ public class OpeningGUI extends javax.swing.JFrame {
         for(int i = 0; i < 2; i++) {
             deck.add(new SwollowCard());
             deck.add(new PredationCard());
-            deck.add(new KelpieCard());
+           // deck.add(new KelpieCard());
+            deck.add(new VolcanoCard());
          }
         for(int i =0; i < 4; i++){ 
             deck.add(new SeaSerpentTrapCard());
