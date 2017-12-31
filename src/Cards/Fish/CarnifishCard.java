@@ -23,7 +23,7 @@ public class CarnifishCard extends Card{
         cardType = CardType.Minion;
         cardPurpose = CardPurpose.VanillaMinion;
         cardText = "On Summon: \n Kill all friendly \n Baitfish";
-        intrinsicValue = 0; //more than a 0/2 to AI
+        intrinsicValue = 0;
         sprite = SpriteHandler.carnifishCard;
         cost = 2;
         summon = new CarnifishMinion(this);

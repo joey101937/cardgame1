@@ -29,9 +29,10 @@ public class SwollowTrap extends Trap{
     
     @Override
     public void onSummon(Minion m){
-        System.out.println("i saw a minion summoned");
         if(m.owner!=owner && m.health < 4){
-            Sticker reveal = new Sticker(parent, 1700, 200, AI.AI.speed * 4);
+            Sticker reveal = new Sticker(parent, 1700, 200, AI.AI.speed * 6);
+            Sticker blood = new Sticker(SpriteHandler.bloodMedium,m,AI.AI.speed*6);
+            Main.wait(AI.AI.speed*6);
             m.destroy();
             owner.traps.remove(this);
             m.destroy();

@@ -3,27 +3,29 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Cards.Fish;
+package Cards.Undead;
 
 import Cards.Card;
 import Cards.CardPurpose;
 import Cards.CardType;
-import Minions.Fish.JellyfishMinion;
+import Minions.Undead.ZombieMinion;
 import cardgame1.SpriteHandler;
 
 /**
  *
  * @author Joseph
  */
-public class JellyfishCard extends Card{
-        public JellyfishCard() {
-        name = "Jellyfish";
+public class ZombieCard extends Card {
+
+    public ZombieCard() {
+        name = "Zombie";
         cardType = CardType.Minion;
         cardPurpose = CardPurpose.VanillaMinion;
-       // cardText = "When this damages \n another minion, \n reduce its attack \n by 1";
         cardText = "";
-        sprite = SpriteHandler.jellyfishCard;
-        cost = 3;
-        summon = new JellyfishMinion(this);
+        intrinsicValue = 0;
+        sprite = SpriteHandler.zombieCard;
+        cost = 2;
+        summon = new ZombieMinion(this);
     }
+
 }

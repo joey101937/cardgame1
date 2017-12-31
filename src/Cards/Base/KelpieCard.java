@@ -33,11 +33,10 @@ public class KelpieCard extends Card{
             for(Card c : owner.hand){
                 if(c==this)continue;
                 if(c.cardType==CardType.Minion){
+                    this.intrinsicValue-=4;
                     if(c.canAfford() && c.cost+2 > owner.resource) {
-                        this.intrinsicValue-=2;
-                    } //higher penalty if the drawback makes a card unaffordable
-                    this.intrinsicValue-=5;
-                    
+                        this.intrinsicValue-=3;
+                    } //higher penalty if the drawback makes a card unaffordable    
                 }
             }
         }

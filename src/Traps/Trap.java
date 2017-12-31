@@ -41,9 +41,10 @@ public abstract class Trap {
      * @return 
      */
     public int getXCoordinate(){
-        int output = 100 + (SpriteHandler.trapSymbol.getWidth() * owner.traps.indexOf(this) + (owner.traps.indexOf(this) * Board.buffer));
+        int output = 50 + (SpriteHandler.trapSymbol.getWidth() * owner.traps.indexOf(this) + (owner.traps.indexOf(this) * Board.buffer));
         return output;
     }
+
     
     /**
      * gets the coordinate of the top left corner of where the trap symbol for this trap is being rendered. 

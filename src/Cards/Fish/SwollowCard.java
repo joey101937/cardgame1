@@ -23,7 +23,7 @@ public class SwollowCard extends TrapCard{
         cost = 2;
         myTrap = new SwollowTrap(this);
     }
-        
+        //intrinsic value of 1. gains alittle vlaue for each card in opponent's hand
         @Override
         public void tick(){
             intrinsicValue = 1;

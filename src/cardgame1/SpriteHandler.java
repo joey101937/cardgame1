@@ -36,7 +36,7 @@ public class SpriteHandler {
     public static BufferedImage snowflakeLarge;
     public static BufferedImage trapSymbol;
     public static BufferedImage trapPlaceholder;
-    public static BufferedImage swollowTrap;
+    public static BufferedImage skullEffect;
     //advanced fish
     public static BufferedImage baitfishCard;
     public static BufferedImage baitfishMinion;
@@ -52,6 +52,10 @@ public class SpriteHandler {
     public static BufferedImage seaWitchMinion;
     public static BufferedImage jellyfishMinion;
     public static BufferedImage jellyfishCard;
+    public static BufferedImage swollowTrap;
+    public static BufferedImage seaSerphantTrap;
+    public static BufferedImage seaSerphantCard;
+    public static BufferedImage seaSerphantMinion;
     //neutral
     public static BufferedImage frostBearCard;
     public static BufferedImage frostBearMinion;
@@ -69,6 +73,11 @@ public class SpriteHandler {
     public static BufferedImage volcanoCard;
     public static BufferedImage frostDragonMinion;
     public static BufferedImage frostDragonCard;
+    //undead
+    public static BufferedImage zombieCard;
+    public static BufferedImage swampZombieMinion;
+    public static BufferedImage zombieTrap;
+    public static BufferedImage undeadSoldier;
     
     public static void Initialize() {
         try {
@@ -94,6 +103,7 @@ public class SpriteHandler {
             snowflakeLarge = load("snowflakeLarge.png");
             trapSymbol = load("warningSign.png");
             trapPlaceholder = load("MysteryTrap.png");
+            skullEffect = load("jollyRoger.png");
             //Advanced Fish
             baitfishCard = load("baitFishCard.png");
             baitfishMinion = load("baitfish.png");
@@ -108,6 +118,9 @@ public class SpriteHandler {
             jellyfishMinion = load("jellyPortrait.png");
             jellyfishCard = load("jellyCard.png");
             swollowTrap = load("swollowTrap.png");
+            seaSerphantTrap = load("seaSerphantTrap.png");
+            seaSerphantCard = load("seaSerphantCard.png");
+            seaSerphantMinion = load("seaSerphantMinion.png");
             //Neutral Cards
             fireBoltCard = ImageIO.read((new File(Main.assets + "fireBoltCard.png")));
             frostBearMinion = load("frostBear.png");
@@ -125,7 +138,11 @@ public class SpriteHandler {
             volcanoCard = load("volcanoCard.png");
             frostDragonMinion = load("frostDragonPortrait.png");
             frostDragonCard = load("frostDragonCard.png");
-            
+            //undead
+            zombieCard = load("zombieCard.png");
+            zombieTrap = load("zombieTrap.png");
+            swampZombieMinion = load("swampZombieMinion.png");
+            undeadSoldier = load("undeadSoldier.png");
         } catch (Exception e) {
             e.printStackTrace();
             Main.display("Error loading all assets. Please Verify Assets folder.");

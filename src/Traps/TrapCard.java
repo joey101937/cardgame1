@@ -58,7 +58,25 @@ public class TrapCard extends Card{
            TrapListener.onPlay(this);
            return 1; //if this code runs, the trap has been added successfully
        }else {
+           System.out.println("could not add trap, likely overpopulated");
            return 0; //could not add trap for some reason
        } 
     }
+    
+    
+    /**
+     * same as regular can afford but returns false if there is already an active trap of this type in play
+     * @return 
+     */
+    @Override
+    public boolean canAfford(){
+        for(Trap t : owner.traps.getOccupants()){
+            if(t.name.equals(name)) {
+                System.out.println("Cannot have 2 of the same kind of trap");
+                return false;
+            }
+        }
+        return super.canAfford();
+    }
+    
 }

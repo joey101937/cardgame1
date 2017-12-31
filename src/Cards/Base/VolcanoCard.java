@@ -26,7 +26,7 @@ public class VolcanoCard extends Card{
         cardPurpose = CardPurpose.AOEDamage;
         isTargeted = false;
         spellDamage = 2;
-        cardText = "Deal " + spellDamage + " damage to \n all enemy minions";
+        cardText = "Deal " + spellDamage + " Damage to \n All Enemy Minions";
         sprite = SpriteHandler.volcanoCard;
         cost = 4;
         intrinsicValue = -2; //we need to get at least 3 value out of this card in order for the ai to want to play it

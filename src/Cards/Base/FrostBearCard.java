@@ -24,7 +24,7 @@ public class FrostBearCard extends Card {
         name = "Frost Bear";
         cardType = CardType.Minion;
         cardPurpose = CardPurpose.VanillaMinion;
-        cardText = "Cannot be frozen";
+        cardText = "Cannot Be Frozen";
         sprite = SpriteHandler.frostBearCard;
         cost = 4;
         summon = new FrostBearMinion(this);

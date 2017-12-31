@@ -108,6 +108,7 @@ public class InputHandler extends KeyAdapter implements MouseListener, MouseMoti
        @Override
     public void keyPressed(KeyEvent e) {
         if (keyTimer > 0) {
+            System.out.println("Key pressed to fast");
             return;
         }
         switch (e.getKeyChar()) {
@@ -132,6 +133,9 @@ public class InputHandler extends KeyAdapter implements MouseListener, MouseMoti
                     System.out.println(c+" : " + AI.getValueOfCard(c) + "/" + c.cost);
                 }
                 break;
+            case 'k':
+                 AI.takeTurn(Board.playerHero);
+                 break;
         }
         keyTimer = 10;
     }
@@ -215,7 +219,7 @@ public class InputHandler extends KeyAdapter implements MouseListener, MouseMoti
         if(y>100 && y < 50+SpriteHandler.trapSymbol.getHeight()){
             //top hero area
             for(int i = 0; i < TrapHolder.MAX_SIZE; i++){
-                int pos = 100 + (SpriteHandler.trapSymbol.getWidth() * i) + ((i * Board.buffer)); //x-coordinate of the top left corner of the trap
+                int pos = 50 + (SpriteHandler.trapSymbol.getWidth() * i) + ((i * Board.buffer)); //x-coordinate of the top left corner of the trap
                 if(x > pos && x < pos + SpriteHandler.trapSymbol.getWidth()){
                     return Board.topHero.traps.get(i);
                 }
@@ -223,7 +227,7 @@ public class InputHandler extends KeyAdapter implements MouseListener, MouseMoti
         } else if (y > 925 && y < 925 + SpriteHandler.trapSymbol.getHeight()) {
             //botHero area
             for (int i = 0; i < TrapHolder.MAX_SIZE; i++) {
-                int pos = 100 + (SpriteHandler.trapSymbol.getWidth() * i) + ((i * Board.buffer)); //x-coordinate of the top left corner of the trap
+                int pos = 50 + (SpriteHandler.trapSymbol.getWidth() * i) + ((i * Board.buffer)); //x-coordinate of the top left corner of the trap
                 if (x > pos && x < pos + SpriteHandler.trapSymbol.getWidth()) {
                     return Board.botHero.traps.get(i);
                 }

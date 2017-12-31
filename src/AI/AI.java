@@ -64,9 +64,11 @@ public abstract class AI {
         if(playOver)return;
         ArrayList<Card> playable = new ArrayList<>();
         for(Card c : h.hand){
-            if(c.canAfford()) playable.add(c);
+            if(c.canAfford() && getValueOfCard(c) > 0) playable.add(c);
         }
         playable.sort(null);
+        //playable.size-1 is weird becuase its actually fetching the lowest value card and doesnt take cost into account unless the card cannot be afforded.
+        //will need to be worked on
         if(playable.get(playable.size()-1).cardPurpose == CardPurpose.Trap){
             Sticker s = new Sticker(SpriteHandler.trapPlaceholder,1700,200,speed*3);
         }else{
@@ -166,7 +168,8 @@ public abstract class AI {
                     c.cast(target);
                     break;
                 }else{
-                    System.out.println("no target for " + c);
+                    c.castOnHero(enemy);
+                    System.out.println("no minion target for " + c);
                     break;
                 }
             case Debuff:
@@ -551,11 +554,11 @@ public abstract class AI {
     
     /**
      * gets the value that playing a card represents
-     * NOT DONE
      * @param c card to evaluate
      * @return the value playing the card presents
      */
     public static int getValueOfCard(Card c){
+        Board.getMainBoard().tick();
         Hero enemy;
         if(c.getOwner() == Board.topHero){
             enemy = Board.botHero;
@@ -612,7 +615,7 @@ public abstract class AI {
             case DirectDamage:
                 value = 0;
                 Minion optimalTarget = null;
-                if(c.spellDamage == 0) return 0;
+                if(c.spellDamage == 0) return -1;
                 if(c.getOwner() == Board.topHero){
                     for(Minion m : Board.botHero.minions.getStorage()){
                         if(m==null)continue;

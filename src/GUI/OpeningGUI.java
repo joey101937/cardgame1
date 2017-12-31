@@ -5,9 +5,12 @@
  */
 package GUI;
 
+import Cards.Undead.ZombieBiteCard;
 import Cards.Base.*;
 import Cards.Card;
 import Cards.Fish.*;
+import Cards.Undead.*;
+import Traps.Undead.ZombieBiteTrap;
 import cardgame1.Board;
 import cardgame1.Hero;
 import cardgame1.Main;
@@ -36,18 +39,21 @@ public class OpeningGUI extends javax.swing.JFrame {
     private void populateCombo(){
         this.yourDeckCombo.addItem("Base Deck");
         this.yourDeckCombo.addItem("Feeding Frenzy");
-        this.yourDeckCombo.addItem("Experimental");
+        this.yourDeckCombo.addItem("Deep Sea");
+        this.yourDeckCombo.addItem("Undead - Experimental");
                 
         this.AIDeckCombo.addItem("Base Deck");
         this.AIDeckCombo.addItem("Feeding Frenzy");
-        this.AIDeckCombo.addItem("Experimental");
+        this.AIDeckCombo.addItem("Deep Sea");
+        this.AIDeckCombo.addItem("Undead - Experimental");
+        
         repaint();
     }
 
     private ArrayList<Card> getBaseDeck(){
         //Base
         ArrayList<Card> deck = new ArrayList<>();
-        for(int i = 0; i < 4; i++){
+        for(int i = 0; i < 3; i++){
             deck.add(new ArakkoaCard());
             deck.add(new ArcherCard());
             deck.add(new FireBoltCard());
@@ -63,7 +69,7 @@ public class OpeningGUI extends javax.swing.JFrame {
         private ArrayList<Card> getFishDeck(){
         //Base
         ArrayList<Card> deck = new ArrayList<>();
-        for(int i = 0; i < 4; i++){
+        for(int i = 0; i < 3; i++){
             deck.add(new BaitfishCard());
             deck.add(new CarnifishCard());
             deck.add(new ThrasherCard());
@@ -73,20 +79,39 @@ public class OpeningGUI extends javax.swing.JFrame {
         return deck;
     }
         
-     private ArrayList<Card> getExperimentalDeck() {
+     private ArrayList<Card> getDeepSeaDeck() {
         ArrayList<Card> deck = new ArrayList<>();
-        for (int i = 0; i < 4; i++) {
-            deck.add(new KelpieCard());
+        for (int i = 0; i < 5; i++) {
             deck.add(new ThrasherCard());
-            deck.add(new FireBoltCard());
+            deck.add(new JellyfishCard()); 
             deck.add(new SeaWitchCard());
         }
         for(int i = 0; i < 2; i++) {
             deck.add(new SwollowCard());
             deck.add(new PredationCard());
          }
+        for(int i =0; i < 4; i++){
+            deck.add(new KelpieCard());
+            deck.add(new SeaSerpentTrapCard());
+        }
         return deck;
         }
+     
+        private ArrayList<Card> getUndeadDeck(){
+                ArrayList<Card> deck = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            deck.add(new KnightCard());
+            deck.add(new ArcherCard());
+            deck.add(new ZombieCard());            
+        }
+        for(int i = 0; i < 2; i++) {
+            deck.add(new ZombieBiteCard());
+         }
+        return deck;
+        }
+     
+     
+     
         /**
      * sets the decks based on combo boxes
      */
@@ -98,8 +123,11 @@ public class OpeningGUI extends javax.swing.JFrame {
             case 1: //fish
                 AIDeck = this.getFishDeck();
                 break;
-            case 2: //experimental
-                AIDeck = this.getExperimentalDeck();
+            case 2: //deep sea
+                AIDeck = this.getDeepSeaDeck();
+                break;
+            case 3: //undead
+                AIDeck = this.getUndeadDeck();
                 break;
         }
         switch (this.yourDeckCombo.getSelectedIndex()) {
@@ -109,8 +137,11 @@ public class OpeningGUI extends javax.swing.JFrame {
             case 1: //fish
                 PlayerDeck = this.getFishDeck();
                 break;
-            case 2: //experiemental
-                PlayerDeck = this.getExperimentalDeck();
+            case 2: //deep sea
+                PlayerDeck = this.getDeepSeaDeck();
+                break;
+            case 3: //undead
+                PlayerDeck = this.getUndeadDeck();
                 break;
         }
     }

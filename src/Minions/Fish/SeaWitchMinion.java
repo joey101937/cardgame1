@@ -6,9 +6,7 @@
 package Minions.Fish;
 
 import Cards.Card;
-import Cards.Fish.FrenzyCard;
-import Cards.Fish.PredationCard;
-import Cards.Fish.SwollowCard;
+import Cards.Fish.*;
 import Minions.Minion;
 import Minions.Tribe;
 import cardgame1.Main;
@@ -23,7 +21,7 @@ public class SeaWitchMinion extends Minion{
         public SeaWitchMinion(Card parent){
         this.parent = parent;
         this.owner = parent.getOwner();
-        attack = 3;
+        attack = 2;
         tribe = Tribe.none;
         maxHealth = 4;
         health = maxHealth;
@@ -38,6 +36,13 @@ public class SeaWitchMinion extends Minion{
         options.add(new FrenzyCard());
         options.add(new PredationCard());
         options.add(new SwollowCard());
+        options.add(new SeaSerpentTrapCard());
+        
+        options.add(new ThrasherCard());
+        options.add(new JellyfishCard());
+        options.add(new CarnifishCard());
+        options.add(new BaitfishCard());
+        options.add(new SeaWitchCard());
         //
         this.proc();
         Main.wait(AI.AI.speed/3);

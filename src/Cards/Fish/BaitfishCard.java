@@ -24,7 +24,7 @@ public class BaitfishCard extends Card{
          name = "Baitfish";
         cardType = CardType.Minion;
         cardPurpose = CardPurpose.VanillaMinion;
-        cardText = "On Death: \n Give Friendly a Fish \n +1/+1 and \n return to hand";
+        cardText = "On Death: \n Give a Friendly Fiah \n +1/+1 and \n Return to Hand";
         intrinsicValue = 1; //more than a 0/2 to AI
         sprite = SpriteHandler.baitfishCard;
         cost = 1;
