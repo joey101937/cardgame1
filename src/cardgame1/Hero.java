@@ -129,9 +129,21 @@ public class Hero {
         }
     }
     
-    public void onTurnEnd(){
-        for(Minion m : minions.getStorage()){
-            if(m!=null) m.onTurnEnd();
+    public void onTurnEnd() {
+        ArrayList<Minion> done = new ArrayList<>();
+        while (true) {
+            try {
+                for (Minion m : minions.getStorage()) {
+                    if (m != null && !done.contains(m)) {
+                        m.onTurnEnd();
+                        done.add(m);
+                    }
+                }
+                break;
+            } catch (ConcurrentModificationException cme) {
+                System.out.println("cme at hero 134");
+            }
+            
         }
         this.turn=false;
     }

@@ -46,7 +46,7 @@ public class SeaSerpentTrapCard extends TrapCard{
             int fishInDeck = 0;
             int fishInHand = 0;
             
-            intrinsicValue = 0;
+            intrinsicValue = 1;
            for(Card c : owner.hand){
                if(c.cardType == CardType.Minion && c.summon.tribe == Tribe.Fish && c.cost > 1){
                    this.intrinsicValue += 4;

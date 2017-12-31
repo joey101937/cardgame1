@@ -8,22 +8,22 @@ package Cards.Fish;
 import Cards.Card;
 import Cards.CardPurpose;
 import Cards.CardType;
-import Minions.Fish.ThrasherMinion;
+import Minions.Base.PirranahMinion;
 import cardgame1.SpriteHandler;
 
 /**
  *
  * @author Joseph
  */
-public class ThrasherCard extends Card {
+public class PirranahCard extends Card {
 
-    public ThrasherCard() {
-        name = "Thrasher";
+    public PirranahCard() {
+        name = "Pirranah";
         cardType = CardType.Minion;
         cardPurpose = CardPurpose.VanillaMinion;
         cardText = "At the end of \n your turn, attack \n a random enemy";
-        sprite = SpriteHandler.thrasherCard;
-        cost = 6;
-        summon = new ThrasherMinion(this);
+        sprite = SpriteHandler.pirranahCard;
+        cost = 2;
+        summon = new PirranahMinion(this);
     }
 }

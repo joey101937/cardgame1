@@ -73,6 +73,8 @@ public class SpriteHandler {
     public static BufferedImage frostDragonMinion;
     public static BufferedImage frostDragonCard;
     public static BufferedImage spellBookCard;
+    public static BufferedImage pirranahCard;
+    public static BufferedImage pirranahMinion;
     //heros
     public static BufferedImage ashePortrait;
     public static BufferedImage seaWitchHero;
@@ -85,11 +87,13 @@ public class SpriteHandler {
     public static BufferedImage swampZombieMinion;
     public static BufferedImage zombieTrap;
     public static BufferedImage undeadSoldier;
+    public static BufferedImage undeadSoldierCard;
     public static BufferedImage zombieBiteSpell;
     public static BufferedImage skeletonSpell;
     public static BufferedImage skeletonMinion;
     public static BufferedImage skelemancerMinion;
     public static BufferedImage skelemancerCard;
+    
     
     public static void Initialize() {
         try {
@@ -150,6 +154,8 @@ public class SpriteHandler {
             frostDragonMinion = load("frostDragonPortrait.png");
             frostDragonCard = load("frostDragonCard.png");
             spellBookCard = load("spellBookCard.png");
+            pirranahCard = load("pirranahCard.png");
+            pirranahMinion = load("pirannahMinion.png");
             //heros
             ashePortrait = ImageIO.read(new File(Main.assets + "ashePortrait.png"));
             seaWitchHero = load("seaWitchHero.png");
@@ -162,9 +168,10 @@ public class SpriteHandler {
             zombieTrap = load("zombieTrap.png");
             swampZombieMinion = load("swampZombieMinion.png");
             undeadSoldier = load("undeadSoldier.png");
+            undeadSoldierCard = load("undeadSoldierCard.png");
             zombieBiteSpell = load("zombieBite.png");
             skeletonSpell = load("skeletonSpell.png");
-            skeletonMinion = load("skeletonMinion.png");
+            skeletonMinion = load("skeletonSoldier.png");
             skelemancerMinion = load("skelemancerMinion.png");
             skelemancerCard = load("skelemancerCard.png");
             

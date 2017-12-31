@@ -5,6 +5,7 @@
  */
 package Minions.Fish;
 
+import Cards.Base.KelpieCard;
 import Cards.Card;
 import Cards.Fish.*;
 import Minions.Minion;
@@ -43,6 +44,9 @@ public class SeaWitchMinion extends Minion{
         options.add(new CarnifishCard());
         options.add(new BaitfishCard());
         options.add(new SeaWitchCard());
+        
+        options.add(new KelpieCard());
+        options.add(new PirranahCard());
         //
         this.proc();
         Main.wait(AI.AI.speed/3);

@@ -21,7 +21,7 @@ public class SkelemancerCard extends Card {
         name = "Skelemancer";
         cardType = CardType.Minion;
         cardPurpose = CardPurpose.VanillaMinion;
-        cardText = "On Turn Start: \n Summon a 2/1 \n skeleton with \n charge";
+        cardText = "On Turn End: \n Summon a 2/1 \n skeleton";
         intrinsicValue = 3;
         sprite = SpriteHandler.skelemancerCard;
         cost = 5;

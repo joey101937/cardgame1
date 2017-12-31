@@ -64,17 +64,19 @@ public class OpeningGUI extends javax.swing.JFrame {
             deck.add(new VolcanoCard());
             deck.add(new FrostDragonCard());  
         }
-            deck.add(new SpellBookCard());
+        deck.add(new SpellBookCard());
+        deck.add(new SpellBookCard());
+
         return deck;
     }
-    
+
         private ArrayList<Card> getFishDeck(){
         //Base
         ArrayList<Card> deck = new ArrayList<>();
         for(int i = 0; i < 3; i++){
             deck.add(new BaitfishCard());
             deck.add(new CarnifishCard());
-            deck.add(new ThrasherCard());
+            deck.add(new PirranahCard());
             deck.add(new PredationCard());
             deck.add(new FrenzyCard());
         }
@@ -83,38 +85,38 @@ public class OpeningGUI extends javax.swing.JFrame {
         
      private ArrayList<Card> getDeepSeaDeck() {
         ArrayList<Card> deck = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            deck.add(new ThrasherCard());
+        for (int i = 0; i < 3; i++) {  
             deck.add(new JellyfishCard()); 
             deck.add(new SeaWitchCard());
-        }
-        for(int i = 0; i < 2; i++) {
-            deck.add(new SwollowCard());
-            deck.add(new PredationCard());
-           // deck.add(new KelpieCard());
-            deck.add(new VolcanoCard());
-         }
-        for(int i =0; i < 4; i++){ 
+            deck.add(new PirranahCard());
             deck.add(new SeaSerpentTrapCard());
         }
+        for(int i = 0; i < 2; i++) {
+            deck.add(new SwollowCard()); 
+            deck.add(new ThrasherCard());
+            //deck.add(new KelpieCard());
+         }
+            deck.add(new PredationCard());
+            deck.add(new VolcanoCard());
+            deck.add(new SpellBookCard());
         return deck;
         }
      
     private ArrayList<Card> getUndeadDeck() {
         ArrayList<Card> deck = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
+            deck.add(new ArcherCard());
             deck.add(new KnightCard());
-            deck.add(new ArcherCard());            
         }
-        for (int i = 0; i < 3; i++) {
+        for(int i = 0; i < 4; i++){
             deck.add(new SkeletonArmySpell());
-            deck.add(new ZombieTrapCard());
         }
-        for(int i = 0; i < 2; i++){
+        for (int i = 0; i < 2; i++) {           
             deck.add(new ZombieBiteSpell());
             deck.add(new SkelemancerCard());
             deck.add(new FireBoltCard());
             deck.add(new SpellBookCard());
+            deck.add(new VolcanoCard());
         }
         
         return deck;

@@ -72,7 +72,6 @@ public class TrapCard extends Card{
     public boolean canAfford(){
         for(Trap t : owner.traps.getOccupants()){
             if(t.name.equals(name)) {
-                System.out.println("Cannot have 2 of the same kind of trap");
                 return false;
             }
         }

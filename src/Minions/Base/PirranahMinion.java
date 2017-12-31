@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Minions.Fish;
+package Minions.Base;
 
 import Cards.Card;
 import Minions.Minion;
@@ -16,19 +16,20 @@ import cardgame1.Sticker;
  *
  * @author Joseph
  */
-public class ThrasherMinion extends Minion{
-    public ThrasherMinion(Card parent){
+public class PirranahMinion extends Minion{
+    
+    public PirranahMinion(Card parent) {
         this.parent = parent;
         this.owner = parent.getOwner();
-        attack = 5;
-        maxHealth = 5;
+        attack = 3;
+        maxHealth = 2;
         health = maxHealth;
         tribe = Tribe.Fish;
-        name = "Thrasher";
-        sprite = SpriteHandler.thrasherMinion;
+        name = "Pirranah";
+        sprite = SpriteHandler.pirranahMinion;
     }
     
-    @Override
+        @Override
     public void onTurnEnd(){
         if(isFrozen){
             //do not attack if frozen
@@ -48,5 +49,4 @@ public class ThrasherMinion extends Minion{
         this.attack(target);
         Main.wait(AI.AI.speed/2);
     }
-
 }

@@ -10,6 +10,7 @@ import Cards.Fish.SeaSerpentCard;
 import Minions.Minion;
 import Minions.Tribe;
 import Traps.Trap;
+import cardgame1.Hero;
 import cardgame1.Main;
 import cardgame1.SpriteHandler;
 import cardgame1.Sticker;
@@ -33,7 +34,7 @@ public class SeaSerpentTrap extends Trap{
             if(m.owner == this.owner && m.tribe == Tribe.Fish && m.parent.cost > 1){
                 numSummoned += 1;
             }
-            if(numSummoned >= 3 && !activated){
+            if(numSummoned >= 3 && !activated && owner.hand.size() < Hero.maxHandSize){
                 activated = true;
                 Sticker reveal = new Sticker(parent, 1700, 200, AI.AI.speed * 6);
                 Sticker blood = new Sticker(SpriteHandler.bloodMedium,m,AI.AI.speed*6);

@@ -120,7 +120,7 @@ public abstract class Minion{
      * @param target 
      */
     public void attack(Minion target){
-        if(!attackReady || attack == 0) return;
+        if(!canAttack() || attack == 0) return;
         target.takeDamage(this.attack);
         this.takeDamage(target.attack);
         this.attackReady = false;
