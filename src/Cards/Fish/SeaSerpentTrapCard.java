@@ -25,7 +25,7 @@ public class SeaSerpentTrapCard extends TrapCard{
         name = "Sea Serpent Trap";
         cardText = "After playing three \n 2+ cost fish, put \n a Sea Serpent card \n into your hand";
         sprite = SpriteHandler.seaSerphantTrap;
-        cost = 2;
+        cost = 1;
         myTrap = new SeaSerpentTrap(this);
     }
      

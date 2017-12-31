@@ -15,6 +15,7 @@ import cardgame1.Main;
 import cardgame1.SpriteHandler;
 import cardgame1.Sticker;
 import AI.*;
+import Minions.Tribe;
 /**
  *
  * @author Joseph
@@ -42,6 +43,7 @@ public class ZombieBiteSpell extends Card{
         Main.wait(AI.speed/3);
         
         target.name = "Zombie";
+        target.tribe = Tribe.Undead;
         target.attack = attack;
         target.health = health;
         target.maxHealth = health;

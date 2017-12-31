@@ -15,6 +15,7 @@ import cardgame1.Hero;
 import cardgame1.Main;
 import cardgame1.SpriteHandler;
 import java.awt.Dimension;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 /**
@@ -26,6 +27,7 @@ public class OpeningGUI extends javax.swing.JFrame {
     private ArrayList<Card> AIDeck;
     private ArrayList<Card> PlayerDeck;
     private static SettingsPane settings = null;
+    private BufferedImage enemyHeroPortrait = SpriteHandler.ashePortrait; //image the enemy hero will have
     /**
      * Creates new form OpeningGUI
      */
@@ -111,7 +113,10 @@ public class OpeningGUI extends javax.swing.JFrame {
         for(int i = 0; i < 2; i++){
             deck.add(new ZombieBiteSpell());
             deck.add(new SkelemancerCard());
+            deck.add(new FireBoltCard());
+            deck.add(new SpellBookCard());
         }
+        
         return deck;
     }
 
@@ -123,15 +128,19 @@ public class OpeningGUI extends javax.swing.JFrame {
         switch (this.AIDeckCombo.getSelectedIndex()) {
             case 0: //base
                 AIDeck = this.getBaseDeck();
+                enemyHeroPortrait = SpriteHandler.knightHero;
                 break;
             case 1: //fish
                 AIDeck = this.getFishDeck();
+                enemyHeroPortrait = SpriteHandler.alligatorHero;
                 break;
             case 2: //deep sea
                 AIDeck = this.getDeepSeaDeck();
+                enemyHeroPortrait = SpriteHandler.fishManHero;
                 break;
             case 3: //undead
                 AIDeck = this.getUndeadDeck();
+                enemyHeroPortrait = SpriteHandler.undeadHero;
                 break;
         }
         switch (this.yourDeckCombo.getSelectedIndex()) {
@@ -345,7 +354,7 @@ public class OpeningGUI extends javax.swing.JFrame {
         }catch(Exception e){
             e.printStackTrace();
         }
-        Hero enemy = new Hero("AI Hero", AIDeck, SpriteHandler.ashePortrait);
+        Hero enemy = new Hero("AI Hero", AIDeck, enemyHeroPortrait);
         enemy.setAIControlled(true);
         Hero player = new Hero("Player Hero", PlayerDeck, SpriteHandler.ashePortrait);
         if(x < 480 || y < 480){

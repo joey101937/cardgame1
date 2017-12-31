@@ -19,7 +19,6 @@ public class SpriteHandler {
     public static BufferedImage cardback; //the back of a card. see this instead of enemy card.
     public static BufferedImage cardbackL; //large cardback
     public static BufferedImage cardback2; //example sprite for use as the image of a card
-    public static BufferedImage ashePortrait;
     public static BufferedImage redX;
     public static BufferedImage fullCrystal;
     public static BufferedImage emptyCrystal;
@@ -74,6 +73,13 @@ public class SpriteHandler {
     public static BufferedImage frostDragonMinion;
     public static BufferedImage frostDragonCard;
     public static BufferedImage spellBookCard;
+    //heros
+    public static BufferedImage ashePortrait;
+    public static BufferedImage seaWitchHero;
+    public static BufferedImage fishManHero;
+    public static BufferedImage undeadHero;
+    public static BufferedImage knightHero;
+    public static BufferedImage alligatorHero;
     //undead
     public static BufferedImage zombieCard;
     public static BufferedImage swampZombieMinion;
@@ -90,7 +96,6 @@ public class SpriteHandler {
             cardback = ImageIO.read(new File(Main.assets + "cardBack.png"));
             cardbackL = ImageIO.read(new File(Main.assets + "cardBackL.png"));
             cardback2 = ImageIO.read(new File(Main.assets + "cardBack2.png"));
-            ashePortrait = ImageIO.read(new File(Main.assets + "ashePortrait.png"));
             redX = load("redXsmall.png");
             fullCrystal = load("gemCSmall.png");
             emptyCrystal = load("gemSmall.png");
@@ -145,6 +150,13 @@ public class SpriteHandler {
             frostDragonMinion = load("frostDragonPortrait.png");
             frostDragonCard = load("frostDragonCard.png");
             spellBookCard = load("spellBookCard.png");
+            //heros
+            ashePortrait = ImageIO.read(new File(Main.assets + "ashePortrait.png"));
+            seaWitchHero = load("seaWitchHero.png");
+            fishManHero = load("deepSeaHero.png");
+            undeadHero = load("undeadHero.png");
+            knightHero = load("knightHero.png");
+            alligatorHero = load("alligatorHero.png");
             //undead
             zombieCard = load("zombieCard.png");
             zombieTrap = load("zombieTrap.png");

@@ -30,18 +30,17 @@ public class SeaSerpentMinion extends Minion{
     
     @Override
     public void onSummon() {
+        Sticker s = new Sticker(SpriteHandler.bloodMedium,this,AI.AI.speed/2);
+         Main.wait(AI.AI.speed/2);
         for (Minion m : owner.minions.getOccupants()) {
-            if (m.tribe != Tribe.Fish) {
-                Sticker s = new Sticker(SpriteHandler.bloodMedium,m,AI.AI.speed/3);
+            if (m.tribe != Tribe.Fish) {      
                 m.takeDamage(1);
             }
         }
         for (Minion m : owner.opponent.minions.getOccupants()) {
             if (m.tribe != Tribe.Fish) {
                 m.takeDamage(1);
-                Sticker s = new Sticker(SpriteHandler.bloodMedium,m,AI.AI.speed/3);
             }
         }
-        Main.wait(AI.AI.speed/3);
     }
 }

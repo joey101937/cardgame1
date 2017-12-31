@@ -13,6 +13,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 
 /**
  * the player character, takes direct attacks
@@ -104,8 +105,20 @@ public class Hero {
     
     public void onTurnStart(){
         System.out.println("on turn start: " + this);
+        ArrayList<Minion> done = new ArrayList<>();
+        while(true){
+        try{
         for(Minion m : minions.getStorage()){
-            if(m!=null)m.onTurnStart();
+            if(m!=null && !done.contains(m)){
+                m.onTurnStart();
+                done.add(m);
+            }
+        }
+        break;
+        }catch(ConcurrentModificationException cme){
+            System.out.println("caught concurrent modication exception in Hero.onTurnStart()");
+            cme.printStackTrace();
+        }
         }
         this.draw();
         if(this.maxResource<Hero.MAX_POSSIBLE_RESOURCE) this.maxResource++;

@@ -20,9 +20,10 @@ public class JellyfishCard extends Card{
         name = "Jellyfish";
         cardType = CardType.Minion;
         cardPurpose = CardPurpose.VanillaMinion;
-        cardText = "When this damages \n another minion, \n reduce its attack \n by 1";
-        this.intrinsicValue = 1;
+       // cardText = "When this damages \n another minion, \n reduce its attack \n by 1";
+        //cardText = "On Summon: \n Freeze a random \n enemy";
         cardText = "";
+        this.intrinsicValue = 1;
         sprite = SpriteHandler.jellyfishCard;
         cost = 3;
         summon = new JellyfishMinion(this);
