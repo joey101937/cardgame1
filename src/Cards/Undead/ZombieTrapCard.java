@@ -6,21 +6,21 @@
 package Cards.Undead;
 
 import Traps.TrapCard;
-import Traps.Undead.ZombieBiteTrap;
+import Traps.Undead.ZombieTrap;
 import cardgame1.SpriteHandler;
 
 /**
  *
  * @author Joseph
  */
-public class ZombieBiteCard extends TrapCard{
-    public ZombieBiteCard(){
+public class ZombieTrapCard extends TrapCard{
+    public ZombieTrapCard(){
         super();
-        name = "Zombie Bite";
+        name = "Zombify";
         cardText = "Whenever your \n opponent summons \n a minion, destroy \n it and summon \n a 3/1 zombie \n in its place.";
         sprite = SpriteHandler.zombieTrap;
-        cost = 2;
-        myTrap = new ZombieBiteTrap(this);
+        cost = 3;
+        myTrap = new ZombieTrap(this);
     }
     
     @Override

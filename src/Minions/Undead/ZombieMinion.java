@@ -21,8 +21,8 @@ public class ZombieMinion extends Minion {
     public ZombieMinion(Card parent) {
         this.parent = parent;
         this.owner = parent.getOwner();
-        attack = 2;
-        maxHealth = 3;
+        attack = 3;
+        maxHealth = 1;
         health = maxHealth;
         tribe = Tribe.Undead;
         name = "Thrasher";

@@ -23,7 +23,7 @@ public class SeaSerpentTrapCard extends TrapCard{
      public SeaSerpentTrapCard(){
         super();
         name = "Sea Serpent Trap";
-        cardText = "After playing three \n 2+ cost fish, summon \n a 5/5 Sea Serpent";
+        cardText = "After playing three \n 2+ cost fish, summon \n a 6/5 Sea Serpent";
         sprite = SpriteHandler.seaSerphantTrap;
         cost = 2;
         myTrap = new SeaSerpentTrap(this);

@@ -78,6 +78,11 @@ public class SpriteHandler {
     public static BufferedImage swampZombieMinion;
     public static BufferedImage zombieTrap;
     public static BufferedImage undeadSoldier;
+    public static BufferedImage zombieBiteSpell;
+    public static BufferedImage skeletonSpell;
+    public static BufferedImage skeletonMinion;
+    public static BufferedImage skelemancerMinion;
+    public static BufferedImage skelemancerCard;
     
     public static void Initialize() {
         try {
@@ -143,6 +148,12 @@ public class SpriteHandler {
             zombieTrap = load("zombieTrap.png");
             swampZombieMinion = load("swampZombieMinion.png");
             undeadSoldier = load("undeadSoldier.png");
+            zombieBiteSpell = load("zombieBite.png");
+            skeletonSpell = load("skeletonSpell.png");
+            skeletonMinion = load("skeletonMinion.png");
+            skelemancerMinion = load("skelemancerMinion.png");
+            skelemancerCard = load("skelemancerCard.png");
+            
         } catch (Exception e) {
             e.printStackTrace();
             Main.display("Error loading all assets. Please Verify Assets folder.");

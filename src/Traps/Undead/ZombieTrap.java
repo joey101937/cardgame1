@@ -18,13 +18,13 @@ import cardgame1.Sticker;
  *
  * @author Joseph
  */
-public class ZombieBiteTrap extends Trap {
+public class ZombieTrap extends Trap {
     private boolean active = true; //used to ensure it only acivates once
     
-    public ZombieBiteTrap(Card parent) {
+    public ZombieTrap(Card parent) {
         owner = parent.getOwner();
         this.parent = parent;
-        name = "Zombie Bite";
+        name = "Zombify";
     }
     
     @Override

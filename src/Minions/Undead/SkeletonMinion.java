@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Minions.Fish;
+package Minions.Undead;
 
 import Cards.Card;
 import Minions.Minion;
@@ -14,15 +14,17 @@ import cardgame1.SpriteHandler;
  *
  * @author Joseph
  */
-public class SeaSerpentMinion extends Minion{
-    public SeaSerpentMinion(Card parent){
+public class SkeletonMinion extends Minion{
+    public SkeletonMinion(Card parent) {
         this.parent = parent;
         this.owner = parent.getOwner();
-        attack = 6;
-        tribe = Tribe.Fish;
-        maxHealth = 5;
+        attack = 2;
+        maxHealth = 1;
+        intrinsicValue = -1; // we want these minions to be expendable
         health = maxHealth;
-        name = "Sea Witch";
-        sprite = SpriteHandler.seaSerphantMinion;
+        tribe = Tribe.Undead;
+        name = "Skeleton";
+        sprite = SpriteHandler.skeletonMinion;
+        this.refresh();
     }
 }

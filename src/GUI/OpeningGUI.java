@@ -5,12 +5,11 @@
  */
 package GUI;
 
-import Cards.Undead.ZombieBiteCard;
+import Cards.Undead.ZombieTrapCard;
 import Cards.Base.*;
 import Cards.Card;
 import Cards.Fish.*;
 import Cards.Undead.*;
-import Traps.Undead.ZombieBiteTrap;
 import cardgame1.Board;
 import cardgame1.Hero;
 import cardgame1.Main;
@@ -89,29 +88,32 @@ public class OpeningGUI extends javax.swing.JFrame {
         for(int i = 0; i < 2; i++) {
             deck.add(new SwollowCard());
             deck.add(new PredationCard());
-         }
-        for(int i =0; i < 4; i++){
             deck.add(new KelpieCard());
+         }
+        for(int i =0; i < 4; i++){ 
             deck.add(new SeaSerpentTrapCard());
         }
         return deck;
         }
      
-        private ArrayList<Card> getUndeadDeck(){
-                ArrayList<Card> deck = new ArrayList<>();
-        for (int i = 0; i < 3; i++) {
+    private ArrayList<Card> getUndeadDeck() {
+        ArrayList<Card> deck = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
             deck.add(new KnightCard());
-            deck.add(new ArcherCard());
-            deck.add(new ZombieCard());            
+            deck.add(new ArcherCard());            
         }
-        for(int i = 0; i < 2; i++) {
-            deck.add(new ZombieBiteCard());
-         }
+        for (int i = 0; i < 3; i++) {
+            deck.add(new SkeletonArmySpell());
+            deck.add(new ZombieTrapCard());
+        }
+        for(int i = 0; i < 2; i++){
+            deck.add(new ZombieBiteSpell());
+            deck.add(new SkelemancerCard());
+        }
         return deck;
-        }
-     
-     
-     
+    }
+
+
         /**
      * sets the decks based on combo boxes
      */

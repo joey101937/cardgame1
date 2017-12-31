@@ -45,6 +45,6 @@ public class SeaSerpentTrap extends Trap{
     
         @Override
         public void tick(){
-            parent.cardText = "After playing three \n 2+ cost fish, summon \n a 5/5 Sea Serpent \n (" + this.numSummoned + ")";
+            parent.cardText = "After playing three \n 2+ cost fish, summon \n a 6/5 Sea Serpent \n (" + this.numSummoned + ")";
         }
 }
