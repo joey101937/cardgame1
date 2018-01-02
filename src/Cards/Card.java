@@ -61,6 +61,9 @@ public abstract class Card implements Comparable{
                g.drawString(summon.attack.toString(), x + 60 - (summon.attack.toString().length() * 10), y + (Card.HEIGHT*12)/14);
                g.setColor(Minion.healthGreen);
                g.drawString(summon.health.toString(), x + Card.WIDTH - 60 - (summon.health.toString().length() * 10), y + (Card.HEIGHT*12)/14);
+               if(summon.isSilenced){
+                   g.drawImage(SpriteHandler.canceledEffect, x + Card.WIDTH/2 - 27, y + Card.HEIGHT/2 + 30, null);
+               }
            }
            if(InputHandler.selectedCard == this){
                if(owner.resource >= cost){// if selected and we can afford to cast it, color it green

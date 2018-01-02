@@ -23,6 +23,7 @@ public class SeaWitchMinion extends Minion{
         this.parent = parent;
         this.owner = parent.getOwner();
         attack = 2;
+        originalAttack = attack;
         tribe = Tribe.none;
         maxHealth = 4;
         health = maxHealth;

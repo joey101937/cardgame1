@@ -5,6 +5,7 @@
  */
 package Cards.Undead;
 
+import AI.SimulatedMinion;
 import Cards.Card;
 import Cards.CardPurpose;
 import Cards.CardType;
@@ -36,7 +37,14 @@ public class SkeletonArmySpell extends Card {
     public void tick(){
         this.intrinsicValue = -4;
         if(owner.minions.numOccupants() ==0 ) intrinsicValue+=2;
-        intrinsicValue += (3*(PlayArea.MAX_SIZE-owner.minions.numOccupants()));
+        int numSpawned = PlayArea.MAX_SIZE-owner.minions.numOccupants();
+        intrinsicValue += (3*numSpawned);
+        for(Minion m : owner.opponent.minions.getOccupants()){
+            if(m.health<=2 == AI.AI.getWorth(m) > 3){
+            intrinsicValue -=3; //if a minion will die to a skeleton, gain that minion's value instead of the skeleton's
+            intrinsicValue += AI.AI.getWorth(m);
+            }
+        }
     }
     
     @Override

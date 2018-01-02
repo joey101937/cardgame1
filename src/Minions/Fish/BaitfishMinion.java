@@ -23,6 +23,7 @@ public class BaitfishMinion extends Minion{
         this.parent = parent;
         this.owner = parent.getOwner();
         attack = 0;
+        originalAttack = attack;
         maxHealth = 2;
         intrinsicValue = -2; //low value; owning ai wants to kill it
         health = maxHealth;
@@ -34,6 +35,7 @@ public class BaitfishMinion extends Minion{
        @Override
        public void onDeath(){
            Sticker s = new Sticker(SpriteHandler.skullMedium,this,600);
+           if(isSilenced) return;
            ArrayList<Minion> targets = new ArrayList<>();
            for(Minion m : owner.minions.getOccupants()){
            if(m.tribe==Tribe.Fish && m!=this)targets.add(m);

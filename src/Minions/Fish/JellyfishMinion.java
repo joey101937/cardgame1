@@ -21,6 +21,7 @@ public class JellyfishMinion extends Minion{
     public JellyfishMinion(Card parent){
         this.parent=parent;
         this.attack=2;
+        originalAttack = attack;
         this.health=5;
         this.maxHealth=health;
         //this.intrinsicValue=2;

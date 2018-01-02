@@ -21,6 +21,7 @@ public class FrostDragonMinion extends Minion{
         this.parent = parent;
         this.owner = parent.getOwner();
         attack = 4;
+        originalAttack = attack;
         maxHealth = 6;
         health = maxHealth;
         tribe = Tribe.Dragon;

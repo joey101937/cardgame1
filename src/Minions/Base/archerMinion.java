@@ -20,6 +20,7 @@ public class archerMinion extends Minion{
         this.parent = parent;
         this.owner = parent.getOwner();
         attack = 2;
+        originalAttack = attack;
         maxHealth = 1;
         health = maxHealth;
         tribe = Tribe.none;

@@ -22,6 +22,7 @@ public class SkelemancerMinion extends Minion {
         this.parent = parent;
         this.owner = parent.getOwner();
         attack = 3;
+        originalAttack = attack;
         maxHealth = 6;
         intrinsicValue = 3; // we want these minions to be expendable
         health = maxHealth;
@@ -32,6 +33,8 @@ public class SkelemancerMinion extends Minion {
     
     @Override
     public void onTurnEnd(){
+        this.isFrozen = false;
+        if(isSilenced) return;
         Sticker s = new Sticker(SpriteHandler.skullEffect,this,AI.AI.speed/2);
         Main.wait(AI.AI.speed/2);
         owner.minions.add(new SkeletonMinion(this.parent));

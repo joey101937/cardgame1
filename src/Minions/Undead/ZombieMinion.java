@@ -22,6 +22,7 @@ public class ZombieMinion extends Minion {
         this.parent = parent;
         this.owner = parent.getOwner();
         attack = 3;
+        originalAttack = attack;
         maxHealth = 1;
         health = maxHealth;
         tribe = Tribe.Undead;
@@ -40,6 +41,7 @@ public class ZombieMinion extends Minion {
         parent.setHero(owner);
         this.owner = owner;
         attack = atk;
+        originalAttack = attack;
         maxHealth = hp;
         health = maxHealth;
         tribe = Tribe.Undead;

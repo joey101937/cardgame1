@@ -21,6 +21,7 @@ public class SeaSerpentMinion extends Minion{
         this.parent = parent;
         this.owner = parent.getOwner();
         attack = 5;
+        originalAttack = attack;
         tribe = Tribe.Fish;
         maxHealth = 5;
         health = maxHealth;

@@ -22,6 +22,7 @@ public class PirranahMinion extends Minion{
         this.parent = parent;
         this.owner = parent.getOwner();
         attack = 3;
+        originalAttack = attack;
         maxHealth = 2;
         health = maxHealth;
         tribe = Tribe.Fish;
@@ -31,7 +32,8 @@ public class PirranahMinion extends Minion{
     
         @Override
     public void onTurnEnd(){
-        if(isFrozen){
+        if(isSilenced) return;
+        if(isFrozen || owner.opponent.minions.numOccupants() == 0){
             //do not attack if frozen
             isFrozen = false;
             return;
@@ -39,11 +41,7 @@ public class PirranahMinion extends Minion{
         Sticker s = new Sticker(SpriteHandler.bloodMedium,this,AI.AI.speed/2); 
         Main.wait(AI.AI.speed/2);
         
-        int roll = (int)(Math.random()*(owner.opponent.minions.numOccupants()+1));
-        if (roll >= owner.opponent.minions.numOccupants()){
-            owner.opponent.takeDamage(attack);
-            return;
-        }
+        int roll = (int)(Math.random()*(owner.opponent.minions.numOccupants()));
         Minion target = owner.opponent.minions.getOccupants().get(roll);
         this.refresh();
         this.attack(target);

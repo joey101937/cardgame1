@@ -21,7 +21,7 @@ public class PirranahCard extends Card {
         name = "Pirranah";
         cardType = CardType.Minion;
         cardPurpose = CardPurpose.VanillaMinion;
-        cardText = "At the end of \n your turn, attack \n a random enemy";
+        cardText = "At the end of \n your turn, attack \n a random enemy \n minion";
         sprite = SpriteHandler.pirranahCard;
         cost = 2;
         summon = new PirranahMinion(this);

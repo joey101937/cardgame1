@@ -27,7 +27,7 @@ public abstract class AI {
     
     /**
      * core of the AI player, makes plays and casts cards the most efficient way possible and ends turn when done
-     * @param h 
+     * @param h the AI will make plays on behalf on this hero
      */
     
     public static void takeTurn(Hero h) {
@@ -39,9 +39,15 @@ public abstract class AI {
         Main.wait(speed);
         tradeOnBoard(h,false);
         for(Minion m : h.minions.getStorage()){
+            if(!AI.isHeroVulnerable(h)){
             if(m==null) continue;
             Main.wait(speed);
             m.attack(enemy);
+            }else{
+            if(m==null) continue;
+            Main.wait(speed);
+            m.attack(AI.getBestTarget(m)); //if we are vulnerable, attack on board as best as possible
+            }
         }
         Main.wait(speed);
         Board.controller.nextTurn();
@@ -477,6 +483,13 @@ public abstract class AI {
         int theirNewValue = AI.getWorthAfterCombat(defender, attacker);
         int ValueGained = (theirPreviousValue-theirNewValue) - (myPreviousValue-myNewValue);
         if(attacker.attack < defender.attack) ValueGained++; //minions with higher attack are worth a tad more
+        int damagePotential = 0;
+        for (Minion m : attacker.owner.minions.getOccupants()) {
+            damagePotential += m.attack;
+        }
+        if(defender.intrinsicValue > attacker.intrinsicValue && defender == AI.getBiggestThreatOf(defender.owner) && damagePotential >= defender.health){
+            ValueGained += defender.intrinsicValue;
+        }
         if(theirNewValue == 0 && attacker.owner.health < defender.owner.health) ValueGained++; 
         return ValueGained;
     }
@@ -488,7 +501,7 @@ public abstract class AI {
      */
     public static Minion getBiggestThreatOf(Hero h){
         Minion biggest = null;
-        for(Minion t : h.minions.getStorage()){
+        for(Minion t : h.minions.getOccupants()){
             if(biggest == null || AI.getWorth(biggest) < AI.getWorth(t)){
                 biggest = t;
             }

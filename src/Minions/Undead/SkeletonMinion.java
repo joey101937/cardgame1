@@ -19,6 +19,7 @@ public class SkeletonMinion extends Minion{
         this.parent = parent;
         this.owner = parent.getOwner();
         attack = 2;
+        originalAttack = attack;
         maxHealth = 1;
         intrinsicValue = -1; // we want these minions to be expendable
         health = maxHealth;

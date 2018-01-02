@@ -5,7 +5,6 @@
  */
 package GUI;
 
-import Cards.Undead.ZombieTrapCard;
 import Cards.Base.*;
 import Cards.Card;
 import Cards.Fish.*;
@@ -66,7 +65,8 @@ public class OpeningGUI extends javax.swing.JFrame {
         }
         deck.add(new SpellBookCard());
         deck.add(new SpellBookCard());
-
+        deck.add(new FireSpearCard());
+        deck.add(new FireSpearCard());
         return deck;
     }
 
@@ -79,6 +79,7 @@ public class OpeningGUI extends javax.swing.JFrame {
             deck.add(new PirranahCard());
             deck.add(new PredationCard());
             deck.add(new FrenzyCard());
+            deck.add(new ThrasherCard());
         }
         return deck;
     }
@@ -112,13 +113,13 @@ public class OpeningGUI extends javax.swing.JFrame {
             deck.add(new SkeletonArmySpell());
         }
         for (int i = 0; i < 2; i++) {           
-            deck.add(new ZombieBiteSpell());
             deck.add(new SkelemancerCard());
+            deck.add(new SkullKingCard());
             deck.add(new FireBoltCard());
-            deck.add(new SpellBookCard());
             deck.add(new VolcanoCard());
         }
-        
+        deck.add(new ZombieBiteSpell());
+        deck.add(new SpellBookCard());
         return deck;
     }
 

@@ -20,6 +20,7 @@ public class KelpieMinion extends Minion{
         this.parent = parent;
         this.owner = parent.getOwner();
         attack = 4;
+        originalAttack = attack;
         maxHealth = 3;
         health = maxHealth;
         tribe = Tribe.Fish;

@@ -21,6 +21,7 @@ public class ThrasherMinion extends Minion{
         this.parent = parent;
         this.owner = parent.getOwner();
         attack = 5;
+        originalAttack = attack;
         maxHealth = 5;
         health = maxHealth;
         tribe = Tribe.Fish;
@@ -30,7 +31,7 @@ public class ThrasherMinion extends Minion{
     
     @Override
     public void onTurnEnd(){
-        if(isFrozen){
+        if(isFrozen || isSilenced){
             //do not attack if frozen
             isFrozen = false;
             return;

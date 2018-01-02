@@ -23,6 +23,7 @@ public abstract class Minion{
     /* FIELDS */
     public String name;         //name of card
     public Integer attack;          //attack value
+    protected Integer originalAttack; //original attack of the minion
     public Integer health;          //current health
     public Integer maxHealth;       //current health
     public Tribe tribe;             //"classification" or "type"
@@ -32,6 +33,7 @@ public abstract class Minion{
     private int procTimer = 0; //used for rendering the proc animation
     private boolean attackReady = false; //inherit one attack per turn flag. true = able to attack
     public boolean isFrozen = false;
+    public boolean isSilenced = false;
     public Card parent; //card that summoned it, used for righclick for details.
     public Hero owner;  //hero controling this minion
     public static final Integer WIDTH = 150; //width of minion in pixel
@@ -111,6 +113,9 @@ public abstract class Minion{
             g.setColor(Color.gray);
             g.drawString(String.valueOf(AI.AI.getWorth(this)), x, y);
         }
+        if(isSilenced){
+            g.drawImage(SpriteHandler.canceledEffect, x + Minion.WIDTH/2 -27, y + Minion.HEIGHT - 27, null);
+        }
     }
     
     /*   MINION GAMEPLAY      */
@@ -175,6 +180,16 @@ public abstract class Minion{
      */
     public void proc(){
         procTimer = 20;
+    }
+    
+    /**
+     * cancels special effects and removes buffs from the minion
+     */
+    public void silence(){
+        this.attack = originalAttack;
+        if(health > maxHealth) health = maxHealth;
+        intrinsicValue = 0;
+        this.isSilenced = true;
     }
     
     /**

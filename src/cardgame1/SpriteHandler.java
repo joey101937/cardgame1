@@ -36,6 +36,7 @@ public class SpriteHandler {
     public static BufferedImage trapSymbol;
     public static BufferedImage trapPlaceholder;
     public static BufferedImage skullEffect;
+    public static BufferedImage canceledEffect;
     //advanced fish
     public static BufferedImage baitfishCard;
     public static BufferedImage baitfishMinion;
@@ -75,6 +76,7 @@ public class SpriteHandler {
     public static BufferedImage spellBookCard;
     public static BufferedImage pirranahCard;
     public static BufferedImage pirranahMinion;
+    public static BufferedImage fireSpearCard;
     //heros
     public static BufferedImage ashePortrait;
     public static BufferedImage seaWitchHero;
@@ -93,7 +95,8 @@ public class SpriteHandler {
     public static BufferedImage skeletonMinion;
     public static BufferedImage skelemancerMinion;
     public static BufferedImage skelemancerCard;
-    
+    public static BufferedImage skullKingMinion;
+    public static BufferedImage skullKingCard;
     
     public static void Initialize() {
         try {
@@ -119,6 +122,7 @@ public class SpriteHandler {
             trapSymbol = load("warningSign.png");
             trapPlaceholder = load("MysteryTrap.png");
             skullEffect = load("jollyRoger.png");
+            canceledEffect = load("canceled.png");
             //Advanced Fish
             baitfishCard = load("baitFishCard.png");
             baitfishMinion = load("baitfish.png");
@@ -156,6 +160,7 @@ public class SpriteHandler {
             spellBookCard = load("spellBookCard.png");
             pirranahCard = load("pirranahCard.png");
             pirranahMinion = load("pirannahMinion.png");
+            fireSpearCard = load("fireSpearCard.png");
             //heros
             ashePortrait = ImageIO.read(new File(Main.assets + "ashePortrait.png"));
             seaWitchHero = load("seaWitchHero.png");
@@ -174,6 +179,8 @@ public class SpriteHandler {
             skeletonMinion = load("skeletonSoldier.png");
             skelemancerMinion = load("skelemancerMinion.png");
             skelemancerCard = load("skelemancerCard.png");
+            skullKingMinion = load("skullKingMinion.png");
+            skullKingCard = load("skullKingCard.png");
             
         } catch (Exception e) {
             e.printStackTrace();

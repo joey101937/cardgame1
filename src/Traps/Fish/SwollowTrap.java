@@ -33,6 +33,7 @@ public class SwollowTrap extends Trap{
             Sticker reveal = new Sticker(parent, 1700, 200, AI.AI.speed * 6);
             Sticker blood = new Sticker(SpriteHandler.bloodMedium,m,AI.AI.speed*6);
             Main.wait(AI.AI.speed*6);
+            m.silence();
             m.destroy();
             owner.traps.remove(this);
             m.destroy();

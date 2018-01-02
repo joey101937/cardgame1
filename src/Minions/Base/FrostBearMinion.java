@@ -20,6 +20,7 @@ public class FrostBearMinion extends Minion{
         this.parent = parent;
         this.owner = parent.getOwner();
         attack = 3;
+        originalAttack = attack;
         maxHealth = 5;
         health = maxHealth;
         tribe = Tribe.Beast;
@@ -29,6 +30,10 @@ public class FrostBearMinion extends Minion{
     
        @Override
        public void freeze(){
+           if(isSilenced){
+               super.freeze();
+               return;
+           }
            this.proc();// this minion cannot be frozen
        }
 }
