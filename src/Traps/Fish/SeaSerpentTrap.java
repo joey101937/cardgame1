@@ -34,7 +34,7 @@ public class SeaSerpentTrap extends Trap{
             if(m.owner == this.owner && m.tribe == Tribe.Fish && m.parent.cost > 1){
                 numSummoned += 1;
             }
-            if(numSummoned >= 3 && !activated && owner.hand.size() < Hero.maxHandSize){
+            if(numSummoned >= 3 && !activated && owner.hand.size() < Hero.maxHandSize && owner.turn){
                 activated = true;
                 Sticker reveal = new Sticker(parent, 1700, 200, AI.AI.speed * 6);
                 Sticker blood = new Sticker(SpriteHandler.bloodMedium,m,AI.AI.speed*6);

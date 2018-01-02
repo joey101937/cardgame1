@@ -46,8 +46,8 @@ public class SettingsPane extends javax.swing.JFrame {
         titleLabel.setText("SETTINGS");
 
         aiSPeedLabel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        aiSPeedLabel.setText("AI Delay");
-        aiSPeedLabel.setToolTipText("How long the pauses between AI moves are");
+        aiSPeedLabel.setText("Effect Duration");
+        aiSPeedLabel.setToolTipText("Determines length of pauses between AI moves and How long visual effects and card previews last\nincrease if you find reading cards in time too difficult");
 
         aiSpeedField.setText("800");
 
@@ -69,7 +69,7 @@ public class SettingsPane extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setText("Display AI-Assessed Value on cards");
-        jLabel1.setToolTipText("Displays how valuable a card is to the AI, mainly for debugging.\nMay Hurt Performance");
+        jLabel1.setToolTipText("Displays how valuable a card is to the AI, mainly for debugging.");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

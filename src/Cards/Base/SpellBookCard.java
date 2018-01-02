@@ -33,11 +33,11 @@ public class SpellBookCard extends Card {
     @Override
     public int cast(Minion m){
         if(!canAfford()) return 0;
+        owner.hand.remove(this); //remove card first
         for(int i =0 ; i < spellDamage; i++){
            owner.draw(); 
         }
         owner.resource -= cost;
-        owner.hand.remove(this);
         TrapListener.onPlay(this);
         return 1;
     }

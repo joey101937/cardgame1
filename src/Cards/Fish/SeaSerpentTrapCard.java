@@ -58,7 +58,7 @@ public class SeaSerpentTrapCard extends TrapCard{
                    fishInDeck++;
                }
            }
-           intrinsicValue += (fishInDeck/owner.deck.size()) * 3;
-           if(fishInHand + fishInDeck < 3) intrinsicValue = 0; //if we cant fullfill the 3 fish requirement, this card is worthless
+           if(owner.deck.size()!=0)intrinsicValue += (fishInDeck/owner.deck.size()) * 3;
+           if(fishInHand + fishInDeck < 3 && owner.hand.size()< Hero.maxHandSize) intrinsicValue = 0; //if we cant fullfill the 3 fish requirement, this card is worthless
         }
 }

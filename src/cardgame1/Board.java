@@ -136,7 +136,7 @@ public class Board extends Canvas implements Runnable {
         g.scale(xScale,yScale);
         g.setColor(Color.white);
         g.drawImage(Main.BackgroundImage, 0, 0, null);
-        g.setFont(new Font("TimesRoman", Font.BOLD, 35));
+        g.setFont(new Font("Arial", Font.BOLD, 35));
         renderHeros(g);
         renderMinions(g);
         renderPlayerHand(g);
@@ -211,25 +211,72 @@ public class Board extends Canvas implements Runnable {
     public void tick() {
         this.visHandler.tick();
         InputHandler.tick();
-        for(Card c : topHero.hand){
-            c.tick();
+        //tick cards
+        ArrayList<Card> doneC = new ArrayList<>();
+        while (true) {
+            try {
+                for (Card c : topHero.hand) {
+                    if (c != null && !doneC.contains(c)) {
+                        c.tick();
+                        doneC.add(c);
+                    }
+                }
+                for (Card c : botHero.hand) {
+                    if (c != null && !doneC.contains(c)) {
+                        c.tick();
+                        doneC.add(c);
+                    }
+                }
+                break;
+            } catch (ConcurrentModificationException cme) {
+                System.out.println("caught concurrent modication in main tick, cards");
+                cme.printStackTrace();
+            }
         }
-        for(Card c : botHero.hand){
-            c.tick();
-        }
-        for(Minion m : topHero.minions.getOccupants()){
-            m.tick();
-        }
-        for(Minion m : botHero.minions.getOccupants()){
-            m.tick();
-        }
-        for(Trap t : topHero.traps.getOccupants()){
-            t.tick();
-        }
-        for(Trap t : botHero.traps.getOccupants()){
-            t.tick();
-        }
+        //tick minions
+        ArrayList<Minion> doneM = new ArrayList<>();
+         while(true){
+             try {
+                 for (Minion m : topHero.minions.getOccupants()) {
+                     if (m != null && !doneC.contains(m)) {
+                        m.tick();
+                        doneM.add(m);
+                    }
+                 }
+                 for (Minion m : botHero.minions.getOccupants()) {
+                     if (m != null && !doneC.contains(m)) {
+                        m.tick();
+                        doneM.add(m);
+                    }
+                 }
+             break;
+             }catch(ConcurrentModificationException cme){
+                 System.out.println("CME caught in main tick, minions");
+             }
+         }      
+         //tick traps
+         ArrayList<Trap> doneT = new ArrayList<>();
+         while(true){
+             try{
+                 for (Trap t : topHero.traps.getOccupants()) {
+                    if (t != null && !doneC.contains(t)) {
+                        t.tick();
+                        doneT.add(t);
+                    }
+                 }
+                 for (Trap t : botHero.traps.getOccupants()) {
+                    if (t != null && !doneC.contains(t)) {
+                        t.tick();
+                        doneT.add(t);
+                    }
+                 }
+                 break;
+             }catch(ConcurrentModificationException cme){
+                 System.out.println("CME caught in main tick, traps");
+             }
+         }
     }
+    
 
     //Core game loop 
     @Override

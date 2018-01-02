@@ -92,7 +92,7 @@ public abstract class Card implements Comparable{
     
     private void renderCardText(Graphics2D g, int x , int y){
         Font original = g.getFont();
-        Font toUse = new Font("TimesRoman", Font.BOLD, 18);
+        Font toUse = new Font("Arial", Font.BOLD, 18);
         g.setColor(Color.black);
         g.setFont(toUse);
         String[] lines = cardText.split(" \n ");
@@ -102,7 +102,7 @@ public abstract class Card implements Comparable{
         g.setColor(Color.black);
         g.drawString(name,x+40, y+20);
         if(summon!=null && summon.tribe!= Tribe.none){
-        g.setFont(new Font("TimesRoman", Font.BOLD,15));
+        g.setFont(new Font("Arial", Font.BOLD,15));
         g.setColor(Color.white);
         g.drawString(summon.tribe.toString(), x+110 - summon.tribe.toString().length()*5, y+Card.HEIGHT-10);
         }

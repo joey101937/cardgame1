@@ -85,8 +85,8 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="12" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="AI Delay"/>
-        <Property name="toolTipText" type="java.lang.String" value="How long the pauses between AI moves are"/>
+        <Property name="text" type="java.lang.String" value="Effect Duration"/>
+        <Property name="toolTipText" type="java.lang.String" value="Determines length of pauses between AI moves and How long visual effects and card previews last&#xa;increase if you find reading cards in time too difficult"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="aiSpeedField">
@@ -118,7 +118,7 @@
           <Font name="Tahoma" size="12" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Display AI-Assessed Value on cards"/>
-        <Property name="toolTipText" type="java.lang.String" value="Displays how valuable a card is to the AI, mainly for debugging.&#xa;May Hurt Performance"/>
+        <Property name="toolTipText" type="java.lang.String" value="Displays how valuable a card is to the AI, mainly for debugging."/>
       </Properties>
     </Component>
   </SubComponents>
