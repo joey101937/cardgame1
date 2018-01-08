@@ -7,6 +7,8 @@ package cardgame1;
 
 import AI.AI;
 import Cards.Card;
+import GUI.OpeningGUI;
+import GUI.SettingsPane;
 import Minions.Minion;
 import Traps.Trap;
 import Traps.TrapHolder;
@@ -38,11 +40,17 @@ public class InputHandler extends KeyAdapter implements MouseListener, MouseMoti
     
     @Override
     public void mouseClicked(MouseEvent e) {
+        double x = e.getX() / Board.xScale;
+        double y = e.getY() / Board.yScale;
         System.out.println(e.getX()/Board.xScale + ", " + e.getY()/Board.yScale);
         if(!Board.playerHero.turn || !enabled) return;  //if its not our turn, ignore it
         Card clickedCard = InputHandler.getCardAt(e.getX()/Board.xScale, e.getY()/Board.yScale);
         if(clickedCard != null && clickedCard.isTargeted == false){
             clickedCard.cast(null); //cast with null param becuase there is no target
+        }
+        if(x < 35 && y < 35){
+            //options gear is in top left, 0,0 and is 35x35
+            OpeningGUI.settings = new SettingsPane();
         }
     }
 
@@ -103,6 +111,7 @@ public class InputHandler extends KeyAdapter implements MouseListener, MouseMoti
     public void mouseMoved(MouseEvent e) {
         Board.mouseX = (int)(e.getX()/Board.xScale);
         Board.mouseY = (int)(e.getY()/Board.yScale);
+        
     }
     
        @Override

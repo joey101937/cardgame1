@@ -9,6 +9,7 @@ import Cards.Card;
 import Minions.Minion;
 import Traps.Trap;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.util.LinkedList;
 
@@ -37,6 +38,19 @@ public class VisualEffectHandler {
         drawMouseOverTrap(g);
         drawGivenCard(g);
         renderStickers(g);
+        renderOptionsMouseOverText(g);
+    }
+    
+    /**
+     * writes "Options" mouse over text for the little gear at the top left of the board
+     * @param g
+     */
+    private void renderOptionsMouseOverText(Graphics2D g) {
+        if (Board.mouseX < 35 && Board.mouseY < 35) {
+            Font prev = g.getFont();
+            g.setFont(new Font("Arial",Font.BOLD,18));
+            g.drawString("Options", Board.mouseX, Board.mouseY + 35);
+        }
     }
     
     public void tick(){

@@ -25,7 +25,7 @@ public class OpeningGUI extends javax.swing.JFrame {
     /*    FIELDS      */
     private ArrayList<Card> AIDeck;
     private ArrayList<Card> PlayerDeck;
-    private static SettingsPane settings = null;
+    public static SettingsPane settings = null;
     private BufferedImage enemyHeroPortrait = SpriteHandler.ashePortrait; //image the enemy hero will have
     /**
      * Creates new form OpeningGUI

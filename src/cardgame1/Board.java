@@ -135,13 +135,14 @@ public class Board extends Canvas implements Runnable {
         Graphics2D g = (Graphics2D)gr;
         g.scale(xScale,yScale);
         g.setColor(Color.white);
-        g.drawImage(Main.BackgroundImage, 0, 0, null);
+        g.drawImage(Main.BackgroundImage, 0, 0, null); //render options gear
         g.setFont(new Font("Arial", Font.BOLD, 35));
         renderHeros(g);
         renderMinions(g);
         renderPlayerHand(g);
         renderEnemyHand(g);   
         renderTraps(g);
+        g.drawImage(SpriteHandler.gearSmall,0,0,null);
         this.visHandler.render(g);
         g.dispose();
         bs.show();
