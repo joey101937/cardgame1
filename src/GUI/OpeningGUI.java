@@ -115,6 +115,7 @@ public class OpeningGUI extends javax.swing.JFrame {
         for (int i = 0; i < 2; i++) {           
             deck.add(new SkelemancerCard());
             deck.add(new SkullKingCard());
+            deck.add(new ZombieTrapCard());
             deck.add(new FireBoltCard());
             deck.add(new VolcanoCard());
         }

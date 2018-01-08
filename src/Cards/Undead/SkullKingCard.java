@@ -24,7 +24,7 @@ public class SkullKingCard extends Card {
         cardText = "Whenever this kills \n an enemy, it may \n attack again";
         intrinsicValue = 5; //ai need to know this is a strong card
         sprite = SpriteHandler.skullKingCard;
-        cost = 8;
+        cost = 7;
         summon = new SkullKingMinion(this);
     }
  

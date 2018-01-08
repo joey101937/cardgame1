@@ -7,6 +7,7 @@ package GUI;
 
 import Cards.Card;
 import Minions.Minion;
+import cardgame1.Hero;
 import cardgame1.Main;
 
 /**
@@ -39,6 +40,8 @@ public class SettingsPane extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         showValueButton = new javax.swing.JRadioButton();
         jLabel1 = new javax.swing.JLabel();
+        gameOverLabel = new javax.swing.JLabel();
+        disableButton = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -71,6 +74,19 @@ public class SettingsPane extends javax.swing.JFrame {
         jLabel1.setText("Display AI-Assessed Value on cards");
         jLabel1.setToolTipText("Displays how valuable a card is to the AI, mainly for debugging.");
 
+        gameOverLabel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        gameOverLabel.setText("Disable Game Over On Death");
+        gameOverLabel.setToolTipText("If disabled, game continues after a hero dies. putting the hero into negative HP");
+
+        disableButton.setText("Disabled");
+        disableButton.setToolTipText("");
+        disableButton.setAutoscrolls(true);
+        disableButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                disableButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -83,15 +99,17 @@ public class SettingsPane extends javax.swing.JFrame {
                         .addGap(20, 20, 20)
                         .addComponent(jButton1)))
                 .addContainerGap(141, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(aiSPeedLabel)
-                    .addComponent(jLabel1))
+                    .addComponent(jLabel1)
+                    .addComponent(gameOverLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(showValueButton)
-                    .addComponent(aiSpeedField, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(aiSpeedField, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(disableButton))
                 .addGap(30, 30, 30))
         );
         layout.setVerticalGroup(
@@ -107,7 +125,11 @@ public class SettingsPane extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(showValueButton)
                     .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(gameOverLabel)
+                    .addComponent(disableButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addContainerGap())
         );
@@ -125,6 +147,7 @@ public class SettingsPane extends javax.swing.JFrame {
        }
        Card.showValue = showValueButton.isSelected();
        Minion.showValue = showValueButton.isSelected();
+       Hero.endGameOnDeath = !this.disableButton.isSelected();
        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -132,10 +155,16 @@ public class SettingsPane extends javax.swing.JFrame {
 
     }//GEN-LAST:event_showValueButtonActionPerformed
 
+    private void disableButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_disableButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_disableButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel aiSPeedLabel;
     private javax.swing.JTextField aiSpeedField;
+    private javax.swing.JRadioButton disableButton;
+    private javax.swing.JLabel gameOverLabel;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JRadioButton showValueButton;

@@ -178,6 +178,7 @@ public abstract class Card implements Comparable{
     }
     /**
      * special method for specialist card-purpose. used by ai to get value
+     * does not include intrinsic value
      * @return 
      */
     public int getValue(){return 0;}

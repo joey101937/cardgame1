@@ -30,7 +30,7 @@ public class SkeletonArmySpell extends Card {
         isTargeted = false;
         cardText = "Summon up to \n four 2/1 skeletons \n with charge";
         sprite = SpriteHandler.skeletonSpell;
-        cost = 6;
+        cost = 7;
     }
     
     @Override

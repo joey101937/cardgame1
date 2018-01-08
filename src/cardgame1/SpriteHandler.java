@@ -37,6 +37,7 @@ public class SpriteHandler {
     public static BufferedImage trapPlaceholder;
     public static BufferedImage skullEffect;
     public static BufferedImage canceledEffect;
+    public static BufferedImage gearSmall;
     //advanced fish
     public static BufferedImage baitfishCard;
     public static BufferedImage baitfishMinion;
@@ -123,6 +124,7 @@ public class SpriteHandler {
             trapPlaceholder = load("MysteryTrap.png");
             skullEffect = load("jollyRoger.png");
             canceledEffect = load("canceled.png");
+            gearSmall = load("gearSmall.png");
             //Advanced Fish
             baitfishCard = load("baitFishCard.png");
             baitfishMinion = load("baitfish.png");

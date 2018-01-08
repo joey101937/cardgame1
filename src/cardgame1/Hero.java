@@ -24,6 +24,7 @@ public class Hero {
     public static int maxHandSize = 6; //max amount of cards to have in your hand
     private static int idBank = 0;     //determines what id a hero will have
     public static final int MAX_POSSIBLE_RESOURCE = 10; //max resource per turn cap
+    public static boolean endGameOnDeath = true;
     /*   FIELDS   */
     public int health = 30;
     public int maxHealth = 30;
@@ -152,8 +153,28 @@ public class Hero {
     public void takeDamage(int amount){
         this.health-=amount;
         this.damageTicker = 20;
+        if(health <= 0){
+            destroy();
+        }
     }
     
+    /**
+     * what happens when the hero dies. usually ends the game
+     * TODO
+     */
+    public void destroy(){
+        //TODO
+        if(!endGameOnDeath)return;
+        if (this == Board.playerHero) {
+            Main.display("Game over!");
+            System.exit(0);
+        }
+        if(this == Board.nonPlayerHero){
+            Main.display("Victory!");
+            System.exit(0);
+        }
+    }
+
     /**
      * adds health to a hero up to their maximum health
      * @param amount 
