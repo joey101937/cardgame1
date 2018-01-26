@@ -39,7 +39,7 @@ public class Board extends Canvas implements Runnable {
     private boolean running = false;
     private Thread thread = null;
     public Dimension d;
-    public InputHandler ih = new InputHandler();
+    public static InputHandler ih = new InputHandler();
     public static GameController controller;
     private static Board mainBoard = null;
     /* CONSTRUCTOR */

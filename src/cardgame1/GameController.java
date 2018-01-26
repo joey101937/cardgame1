@@ -23,6 +23,17 @@ public class GameController {
     }
 
     public void nextTurn() {
+        if(activeHero == Board.playerHero){
+            //player ending their turn, so disable input
+            Board.getMainBoard().removeKeyListener(Board.ih);
+            Board.getMainBoard().removeMouseListener(Board.ih);
+            Board.getMainBoard().removeMouseMotionListener(Board.ih);
+        }else{
+            //enemy ending turn so player regains control
+            Board.getMainBoard().addKeyListener(Board.ih);
+            Board.getMainBoard().addMouseListener(Board.ih);
+            Board.getMainBoard().addMouseMotionListener(Board.ih);
+        }     
         activeHero.onTurnEnd();
         Hero temp = activeHero;
         activeHero = inactiveHero;
