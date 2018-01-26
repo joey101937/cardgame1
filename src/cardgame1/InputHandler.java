@@ -29,12 +29,18 @@ public class InputHandler extends KeyAdapter implements MouseListener, MouseMoti
     public static Card selectedCard = null;
     private static int keyTimer = 0; // used to prevent too many key presses in quick succession
     public static boolean enabled = true;
+    public static int enablingTimer = 0; //used to delay reactivation
     /**
      * ticks every gametime second
      */
     public static void tick(){
         if(keyTimer > 0){
             keyTimer--;
+        }
+        if(enablingTimer > 0){
+            enablingTimer--;
+        }else{
+            if(!enabled && Board.playerHero.turn) enabled =true;
         }
     }
     

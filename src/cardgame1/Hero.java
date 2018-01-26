@@ -107,6 +107,7 @@ public class Hero {
     
     public void onTurnStart(){
         System.out.println("on turn start: " + this);
+        if(Board.playerHero == this) InputHandler.enablingTimer=20;
         ArrayList<Minion> done = new ArrayList<>();
         while(true){
         try{
@@ -132,6 +133,7 @@ public class Hero {
     }
     
     public void onTurnEnd() {
+        if(Board.playerHero == this) InputHandler.enabled=false;
         ArrayList<Minion> done = new ArrayList<>();
         while (true) {
             try {
