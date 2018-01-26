@@ -48,9 +48,20 @@ public class InputHandler extends KeyAdapter implements MouseListener, MouseMoti
         if(clickedCard != null && clickedCard.isTargeted == false){
             clickedCard.cast(null); //cast with null param becuase there is no target
         }
-        if(x < 35 && y < 35){
-            //options gear is in top left, 0,0 and is 35x35
+        if(x < 35 && y < 35){//options gear is in top left, 0,0 and is 35x35
             OpeningGUI.settings = new SettingsPane();
+        }
+        if(x > 400 + Board.playerHero.picture.getWidth() && x < 400 + Board.playerHero.picture.getWidth() + SpriteHandler.leftArrow.getWidth()){
+             if(Board.playerHero == Board.botHero){
+                 if(y > 850 && y < 850 + SpriteHandler.leftArrow.getHeight()){
+                     onEndTurn();
+                 }
+             }else{
+                 //player is tophero
+                 if(y < SpriteHandler.leftArrow.getHeight()){
+                     onEndTurn();
+                 }
+             }
         }
     }
 
@@ -113,7 +124,19 @@ public class InputHandler extends KeyAdapter implements MouseListener, MouseMoti
         Board.mouseY = (int)(e.getY()/Board.yScale);
         
     }
-    
+    /**
+     * code to be executed whenever the player attempts to end his turn.
+     */
+    private static void onEndTurn() {
+        if (keyTimer > 0) {
+            System.out.println("Key pressed to fast");
+            return;
+        }
+        Board.visHandler.resetMouseOverTime();
+        Board.controller.nextTurn();
+        keyTimer = 15;
+    }
+
        @Override
     public void keyPressed(KeyEvent e) {
         if (keyTimer > 0) {
@@ -122,8 +145,7 @@ public class InputHandler extends KeyAdapter implements MouseListener, MouseMoti
         }
         switch (e.getKeyChar()) {
             case ' ':
-                Board.visHandler.resetMouseOverTime();
-                Board.controller.nextTurn();
+                 onEndTurn();
                 break;
             case 'q':
                 for(Card c : Board.playerHero.hand){

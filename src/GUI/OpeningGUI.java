@@ -40,12 +40,14 @@ public class OpeningGUI extends javax.swing.JFrame {
         this.yourDeckCombo.addItem("Base Deck");
         this.yourDeckCombo.addItem("Feeding Frenzy");
         this.yourDeckCombo.addItem("Deep Sea");
-        this.yourDeckCombo.addItem("Undead - Experimental");
+        this.yourDeckCombo.addItem("Undead");
+        this.yourDeckCombo.addItem("Experimental");
                 
         this.AIDeckCombo.addItem("Base Deck");
         this.AIDeckCombo.addItem("Feeding Frenzy");
         this.AIDeckCombo.addItem("Deep Sea");
-        this.AIDeckCombo.addItem("Undead - Experimental");
+        this.AIDeckCombo.addItem("Undead");
+        this.AIDeckCombo.addItem("Experimental");
         
         repaint();
     }
@@ -123,7 +125,20 @@ public class OpeningGUI extends javax.swing.JFrame {
         deck.add(new SpellBookCard());
         return deck;
     }
-
+     private ArrayList<Card> getExperimentalDeck() {
+        ArrayList<Card> deck = new ArrayList<>();
+        for (int i = 0; i < 4; i++) {
+            deck.add(new KelpieCard());
+            deck.add(new ThrasherCard());
+            deck.add(new FireBoltCard());
+            deck.add(new SeaWitchCard());
+        }
+        for(int i = 0; i < 2; i++) {
+            deck.add(new SwollowCard());
+            deck.add(new PredationCard());
+         }
+        return deck;
+        }
 
         /**
      * sets the decks based on combo boxes
@@ -146,6 +161,10 @@ public class OpeningGUI extends javax.swing.JFrame {
                 AIDeck = this.getUndeadDeck();
                 enemyHeroPortrait = SpriteHandler.undeadHero;
                 break;
+            case 4: //experimental
+                AIDeck = this.getExperimentalDeck();
+                enemyHeroPortrait = SpriteHandler.fishManHero;
+                break;
         }
         switch (this.yourDeckCombo.getSelectedIndex()) {
             case 0: //base
@@ -159,6 +178,9 @@ public class OpeningGUI extends javax.swing.JFrame {
                 break;
             case 3: //undead
                 PlayerDeck = this.getUndeadDeck();
+                break;
+            case 4: //experimental
+                PlayerDeck = this.getExperimentalDeck();
                 break;
         }
     }

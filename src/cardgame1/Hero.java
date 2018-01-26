@@ -10,6 +10,7 @@ import Minions.Minion;
 import Cards.*;
 import Traps.TrapHolder;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -202,6 +203,14 @@ public class Hero {
         if(this.turn){
             g.setColor(new Color(255,255,255,100));
             g.drawImage(SpriteHandler.leftArrow,x + picture.getWidth(), y,null);
+            if(Board.playerHero==this){
+                Font original = g.getFont();
+                Font toUse = new Font("Arial", Font.BOLD, 18);
+                g.setFont(toUse);
+                g.setColor(Color.white);
+                g.drawString("End Turn", x+picture.getWidth() + 25, y + SpriteHandler.leftArrow.getHeight()/2 + 5);
+                g.setFont(original);
+            }
         }
         if(this.damageTicker > 0){
         g.setColor(new Color(255,0,0,(this.damageTicker)*12));
