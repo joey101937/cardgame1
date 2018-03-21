@@ -261,5 +261,13 @@ public abstract class Minion{
     public String toString(){
         return (this.name + "  "+ this.attack + "/" + this.health + " owner:" + this.owner);
     }
-    
+    /**
+     * adds health, not exceeding the max health of the minion
+     * @param ammount 
+     */
+    public void heal(int ammount){
+        for(int i = 0; i < ammount && health<maxHealth; i++){
+            this.health++;
+        }
+    }
 }

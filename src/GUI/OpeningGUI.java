@@ -69,6 +69,8 @@ public class OpeningGUI extends javax.swing.JFrame {
         deck.add(new SpellBookCard());
         deck.add(new FireSpearCard());
         deck.add(new FireSpearCard());
+        deck.add(new PaladinCard());
+        deck.add(new PaladinCard());
         return deck;
     }
 

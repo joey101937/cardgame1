@@ -37,6 +37,7 @@ public class Hero {
     public ArrayList<Card> hand = new ArrayList<>();
     public ArrayList<Card> deck;
     public int id;
+    private int procTimer=0; //used for green proc animation
     public Hero opponent;
     private int damageTicker = 0; //used to apply the red on damage effect
     public boolean turn = false; //is it our turn?
@@ -219,6 +220,18 @@ public class Hero {
         damageTicker--;
         g.fillRect(x, y, picture.getWidth(), picture.getHeight());
         }
+        if (this.procTimer > 0) {
+            procTimer--;
+            g.setColor(new Color(0, 255, 0, procTimer * 10));
+            g.fillRect(x, y, this.picture.getWidth(), picture.getHeight());
+        }
+    }
+    
+    /**
+     * temporarily makes the hero tint green
+     */
+    public void proc(){
+        this.procTimer = 20;
     }
     
     @Override

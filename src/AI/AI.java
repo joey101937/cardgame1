@@ -59,7 +59,7 @@ public abstract class AI {
     }
     
     /**
-     * plays all cards we can in the best way possible
+     * plays all cards we can in the best way possible, recursively
      */
     public static void playOutHand(Hero h){
         Board.getMainBoard().tick();
@@ -72,13 +72,11 @@ public abstract class AI {
         for(Card c : h.hand){
             if(c.canAfford() && getValueOfCard(c) > 0) playable.add(c);
         }
-        playable.sort(null);
-        //playable.size-1 is weird becuase its actually fetching the lowest value card and doesnt take cost into account unless the card cannot be afforded.
-        //will need to be worked on
+        playable.sort(null); //orders the cards using their comparable interface, ordering based on value rather than worth (value accounts for cost, worth does not)
         if(playable.get(playable.size()-1).cardPurpose == CardPurpose.Trap){
-            Sticker s = new Sticker(SpriteHandler.trapPlaceholder,1700,200,speed*3);
+            Sticker s = new Sticker(SpriteHandler.trapPlaceholder,1700,200,speed*3);        //let user know we are playing a trap card
         }else{
-            Sticker s = new Sticker(playable.get(playable.size()-1),1700,200,speed*3);
+            Sticker s = new Sticker(playable.get(playable.size()-1),1700,200,speed*3);      //let user know what non-trap card we are playing
         }
         Main.wait(speed*3);
         System.out.println("attempting to play: " + playable.get(playable.size()-1));
