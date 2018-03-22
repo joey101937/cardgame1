@@ -19,7 +19,7 @@ import java.util.logging.Logger;
 public class DeckLoader extends javax.swing.JFrame {
 
     /*        FIELDS         */
-    private ArrayList<File> savedDecks;
+    private static ArrayList<File> savedDecks;
     public CustomDeck chosenDeck;
     /**
      * Creates new form DeckLoader
@@ -27,13 +27,13 @@ public class DeckLoader extends javax.swing.JFrame {
     public DeckLoader() {
         initComponents();
         this.setVisible(true);
-        directoryLabel.setText("Checking: " + System.getProperty("user.dir") + File.separator + "DataSets" + File.separator);
+        directoryLabel.setText("Checking: " + System.getProperty("user.dir") + File.separator + "Decks" + File.separator);
         populateCombo();
     }
     
     private void populateCombo(){
         boolean filesFound = false;
-        File dir = new File(System.getProperty("user.dir") + File.separator + "DataSets" + File.separator); //where we store the dataset files
+        File dir = new File(System.getProperty("user.dir") + File.separator + "Decks" + File.separator); //where we store the dataset files
         if(dir.exists()) System.out.println("found dir");
         else dir.mkdir();
         ArrayList<File> deckFiles = new ArrayList<>();
@@ -48,7 +48,19 @@ public class DeckLoader extends javax.swing.JFrame {
             savedDecks.add(f);
         }
     }
-
+    /**
+     * loads a custom deck based on selected file
+     */
+    private void loadSelected(){
+        try {
+            chosenDeck = new CustomDeck(savedDecks.get(comboBox.getSelectedIndex()));
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } catch (CorruptFileException ex) {
+            ex.printStackTrace();
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -62,10 +74,11 @@ public class DeckLoader extends javax.swing.JFrame {
         directoryLabel = new javax.swing.JLabel();
         comboBox = new javax.swing.JComboBox<>();
         loadButton = new javax.swing.JButton();
+        decknameLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        HeaderLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        HeaderLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         HeaderLabel.setText("Select Deck To Load");
 
         directoryLabel.setText("<FilePath>");
@@ -79,6 +92,8 @@ public class DeckLoader extends javax.swing.JFrame {
             }
         });
 
+        decknameLabel.setText("<deckname>");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -89,12 +104,13 @@ public class DeckLoader extends javax.swing.JFrame {
                     .addComponent(directoryLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(decknameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(HeaderLabel)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(loadButton)))
-                        .addGap(0, 79, Short.MAX_VALUE)))
+                        .addGap(0, 131, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -108,60 +124,30 @@ public class DeckLoader extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(loadButton))
-                .addContainerGap(358, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(decknameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(333, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void loadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadButtonActionPerformed
-        try {
-            chosenDeck = new CustomDeck(savedDecks.get(comboBox.getSelectedIndex()));
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        } catch (CorruptFileException ex) {
-            ex.printStackTrace();
-        }
+        loadSelected();
     }//GEN-LAST:event_loadButtonActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DeckLoader.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DeckLoader.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DeckLoader.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DeckLoader.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new DeckLoader().setVisible(true);
-            }
-        });
+       if(savedDecks.isEmpty()) return;
+       DeckLoader dl = new DeckLoader();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel HeaderLabel;
     private javax.swing.JComboBox<String> comboBox;
+    private javax.swing.JLabel decknameLabel;
     private javax.swing.JLabel directoryLabel;
     private javax.swing.JButton loadButton;
     // End of variables declaration//GEN-END:variables
