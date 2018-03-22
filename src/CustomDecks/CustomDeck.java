@@ -32,7 +32,7 @@ public class CustomDeck {
     public String deckName = "Unnamed";
     public ArrayList<Card> deck; //list of cards
     public HeroClass deckClass; //what class we are
-    ///////////
+    ////////////
     public static final int MAX_NUM_COPIES = 3;  //how many copies of a single card we allow in a deck
     public static final int MIN_NUM_CARDS = 20;
     public CustomDeck(String name, ArrayList<Card> cards, HeroClass hc){
