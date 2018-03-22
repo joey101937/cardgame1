@@ -8,6 +8,7 @@ package Cards.Fish;
 import Cards.Card;
 import Cards.CardPurpose;
 import Cards.CardType;
+import CustomDecks.HeroClass;
 import Minions.Fish.SeaWitchMinion;
 import Minions.Minion;
 import Minions.Tribe;
@@ -27,6 +28,7 @@ public class SeaWitchCard extends Card{
         cost = 4;
         summon = new SeaWitchMinion(this);
         this.spellDamage = 1; //spell damage represents number of cards drawn for a battlecryminiondraw
+        heroClass = HeroClass.Ocean;
     }
         
 }

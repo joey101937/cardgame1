@@ -8,9 +8,9 @@ package Cards.Fish;
 import Cards.Card;
 import Cards.CardPurpose;
 import Cards.CardType;
+import CustomDecks.HeroClass;
 import Minions.Fish.BaitfishMinion;
 import Minions.Minion;
-import cardgame1.Hero;
 import cardgame1.PlayArea;
 import cardgame1.SpriteHandler;
 
@@ -29,6 +29,7 @@ public class BaitfishCard extends Card{
         sprite = SpriteHandler.baitfishCard;
         cost = 1;
         summon = new BaitfishMinion(this);
+        heroClass = HeroClass.Ocean;
     }
     
     @Override

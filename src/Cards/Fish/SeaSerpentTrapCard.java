@@ -7,6 +7,7 @@ package Cards.Fish;
 
 import Cards.Card;
 import Cards.CardType;
+import CustomDecks.HeroClass;
 import Minions.Minion;
 import Minions.Tribe;
 import Traps.Fish.SeaSerpentTrap;
@@ -27,6 +28,7 @@ public class SeaSerpentTrapCard extends TrapCard{
         sprite = SpriteHandler.seaSerphantTrap;
         cost = 1;
         myTrap = new SeaSerpentTrap(this);
+        heroClass = HeroClass.Ocean;
     }
      
 

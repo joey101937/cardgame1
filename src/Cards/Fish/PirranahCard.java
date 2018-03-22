@@ -8,6 +8,7 @@ package Cards.Fish;
 import Cards.Card;
 import Cards.CardPurpose;
 import Cards.CardType;
+import CustomDecks.HeroClass;
 import Minions.Base.PirranahMinion;
 import cardgame1.SpriteHandler;
 
@@ -25,5 +26,6 @@ public class PirranahCard extends Card {
         sprite = SpriteHandler.pirranahCard;
         cost = 2;
         summon = new PirranahMinion(this);
+        heroClass = HeroClass.Ocean;
     }
 }

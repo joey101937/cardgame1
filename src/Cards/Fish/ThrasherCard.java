@@ -8,6 +8,7 @@ package Cards.Fish;
 import Cards.Card;
 import Cards.CardPurpose;
 import Cards.CardType;
+import CustomDecks.HeroClass;
 import Minions.Fish.ThrasherMinion;
 import cardgame1.SpriteHandler;
 
@@ -25,5 +26,6 @@ public class ThrasherCard extends Card {
         sprite = SpriteHandler.thrasherCard;
         cost = 6;
         summon = new ThrasherMinion(this);
+        heroClass = HeroClass.Ocean;
     }
 }

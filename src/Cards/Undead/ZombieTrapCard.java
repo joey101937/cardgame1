@@ -5,6 +5,7 @@
  */
 package Cards.Undead;
 
+import CustomDecks.HeroClass;
 import Traps.TrapCard;
 import Traps.Undead.ZombieTrap;
 import cardgame1.SpriteHandler;
@@ -21,6 +22,7 @@ public class ZombieTrapCard extends TrapCard{
         sprite = SpriteHandler.zombieTrap;
         cost = 3;
         myTrap = new ZombieTrap(this);
+        heroClass = HeroClass.Undead;
     }
     
     @Override

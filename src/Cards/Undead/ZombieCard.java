@@ -8,6 +8,7 @@ package Cards.Undead;
 import Cards.Card;
 import Cards.CardPurpose;
 import Cards.CardType;
+import CustomDecks.HeroClass;
 import Minions.Undead.ZombieMinion;
 import cardgame1.SpriteHandler;
 
@@ -26,6 +27,7 @@ public class ZombieCard extends Card {
         sprite = SpriteHandler.zombieCard;
         cost = 2;
         summon = new ZombieMinion(this);
+        heroClass = HeroClass.Undead;
     }
 
 }

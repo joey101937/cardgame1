@@ -8,6 +8,7 @@ package Cards.Fish;
 import Cards.Card;
 import Cards.CardPurpose;
 import Cards.CardType;
+import CustomDecks.HeroClass;
 import Minions.Minion;
 import Minions.Tribe;
 import Traps.TrapListener;
@@ -29,6 +30,7 @@ public class PredationCard extends Card {
         cardText = "Deal Damage equal \n to the attack of \n your strongest fish \n (" + spellDamage +")";
         sprite = SpriteHandler.predationCard;
         cost = 2;
+        heroClass = HeroClass.Ocean;
     }
     
     

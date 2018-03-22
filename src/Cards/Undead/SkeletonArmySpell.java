@@ -9,6 +9,7 @@ import AI.SimulatedMinion;
 import Cards.Card;
 import Cards.CardPurpose;
 import Cards.CardType;
+import CustomDecks.HeroClass;
 import Minions.Minion;
 import Minions.Undead.SkeletonMinion;
 import Traps.TrapListener;
@@ -31,6 +32,7 @@ public class SkeletonArmySpell extends Card {
         cardText = "Summon up to \n four 2/1 skeletons \n with charge";
         sprite = SpriteHandler.skeletonSpell;
         cost = 7;
+        heroClass = HeroClass.Undead;
     }
     
     @Override

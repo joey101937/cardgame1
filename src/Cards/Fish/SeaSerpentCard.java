@@ -8,6 +8,7 @@ package Cards.Fish;
 import Cards.Card;
 import Cards.CardPurpose;
 import Cards.CardType;
+import CustomDecks.HeroClass;
 import Minions.Fish.SeaSerpentMinion;
 import cardgame1.SpriteHandler;
 
@@ -26,5 +27,6 @@ public class SeaSerpentCard extends Card {
         sprite = SpriteHandler.seaSerphantCard;
         cost = 1;
         summon = new SeaSerpentMinion(this);
+        heroClass = HeroClass.Restricted;
     }
 }

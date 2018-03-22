@@ -8,6 +8,7 @@ package Cards.Undead;
 import Cards.Card;
 import Cards.CardPurpose;
 import Cards.CardType;
+import CustomDecks.HeroClass;
 import Minions.Undead.SkullKingMinion;
 import cardgame1.SpriteHandler;
 
@@ -26,6 +27,7 @@ public class SkullKingCard extends Card {
         sprite = SpriteHandler.skullKingCard;
         cost = 7;
         summon = new SkullKingMinion(this);
+        heroClass = HeroClass.Undead;
     }
  
 }

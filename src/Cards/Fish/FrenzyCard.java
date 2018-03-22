@@ -8,6 +8,7 @@ package Cards.Fish;
 import Cards.Card;
 import Cards.CardPurpose;
 import Cards.CardType;
+import CustomDecks.HeroClass;
 import Minions.Minion;
 import Traps.TrapListener;
 import cardgame1.Hero;
@@ -28,6 +29,7 @@ public class FrenzyCard extends Card {
         cardText = "Give all friendly \n Baitfish +3 attck";
         sprite = SpriteHandler.frenzyCard;
         cost = 4;
+        heroClass = HeroClass.Ocean;
     }
 
     

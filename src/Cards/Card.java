@@ -6,6 +6,7 @@
 package Cards;
 
 import AI.AI;
+import CustomDecks.HeroClass;
 import Minions.Minion;
 import Minions.Tribe;
 import Traps.TrapListener;
@@ -40,6 +41,7 @@ public abstract class Card implements Comparable{
     public String cardText;     //what the card says on it
     public int cost;            //casting cost
     public BufferedImage sprite; //visual representation of the card
+    public HeroClass heroClass = HeroClass.Neutral; //neutral by default
     protected Hero owner;
     public static boolean showValue = false;
     

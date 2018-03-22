@@ -8,6 +8,7 @@ package Cards.Undead;
 import Cards.Card;
 import Cards.CardPurpose;
 import Cards.CardType;
+import CustomDecks.HeroClass;
 import Minions.Undead.SkelemancerMinion;
 import cardgame1.SpriteHandler;
 
@@ -26,5 +27,6 @@ public class SkelemancerCard extends Card {
         sprite = SpriteHandler.skelemancerCard;
         cost = 5;
         summon = new SkelemancerMinion(this);
+        heroClass = HeroClass.Undead;
     }
 }

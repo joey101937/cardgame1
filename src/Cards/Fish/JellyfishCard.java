@@ -8,6 +8,7 @@ package Cards.Fish;
 import Cards.Card;
 import Cards.CardPurpose;
 import Cards.CardType;
+import CustomDecks.HeroClass;
 import Minions.Fish.JellyfishMinion;
 import cardgame1.SpriteHandler;
 
@@ -27,5 +28,6 @@ public class JellyfishCard extends Card{
         sprite = SpriteHandler.jellyfishCard;
         cost = 3;
         summon = new JellyfishMinion(this);
+        heroClass = HeroClass.Ocean;
     }
 }

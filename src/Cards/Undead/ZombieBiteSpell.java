@@ -15,6 +15,7 @@ import cardgame1.Main;
 import cardgame1.SpriteHandler;
 import cardgame1.Sticker;
 import AI.*;
+import CustomDecks.HeroClass;
 import Minions.Tribe;
 /**
  *
@@ -32,6 +33,7 @@ public class ZombieBiteSpell extends Card{
         cardText = "Transform a minion \n into a 4/2 zombie \n with charge";
         sprite = SpriteHandler.zombieBiteSpell;
         cost = 3;
+        heroClass = HeroClass.Undead;
     }
       
       

@@ -8,6 +8,7 @@ package Cards.Fish;
 import Cards.Card;
 import Cards.CardPurpose;
 import Cards.CardType;
+import CustomDecks.HeroClass;
 import Minions.Fish.CarnifishMinion;
 import Minions.Minion;
 import cardgame1.Board;
@@ -27,6 +28,7 @@ public class CarnifishCard extends Card{
         sprite = SpriteHandler.carnifishCard;
         cost = 2;
         summon = new CarnifishMinion(this);
+        heroClass = HeroClass.Ocean;
     }
         
     @Override
