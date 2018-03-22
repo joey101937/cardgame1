@@ -7,7 +7,10 @@ package CustomDecks;
 
 import Cards.Card;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -16,7 +19,8 @@ import java.util.ArrayList;
 public class DeckLoader extends javax.swing.JFrame {
 
     /*        FIELDS         */
-    private ArrayList<ArrayList<Card>> savedDecks;
+    private ArrayList<File> savedDecks;
+    public CustomDeck chosenDeck;
     /**
      * Creates new form DeckLoader
      */
@@ -24,6 +28,7 @@ public class DeckLoader extends javax.swing.JFrame {
         initComponents();
         this.setVisible(true);
         directoryLabel.setText("Checking: " + System.getProperty("user.dir") + File.separator + "DataSets" + File.separator);
+        populateCombo();
     }
     
     private void populateCombo(){
@@ -40,14 +45,10 @@ public class DeckLoader extends javax.swing.JFrame {
         if(filesFound)comboBox.removeAllItems(); //if we have files to display, get rid of that NONE message
         for(File f : deckFiles){
             comboBox.addItem(f.getName());
-            savedDecks.add(loadDeck(f));
+            savedDecks.add(f);
         }
     }
 
-    private ArrayList<Card> loadDeck(File f){
-        //todo
-        return null;
-    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -114,7 +115,13 @@ public class DeckLoader extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void loadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadButtonActionPerformed
-        // TODO add your handling code here:
+        try {
+            chosenDeck = new CustomDeck(savedDecks.get(comboBox.getSelectedIndex()));
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } catch (CorruptFileException ex) {
+            ex.printStackTrace();
+        }
     }//GEN-LAST:event_loadButtonActionPerformed
 
     /**
