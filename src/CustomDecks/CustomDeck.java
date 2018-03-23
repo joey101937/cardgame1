@@ -30,15 +30,32 @@ import java.util.logging.Logger;
  */
 public class CustomDeck {
     public String deckName = "Unnamed";
-    public ArrayList<Card> deck; //list of cards
+    public ArrayList<Card> deck = new ArrayList<>(); //list of cards
     public HeroClass deckClass; //what class we are
-    ////////////
     public static final int MAX_NUM_COPIES = 3;  //how many copies of a single card we allow in a deck
     public static final int MIN_NUM_CARDS = 20;
+    
+    /**
+     * manually create new custom deck
+     * @param name name of deck
+     * @param cards list of cards
+     * @param hc class
+     */
     public CustomDeck(String name, ArrayList<Card> cards, HeroClass hc){
-        
+        this.deckName = name;
+        this.deck = cards;
+        this.deckClass = hc;
+        if(!this.isValid()){
+            System.out.println("Warning! Just created invalid deck: " + name);
+        }
     }
-    //used for importing
+    /**
+     * create a custom deck object by importing a deck file
+     * @param file file to import
+     * @throws FileNotFoundException
+     * @throws IOException 
+     * @throws CorruptFileException if there is something wrong with the data stored in the deck file
+     */
     public CustomDeck(File file) throws FileNotFoundException, IOException, CorruptFileException {
         ArrayList<String> lines = new ArrayList<>(); //output is where we store all the lines from the given file
         InputStream ips = new FileInputStream(file);
@@ -48,7 +65,19 @@ public class CustomDeck {
         while ((line = br.readLine()) != null) {
             lines.add(line);
         }
-        this.deckName = lines.get(0);
+        if(lines.size() < 3) throw new CorruptFileException("Too few lines to be valid file: " + file.getName());
+        switch(lines.get(0)){
+            case "Neutral":
+                this.deckClass= HeroClass.Neutral;
+                break;
+            case "Ocean":
+                this.deckClass = HeroClass.Ocean;
+                break;
+            case "Undead":
+                this.deckClass = HeroClass.Undead;
+            default: 
+                throw new CorruptFileException("Unknown Class: " + lines.get(0));
+        }
         for(int i = 1; i < lines.size();i++){
             try {
                 deck.add(getCard(lines.get(i)));
@@ -56,9 +85,9 @@ public class CustomDeck {
                 throw new CorruptFileException(ex.getMessage());
             }
         }
-        deckName = file.getName().split(".")[0]; //sets name of new deck to name of the file without the file extension
+        deckName = file.getName();
     }
-    /*
+    /**
     creates a file representation of this deck
     format of the file is 
     HeroClass

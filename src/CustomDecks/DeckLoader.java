@@ -5,12 +5,15 @@
  */
 package CustomDecks;
 
-import Cards.Card;
+import java.awt.Canvas;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.image.BufferStrategy;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,7 +22,7 @@ import java.util.logging.Logger;
 public class DeckLoader extends javax.swing.JFrame {
 
     /*        FIELDS         */
-    private static ArrayList<File> savedDecks;
+    private static ArrayList<File> savedDecks = new ArrayList<>();
     public CustomDeck chosenDeck;
     /**
      * Creates new form DeckLoader
@@ -54,9 +57,27 @@ public class DeckLoader extends javax.swing.JFrame {
     private void loadSelected(){
         try {
             chosenDeck = new CustomDeck(savedDecks.get(comboBox.getSelectedIndex()));
+            decknameLabel.setText(chosenDeck.deckName + " - " + chosenDeck.deckClass);
+            Canvas canvas = new Canvas();
+            canvas.setVisible(true);
+            scrollPane.removeAll();
+            scrollPane.add(canvas);
+            canvas.setBackground(Color.red);
+            canvas.setSize(500, 500);
+            canvas.createBufferStrategy(3);
+            BufferStrategy bs = canvas.getBufferStrategy();
+            Graphics gr = bs.getDrawGraphics();
+            Graphics2D g = (Graphics2D)gr;
+            g.setColor(Color.white);
+            g.fillRect(50, 50, 50, 50);
+            g.dispose();         
+            bs.show();
+            canvas.setBackground(Color.yellow);
         } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "IO Error");
             ex.printStackTrace();
         } catch (CorruptFileException ex) {
+            JOptionPane.showMessageDialog(null, "Deck could not be loaded without error: " + ex.getMessage());
             ex.printStackTrace();
         }
     }
@@ -75,8 +96,11 @@ public class DeckLoader extends javax.swing.JFrame {
         comboBox = new javax.swing.JComboBox<>();
         loadButton = new javax.swing.JButton();
         decknameLabel = new javax.swing.JLabel();
+        scrollPane = new java.awt.ScrollPane();
+        canvas1 = new java.awt.Canvas();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         HeaderLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         HeaderLabel.setText("Select Deck To Load");
@@ -94,23 +118,29 @@ public class DeckLoader extends javax.swing.JFrame {
 
         decknameLabel.setText("<deckname>");
 
+        scrollPane.add(canvas1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(directoryLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(decknameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(HeaderLabel)
+                            .addComponent(scrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 471, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(loadButton)))
-                        .addGap(0, 131, Short.MAX_VALUE)))
+                                .addGap(13, 13, 13)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(HeaderLabel)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(loadButton))
+                                    .addComponent(decknameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 13, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -126,13 +156,18 @@ public class DeckLoader extends javax.swing.JFrame {
                     .addComponent(loadButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(decknameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(333, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(scrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(37, Short.MAX_VALUE))
         );
+
+        getAccessibleContext().setAccessibleDescription("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void loadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadButtonActionPerformed
+        if(savedDecks.isEmpty())return;
         loadSelected();
     }//GEN-LAST:event_loadButtonActionPerformed
 
@@ -140,15 +175,16 @@ public class DeckLoader extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-       if(savedDecks.isEmpty()) return;
        DeckLoader dl = new DeckLoader();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel HeaderLabel;
+    private java.awt.Canvas canvas1;
     private javax.swing.JComboBox<String> comboBox;
     private javax.swing.JLabel decknameLabel;
     private javax.swing.JLabel directoryLabel;
     private javax.swing.JButton loadButton;
+    private java.awt.ScrollPane scrollPane;
     // End of variables declaration//GEN-END:variables
 }
