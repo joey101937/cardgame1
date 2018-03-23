@@ -20,6 +20,7 @@ public class SpriteHandler {
     public static BufferedImage cardbackL; //large cardback
     public static BufferedImage cardback2; //example sprite for use as the image of a card
     public static BufferedImage redX;
+    public static BufferedImage checkmark;
     public static BufferedImage fullCrystal;
     public static BufferedImage emptyCrystal;
     public static BufferedImage leftArrow;
@@ -106,6 +107,7 @@ public class SpriteHandler {
             cardbackL = ImageIO.read(new File(Main.assets + "cardBackL.png"));
             cardback2 = ImageIO.read(new File(Main.assets + "cardBack2.png"));
             redX = load("redXsmall.png");
+            checkmark = load("checkmarkSmall.png");
             fullCrystal = load("gemCSmall.png");
             emptyCrystal = load("gemSmall.png");
             leftArrow = load("arrow-left.png");

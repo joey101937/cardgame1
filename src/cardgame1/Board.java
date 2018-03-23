@@ -145,7 +145,7 @@ public class Board extends Canvas implements Runnable {
         g.drawImage(SpriteHandler.gearSmall,0,0,null);
         this.visHandler.render(g);
         g.dispose();
-        bs.show();
+            bs.show();
     }
     /**
      * renders the cardbacks of the enemy's cards

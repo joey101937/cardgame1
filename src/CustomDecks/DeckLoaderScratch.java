@@ -5,9 +5,12 @@
  */
 package CustomDecks;
 
+import Cards.Base.FireBoltCard;
 import Cards.Card;
 import cardgame1.Main;
+import cardgame1.SpriteHandler;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -30,6 +33,7 @@ public class DeckLoaderScratch {
     /*   FIELDS    */
     private ArrayList<File> savedDecks = new ArrayList<>();
     public CustomDeck chosenDeck;
+    public static Card mousedOver = null;
     private JFrame core;
     private JPanel panel;
     private JLabel titleLabel;
@@ -38,6 +42,7 @@ public class DeckLoaderScratch {
     private JLabel isValidLabel;
     private JComboBox combo;
     private JButton loadButton;
+    private ColorPanel cardDisplay;
     private static Font titleFont = new Font("Times", Font.ITALIC, 35);
     private static Font detailFont = new Font("Courier", Font.ITALIC,12);
     private static Font deckTitleFont = new Font("Arial",Font.PLAIN,20);
@@ -51,12 +56,16 @@ public class DeckLoaderScratch {
     }
     
     private void setupInitialComponents(){
-        this.core = new JFrame();
-        core.setSize(600, 600);
+        core = new JFrame();
+        core.setSize(625, 720);
+        core.setIconImage(SpriteHandler.swords);
+        core.setPreferredSize(new Dimension(600,720));
+       
+        
         core.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         
         panel = new JPanel();
-        panel.setSize(600, 600);
+        panel.setSize(core.getWidth(), core.getHeight());
         panel.setBackground(Color.white);   
         panel.setLayout(null); //allows us to place components at indevidual xy coordinates
         
@@ -73,9 +82,15 @@ public class DeckLoaderScratch {
         directoryLabel.setSize(600,20);
         panel.add(directoryLabel);
         
+        cardDisplay = new ColorPanel(mousedOver);
+        cardDisplay.setSize(200,300);
+        cardDisplay.setLocation(400, 300);
+        panel.add(cardDisplay);
+        
+        
         isValidLabel = new JLabel();
         isValidLabel.setSize(200, 100);
-        isValidLabel.setLocation(400,400);
+        isValidLabel.setLocation(400,600);
         isValidLabel.setFont(cardTitleFont);
        // isValidLabel.setText("Illegal Deck");
        //isValidLabel.setIcon(new ImageIcon(Main.assets+"redXsmall.png"));
@@ -91,7 +106,15 @@ public class DeckLoaderScratch {
                 JOptionPane.showMessageDialog(null,toDisplay);
             }
             @Override
-            public void mousePressed(MouseEvent e) {
+             public void mousePressed(MouseEvent e) {
+                 if (chosenDeck == null || chosenDeck.isValid()) {
+                     return;
+                 }
+                 String toDisplay = "";
+                 for (String s : chosenDeck.diagnose()) {
+                     toDisplay += (s + "\n");
+                 }
+                 JOptionPane.showMessageDialog(null, toDisplay);
             }
             @Override
             public void mouseReleased(MouseEvent e) {
@@ -131,6 +154,7 @@ public class DeckLoaderScratch {
 
         core.add(panel);
         core.setVisible(true);
+        core.requestFocus();
         populateCombo();
     }
     /**
@@ -166,6 +190,15 @@ public class DeckLoaderScratch {
         }
     }
 
+    public void updatePreview() {
+        panel.remove(cardDisplay);
+        cardDisplay = new ColorPanel(mousedOver);
+        cardDisplay.setSize(200, 300);
+        cardDisplay.setLocation(400, 300);
+        panel.add(cardDisplay);
+        panel.repaint();
+    }
+
     private void loadSelected() {
         try {
             for (JLabel jl : cardLabels) {
@@ -174,14 +207,12 @@ public class DeckLoaderScratch {
             cardLabels.clear();
             chosenDeck = new CustomDeck(savedDecks.get(combo.getSelectedIndex()));
             deckTitleLabel.setText(chosenDeck.deckName);
-            deckTitleLabel.setIcon(new ImageIcon(chosenDeck.deckClass.getClassIconPath()));
+            deckTitleLabel.setIcon(new ImageIcon(chosenDeck.deckClass.getHeroPortraitPath()));
             int i = 0;  
             for (Card c : chosenDeck.deck) {
-                JLabel cardLabel = new JLabel();
-                cardLabel.setText(c.name);
-                cardLabel.setFont(cardTitleFont);
-                cardLabel.setSize(300, 25);
-                cardLabel.setLocation(20, 200 + 25 * i);
+                JLabel cardLabel = new CardLabel(c,this);
+                cardLabel.setSize(300, 22);
+                cardLabel.setLocation(20, 200 + 22 * i);
                 panel.add(cardLabel);
                 cardLabels.add(cardLabel);
                 i++;
@@ -191,8 +222,8 @@ public class DeckLoaderScratch {
                 isValidLabel.setText("Illegal Deck");
                 isValidLabel.setIcon(new ImageIcon(Main.assets+"redXsmall.png"));
             }else{
-                isValidLabel.setText("");
-                isValidLabel.setIcon(null);
+                isValidLabel.setIcon(new ImageIcon(Main.assets+"checkmarkSmall.png"));
+                isValidLabel.setText("Legal Deck");
             }
             panel.repaint();
             core.setVisible(true);
@@ -208,6 +239,8 @@ public class DeckLoaderScratch {
 
     
     public static void main(String[] args) {
+        SpriteHandler.Initialize();
         new DeckLoaderScratch();
+        
     }
 }

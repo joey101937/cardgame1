@@ -20,9 +20,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -147,8 +146,8 @@ public class CustomDeck {
      * used to figure out why a deck is illegal
      * @return list of string explanations of what went wrong. empty if legal deck
      */
-    public ArrayList<String> diagnose(){
-        ArrayList<String> output = new ArrayList<>();
+    public HashSet<String> diagnose(){
+        HashSet<String> output = new HashSet<>();
         Map<String, Integer> numCards = new HashMap<>(); //stores the naame of card with hte num of them in the deck
         for (Card c : deck) {
             if(c==null){
@@ -156,18 +155,18 @@ public class CustomDeck {
                 continue;
             }
             if (c.heroClass != HeroClass.Neutral && c.heroClass != deckClass) {
-                output.add(c.name + " is of class " + c.heroClass + " but deck is of class " + deckClass);
+                output.add("A " + deckClass +" deck may not contain " + c.heroClass + " class cards: " + c.name);
             }
             if (numCards.get(c.name) == null) {
                 numCards.put(c.name, 1);
             } else {
                 numCards.put(c.name, numCards.get(c.name) + 1);
                 if (numCards.get(c.name) > MAX_NUM_COPIES) {
-                    output.add("too many copies of " + c.name + ". Max Copies: " + MAX_NUM_COPIES); 
+                    output.add("Too many copies of " + c.name + ". Max of " + MAX_NUM_COPIES + " copies."); 
                 }
             }
         }
-        if(deck.size()<MIN_NUM_CARDS) output.add("deck must have at least " + MIN_NUM_CARDS + " cards; currently has " + deck.size());
+        if(deck.size()<MIN_NUM_CARDS) output.add("Deck must have at least " + MIN_NUM_CARDS + " cards; currently has " + deck.size());
         return output;
     }
     /**
@@ -201,7 +200,7 @@ public class CustomDeck {
             case "Swollow Trap": return new SwollowCard();
             case "Thrasher": return new ThrasherCard();
             //undead
-            case "Skelemancer ": return new SkelemancerCard();
+            case "Skelemancer": return new SkelemancerCard();
             case "Skeleton Army": return new SkeletonArmySpell();
             case "Skeleton King": return new SkullKingCard();
             case "Zombie Bite": return new ZombieBiteSpell();
