@@ -5,34 +5,34 @@
  */
 package CustomDecks;
 
-import Cards.Card;
 import cardgame1.SpriteHandler;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 import javax.swing.JPanel;
 
 /**
  *
  * @author Joseph
  */
-public class ColorPanel extends JPanel{
-            Card card; 
-        public ColorPanel(Card c){
-            card = c;
+public class BackgroundPane extends JPanel{
+        BufferedImage img;
+        public BackgroundPane(BufferedImage i){
+            img = i;
         }
         
+        @Override
         public void paintComponent(Graphics g){
             super.paintComponent(g);
             Graphics2D g2d = (Graphics2D)g;
-             if(card==null){
+             if(img==null){
                  g2d.setBackground(new Color(255,255,255,0));
-                 g2d.drawImage(SpriteHandler.cardbackL,0,0,null);
                  return;
              }
             this.setBackground(Color.black);  
-            g.setFont(new Font("Arial", Font.BOLD, 35));
-            card.render(g2d, 0, 0, true); //this method is known to work in other classes
-        }
+            //g.drawImage(img, 0, 0, null);
+            g.drawImage(img,0,0,700,1000,200,200,900,1000,null);
+        } 
 }

@@ -33,6 +33,7 @@ public class CustomDeck {
     public HeroClass deckClass; //what class we are
     public static final int MAX_NUM_COPIES = 3;  //how many copies of a single card we allow in a deck
     public static final int MIN_NUM_CARDS = 20;
+    public static final int MAX_NUM_CARDS = 20;
     
     /**
      * manually create new custom deck
@@ -138,6 +139,7 @@ public class CustomDeck {
             }
         }
         if(deck.size()<MIN_NUM_CARDS) return false;
+        if(deck.size()>MAX_NUM_CARDS) return false;
         return true;
     }
     
@@ -166,7 +168,9 @@ public class CustomDeck {
                 }
             }
         }
-        if(deck.size()<MIN_NUM_CARDS) output.add("Deck must have at least " + MIN_NUM_CARDS + " cards; currently has " + deck.size());
+        //if(deck.size()<MIN_NUM_CARDS) output.add("Deck must have at least " + MIN_NUM_CARDS + " cards; currently has " + deck.size());
+       //if(deck.size()>MAX_NUM_CARDS) output.add("Deck must have no more than " + MAX_NUM_CARDS + " cards; currently has " + deck.size());
+         if(deck.size()!= 20) output.add("Deck must have exactly 20 cards. Currently " + deck.size() + ".");
         return output;
     }
     /**

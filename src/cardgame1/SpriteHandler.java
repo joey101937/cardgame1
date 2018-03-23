@@ -16,6 +16,7 @@ import javax.imageio.ImageIO;
  */
 public class SpriteHandler {
     //misc
+    public static boolean hasInitialized = false;
     public static BufferedImage cardback; //the back of a card. see this instead of enemy card.
     public static BufferedImage cardbackL; //large cardback
     public static BufferedImage cardback2; //example sprite for use as the image of a card
@@ -103,6 +104,8 @@ public class SpriteHandler {
     
     public static void Initialize() {
         try {
+            if(SpriteHandler.hasInitialized) return;
+            else hasInitialized=true;
             cardback = ImageIO.read(new File(Main.assets + "cardBack.png"));
             cardbackL = ImageIO.read(new File(Main.assets + "cardBackL.png"));
             cardback2 = ImageIO.read(new File(Main.assets + "cardBack2.png"));

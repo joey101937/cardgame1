@@ -103,9 +103,9 @@ public class Main {
         }
     }
 
-    private static void setBackgroundImage() {
+    public static void setBackgroundImage() {
         try {
-           // BackgroundImage = ImageIO.read(new File(Main.getDir() + Main.assets + "BGtest.png"));
+           //BackgroundImage = ImageIO.read(new File(Main.getDir() + Main.assets + "BGtest.png"));
             BackgroundImage = ImageIO.read(new File(Main.getDir() + Main.assets + "paper.png"));
         } catch (Exception e) {
             e.printStackTrace();

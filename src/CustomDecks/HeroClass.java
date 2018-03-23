@@ -28,7 +28,7 @@ public enum HeroClass {
 
         @Override
         public String getHeroPortraitPath() {
-            return Main.assets+"knightHero.png";
+            return Main.assets+"knightHero2.png";
         }
 
         @Override

@@ -5,7 +5,6 @@
  */
 package CustomDecks;
 
-import Cards.Base.FireBoltCard;
 import Cards.Card;
 import cardgame1.Main;
 import cardgame1.SpriteHandler;
@@ -23,7 +22,6 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
 /**
  * Interface user uses to load saved decks
@@ -35,7 +33,7 @@ public class DeckLoaderScratch {
     public CustomDeck chosenDeck;
     public static Card mousedOver = null;
     private JFrame core;
-    private JPanel panel;
+    private BackgroundPane panel;
     private JLabel titleLabel;
     private JLabel directoryLabel;
     private JLabel deckTitleLabel;
@@ -52,6 +50,7 @@ public class DeckLoaderScratch {
      * constructor
      */
     public DeckLoaderScratch(){
+       SpriteHandler.Initialize();
        setupInitialComponents();
     }
     
@@ -64,9 +63,8 @@ public class DeckLoaderScratch {
         
         core.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         
-        panel = new JPanel();
-        panel.setSize(core.getWidth(), core.getHeight());
-        panel.setBackground(Color.white);   
+        panel = new BackgroundPane(Main.BackgroundImage);
+        panel.setSize(core.getWidth(), core.getHeight());   
         panel.setLayout(null); //allows us to place components at indevidual xy coordinates
         
         titleLabel = new JLabel();
@@ -84,7 +82,7 @@ public class DeckLoaderScratch {
         
         cardDisplay = new ColorPanel(mousedOver);
         cardDisplay.setSize(200,300);
-        cardDisplay.setLocation(400, 300);
+        cardDisplay.setLocation(400, 250);
         panel.add(cardDisplay);
         
         
@@ -95,6 +93,7 @@ public class DeckLoaderScratch {
        // isValidLabel.setText("Illegal Deck");
        //isValidLabel.setIcon(new ImageIcon(Main.assets+"redXsmall.png"));
         panel.add(isValidLabel);
+        
          isValidLabel.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -128,7 +127,7 @@ public class DeckLoaderScratch {
         
         
         deckTitleLabel = new JLabel();
-        deckTitleLabel.setText("<title>");
+        deckTitleLabel.setText("");
         deckTitleLabel.setSize(600, 45);
         deckTitleLabel.setLocation(20, 150);
         deckTitleLabel.setFont(titleFont);
@@ -151,7 +150,7 @@ public class DeckLoaderScratch {
                 loadButtonActionPerformed(evt);
             }
         });
-
+        panel.repaint();
         core.add(panel);
         core.setVisible(true);
         core.requestFocus();
@@ -194,7 +193,7 @@ public class DeckLoaderScratch {
         panel.remove(cardDisplay);
         cardDisplay = new ColorPanel(mousedOver);
         cardDisplay.setSize(200, 300);
-        cardDisplay.setLocation(400, 300);
+        cardDisplay.setLocation(400, 250);
         panel.add(cardDisplay);
         panel.repaint();
     }
@@ -239,6 +238,7 @@ public class DeckLoaderScratch {
 
     
     public static void main(String[] args) {
+        Main.setBackgroundImage();
         SpriteHandler.Initialize();
         new DeckLoaderScratch();
         
