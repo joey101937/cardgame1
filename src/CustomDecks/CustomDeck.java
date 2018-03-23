@@ -75,6 +75,7 @@ public class CustomDeck {
                 break;
             case "Undead":
                 this.deckClass = HeroClass.Undead;
+                break;
             default: 
                 throw new CorruptFileException("Unknown Class: " + lines.get(0));
         }
@@ -85,7 +86,8 @@ public class CustomDeck {
                 throw new CorruptFileException(ex.getMessage());
             }
         }
-        deckName = file.getName();
+        System.out.println(file.getName());
+        deckName = file.getName().substring(0, file.getName().length()-5);
     }
     /**
     creates a file representation of this deck
@@ -203,7 +205,7 @@ public class CustomDeck {
             case "Skeleton Army": return new SkeletonArmySpell();
             case "Skeleton King": return new SkullKingCard();
             case "Zombie Bite": return new ZombieBiteSpell();
-            case "Zomebie": return new ZombieCard();
+            case "Zombie": return new ZombieCard();
             case "Zombify": return new ZombieTrapCard();
             default: throw new NoSuchCardException("No card found matching name: " + s);   
         }

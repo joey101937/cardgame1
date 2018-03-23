@@ -5,6 +5,7 @@
  */
 package CustomDecks;
 
+import cardgame1.Main;
 import cardgame1.SpriteHandler;
 import java.awt.image.BufferedImage;
 
@@ -18,20 +19,40 @@ public enum HeroClass {
         public BufferedImage getHeroPortrait() {
             return SpriteHandler.knightHero;
         }
+
+        @Override
+        public String getClassIconPath() {
+            return Main.assets+"swordsSmall.png";
+        }
     }, Restricted{
         @Override
         public BufferedImage getHeroPortrait() {
             return SpriteHandler.ashePortrait;
+        }
+
+        @Override
+        public String getClassIconPath() {
+            return Main.assets+"redXsmall.png";
         }
     }, Ocean{
         @Override
         public BufferedImage getHeroPortrait() {
             return SpriteHandler.seaWitchHero;
         }
+
+        @Override
+        public String getClassIconPath() {
+            return Main.assets+"bloodMed.png";
+        }
     }, Undead{
         @Override
         public BufferedImage getHeroPortrait() {
             return SpriteHandler.undeadHero;
+        }
+
+        @Override
+        public String getClassIconPath() {
+            return Main.assets+"jollyRoger.png";
         }
     };
     /**
@@ -39,4 +60,9 @@ public enum HeroClass {
      * @return hte image
      */
     public abstract BufferedImage getHeroPortrait();
+    /**
+     * path to get the class's icon
+     * @return 
+     */
+    public abstract String getClassIconPath();
 }

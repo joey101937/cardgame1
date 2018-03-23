@@ -34,22 +34,17 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="directoryLabel" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="scrollPane" alignment="0" min="-2" pref="471" max="-2" attributes="0"/>
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="HeaderLabel" min="-2" max="-2" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="comboBox" min="-2" pref="275" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="loadButton" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="decknameLabel" alignment="0" min="-2" pref="295" max="-2" attributes="0"/>
-                              </Group>
+                          <Component id="HeaderLabel" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="comboBox" min="-2" pref="275" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="loadButton" min="-2" max="-2" attributes="0"/>
                           </Group>
+                          <Component id="decknameLabel" alignment="0" min="-2" pref="295" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="0" pref="13" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="131" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -70,9 +65,7 @@
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="decknameLabel" min="-2" pref="14" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="scrollPane" min="-2" pref="286" max="-2" attributes="0"/>
-              <EmptySpace pref="37" max="32767" attributes="0"/>
+              <EmptySpace pref="333" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -99,6 +92,9 @@
           </StringArray>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comboBoxActionPerformed"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
@@ -116,13 +112,5 @@
         <Property name="text" type="java.lang.String" value="&lt;deckname&gt;"/>
       </Properties>
     </Component>
-    <Container class="java.awt.ScrollPane" name="scrollPane">
-
-      <Layout class="org.netbeans.modules.form.compat2.layouts.support.ScrollPaneSupportLayout"/>
-      <SubComponents>
-        <Component class="java.awt.Canvas" name="canvas1">
-        </Component>
-      </SubComponents>
-    </Container>
   </SubComponents>
 </Form>

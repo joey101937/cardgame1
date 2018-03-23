@@ -5,6 +5,7 @@
  */
 package CustomDecks;
 
+import cardgame1.SpriteHandler;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -58,21 +59,17 @@ public class DeckLoader extends javax.swing.JFrame {
         try {
             chosenDeck = new CustomDeck(savedDecks.get(comboBox.getSelectedIndex()));
             decknameLabel.setText(chosenDeck.deckName + " - " + chosenDeck.deckClass);
-            Canvas canvas = new Canvas();
-            canvas.setVisible(true);
-            scrollPane.removeAll();
-            scrollPane.add(canvas);
-            canvas.setBackground(Color.red);
-            canvas.setSize(500, 500);
-            canvas.createBufferStrategy(3);
-            BufferStrategy bs = canvas.getBufferStrategy();
-            Graphics gr = bs.getDrawGraphics();
-            Graphics2D g = (Graphics2D)gr;
-            g.setColor(Color.white);
-            g.fillRect(50, 50, 50, 50);
-            g.dispose();         
-            bs.show();
-            canvas.setBackground(Color.yellow);
+            Graphics gb = canvasBean.getGraphics();
+            gb.drawImage(chosenDeck.deckClass.getHeroPortrait(), 100, 100,null);
+            Graphics2D g = (Graphics2D)gb;
+            System.out.println(g.drawImage(SpriteHandler.gearSmall, 0,0, null));
+            System.out.println(g.drawImage(SpriteHandler.gearSmall, 0,0, null));
+            System.out.println(g.drawImage(SpriteHandler.gearSmall, 0,0, null));
+            System.out.println(g.drawImage(SpriteHandler.gearSmall, 0,0, null));
+            System.out.println(g.drawImage(SpriteHandler.gearSmall, 0,0, null));
+            gb.fillRect(50, 50, 50, 50);
+            gb.dispose();
+            this.setVisible(true);
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, "IO Error");
             ex.printStackTrace();
@@ -97,7 +94,7 @@ public class DeckLoader extends javax.swing.JFrame {
         loadButton = new javax.swing.JButton();
         decknameLabel = new javax.swing.JLabel();
         scrollPane = new java.awt.ScrollPane();
-        canvas1 = new java.awt.Canvas();
+        canvasBean = new java.awt.Canvas();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -118,7 +115,7 @@ public class DeckLoader extends javax.swing.JFrame {
 
         decknameLabel.setText("<deckname>");
 
-        scrollPane.add(canvas1);
+        scrollPane.add(canvasBean);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -180,7 +177,7 @@ public class DeckLoader extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel HeaderLabel;
-    private java.awt.Canvas canvas1;
+    private java.awt.Canvas canvasBean;
     private javax.swing.JComboBox<String> comboBox;
     private javax.swing.JLabel decknameLabel;
     private javax.swing.JLabel directoryLabel;
