@@ -3,9 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package CustomDecks;
+package GUI;
 
 import Cards.Card;
+import CustomDecks.CorruptFileException;
+import CustomDecks.CustomDeck;
 import cardgame1.Main;
 import cardgame1.SpriteHandler;
 import java.awt.Color;

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package CustomDecks;
+package GUI;
 
 import cardgame1.SpriteHandler;
 import java.awt.Color;
@@ -37,6 +37,6 @@ public class BackgroundPane extends JPanel{
              }
             this.setBackground(Color.black);  
             //g.drawImage(img, 0, 0, null);
-            g.drawImage(img,0,0,700,1000,200,200,900,1000,null);
+            g.drawImage(img,0,0,1000,1000,200,200,1000,1300,null);
         } 
 }
