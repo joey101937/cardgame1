@@ -13,7 +13,7 @@ import Cards.Base.KnightCard;
 import Cards.Base.ArakkoaCard;
 import Cards.*;
 import Cards.Fish.*;
-import GUI.OpeningGUI;
+import GUI.LegacyGUI;
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -42,7 +42,7 @@ public class Main {
     public static void main(String[] args) {
         setBackgroundImage();
         SpriteHandler.Initialize();
-        OpeningGUI og = new OpeningGUI();
+        LegacyGUI og = new LegacyGUI();
     }
 
     /**

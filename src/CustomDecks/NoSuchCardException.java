@@ -6,7 +6,7 @@
 package CustomDecks;
 
 /**
- *
+ * When loading a deck file and we encounter a card name that we do not know what to do with
  * @author Joseph
  */
 public class NoSuchCardException extends Exception{

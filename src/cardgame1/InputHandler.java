@@ -7,7 +7,7 @@ package cardgame1;
 
 import AI.AI;
 import Cards.Card;
-import GUI.OpeningGUI;
+import GUI.LegacyGUI;
 import GUI.SettingsPane;
 import Minions.Minion;
 import Traps.Trap;
@@ -55,7 +55,7 @@ public class InputHandler extends KeyAdapter implements MouseListener, MouseMoti
             clickedCard.cast(null); //cast with null param becuase there is no target
         }
         if(x < 35 && y < 35){//options gear is in top left, 0,0 and is 35x35
-            OpeningGUI.settings = new SettingsPane();
+            LegacyGUI.settings = new SettingsPane();
         }
         if(x > 400 + Board.playerHero.picture.getWidth() && x < 400 + Board.playerHero.picture.getWidth() + SpriteHandler.leftArrow.getWidth()){
              if(Board.playerHero == Board.botHero){

@@ -23,12 +23,21 @@ public class CardLabel extends JLabel{
         super();
         init(c);
     }
+    /**
+     * constructor that also takes deckloaderscratch param to call the updatepreview method 
+     * on whenevever the component is moused over
+     * @param c card we are holding and to display
+     * @param d UI frame to update
+     */
     public CardLabel(Card c, DeckLoaderScratch d){
         super();
         host = d;
         init(c);
     }
-    
+    /**
+     * initializes starting values based on given card
+     * @param c given card
+     */
     private void init(Card c){
         card = c;
         setForeground(c.heroClass.getColor());

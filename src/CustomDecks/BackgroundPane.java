@@ -14,7 +14,7 @@ import java.awt.image.BufferedImage;
 import javax.swing.JPanel;
 
 /**
- *
+ * Modified JPanel that displays a given image; for use as a background
  * @author Joseph
  */
 public class BackgroundPane extends JPanel{
@@ -22,7 +22,11 @@ public class BackgroundPane extends JPanel{
         public BackgroundPane(BufferedImage i){
             img = i;
         }
-        
+        /**
+         * Same as regular paintComponent except it also draws the given buffered image
+         * note the image is sourced starting from a 200x200 offset from the top left of the image rather than usual 0x0
+         * @param g image to draw
+         */
         @Override
         public void paintComponent(Graphics g){
             super.paintComponent(g);

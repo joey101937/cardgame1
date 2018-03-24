@@ -40,7 +40,7 @@ public class DeckLoaderScratch {
     private JLabel isValidLabel;
     private JComboBox combo;
     private JButton loadButton;
-    private ColorPanel cardDisplay;
+    private CardPreviewPanel cardDisplay;
     private static Font titleFont = new Font("Times", Font.ITALIC, 35);
     private static Font detailFont = new Font("Courier", Font.ITALIC,12);
     private static Font deckTitleFont = new Font("Arial",Font.PLAIN,20);
@@ -53,7 +53,9 @@ public class DeckLoaderScratch {
        SpriteHandler.Initialize();
        setupInitialComponents();
     }
-    
+    /**
+     * initializes ui components
+     */
     private void setupInitialComponents(){
         core = new JFrame();
         core.setSize(625, 720);
@@ -68,10 +70,10 @@ public class DeckLoaderScratch {
         panel.setLayout(null); //allows us to place components at indevidual xy coordinates
         
         titleLabel = new JLabel();
-        titleLabel.setText("Select Deck to Use");
-        titleLabel.setSize(400,50);
+        titleLabel.setText("Select Custom Deck to Use");
+        titleLabel.setSize(600,50);
         titleLabel.setFont(titleFont);
-        titleLabel.setLocation(120,0);
+        titleLabel.setLocation(90,0);
         panel.add(titleLabel);
         
         directoryLabel = new JLabel();
@@ -80,7 +82,7 @@ public class DeckLoaderScratch {
         directoryLabel.setSize(600,20);
         panel.add(directoryLabel);
         
-        cardDisplay = new ColorPanel(mousedOver);
+        cardDisplay = new CardPreviewPanel(mousedOver);
         cardDisplay.setSize(200,300);
         cardDisplay.setLocation(400, 250);
         panel.add(cardDisplay);
@@ -188,16 +190,20 @@ public class DeckLoaderScratch {
             savedDecks.add(f);
         }
     }
-
+    /**
+     * updates the card preview section based on what the used is currently mousing over
+     */
     public void updatePreview() {
         panel.remove(cardDisplay);
-        cardDisplay = new ColorPanel(mousedOver);
+        cardDisplay = new CardPreviewPanel(mousedOver);
         cardDisplay.setSize(200, 300);
         cardDisplay.setLocation(400, 250);
         panel.add(cardDisplay);
         panel.repaint();
     }
-
+/**
+ * Loads the deck corresponding to what the combobox has selected.
+ */
     private void loadSelected() {
         try {
             for (JLabel jl : cardLabels) {
@@ -222,7 +228,7 @@ public class DeckLoaderScratch {
                 isValidLabel.setIcon(new ImageIcon(Main.assets+"redXsmall.png"));
             }else{
                 isValidLabel.setIcon(new ImageIcon(Main.assets+"checkmarkSmall.png"));
-                isValidLabel.setText("Legal Deck");
+                isValidLabel.setText("Confirm");
             }
             panel.repaint();
             core.setVisible(true);

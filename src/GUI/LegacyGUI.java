@@ -21,7 +21,7 @@ import java.util.ArrayList;
  *
  * @author Joseph
  */
-public class OpeningGUI extends javax.swing.JFrame {
+public class LegacyGUI extends javax.swing.JFrame {
     /*    FIELDS      */
     private ArrayList<Card> AIDeck;
     private ArrayList<Card> PlayerDeck;
@@ -30,7 +30,7 @@ public class OpeningGUI extends javax.swing.JFrame {
     /**
      * Creates new form OpeningGUI
      */
-    public OpeningGUI() {
+    public LegacyGUI() {
         initComponents();
         populateCombo();
         this.setVisible(true);

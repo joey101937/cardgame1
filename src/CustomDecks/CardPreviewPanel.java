@@ -14,15 +14,19 @@ import java.awt.Graphics2D;
 import javax.swing.JPanel;
 
 /**
- *
+ * Modified JPanel that displays given card(s)
  * @author Joseph
  */
-public class ColorPanel extends JPanel{
-            Card card; 
-        public ColorPanel(Card c){
+public class CardPreviewPanel extends JPanel{
+        Card card; 
+        /**
+         * @param c card to display
+         */
+        public CardPreviewPanel(Card c){
             card = c;
         }
         
+        @Override
         public void paintComponent(Graphics g){
             super.paintComponent(g);
             Graphics2D g2d = (Graphics2D)g;
