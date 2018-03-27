@@ -413,6 +413,7 @@ public class LegacyGUI extends javax.swing.JFrame {
         if(this.AIDeckCombo.getSelectedItem().equals(useCustomText)){
             if(this.loadedCustomDeckAI==null)return;
         }
+        System.out.println("test for commit");
         this.assignDecks();
         int x = 0, y =0;
         try{
