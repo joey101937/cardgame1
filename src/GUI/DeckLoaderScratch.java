@@ -12,16 +12,15 @@ import cardgame1.Main;
 import cardgame1.SpriteHandler;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.event.WindowStateListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
@@ -94,12 +93,12 @@ public class DeckLoaderScratch {
         directoryLabel.setLocation(30, 50);
         directoryLabel.setSize(600,20);
         panel.add(directoryLabel);
-        
+     
         cardDisplay = new CardPreviewPanel(mousedOver);
-        cardDisplay.setSize(200,300);
+        cardDisplay.setSize(200, 300);
         cardDisplay.setLocation(400, 250);
         panel.add(cardDisplay);
-        
+
         
         isValidLabel = new JLabel();
         isValidLabel.setSize(200, 100);
@@ -116,6 +115,7 @@ public class DeckLoaderScratch {
                 if(chosenDeck.isValid()){
                     maker.setLoadedCustomDeckPlayer(chosenDeck);
                     maker.setEnabled(true);
+                    CardDisplay.close();
                     core.dispose();
                     return;
                 }
@@ -216,12 +216,14 @@ public class DeckLoaderScratch {
      * updates the card preview section based on what the used is currently mousing over
      */
     public void updatePreview() {
+
         panel.remove(cardDisplay);
         cardDisplay = new CardPreviewPanel(mousedOver);
         cardDisplay.setSize(200, 300);
         cardDisplay.setLocation(400, 250);
         panel.add(cardDisplay);
         panel.repaint();
+         
     }
 /**
  * Loads the deck corresponding to what the combobox has selected.

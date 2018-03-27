@@ -35,7 +35,7 @@ public class CardPreviewPanel extends JPanel{
                  g2d.drawImage(SpriteHandler.cardbackL,0,0,null);
                  return;
              }
-            this.setBackground(Color.black);  
+           //this.setBackground(Color.black);  
             g.setFont(new Font("Arial", Font.BOLD, 35));
             card.render(g2d, 0, 0, true); //this method is known to work in other classes
         }

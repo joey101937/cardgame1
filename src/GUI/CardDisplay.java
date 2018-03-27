@@ -29,6 +29,10 @@ public class CardDisplay extends JFrame{
         toDisplay = c;
         initComponents();
     }
+    
+    public static void close(){
+        display.dispose();
+    }
     /**
      * sets starting values for components
      */
