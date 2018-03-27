@@ -54,10 +54,6 @@
               <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="jLabel3" min="-2" pref="185" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="yourDeckCombo" min="-2" pref="133" max="-2" attributes="0"/>
                           <Component id="yourDeckLabel" min="-2" pref="106" max="-2" attributes="0"/>
@@ -74,6 +70,14 @@
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Component id="jLabel3" min="-2" pref="185" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Component id="customDeckLabel" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -102,7 +106,9 @@
                   <Component id="yourDeckCombo" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="AIDeckCombo" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
+              <Component id="customDeckLabel" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jLabel3" min="-2" pref="23" max="-2" attributes="0"/>
               <EmptySpace pref="60" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -207,6 +213,9 @@
         </Property>
         <Property name="toolTipText" type="java.lang.String" value=""/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="yourDeckComboActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JComboBox" name="AIDeckCombo">
       <Properties>
@@ -218,6 +227,11 @@
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
         <Property name="text" type="java.lang.String" value="Note: Spacebar = End Turn"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="customDeckLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Currently Selected Custom Deck: none"/>
       </Properties>
     </Component>
   </SubComponents>

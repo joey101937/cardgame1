@@ -10,11 +10,11 @@ import CustomDecks.CorruptFileException;
 import CustomDecks.CustomDeck;
 import cardgame1.Main;
 import cardgame1.SpriteHandler;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.WindowStateListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -24,6 +24,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 
 /**
  * Interface user uses to load saved decks
@@ -34,7 +35,7 @@ public class DeckLoaderScratch {
     private ArrayList<File> savedDecks = new ArrayList<>();
     public CustomDeck chosenDeck;
     public static Card mousedOver = null;
-    private JFrame core;
+    private coreJFrame core;
     private BackgroundPane panel;
     private JLabel titleLabel;
     private JLabel directoryLabel;
@@ -48,6 +49,7 @@ public class DeckLoaderScratch {
     private static Font deckTitleFont = new Font("Arial",Font.PLAIN,20);
     private static Font cardTitleFont = new Font("Arial",Font.PLAIN,20);
     private ArrayList<JLabel> cardLabels = new ArrayList<>();
+    private LegacyGUI maker;
     /**
      * constructor
      */
@@ -55,17 +57,26 @@ public class DeckLoaderScratch {
        SpriteHandler.Initialize();
        setupInitialComponents();
     }
+
+    DeckLoaderScratch(LegacyGUI leg) {
+       maker = leg;
+       SpriteHandler.Initialize();
+       setupInitialComponents();
+    }
     /**
      * initializes ui components
      */
     private void setupInitialComponents(){
-        core = new JFrame();
+        core = new coreJFrame(this, maker);
         core.setSize(625, 720);
         core.setIconImage(SpriteHandler.swords);
         core.setPreferredSize(new Dimension(600,720));
        
-        
-        core.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        if(maker==null)core.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        else{
+            System.out.println("dispose on close");
+            core.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        }
         
         panel = new BackgroundPane(Main.BackgroundImage);
         panel.setSize(core.getWidth(), core.getHeight());   
@@ -101,7 +112,13 @@ public class DeckLoaderScratch {
          isValidLabel.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if(chosenDeck == null || chosenDeck.isValid()) return;
+                if(chosenDeck == null) return;
+                if(chosenDeck.isValid()){
+                    maker.setLoadedCustomDeckPlayer(chosenDeck);
+                    maker.setEnabled(true);
+                    core.dispose();
+                    return;
+                }
                 String toDisplay = "";
                 for(String s : chosenDeck.diagnose()){
                     toDisplay += (s+"\n");
@@ -110,8 +127,11 @@ public class DeckLoaderScratch {
             }
             @Override
              public void mousePressed(MouseEvent e) {
-                 if (chosenDeck == null || chosenDeck.isValid()) {
-                     return;
+                 if (chosenDeck == null)return;
+                 if(chosenDeck.isValid() && maker!=null){
+                    maker.setLoadedCustomDeckPlayer(chosenDeck);
+                    maker.setEnabled(true);
+                     return; 
                  }
                  String toDisplay = "";
                  for (String s : chosenDeck.diagnose()) {

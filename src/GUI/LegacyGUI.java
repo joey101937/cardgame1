@@ -9,10 +9,12 @@ import Cards.Base.*;
 import Cards.Card;
 import Cards.Fish.*;
 import Cards.Undead.*;
+import CustomDecks.CustomDeck;
 import cardgame1.Board;
 import cardgame1.Hero;
 import cardgame1.Main;
 import cardgame1.SpriteHandler;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -22,11 +24,26 @@ import java.util.ArrayList;
  * @author Joseph
  */
 public class LegacyGUI extends javax.swing.JFrame {
+    private static String useCustomText = "Load Custom Deck...";
     /*    FIELDS      */
     private ArrayList<Card> AIDeck;
     private ArrayList<Card> PlayerDeck;
+    private CustomDeck loadedCustomDeckPlayer;
+    private CustomDeck loadedCustomDeckAI;
     public static SettingsPane settings = null;
     private BufferedImage enemyHeroPortrait = SpriteHandler.ashePortrait; //image the enemy hero will have
+    
+    public void setLoadedCustomDeckPlayer(CustomDeck cd){
+        loadedCustomDeckPlayer = cd;
+        if(cd!=null){
+        customDeckLabel.setForeground(Color.red);
+        customDeckLabel.setText("Loaded: "+cd.deckName);
+        }
+    }
+    public void setLoadedCustomDeckAI(CustomDeck cd){
+        loadedCustomDeckAI = cd;
+    }
+    
     /**
      * Creates new form OpeningGUI
      */
@@ -42,13 +59,13 @@ public class LegacyGUI extends javax.swing.JFrame {
         this.yourDeckCombo.addItem("Deep Sea");
         this.yourDeckCombo.addItem("Undead");
         this.yourDeckCombo.addItem("Experimental");
+        this.yourDeckCombo.addItem("Load Custom Deck...");
                 
         this.AIDeckCombo.addItem("Base Deck");
         this.AIDeckCombo.addItem("Feeding Frenzy");
         this.AIDeckCombo.addItem("Deep Sea");
         this.AIDeckCombo.addItem("Undead");
-        this.AIDeckCombo.addItem("Experimental");
-        
+        this.AIDeckCombo.addItem("Experimental");       
         repaint();
     }
 
@@ -168,6 +185,13 @@ public class LegacyGUI extends javax.swing.JFrame {
                 enemyHeroPortrait = SpriteHandler.fishManHero;
                 break;
         }
+        if(yourDeckCombo.getSelectedItem().equals(useCustomText)){
+            if(loadedCustomDeckPlayer==null){
+                return;
+            }
+            PlayerDeck = loadedCustomDeckPlayer.deck;
+            return;
+        }
         switch (this.yourDeckCombo.getSelectedIndex()) {
             case 0: //base
                 PlayerDeck = this.getBaseDeck();
@@ -184,6 +208,7 @@ public class LegacyGUI extends javax.swing.JFrame {
             case 4: //experimental
                 PlayerDeck = this.getExperimentalDeck();
                 break;
+            
         }
     }
 
@@ -210,6 +235,7 @@ public class LegacyGUI extends javax.swing.JFrame {
         yourDeckCombo = new javax.swing.JComboBox();
         AIDeckCombo = new javax.swing.JComboBox();
         jLabel3 = new javax.swing.JLabel();
+        customDeckLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -270,8 +296,15 @@ public class LegacyGUI extends javax.swing.JFrame {
         opponentDeckLabel.setText("AI Deck");
 
         yourDeckCombo.setToolTipText("");
+        yourDeckCombo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                yourDeckComboActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Note: Spacebar = End Turn");
+
+        customDeckLabel.setText("Currently Selected Custom Deck: none");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -304,9 +337,6 @@ public class LegacyGUI extends javax.swing.JFrame {
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(yourDeckCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(yourDeckLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -318,7 +348,13 @@ public class LegacyGUI extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(122, 122, 122)
                                 .addComponent(AIDeckCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(customDeckLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -340,7 +376,9 @@ public class LegacyGUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(yourDeckCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(AIDeckCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
+                .addGap(3, 3, 3)
+                .addComponent(customDeckLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -402,11 +440,19 @@ public class LegacyGUI extends javax.swing.JFrame {
         settings = new SettingsPane();
     }//GEN-LAST:event_settingsButtonActionPerformed
 
+    private void yourDeckComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yourDeckComboActionPerformed
+        if(yourDeckCombo.getSelectedItem().equals(useCustomText)){
+            DeckLoaderScratch dls = new DeckLoaderScratch(this);
+            this.setEnabled(false);
+        }
+    }//GEN-LAST:event_yourDeckComboActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox AIDeckCombo;
     private javax.swing.JButton button1080;
     private javax.swing.JButton button720;
+    private javax.swing.JLabel customDeckLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
