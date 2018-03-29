@@ -33,7 +33,13 @@ public enum HeroClass {
 
         @Override
         public Color getColor() {
-            return new Color(25,25,25);
+            //return new Color(25,25,25);
+            return Color.gray;
+        }
+
+        @Override
+        public BufferedImage getClassIcon() {
+            return SpriteHandler.swordsSmall;
         }
     }, Restricted{
         @Override
@@ -53,7 +59,12 @@ public enum HeroClass {
 
         @Override
         public Color getColor() {
-           return Color.BLACK;
+           return Color.RED;
+        }
+
+        @Override
+        public BufferedImage getClassIcon() {
+           return SpriteHandler.redX;
         }
     }, Ocean{
         @Override
@@ -63,7 +74,7 @@ public enum HeroClass {
 
         @Override
         public String getClassIconPath() {
-            return Main.assets+"bloodMed.png";
+            return Main.assets+"iconFish.png";
         }
 
         @Override
@@ -75,6 +86,11 @@ public enum HeroClass {
         public Color getColor() {
             return Color.BLUE;
         }
+
+        @Override
+        public BufferedImage getClassIcon() {
+            return SpriteHandler.iconFish;
+        }
     }, Undead{
         @Override
         public BufferedImage getHeroPortrait() {
@@ -83,7 +99,7 @@ public enum HeroClass {
 
         @Override
         public String getClassIconPath() {
-            return Main.assets+"jollyRoger.png";
+            return Main.assets+"iconUndead.png";
         }
 
         @Override
@@ -94,6 +110,12 @@ public enum HeroClass {
         @Override
         public Color getColor() {
             return new Color(51,10,150);
+           // return new Color(100,60,200);
+        }
+
+        @Override
+        public BufferedImage getClassIcon() {
+            return SpriteHandler.iconUndead;
         }
     };
     /**
@@ -116,4 +138,6 @@ public enum HeroClass {
      * @return 
      */
     public abstract Color getColor();
+    
+    public abstract BufferedImage getClassIcon();
 }

@@ -11,7 +11,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 /**
- *
+ * Main sprite loader for application
  * @author Joseph
  */
 public class SpriteHandler {
@@ -40,6 +40,8 @@ public class SpriteHandler {
     public static BufferedImage skullEffect;
     public static BufferedImage canceledEffect;
     public static BufferedImage gearSmall;
+    public static BufferedImage iconFish;
+    public static BufferedImage iconUndead;
     //advanced fish
     public static BufferedImage baitfishCard;
     public static BufferedImage baitfishMinion;
@@ -131,6 +133,8 @@ public class SpriteHandler {
             skullEffect = load("jollyRoger.png");
             canceledEffect = load("canceled.png");
             gearSmall = load("gearSmall.png");
+            iconFish = load("iconFish.png");
+            iconUndead = load("iconUndead.png");
             //Advanced Fish
             baitfishCard = load("baitFishCard.png");
             baitfishMinion = load("baitfish.png");

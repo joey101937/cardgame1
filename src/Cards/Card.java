@@ -6,6 +6,9 @@
 package Cards;
 
 import AI.AI;
+import Cards.Base.*;
+import Cards.Fish.*;
+import Cards.Undead.*;
 import CustomDecks.HeroClass;
 import Minions.Minion;
 import Minions.Tribe;
@@ -18,6 +21,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 /**
  * Card itself, these are played from the hand to perform functions or generate Minions
@@ -224,5 +228,43 @@ public abstract class Card implements Comparable{
         Integer myVal = AI.getValueOfCard(this)/this.cost;
         Integer theirVal = AI.getValueOfCard(c)/c.cost;
         return myVal.compareTo(theirVal);
+    }
+    /**
+     * returns a list of all cards in the game
+     * @return 
+     */
+    public static ArrayList<Card> getCardList(){
+        ArrayList<Card> output = new ArrayList<>();
+        output.add(new ArakkoaCard());
+        output.add(new ArcherCard());
+        output.add(new FireBoltCard());
+        output.add(new FireSpearCard());
+        output.add(new FrostBearCard());
+        output.add(new FrostDragonCard());
+        output.add(new KelpieCard());
+        output.add(new KnightCard());
+        output.add(new PaladinCard());
+        output.add(new SpellBookCard());
+        output.add(new VengefullKnightCard());
+        output.add(new VolcanoCard());
+        
+        output.add(new BaitfishCard());
+        output.add(new CarnifishCard());
+        output.add(new FrenzyCard());
+        output.add(new JellyfishCard());
+        output.add(new PirranahCard());
+        output.add(new PredationCard());
+        output.add(new SeaSerpentCard());
+        output.add(new SeaWitchCard());
+        output.add(new SwollowCard());
+        output.add(new ThrasherCard());
+        
+        output.add(new SkelemancerCard());
+        output.add(new SkeletonArmySpell());
+        output.add(new SkullKingCard());
+        output.add(new ZombieCard());
+        output.add(new ZombieBiteSpell());
+        output.add(new ZombieTrapCard());
+        return output;
     }
 }
