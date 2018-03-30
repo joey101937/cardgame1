@@ -1,0 +1,3 @@
+java -jar packr.jar --classpath CardGame1.jar --executable
+ outputname --jdk jdk1.8.0_60.zip  --platform windows64 --mainclass cardgame1.Main --output build --resources Assets --v
+margs Xmx1G --minimizejre soft
