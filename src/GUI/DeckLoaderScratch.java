@@ -49,6 +49,7 @@ public class DeckLoaderScratch {
     private static Font cardTitleFont = new Font("Arial",Font.PLAIN,20);
     private ArrayList<JLabel> cardLabels = new ArrayList<>();
     private LegacyGUI maker;
+    private DeckBuilder builder;
     /**
      * constructor
      */
@@ -62,16 +63,22 @@ public class DeckLoaderScratch {
        SpriteHandler.Initialize();
        setupInitialComponents();
     }
+    
+    DeckLoaderScratch(DeckBuilder builder){
+        this.builder = builder;
+        SpriteHandler.Initialize();
+        setupInitialComponents();
+    }
     /**
      * initializes ui components
      */
     private void setupInitialComponents(){
-        core = new coreJFrame(this, maker);
+        core = new coreJFrame(this, maker, builder);
         core.setSize(625, 720);
         core.setIconImage(SpriteHandler.swords);
         core.setPreferredSize(new Dimension(600,720));
        
-        if(maker==null)core.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        if(maker==null && builder==null)core.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         else{
             System.out.println("dispose on close");
             core.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -132,6 +139,12 @@ public class DeckLoaderScratch {
                     maker.setLoadedCustomDeckPlayer(chosenDeck);
                     maker.setEnabled(true);
                      return; 
+                 }
+                 if(builder!=null){
+                     if(!chosenDeck.isValid())JOptionPane.showMessageDialog(null, "Notice: Loading invalid Deck");
+                     builder.setEnabled(true);
+                     core.dispose();
+                     return;
                  }
                  String toDisplay = "";
                  for (String s : chosenDeck.diagnose()) {

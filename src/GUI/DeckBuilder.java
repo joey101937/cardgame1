@@ -17,8 +17,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -41,10 +43,13 @@ public class DeckBuilder extends JFrame{
     private JComboBox classCombo; //select deck class with this
     private JLabel classLabel; //displays current class of deck
     private JLabel isValidLabel;
+    private JButton saveButton;
+    private JButton loadButton;
+    private JButton clearButton;
     public CustomDeck product = new CustomDeck("Unnamed", new ArrayList<Card>(), HeroClass.Neutral); //deck we are building
     private static Font titleFont = new Font("Times", Font.BOLD, 35);
     private static Font classTitleFont = new Font("Arial",Font.PLAIN,20);
-    
+    public static DeckBuilder mainBuilder;
     /**
      * constructor
      */
@@ -56,6 +61,7 @@ public class DeckBuilder extends JFrame{
         this.setVisible(true);
         this.requestFocus();
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        mainBuilder = this;
     }
     /**
      * initializes core components
@@ -117,7 +123,7 @@ public class DeckBuilder extends JFrame{
         
         isValidLabel = new JLabel();
         isValidLabel.setSize(200,100);
-        isValidLabel.setLocation(750,570);
+        isValidLabel.setLocation(770,550);
         isValidLabel.setFont(classTitleFont);
         updateIsValidLabel();
         isValidLabel.addMouseListener(new MouseListener() {
@@ -142,6 +148,63 @@ public class DeckBuilder extends JFrame{
         });
         panel.add(isValidLabel);
         
+        loadButton = new JButton();
+        loadButton.setSize(100,50);
+        loadButton.setLocation(510,600);
+        loadButton.setText("Load...");
+        loadButton.setFont(classTitleFont);
+        loadButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mainBuilder.setEnabled(false);
+                DeckLoaderScratch dl = new DeckLoaderScratch(mainBuilder); 
+            }
+        });
+        panel.add(loadButton);
+        
+        clearButton = new JButton();
+        clearButton.setSize(100,50);
+        clearButton.setLocation(410,600);
+        clearButton.setText("Clear");
+        clearButton.setFont(classTitleFont);
+        clearButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                product.deck.clear();
+                mainBuilder.updateList();
+            }
+        });
+        panel.add(clearButton);
+        
+        saveButton = new JButton();
+        saveButton.setSize(100,50);
+        saveButton.setText("Save...");
+        saveButton.setFont(classTitleFont);
+        saveButton.setLocation(610,600);
+        panel.add(saveButton);
+        saveButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String givenName = JOptionPane.showInputDialog("Save as...");
+                if(givenName==null || givenName.trim().equals("")){
+                    JOptionPane.showMessageDialog(null, "No name detected");
+                    return;   
+                }
+                if(!isStringSafe(givenName)){
+                    JOptionPane.showMessageDialog(null, "Name cannot contain the following characters:\n ~ # % * { } [ ] < > ? /\\ + |");
+                    return;
+                }
+                product.deckName = givenName;
+                File f = new File("Decks/"+givenName+".deck");
+                if(f.exists()){
+                    int shouldOverwrite = JOptionPane.showConfirmDialog(null, "Deck already exists. Overwrite?");
+                    if(shouldOverwrite != 0) return; //user doesnt want to overwrite
+                }
+                product.export();
+                JOptionPane.showMessageDialog(null, "Deck Saved!\n" + f.getAbsolutePath());
+            }
+        });
+        
         int column = 0;
         int row = 0;
         for(Card c : Card.getCardList()){
@@ -154,8 +217,7 @@ public class DeckBuilder extends JFrame{
             }
             interior.add(ci);
         }
-       interior.setPreferredSize(new Dimension(700, row*(300+20)));
-              
+       interior.setPreferredSize(new Dimension(700, row*(300+20)));         
     }
     
     public static void main(String[] args) {
@@ -258,5 +320,39 @@ public class DeckBuilder extends JFrame{
             }
         }
         updateList();
+    }
+    /**
+     * returns true if the string does not contain illegal characters for windows file names
+     * @param input
+     * @return 
+     */
+    private boolean isStringSafe(String input){
+        if(input.contains("/"))return false;
+        if(input.contains("\\"))return false;
+        if(input.contains("?"))return false;
+        if(input.contains(">"))return false;
+        if(input.contains("<"))return false;
+        if(input.contains("%"))return false;
+        if(input.contains("~"))return false;
+        if(input.contains("&"))return false;
+        if(input.contains("*"))return false;
+        if(input.contains("{"))return false;
+        if(input.contains("}"))return false;
+        if(input.contains("["))return false;
+        if(input.contains("]"))return false;
+        if(input.contains(":"))return false;
+        if(input.contains("+"))return false;
+        if(input.contains("|"))return false;
+        if(input.contains("\""))return false;
+        return true;
+    }
+    
+    public void loadDeck(CustomDeck cd){
+        if(cd ==null) return;
+        product = cd;
+        this.updateIsValidLabel();
+        this.updateList();
+        product.deckClass = cd.deckClass;
+        classCombo.setSelectedItem(cd.deckClass);
     }
 }
