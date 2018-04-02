@@ -12,8 +12,14 @@ import cardgame1.Main;
 import cardgame1.SpriteHandler;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -24,12 +30,18 @@ import javax.swing.JScrollPane;
  */
 public class DeckBuilder extends JFrame{
     /*       FIELDS        */
-    private JPanel panel;
+    private JPanel panel; //main content holder
     private JScrollPane scroll;
     private JPanel interior; //panel inside scrollpane
-    private ArrayList<CardLabel> cardLabels = new ArrayList<>();
-    
+    private ArrayList<CardLabel> cardLabels = new ArrayList<>(); //holds list of cards currently in deck
+    private JLabel titleLabel;
+    private JLabel classTitle;
+    private JComboBox classCombo; //select deck class with this
+    private JLabel classLabel; //displays current class of deck
     public CustomDeck product = new CustomDeck("Unnamed", new ArrayList<Card>(), HeroClass.Neutral); //deck we are building
+    private static Font titleFont = new Font("Times", Font.BOLD, 35);
+    private static Font classTitleFont = new Font("Arial",Font.PLAIN,20);
+    
     /**
      * constructor
      */
@@ -66,9 +78,39 @@ public class DeckBuilder extends JFrame{
         panel.add(scroll);
         interior.setLayout(null);
         
-        //CardIcon ci = new CardIcon(new FrostBearCard(),this);
-   //     interior.add(ci);
+        titleLabel = new JLabel();
+        titleLabel.setSize(300,50);
+        titleLabel.setText("DECK BUILDER");
+        titleLabel.setLocation(400,20);
+        titleLabel.setFont(titleFont);
+        panel.add(titleLabel);
         
+        classTitle = new JLabel();
+        classTitle.setFont(classTitleFont);
+        classTitle.setText("Deck Class:");
+        classTitle.setLocation(20,10);
+        classTitle.setSize(200,30);
+        panel.add(classTitle);
+        
+        classCombo = new JComboBox();
+        classCombo.setSize(new Dimension(200,25));
+        classCombo.setLocation(20,50);
+        classCombo.addItem(HeroClass.Neutral);
+        classCombo.addItem(HeroClass.Ocean);
+        classCombo.addItem(HeroClass.Undead);
+        classCombo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               updateDeckClass();
+            }
+        });
+        panel.add(classCombo);
+        
+        classLabel = new JLabel();
+        classLabel.setSize(80,80);
+        classLabel.setLocation(230, 20);
+        classLabel.setIcon(new ImageIcon(product.deckClass.getClassIcon()));
+        panel.add(classLabel);
         
         int column = 0;
         int row = 0;
@@ -110,10 +152,21 @@ public class DeckBuilder extends JFrame{
             panel.add(cl);  
             i++;
         }
+       classLabel.setIcon(new ImageIcon(product.deckClass.getClassIcon()));
        this.panel.repaint();
        setVisible(true);
     }
     
+    /**
+     * updates deck class using combo
+     */
+    private void updateDeckClass(){
+        HeroClass hc;
+        hc = (HeroClass)classCombo.getItemAt(classCombo.getSelectedIndex());
+        product.deckClass = hc;
+        classLabel.setIcon(new ImageIcon(product.deckClass.getClassIcon()));
+        panel.repaint();
+    }
     
     /**
      * Attempts to add a card to deck.
@@ -121,7 +174,7 @@ public class DeckBuilder extends JFrame{
      * @param c card to add
      */
     public void addCard(Card c){
-        if(c.heroClass != product.deckClass){
+        if(c.heroClass != product.deckClass && c.heroClass!=HeroClass.Neutral){
             JOptionPane.showMessageDialog(null, c.heroClass + " card cannot be added to " + product.deckClass + " deck.");
             return;
         }

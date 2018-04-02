@@ -109,7 +109,7 @@ public enum HeroClass {
 
         @Override
         public Color getColor() {
-            return new Color(51,10,150);
+            return new Color(56,15,130);
            // return new Color(100,60,200);
         }
 
