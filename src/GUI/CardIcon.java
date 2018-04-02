@@ -38,8 +38,13 @@ public class CardIcon extends JPanel{
             public void mouseClicked(MouseEvent e) {               
             }
             @Override
-            public void mousePressed(MouseEvent e) {      
-                host.addCard(card);
+            public void mousePressed(MouseEvent e) {   
+                System.out.println(e.getButton());
+                if(e.getButton() == 1){ //left click
+                  host.addCard(card);  
+                }else if(e.getButton()==3){ //right click
+                    host.removeCard(card);
+                }
             }
             @Override
             public void mouseReleased(MouseEvent e) {              

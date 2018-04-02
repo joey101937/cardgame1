@@ -34,7 +34,7 @@ public enum HeroClass {
         @Override
         public Color getColor() {
             //return new Color(25,25,25);
-            return Color.gray;
+            return Color.darkGray;
         }
 
         @Override

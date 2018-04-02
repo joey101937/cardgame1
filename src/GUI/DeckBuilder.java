@@ -5,7 +5,6 @@
  */
 package GUI;
 
-import Cards.Base.FrostBearCard;
 import Cards.Card;
 import CustomDecks.CustomDeck;
 import CustomDecks.HeroClass;
@@ -28,6 +27,7 @@ public class DeckBuilder extends JFrame{
     private JPanel panel;
     private JScrollPane scroll;
     private JPanel interior; //panel inside scrollpane
+    private ArrayList<CardLabel> cardLabels = new ArrayList<>();
     
     public CustomDeck product = new CustomDeck("Unnamed", new ArrayList<Card>(), HeroClass.Neutral); //deck we are building
     /**
@@ -92,6 +92,29 @@ public class DeckBuilder extends JFrame{
         DeckBuilder db = new DeckBuilder();
         db.setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
+    
+    /**
+     * updates the list of added cards in the deck
+     */
+    private void updateList(){
+        for(CardLabel cl : cardLabels){
+            panel.remove(cl);
+        }
+        cardLabels.clear();
+        int i = 0;
+        for(Card c : this.product.deck){
+            CardLabel cl = new CardLabel(c);
+            cardLabels.add(cl);
+            cl.setSize(300, 22);
+            cl.setLocation(800, 100 + 22 * i);
+            panel.add(cl);  
+            i++;
+        }
+       this.panel.repaint();
+       setVisible(true);
+    }
+    
+    
     /**
      * Attempts to add a card to deck.
      * If the card is not able to be added due to custom deck restrictions, it will prompt the user and not add the card
@@ -117,5 +140,24 @@ public class DeckBuilder extends JFrame{
             return;
         }
         product.deck.add(c);
+        updateList();
+    }
+    
+    /**
+     * attempts to remove a card from the deck
+     * @param c card to remove
+     */
+    public void removeCard(Card c){
+        System.out.println("removing " + c);
+        boolean removed = false;
+        for(Card card : product.deck){
+            if(card.name.equals(c.name)){
+                product.deck.remove(card);
+                removed = true;
+                break;
+            }
+        }
+        if(!removed)System.out.println("remove failed");
+        updateList();
     }
 }
