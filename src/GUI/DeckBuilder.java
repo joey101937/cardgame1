@@ -37,7 +37,7 @@ public class DeckBuilder extends JFrame{
     private JPanel panel; //main content holder
     private JScrollPane scroll;
     private JPanel interior; //panel inside scrollpane
-    private ArrayList<JLabel> cardLabels = new ArrayList<>(); //holds list of cards currently in deck
+    public ArrayList<JLabel> cardLabels = new ArrayList<>(); //holds list of cards currently in deck
     private JLabel titleLabel;
     private JLabel classTitle;
     private JComboBox classCombo; //select deck class with this
@@ -230,7 +230,7 @@ public class DeckBuilder extends JFrame{
     /**
      * updates the list of added cards in the deck
      */
-    private void updateList(){
+    void updateList(){
         for(JLabel cl : cardLabels){
             panel.remove(cl);
         }

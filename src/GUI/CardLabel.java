@@ -6,6 +6,7 @@
 package GUI;
 
 import Cards.Card;
+import static GUI.DeckBuilder.mainBuilder;
 import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -19,6 +20,7 @@ public class CardLabel extends JLabel{
     public Card card;
     private static Font cardTitleFont = new Font("Arial",Font.PLAIN,20);
     private DeckLoaderScratch host;
+    private CardLabel me = this;
     public CardLabel(Card c){
         super();
         init(c);
@@ -45,11 +47,16 @@ public class CardLabel extends JLabel{
         setFont(cardTitleFont);
         addMouseListener(new MouseListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {
-                CardDisplay.display(card);
+            public void mouseClicked(MouseEvent e) {  
             }
             @Override
              public void mousePressed(MouseEvent e) {   
+                 if(e.getButton()==1)CardDisplay.display(card); //l;eft click
+                if(e.getButton()==3 && mainBuilder!=null && mainBuilder.isEnabled()){
+                    System.out.println("test");
+                    mainBuilder.product.deck.remove(mainBuilder.cardLabels.indexOf(me));
+                    mainBuilder.updateList();
+                }//right click
             }
             @Override
             public void mouseReleased(MouseEvent e) {
