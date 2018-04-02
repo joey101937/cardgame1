@@ -31,7 +31,7 @@ public class CardDisplay extends JFrame{
     }
     
     public static void close(){
-        display.dispose();
+        if(display!=null)display.dispose();
     }
     /**
      * sets starting values for components

@@ -9,6 +9,7 @@ import Cards.Card;
 import Traps.TrapListener;
 import cardgame1.Board;
 import cardgame1.Hero;
+import cardgame1.ProcHandler;
 import cardgame1.SpriteHandler;
 import cardgame1.Sticker;
 import java.awt.Color;
@@ -30,7 +31,7 @@ public abstract class Minion{
     public BufferedImage sprite;    //visual representation
     public int damagedTicker = 0; //set to positive value when damaged, passively ticks down to 0 over time.
     public int intrinsicValue = 0; //bonus value, used by AI to evaluate worth
-    private int procTimer = 0; //used for rendering the proc animation
+    public int procTimer = 0; //used for rendering the proc animation
     private boolean attackReady = false; //inherit one attack per turn flag. true = able to attack
     public boolean isFrozen = false;
     public boolean isSilenced = false;
@@ -89,7 +90,7 @@ public abstract class Minion{
         //damaging effect
         if(damagedTicker > 0){
         g.setColor(new Color(255,0,0,(this.damagedTicker)*12));
-        damagedTicker--;
+        //damagedTicker--;
         g.fillRect(x, y, Minion.WIDTH, Minion.HEIGHT);
         }
         if(!canAttack()){ //makes them dark if unable to attack
@@ -105,7 +106,7 @@ public abstract class Minion{
             }
         }
         if(this.procTimer>0){
-            procTimer--;
+            //procTimer--;
             g.setColor(new Color(0,255,0,procTimer*10));
             g.fillRect(x, y, Minion.WIDTH, Minion.HEIGHT);
         }
@@ -171,6 +172,7 @@ public abstract class Minion{
     public void takeDamage(int amount){
         this.health-=amount;
         this.damagedTicker = 20;
+        new ProcHandler(this);
         if(this.health <= 0){
             this.destroy();
         }
@@ -180,6 +182,7 @@ public abstract class Minion{
      */
     public void proc(){
         procTimer = 20;
+        new ProcHandler(this);
     }
     
     /**

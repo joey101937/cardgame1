@@ -236,6 +236,7 @@ public class LegacyGUI extends javax.swing.JFrame {
         AIDeckCombo = new javax.swing.JComboBox();
         jLabel3 = new javax.swing.JLabel();
         customDeckLabel = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -304,6 +305,13 @@ public class LegacyGUI extends javax.swing.JFrame {
 
         jLabel3.setText("Note: Spacebar = End Turn");
 
+        jButton1.setText("Deck Builder...");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -328,6 +336,8 @@ public class LegacyGUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(settingsButton)
+                .addGap(115, 115, 115)
+                .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(playButton)
                 .addGap(20, 20, 20))
@@ -381,7 +391,8 @@ public class LegacyGUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(settingsButton)
-                    .addComponent(playButton))
+                    .addComponent(playButton)
+                    .addComponent(jButton1))
                 .addContainerGap())
         );
 
@@ -452,12 +463,19 @@ public class LegacyGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_yourDeckComboActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if(DeckBuilder.mainBuilder == null){
+            new DeckBuilder();
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox AIDeckCombo;
     private javax.swing.JButton button1080;
     private javax.swing.JButton button720;
     private javax.swing.JLabel customDeckLabel;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

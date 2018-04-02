@@ -196,7 +196,7 @@ public class CustomDeck {
             case "Carnifish": return new CarnifishCard();
             case "Frenzy": return new FrenzyCard();
             case "Jellyfish": return new JellyfishCard();
-            case "Pirrana": return new PirranahCard();
+            case "Pirranah": return new PirranahCard();
             case "Predation": return new PredationCard();
             case "SeaSerpent": return new SeaSerpentCard();
             case "Sea Serpent Trap": return new SeaSerpentTrapCard();

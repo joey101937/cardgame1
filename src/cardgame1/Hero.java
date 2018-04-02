@@ -37,9 +37,9 @@ public class Hero {
     public ArrayList<Card> hand = new ArrayList<>();
     public ArrayList<Card> deck;
     public int id;
-    private int procTimer=0; //used for green proc animation
+    public int procTimer=0; //used for green proc animation
     public Hero opponent;
-    private int damageTicker = 0; //used to apply the red on damage effect
+    public int damageTicker = 0; //used to apply the red on damage effect
     public boolean turn = false; //is it our turn?
     public boolean isAIControlled = false;
        
@@ -157,6 +157,7 @@ public class Hero {
     public void takeDamage(int amount){
         this.health-=amount;
         this.damageTicker = 20;
+        new ProcHandler(this);
         if(health <= 0){
             destroy();
         }
@@ -217,11 +218,11 @@ public class Hero {
         }
         if(this.damageTicker > 0){
         g.setColor(new Color(255,0,0,(this.damageTicker)*12));
-        damageTicker--;
+        //damageTicker--;
         g.fillRect(x, y, picture.getWidth(), picture.getHeight());
         }
         if (this.procTimer > 0) {
-            procTimer--;
+           //procTimer--;
             g.setColor(new Color(0, 255, 0, procTimer * 10));
             g.fillRect(x, y, this.picture.getWidth(), picture.getHeight());
         }
@@ -232,6 +233,7 @@ public class Hero {
      */
     public void proc(){
         this.procTimer = 20;
+        new ProcHandler(this);
     }
     
     @Override

@@ -257,6 +257,7 @@ public abstract class Card implements Comparable{
         output.add(new SeaSerpentCard());
         output.add(new SeaWitchCard());
         output.add(new SwollowCard());
+        output.add(new SeaSerpentTrapCard());
         output.add(new ThrasherCard());
         
         output.add(new SkelemancerCard());
