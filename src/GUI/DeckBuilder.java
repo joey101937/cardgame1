@@ -15,6 +15,8 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
@@ -33,11 +35,12 @@ public class DeckBuilder extends JFrame{
     private JPanel panel; //main content holder
     private JScrollPane scroll;
     private JPanel interior; //panel inside scrollpane
-    private ArrayList<CardLabel> cardLabels = new ArrayList<>(); //holds list of cards currently in deck
+    private ArrayList<JLabel> cardLabels = new ArrayList<>(); //holds list of cards currently in deck
     private JLabel titleLabel;
     private JLabel classTitle;
     private JComboBox classCombo; //select deck class with this
     private JLabel classLabel; //displays current class of deck
+    private JLabel isValidLabel;
     public CustomDeck product = new CustomDeck("Unnamed", new ArrayList<Card>(), HeroClass.Neutral); //deck we are building
     private static Font titleFont = new Font("Times", Font.BOLD, 35);
     private static Font classTitleFont = new Font("Arial",Font.PLAIN,20);
@@ -112,6 +115,33 @@ public class DeckBuilder extends JFrame{
         classLabel.setIcon(new ImageIcon(product.deckClass.getClassIcon()));
         panel.add(classLabel);
         
+        isValidLabel = new JLabel();
+        isValidLabel.setSize(200,100);
+        isValidLabel.setLocation(750,570);
+        isValidLabel.setFont(classTitleFont);
+        updateIsValidLabel();
+        isValidLabel.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {}
+            @Override
+            public void mousePressed(MouseEvent e) {
+                if (!product.isValid()) {
+                    String toDisplay = "";
+                    for (String s : product.diagnose()) {
+                        toDisplay += (s + "\n");
+                    }
+                    JOptionPane.showMessageDialog(null, toDisplay);
+                }
+            }
+            @Override
+            public void mouseReleased(MouseEvent e) {}
+            @Override
+            public void mouseEntered(MouseEvent e) {}
+            @Override
+            public void mouseExited(MouseEvent e) {}
+        });
+        panel.add(isValidLabel);
+        
         int column = 0;
         int row = 0;
         for(Card c : Card.getCardList()){
@@ -139,7 +169,7 @@ public class DeckBuilder extends JFrame{
      * updates the list of added cards in the deck
      */
     private void updateList(){
-        for(CardLabel cl : cardLabels){
+        for(JLabel cl : cardLabels){
             panel.remove(cl);
         }
         cardLabels.clear();
@@ -152,7 +182,14 @@ public class DeckBuilder extends JFrame{
             panel.add(cl);  
             i++;
         }
+        JLabel numCards = new JLabel();
+        numCards.setText(product.deck.size()+"/"+CustomDeck.MIN_NUM_CARDS);
+        numCards.setSize(300,22);
+        numCards.setLocation(800,100+22*i);
+        cardLabels.add(numCards);
+        panel.add(numCards);
        classLabel.setIcon(new ImageIcon(product.deckClass.getClassIcon()));
+       updateIsValidLabel();
        this.panel.repaint();
        setVisible(true);
     }
@@ -197,20 +234,29 @@ public class DeckBuilder extends JFrame{
     }
     
     /**
+     * updates teh is valid label
+     */
+    private void updateIsValidLabel() {
+        if (product.isValid()) {
+            isValidLabel.setText("Valid Deck");
+            isValidLabel.setIcon(new ImageIcon(SpriteHandler.checkmark));
+        } else {
+            isValidLabel.setText("Invalid Deck");
+            isValidLabel.setIcon(new ImageIcon(SpriteHandler.redX));
+        }
+    }
+    
+    /**
      * attempts to remove a card from the deck
      * @param c card to remove
      */
     public void removeCard(Card c){
-        System.out.println("removing " + c);
-        boolean removed = false;
         for(Card card : product.deck){
             if(card.name.equals(c.name)){
                 product.deck.remove(card);
-                removed = true;
                 break;
             }
         }
-        if(!removed)System.out.println("remove failed");
         updateList();
     }
 }
