@@ -24,7 +24,7 @@ public class PaladinCard extends Card {
     public PaladinCard() {
         name = "Paladin";
         this.isTargeted = true;
-        this.spellDamage = 5;
+        this.spellDamage = 4;
         cardType = CardType.Minion;
         cardPurpose = CardPurpose.BattlecryMinionHeal;
         cardText = "On Summon: \n Grant " + spellDamage +" health to \n target hero or minion";
@@ -49,7 +49,7 @@ public class PaladinCard extends Card {
         if(outcome == 1){
             target.proc();
             Main.wait(AI.AI.speed/3);
-            target.heal(spellDamage);
+            target.health+=spellDamage;
         }
         return outcome;
     }

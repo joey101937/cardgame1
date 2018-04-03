@@ -355,4 +355,10 @@ public class DeckBuilder extends JFrame{
         product.deckClass = cd.deckClass;
         classCombo.setSelectedItem(cd.deckClass);
     }
+    
+    @Override
+    public void dispose(){
+        super.dispose();
+        mainBuilder = null;
+    }
 }

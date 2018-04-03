@@ -21,7 +21,7 @@ public class PaladinMinion extends Minion{
         this.owner = parent.getOwner();
         attack = 3;
         originalAttack = attack;
-        maxHealth = 4;
+        maxHealth = 3;
         health = maxHealth;
         tribe = Tribe.Knight;
         name = "Paladin";

@@ -36,7 +36,7 @@ public class Board extends Canvas implements Runnable {
     public static int buffer = 50; //extra space between rendered cards in hand
     public static VisualEffectHandler visHandler = null;
     public Window window;  //main window
-    private boolean running = false;
+    boolean running = false;
     private Thread thread = null;
     public Dimension d;
     public static InputHandler ih = new InputHandler();
@@ -56,7 +56,7 @@ public class Board extends Canvas implements Runnable {
         yScale = d.getHeight()/1080;
         System.out.println("Scale; " + xScale + ", " + yScale);
         System.out.println("Dimenstion: " + d.toString());
-        Window window = new Window(d.width, d.height, "Card Game", this);
+        window = new Window(d.width, d.height, "Card Game", this);
         topHero = t;
         botHero = b;
         playerHero = b;
@@ -86,7 +86,7 @@ public class Board extends Canvas implements Runnable {
         yScale = d.getHeight()/1080;
         System.out.println("Scale; " + xScale + ", " + yScale);
         System.out.println("Dimenstion: " + d.toString());
-        Window window = new Window(d.width, d.height, "Card Game", this);
+        window = new Window(d.width, d.height, "Card Game", this);
         topHero = t;
         botHero = b;
         playerHero = b;
@@ -313,7 +313,7 @@ public class Board extends Canvas implements Runnable {
 
             }
         }
-        stop();
+        //stop();
     }
 
     //starts the main game
@@ -327,7 +327,7 @@ public class Board extends Canvas implements Runnable {
     ///stops the main game
     public synchronized void stop() {
         try {
-            thread.join();
+            //thread.join();
             running = false;
         } catch (Exception e) {
             e.printStackTrace();

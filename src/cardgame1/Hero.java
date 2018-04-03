@@ -8,6 +8,7 @@ package cardgame1;
 import AI.AI;
 import Minions.Minion;
 import Cards.*;
+import GUI.LegacyGUI;
 import Traps.TrapHolder;
 import java.awt.Color;
 import java.awt.Font;
@@ -15,6 +16,8 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  * the player character, takes direct attacks
@@ -42,6 +45,7 @@ public class Hero {
     public int damageTicker = 0; //used to apply the red on damage effect
     public boolean turn = false; //is it our turn?
     public boolean isAIControlled = false;
+    private boolean available = true;//makes it so we can only restart once at a time
        
     //CONSTRUCTOR
     public Hero(String name, ArrayList<Card> deck, BufferedImage portrait){
@@ -116,6 +120,7 @@ public class Hero {
             if(m!=null && !done.contains(m)){
                 m.onTurnStart();
                 done.add(m);
+                
             }
         }
         break;
@@ -154,7 +159,7 @@ public class Hero {
     }
     
     
-    public void takeDamage(int amount){
+    public synchronized void takeDamage(int amount){
         this.health-=amount;
         this.damageTicker = 20;
         new ProcHandler(this);
@@ -167,25 +172,62 @@ public class Hero {
      * what happens when the hero dies. usually ends the game
      * TODO
      */
-    public void destroy(){
-        //TODO
+    public synchronized void destroy(){
+        if(!available)return;
+        available = false;
         if(!endGameOnDeath)return;
         if (this == Board.playerHero) {
             Main.display("Game over!");
-            System.exit(0);
+            int selection = JOptionPane.showConfirmDialog(null, "Restart?");
+            if(selection == 0){
+                try{
+                this.restartApplication();
+                }catch(Exception e){
+                    e.printStackTrace();
+                    System.exit(1);
+                }
+            }else{
+                 System.exit(0);
+             }
         }
         if(this == Board.nonPlayerHero){
             Main.display("Victory!");
-            System.exit(0);
+             int selection = JOptionPane.showConfirmDialog(null, "Restart?");
+             if(selection==0){
+                 try{
+                 restartApplication();
+                 }catch(Exception e){
+                     e.printStackTrace();
+                     System.exit(1);
+                 }
+             }else{
+                 System.exit(0);
+             }
         }
     }
 
+    public void restartApplication() {
+        Board board = Board.getMainBoard();
+        board.running= false;
+        Window window = board.window;
+        JFrame frame = window.frame;
+        if(frame==null){
+            System.out.println("frame is null");
+            System.exit(1);
+        }else{
+            frame.dispose();
+            board.running= false;
+            new LegacyGUI();
+            //available = true;
+        }
+    }
+    
     /**
      * adds health to a hero up to their maximum health
      * @param amount 
      */
     public void heal(int amount) {
-        if (amount + health <= maxHealth) {
+        if (amount + health >= maxHealth) {
             health = maxHealth;
             return;
         } else {
