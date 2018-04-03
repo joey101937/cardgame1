@@ -27,7 +27,7 @@ public class PaladinCard extends Card {
         this.spellDamage = 4;
         cardType = CardType.Minion;
         cardPurpose = CardPurpose.BattlecryMinionHeal;
-        cardText = "On Summon: \n Grant " + spellDamage +" health to \n target hero or minion";
+        cardText = "On Summon: \n restore " + spellDamage +" health to \n target hero or minion";
         sprite = SpriteHandler.paladinCard;
         cost = 4;
         summon = new PaladinMinion(this);
@@ -38,7 +38,8 @@ public class PaladinCard extends Card {
         if(outcome == 1){
             target.proc();
             Main.wait(AI.AI.speed/3);
-            target.health+=spellDamage;
+            //target.health+=spellDamage;
+            target.heal(spellDamage);
         }
         return outcome;
     }
@@ -49,7 +50,8 @@ public class PaladinCard extends Card {
         if(outcome == 1){
             target.proc();
             Main.wait(AI.AI.speed/3);
-            target.health+=spellDamage;
+            //target.health+=spellDamage;
+            target.heal(spellDamage);
         }
         return outcome;
     }

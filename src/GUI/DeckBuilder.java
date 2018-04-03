@@ -123,7 +123,7 @@ public class DeckBuilder extends JFrame{
         
         isValidLabel = new JLabel();
         isValidLabel.setSize(200,100);
-        isValidLabel.setLocation(770,550);
+        isValidLabel.setLocation(770,580);
         isValidLabel.setFont(classTitleFont);
         updateIsValidLabel();
         isValidLabel.addMouseListener(new MouseListener() {
