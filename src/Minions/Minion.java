@@ -35,6 +35,7 @@ public abstract class Minion{
     private boolean attackReady = false; //inherit one attack per turn flag. true = able to attack
     public boolean isFrozen = false;
     public boolean isSilenced = false;
+    public boolean isMadeUndead = false;//if the minoin has been made undead from a card effect
     public Card parent; //card that summoned it, used for righclick for details.
     public Hero owner;  //hero controling this minion
     public static final Integer WIDTH = 150; //width of minion in pixel

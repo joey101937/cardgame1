@@ -217,6 +217,7 @@ public class DeckBuilder extends JFrame{
             }
             interior.add(ci);
         }
+       if(Card.getCardList().size()%3 != 0) row++; //makes sure that it expands to account for incomeplete rows
        interior.setPreferredSize(new Dimension(700, row*(300+20)));         
     }
     

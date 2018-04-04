@@ -111,6 +111,7 @@ public abstract class Card implements Comparable{
         g.setFont(new Font("Arial", Font.BOLD,15));
         g.setColor(Color.white);
         g.drawString(summon.tribe.toString(), x+110 - summon.tribe.toString().length()*5, y+Card.HEIGHT-10);
+        if(summon.isMadeUndead)g.drawString("Undead", x+110 - "Undead".length()*5, y+Card.HEIGHT);
         }
         g.setFont(original);
     }
@@ -266,6 +267,7 @@ public abstract class Card implements Comparable{
         output.add(new ZombieCard());
         output.add(new ZombieBiteSpell());
         output.add(new ZombieTrapCard());
+        output.add(new GhoulCard());
         return output;
     }
 }

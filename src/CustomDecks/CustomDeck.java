@@ -210,6 +210,7 @@ public class CustomDeck {
             case "Zombie Bite": return new ZombieBiteSpell();
             case "Zombie": return new ZombieCard();
             case "Zombify": return new ZombieTrapCard();
+            case "Ghoul": return new GhoulCard();
             default: throw new NoSuchCardException("No card found matching name: " + s);   
         }
     }

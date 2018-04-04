@@ -16,15 +16,15 @@ import cardgame1.SpriteHandler;
  *
  * @author Joseph
  */
-public class ZombieCard extends Card {
+public class GhoulCard extends Card {
 
-    public ZombieCard() {
-        name = "Zombie";
+    public GhoulCard() {
+        name = "Ghoul";
         cardType = CardType.Minion;
         cardPurpose = CardPurpose.VanillaMinion;
         cardText = "Minions attacked \n by this card \n become undead.";
         intrinsicValue = 0;
-        sprite = SpriteHandler.zombieCard;
+        sprite = SpriteHandler.ghoulCard;
         cost = 2;
         summon = new ZombieMinion(this);
         heroClass = HeroClass.Undead;
