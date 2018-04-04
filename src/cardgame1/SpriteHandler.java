@@ -112,6 +112,8 @@ public class SpriteHandler {
     public static BufferedImage necromancyCard;
     //Dragons
     public static BufferedImage grayDrakeMinion, grayDrakeCard;
+    public static BufferedImage firePlumeCard;
+    public static BufferedImage volcanicDrakeCard, volcanicDrakeMinion;
     
     public static void Initialize() {
         try {
@@ -143,7 +145,8 @@ public class SpriteHandler {
             canceledEffect = load("canceled.png");
             gearSmall = load("gearSmall.png");
             iconFish = load("iconFish.png");
-            iconUndead = load("iconUndead.png");
+            //iconUndead = load("iconUndead.png");
+            iconUndead = load("iconSkull.png");
             iconDragon = load("iconDragon.png");
             //Advanced Fish
             baitfishCard = load("baitFishCard.png");
@@ -214,6 +217,9 @@ public class SpriteHandler {
             //Dragons
             grayDrakeMinion = load("grayDrakeMinion.png");
             grayDrakeCard = load("grayDrakeCard.png");
+            firePlumeCard = load("firePlumeCard.png");
+            volcanicDrakeCard = load("volcanicDrakeCard.png");
+            volcanicDrakeMinion = load("volcanicDrakeMinion.png");
         } catch (Exception e) {
             e.printStackTrace();
             Main.display("Error loading all assets. Please Verify Assets folder.");

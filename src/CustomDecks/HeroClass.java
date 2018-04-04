@@ -99,7 +99,7 @@ public enum HeroClass {
 
         @Override
         public String getClassIconPath() {
-            return Main.assets+"iconUndead.png";
+            return Main.assets+"iconSkull.png";
         }
 
         @Override
@@ -135,7 +135,8 @@ public enum HeroClass {
 
         @Override
         public Color getColor() {
-            return Color.red;
+            //return Color.red;
+            return new Color(220,40,40);
         }
 
         @Override

@@ -216,6 +216,8 @@ public class CustomDeck {
             case "Necromancy": return new NecromancyCard();
             //dragon
             case "Gray Drake": return new GrayDrakeCard();
+            case "Fire Plume": return new FirePlumeCard();
+            case "Volcanic Drake": return new VolcanicDrakeCard();
             default: throw new NoSuchCardException("No card found matching name: " + s);   
         }
     }
