@@ -225,9 +225,19 @@ public abstract class Card implements Comparable{
 
     @Override
     public int compareTo(Object o) {
-        Card c = (Card)o;
-        Integer myVal = AI.getValueOfCard(this)/this.cost;
-        Integer theirVal = AI.getValueOfCard(c)/c.cost;
+        Card c = (Card) o;
+        Integer myVal;
+        Integer theirVal;
+        if (cost != 0) {
+            myVal = AI.getValueOfCard(this) / this.cost;
+        } else {
+            myVal = AI.getValueOfCard(this);
+        }
+        if (c.cost != 0) {
+            theirVal = AI.getValueOfCard(c) / c.cost;
+        } else {
+            theirVal = AI.getValueOfCard(c);
+        }
         return myVal.compareTo(theirVal);
     }
     /**

@@ -7,6 +7,7 @@ package GUI;
 
 import Cards.Base.*;
 import Cards.Card;
+import Cards.Dragon.*;
 import Cards.Fish.*;
 import Cards.Undead.*;
 import CustomDecks.CustomDeck;
@@ -58,6 +59,7 @@ public class LegacyGUI extends javax.swing.JFrame {
         this.yourDeckCombo.addItem("Feeding Frenzy");
         this.yourDeckCombo.addItem("Deep Sea");
         this.yourDeckCombo.addItem("Undead");
+        this.yourDeckCombo.addItem("Dragon");
         this.yourDeckCombo.addItem("Experimental");
         this.yourDeckCombo.addItem("Load Custom Deck...");
                 
@@ -65,6 +67,7 @@ public class LegacyGUI extends javax.swing.JFrame {
         this.AIDeckCombo.addItem("Feeding Frenzy");
         this.AIDeckCombo.addItem("Deep Sea");
         this.AIDeckCombo.addItem("Undead");
+        this.AIDeckCombo.addItem("Dragon");
         this.AIDeckCombo.addItem("Experimental");       
         repaint();
     }
@@ -157,8 +160,24 @@ public class LegacyGUI extends javax.swing.JFrame {
         }
         deck.add(new PaladinCard());
         return deck;
-        }
+    }
 
+    private ArrayList<Card> getDragonDeck() {
+        ArrayList<Card> deck = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            deck.add(new GrayDrakeCard());
+            deck.add(new VolcanicDrakeCard());
+            deck.add(new FrostDragonCard());
+            deck.add(new ArcherCard());
+            deck.add(new VolcanoCard());
+            deck.add(new PaladinCard());
+        }
+        for(int i = 0; i < 2; i++){
+            deck.add(new DragonSoulTrapCard());
+            deck.add(new DragonBreathCard());
+        }
+        return deck;
+    }
         /**
      * sets the decks based on combo boxes
      */
@@ -180,7 +199,11 @@ public class LegacyGUI extends javax.swing.JFrame {
                 AIDeck = this.getUndeadDeck();
                 enemyHeroPortrait = SpriteHandler.undeadHero;
                 break;
-            case 4: //experimental
+            case 4: //dragon
+                AIDeck = this.getDragonDeck();
+                enemyHeroPortrait = SpriteHandler.dragonHero;
+                break;
+            case 5: //experimental
                 AIDeck = this.getExperimentalDeck();
                 enemyHeroPortrait = SpriteHandler.undeadHero;
                 break;
@@ -205,7 +228,10 @@ public class LegacyGUI extends javax.swing.JFrame {
             case 3: //undead
                 PlayerDeck = this.getUndeadDeck();
                 break;
-            case 4: //experimental
+            case 4://dragon
+                PlayerDeck = this.getDragonDeck();
+                break;
+            case 5: //experimental
                 PlayerDeck = this.getExperimentalDeck();
                 break;
             

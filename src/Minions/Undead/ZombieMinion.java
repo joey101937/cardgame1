@@ -60,6 +60,7 @@ public class ZombieMinion extends Minion {
 
     @Override
     public void onAttacked(Minion attacker) {
+        if(attacker.canAttack())return;
         attacker.turnUndead();
         System.out.println("done");
         super.onAttacked(attacker);

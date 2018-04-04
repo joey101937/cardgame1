@@ -242,14 +242,14 @@ public class DeckBuilder extends JFrame{
             CardLabel cl = new CardLabel(c);
             cardLabels.add(cl);
             cl.setSize(300, 22);
-            cl.setLocation(800, 100 + 22 * i);
+            cl.setLocation(800, 40 + 22 * i);
             panel.add(cl);  
             i++;
         }
         JLabel numCards = new JLabel();
         numCards.setText(product.deck.size()+"/"+CustomDeck.MIN_NUM_CARDS);
         numCards.setSize(300,22);
-        numCards.setLocation(800,100+22*i);
+        numCards.setLocation(800,40+22*i);
         cardLabels.add(numCards);
         panel.add(numCards);
        classLabel.setIcon(new ImageIcon(product.deckClass.getClassIcon()));

@@ -26,7 +26,7 @@ public class VolcanicDrakeCard extends Card {
         cardPurpose = CardPurpose.VanillaMinion;
         cardText = "On Summon: \n Add 2 \"Fire Plume\" \n cards to your hand";
         sprite = SpriteHandler.volcanicDrakeCard;
-        cost = 8;
+        cost = 9;
         summon = new VolcanicDrakeMinion(this);
         heroClass = HeroClass.Dragon;
     }

@@ -33,8 +33,8 @@ public class CustomDeck {
     public ArrayList<Card> deck = new ArrayList<>(); //list of cards
     public HeroClass deckClass; //what class we are
     public static final int MAX_NUM_COPIES = 3;  //how many copies of a single card we allow in a deck
-    public static final int MIN_NUM_CARDS = 22;
-    public static final int MAX_NUM_CARDS = 22;
+    public static final int MIN_NUM_CARDS = 25;
+    public static final int MAX_NUM_CARDS = 25;
     
     /**
      * manually create new custom deck

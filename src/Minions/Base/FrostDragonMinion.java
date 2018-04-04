@@ -20,7 +20,7 @@ public class FrostDragonMinion extends Minion{
      public FrostDragonMinion(Card parent){
         this.parent = parent;
         this.owner = parent.getOwner();
-        attack = 4;
+        attack = 3;
         originalAttack = attack;
         maxHealth = 6;
         health = maxHealth;
