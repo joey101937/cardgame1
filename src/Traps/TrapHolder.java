@@ -58,6 +58,7 @@ public class TrapHolder {
         storage.set(i, null);
     }
     
+    
         /**
          * is storage at max capacity, excluding null items?
          * @return 

@@ -84,6 +84,7 @@ public class SpriteHandler {
     public static BufferedImage pirranahMinion;
     public static BufferedImage fireSpearCard;
     public static BufferedImage paladinMinion,paladinCard;
+    public static BufferedImage tornadoCard;
     //heros
     public static BufferedImage ashePortrait;
     public static BufferedImage seaWitchHero;
@@ -179,6 +180,7 @@ public class SpriteHandler {
             fireSpearCard = load("fireSpearCard.png");
             paladinMinion = load("paladin.png");
             paladinCard = load("paladinCard.png");
+            tornadoCard = load("tornadoCard.png");
             //heros
             ashePortrait = ImageIO.read(new File(Main.assets + "ashePortrait.png"));
             seaWitchHero = load("seaWitchHero.png");

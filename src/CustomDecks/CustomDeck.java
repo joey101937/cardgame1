@@ -191,6 +191,7 @@ public class CustomDeck {
             case "Spell Book": return new SpellBookCard();
             case "Vengefull Knight": return new VengefullKnightCard();
             case "Volcano": return new VolcanoCard();
+            case "Tornado": return new TornadoCard();
             //fish
             case "Baitfish": return new BaitfishCard();
             case "Carnifish": return new CarnifishCard();

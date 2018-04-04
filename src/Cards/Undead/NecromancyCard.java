@@ -47,6 +47,7 @@ public class NecromancyCard extends Card {
         owner.opponent.minions.remove(target);
         owner.minions.add(target);
         target.owner=owner;
+        target.parent.setHero(owner);
 
         owner.resource -= cost;
         owner.hand.remove(this);
