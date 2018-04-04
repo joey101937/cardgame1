@@ -42,6 +42,7 @@ public class SpriteHandler {
     public static BufferedImage gearSmall;
     public static BufferedImage iconFish;
     public static BufferedImage iconUndead;
+    public static BufferedImage iconUndeadSmall;
     //advanced fish
     public static BufferedImage baitfishCard;
     public static BufferedImage baitfishMinion;
@@ -105,6 +106,7 @@ public class SpriteHandler {
     public static BufferedImage skullKingCard;
     public static BufferedImage ghoulCard;
     public static BufferedImage ghoulMinion;
+    public static BufferedImage necromancyCard;
     
     public static void Initialize() {
         try {
@@ -199,6 +201,8 @@ public class SpriteHandler {
             skullKingCard = load("skullKingCard.png");
             ghoulMinion = load("ghoulMinion.png");
             ghoulCard = load("ghoulCard.png");
+            necromancyCard = load("necromancyCard.png");
+            iconUndeadSmall = load("iconUndeadSmall.png");
         } catch (Exception e) {
             e.printStackTrace();
             Main.display("Error loading all assets. Please Verify Assets folder.");

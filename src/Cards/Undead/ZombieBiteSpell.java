@@ -51,6 +51,7 @@ public class ZombieBiteSpell extends Card{
         target.maxHealth = health;
         target.refresh();
         target.sprite = SpriteHandler.swampZombieMinion;
+        target.turnUndead();
         
         owner.resource -= cost;
         owner.hand.remove(this);

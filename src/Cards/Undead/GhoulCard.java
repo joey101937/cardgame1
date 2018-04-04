@@ -9,7 +9,7 @@ import Cards.Card;
 import Cards.CardPurpose;
 import Cards.CardType;
 import CustomDecks.HeroClass;
-import Minions.Undead.ZombieMinion;
+import Minions.Undead.GhoulMinion;
 import cardgame1.SpriteHandler;
 
 /**
@@ -22,11 +22,11 @@ public class GhoulCard extends Card {
         name = "Ghoul";
         cardType = CardType.Minion;
         cardPurpose = CardPurpose.VanillaMinion;
-        cardText = "Minions attacked \n by this card \n become undead.";
+        cardText = "Minions damaged \n by this card \n become undead.";
         intrinsicValue = 0;
         sprite = SpriteHandler.ghoulCard;
         cost = 2;
-        summon = new ZombieMinion(this);
+        summon = new GhoulMinion(this);
         heroClass = HeroClass.Undead;
     }
 

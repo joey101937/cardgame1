@@ -9,6 +9,7 @@ import Cards.Card;
 import Cards.CardPurpose;
 import Cards.CardType;
 import CustomDecks.HeroClass;
+import Minions.Minion;
 import Minions.Undead.ZombieMinion;
 import cardgame1.SpriteHandler;
 
@@ -22,12 +23,13 @@ public class ZombieCard extends Card {
         name = "Zombie";
         cardType = CardType.Minion;
         cardPurpose = CardPurpose.VanillaMinion;
-        cardText = "Minions attacked \n by this card \n become undead.";
+        cardText = "Minions damaged \n by this card \n become undead.";
         intrinsicValue = 0;
         sprite = SpriteHandler.zombieCard;
         cost = 2;
         summon = new ZombieMinion(this);
         heroClass = HeroClass.Undead;
     }
+
 
 }

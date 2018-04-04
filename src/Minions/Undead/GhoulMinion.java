@@ -28,9 +28,18 @@ public class GhoulMinion extends Minion{
         sprite = SpriteHandler.ghoulMinion;
     }
 
-    @Override
+   @Override
     public void attack(Minion target) {
+         if(canAttack())target.turnUndead();
+        System.out.println("done");
         super.attack(target);
-        target.isMadeUndead = true;
+
+    }
+
+    @Override
+    public void onAttacked(Minion attacker) {
+        attacker.turnUndead();
+        System.out.println("done");
+        super.onAttacked(attacker);
     }
 }

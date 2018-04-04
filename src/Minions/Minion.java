@@ -35,7 +35,7 @@ public abstract class Minion{
     private boolean attackReady = false; //inherit one attack per turn flag. true = able to attack
     public boolean isFrozen = false;
     public boolean isSilenced = false;
-    public boolean isMadeUndead = false;//if the minoin has been made undead from a card effect
+    private boolean isMadeUndead = false;//if the minoin has been made undead from a card effect
     public Card parent; //card that summoned it, used for righclick for details.
     public Hero owner;  //hero controling this minion
     public static final Integer WIDTH = 150; //width of minion in pixel
@@ -118,6 +118,9 @@ public abstract class Minion{
         if(isSilenced){
             g.drawImage(SpriteHandler.canceledEffect, x + Minion.WIDTH/2 -27, y + Minion.HEIGHT - 27, null);
         }
+        if(hasTurnedUndead()){
+            g.drawImage(SpriteHandler.iconUndeadSmall, x+sprite.getWidth()/2-SpriteHandler.iconUndeadSmall.getWidth()/2,y+sprite.getHeight()-SpriteHandler.iconUndeadSmall.getHeight()/2,null);
+        }
     }
     
     /*   MINION GAMEPLAY      */
@@ -195,7 +198,14 @@ public abstract class Minion{
         intrinsicValue = 0;
         this.isSilenced = true;
     }
-    
+
+    public final void turnUndead(){
+        this.isMadeUndead=true;
+        new Sticker(SpriteHandler.skullEffect,this,AI.AI.speed/3);
+    }
+    public boolean hasTurnedUndead(){
+        return isMadeUndead;
+    }
     /**
      * attacks enemy hero/lifepoints directly
      */

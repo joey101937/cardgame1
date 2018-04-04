@@ -26,7 +26,7 @@ public class ZombieMinion extends Minion {
         maxHealth = 1;
         health = maxHealth;
         tribe = Tribe.Undead;
-        name = "Thrasher";
+        name = "Zombie";
         sprite = SpriteHandler.swampZombieMinion;
     }
     
@@ -47,12 +47,21 @@ public class ZombieMinion extends Minion {
         tribe = Tribe.Undead;
         name = "Zombie";
         sprite = SpriteHandler.swampZombieMinion;
+        this.turnUndead();
     }
     
-    @Override
-    public void attack(Minion target)
-    {
+   @Override
+    public void attack(Minion target) {
+        if(canAttack())target.turnUndead();
+        System.out.println("done");
         super.attack(target);
-        target.isMadeUndead=true;
-    }  
+
+    }
+
+    @Override
+    public void onAttacked(Minion attacker) {
+        attacker.turnUndead();
+        System.out.println("done");
+        super.onAttacked(attacker);
+    }
 }

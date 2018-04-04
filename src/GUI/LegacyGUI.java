@@ -146,16 +146,16 @@ public class LegacyGUI extends javax.swing.JFrame {
     }
      private ArrayList<Card> getExperimentalDeck() {
         ArrayList<Card> deck = new ArrayList<>();
-        for (int i = 0; i < 4; i++) {
-            deck.add(new KelpieCard());
-            deck.add(new PirranahCard());
-            deck.add(new FireBoltCard());
-            deck.add(new SeaWitchCard());
+        for (int i = 0; i < 3; i++) {
+            deck.add(new ZombieCard());
+            deck.add(new GhoulCard());
+            deck.add(new ZombieTrapCard());
+            deck.add(new NecromancyCard());
+            deck.add(new SpellBookCard());
+            deck.add(new ArcherCard());
+            deck.add(new VolcanoCard());
         }
-        for(int i = 0; i < 2; i++) {
-            deck.add(new SwollowCard());
-            deck.add(new PredationCard());
-         }
+        deck.add(new PaladinCard());
         return deck;
         }
 
@@ -182,7 +182,7 @@ public class LegacyGUI extends javax.swing.JFrame {
                 break;
             case 4: //experimental
                 AIDeck = this.getExperimentalDeck();
-                enemyHeroPortrait = SpriteHandler.fishManHero;
+                enemyHeroPortrait = SpriteHandler.undeadHero;
                 break;
         }
         if(yourDeckCombo.getSelectedItem().equals(useCustomText)){
