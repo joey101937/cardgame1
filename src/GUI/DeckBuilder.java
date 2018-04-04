@@ -258,6 +258,38 @@ public class DeckBuilder extends JFrame{
     }
     
     /**
+     * reloads the list of cards with only neutral and selected class cards
+     */
+    private void updateScrollPane(){
+        scroll.remove(interior);
+        interior = new JPanel();
+        interior.setLocation(0,0);
+        interior.setSize(700,1000);
+        interior.setPreferredSize(interior.getSize());
+        interior.setBackground(Color.gray);
+        
+        int column = 0;
+        int row = 0;
+        for(Card c : Card.getCardList()){
+            if(product.deckClass!=HeroClass.Neutral && product.deckClass != c.heroClass && c.heroClass!=HeroClass.Neutral)continue;
+            CardIcon ci = new CardIcon(c, this);
+            ci.setLocation(10 + column*(c.sprite.getWidth() + 30), row*(c.sprite.getHeight() + 20));
+            column++;
+            if(column > 2){
+            row++;
+            column = 0;
+            }
+            interior.add(ci);
+        }
+       if(Card.getCardList().size()%3 != 0) row++; //makes sure that it expands to account for incomeplete rows
+       interior.setPreferredSize(new Dimension(700, row*(300+20)));        
+        
+        scroll.add(interior);
+        scroll.setViewportView(interior);
+        interior.setLayout(null);
+    }
+    
+    /**
      * updates deck class using combo
      */
     private void updateDeckClass(){
@@ -265,6 +297,7 @@ public class DeckBuilder extends JFrame{
         hc = (HeroClass)classCombo.getItemAt(classCombo.getSelectedIndex());
         product.deckClass = hc;
         classLabel.setIcon(new ImageIcon(product.deckClass.getClassIcon()));
+        updateScrollPane();
         panel.repaint();
     }
     
