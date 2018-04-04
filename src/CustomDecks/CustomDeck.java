@@ -77,6 +77,9 @@ public class CustomDeck {
             case "Undead":
                 this.deckClass = HeroClass.Undead;
                 break;
+            case "Dragon":
+                this.deckClass = HeroClass.Dragon;
+                break;
             default: 
                 throw new CorruptFileException("Unknown Class: " + lines.get(0));
         }
@@ -218,6 +221,8 @@ public class CustomDeck {
             case "Gray Drake": return new GrayDrakeCard();
             case "Fire Plume": return new FirePlumeCard();
             case "Volcanic Drake": return new VolcanicDrakeCard();
+            case "Dragon's Breath": return new DragonBreathCard();
+            case "Dragon Soul Trap": return new DragonSoulTrapCard();
             default: throw new NoSuchCardException("No card found matching name: " + s);   
         }
     }

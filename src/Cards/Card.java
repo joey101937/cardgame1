@@ -274,6 +274,8 @@ public abstract class Card implements Comparable{
         output.add(new GrayDrakeCard());
         output.add(new FirePlumeCard());
         output.add(new VolcanicDrakeCard());
+        output.add(new DragonBreathCard());
+        output.add(new DragonSoulTrapCard());
         return output;
     }
 }

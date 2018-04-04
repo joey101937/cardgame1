@@ -10,6 +10,7 @@ import Cards.CardType;
 import Minions.Minion;
 import Minions.Tribe;
 import cardgame1.Main;
+import cardgame1.ProcHandler;
 import cardgame1.SpriteHandler;
 
 /**
@@ -21,7 +22,7 @@ public class GrayDrakeMinion extends Minion {
     public GrayDrakeMinion(Card parent) {
         this.parent = parent;
         this.owner = parent.getOwner();
-        attack = 3;
+        attack = 2;
         originalAttack = attack;
         maxHealth = 4;
         health = maxHealth;
@@ -40,5 +41,8 @@ public class GrayDrakeMinion extends Minion {
         Minion target = owner.opponent.minions.getOccupants().get(roll);
         target.attack-=2;
         if(target.attack<0)target.attack=0;
+        this.proc();
+        target.damagedTicker=20;
+        new ProcHandler(target);
     }
 }

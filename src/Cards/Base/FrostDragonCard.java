@@ -39,6 +39,7 @@ public class FrostDragonCard extends Card{
                 }else{
                     this.intrinsicValue+=1;
                 }
+                if(AI.AI.isHeroVulnerable(owner)) intrinsicValue++;
             }    
         }
     }
