@@ -43,6 +43,7 @@ public class SpriteHandler {
     public static BufferedImage iconFish;
     public static BufferedImage iconUndead;
     public static BufferedImage iconUndeadSmall;
+    public static BufferedImage iconDragon;
     //advanced fish
     public static BufferedImage baitfishCard;
     public static BufferedImage baitfishMinion;
@@ -92,6 +93,7 @@ public class SpriteHandler {
     public static BufferedImage undeadHero;
     public static BufferedImage knightHero;
     public static BufferedImage alligatorHero;
+    public static BufferedImage dragonHero;
     //undead
     public static BufferedImage zombieCard;
     public static BufferedImage swampZombieMinion;
@@ -108,6 +110,8 @@ public class SpriteHandler {
     public static BufferedImage ghoulCard;
     public static BufferedImage ghoulMinion;
     public static BufferedImage necromancyCard;
+    //Dragons
+    public static BufferedImage grayDrakeMinion, grayDrakeCard;
     
     public static void Initialize() {
         try {
@@ -140,6 +144,7 @@ public class SpriteHandler {
             gearSmall = load("gearSmall.png");
             iconFish = load("iconFish.png");
             iconUndead = load("iconUndead.png");
+            iconDragon = load("iconDragon.png");
             //Advanced Fish
             baitfishCard = load("baitFishCard.png");
             baitfishMinion = load("baitfish.png");
@@ -188,6 +193,7 @@ public class SpriteHandler {
             undeadHero = load("undeadHero.png");
             knightHero = load("knightHero.png");
             alligatorHero = load("alligatorHero.png");
+            dragonHero = load("dragonHero.png");
             //undead
             zombieCard = load("zombieCard.png");
             zombieTrap = load("zombieTrap.png");
@@ -205,6 +211,9 @@ public class SpriteHandler {
             ghoulCard = load("ghoulCard.png");
             necromancyCard = load("necromancyCard.png");
             iconUndeadSmall = load("iconUndeadSmall.png");
+            //Dragons
+            grayDrakeMinion = load("grayDrakeMinion.png");
+            grayDrakeCard = load("grayDrakeCard.png");
         } catch (Exception e) {
             e.printStackTrace();
             Main.display("Error loading all assets. Please Verify Assets folder.");

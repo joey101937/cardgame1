@@ -107,6 +107,7 @@ public class DeckBuilder extends JFrame{
         classCombo.addItem(HeroClass.Neutral);
         classCombo.addItem(HeroClass.Ocean);
         classCombo.addItem(HeroClass.Undead);
+        classCombo.addItem(HeroClass.Dragon);
         classCombo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -281,7 +282,7 @@ public class DeckBuilder extends JFrame{
             }
             interior.add(ci);
         }
-       if(Card.getCardList().size()%3 != 0) row++; //makes sure that it expands to account for incomeplete rows
+       row++; //makes sure that it expands to account for incomeplete rows
        interior.setPreferredSize(new Dimension(700, row*(300+20)));        
         
         scroll.add(interior);

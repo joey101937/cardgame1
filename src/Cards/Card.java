@@ -7,6 +7,7 @@ package Cards;
 
 import AI.AI;
 import Cards.Base.*;
+import Cards.Dragon.*;
 import Cards.Fish.*;
 import Cards.Undead.*;
 import CustomDecks.HeroClass;
@@ -269,6 +270,8 @@ public abstract class Card implements Comparable{
         output.add(new ZombieTrapCard());
         output.add(new GhoulCard());
         output.add(new NecromancyCard());
+        
+        output.add(new GrayDrakeCard());
         return output;
     }
 }

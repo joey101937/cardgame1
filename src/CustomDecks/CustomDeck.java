@@ -7,6 +7,7 @@ package CustomDecks;
 
 import Cards.Base.*;
 import Cards.Card;
+import Cards.Dragon.*;
 import Cards.Fish.*;
 import Cards.Undead.*;
 import java.io.BufferedReader;
@@ -213,6 +214,8 @@ public class CustomDeck {
             case "Zombify": return new ZombieTrapCard();
             case "Ghoul": return new GhoulCard();
             case "Necromancy": return new NecromancyCard();
+            //dragon
+            case "Gray Drake": return new GrayDrakeCard();
             default: throw new NoSuchCardException("No card found matching name: " + s);   
         }
     }

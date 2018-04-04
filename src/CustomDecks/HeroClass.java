@@ -117,7 +117,33 @@ public enum HeroClass {
         public BufferedImage getClassIcon() {
             return SpriteHandler.iconUndead;
         }
-    };
+    }, Dragon{
+        @Override
+        public BufferedImage getHeroPortrait() {
+            return SpriteHandler.dragonHero;
+        }
+
+        @Override
+        public String getHeroPortraitPath() {
+            return Main.assets+"dragonHero.png";
+        }
+
+        @Override
+        public String getClassIconPath() {
+            return Main.assets+"iconDragon.png";
+        }
+
+        @Override
+        public Color getColor() {
+            return Color.red;
+        }
+
+        @Override
+        public BufferedImage getClassIcon() {
+           return SpriteHandler.iconDragon;
+        }
+        
+    }    ;
     /**
      * gets the hero image corresponding to that class
      * @return the image
