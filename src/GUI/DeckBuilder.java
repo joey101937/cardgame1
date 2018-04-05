@@ -47,6 +47,7 @@ public class DeckBuilder extends JFrame{
     private JButton loadButton;
     private JButton clearButton;
     public CustomDeck product = new CustomDeck("Unnamed", new ArrayList<Card>(), HeroClass.Neutral); //deck we are building
+    public String loadedDeckName = null; //name of the deck we loaded via the deck loader, if applicable
     private static Font titleFont = new Font("Times", Font.BOLD, 35);
     private static Font classTitleFont = new Font("Arial",Font.PLAIN,20);
     public static DeckBuilder mainBuilder;
@@ -186,6 +187,18 @@ public class DeckBuilder extends JFrame{
         saveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if (DeckBuilder.mainBuilder.loadedDeckName != null) {
+                    String[] options = {"Save Over " + product.deckName, "Save as..."};
+                    int choice = JOptionPane.showOptionDialog(null, "Overwrite existing deck: " + product.deckName + "?", "Overwrite Prompt", 0, 0, null, options, "init");
+                    System.out.println(choice);
+                    //-1 = exit, 0 = overwrite, 1= save as
+                    if(choice == -1)return;
+                    if(choice == 0){
+                        product.export();
+                        return;
+                    }
+                    //if choice == 1, continue to next stage for saving
+                }              
                 String givenName = JOptionPane.showInputDialog("Save as...");
                 if(givenName==null || givenName.trim().equals("")){
                     JOptionPane.showMessageDialog(null, "No name detected");
@@ -389,6 +402,7 @@ public class DeckBuilder extends JFrame{
         this.updateList();
         product.deckClass = cd.deckClass;
         classCombo.setSelectedItem(cd.deckClass);
+        this.loadedDeckName = cd.deckName;
     }
     
     @Override

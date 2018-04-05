@@ -174,7 +174,7 @@ public class CustomDeck {
         }
         //if(deck.size()<MIN_NUM_CARDS) output.add("Deck must have at least " + MIN_NUM_CARDS + " cards; currently has " + deck.size());
        //if(deck.size()>MAX_NUM_CARDS) output.add("Deck must have no more than " + MAX_NUM_CARDS + " cards; currently has " + deck.size());
-         if(deck.size()!= 20) output.add("Deck must have exactly 25 cards. Currently " + deck.size() + ".");
+         if(deck.size()!= 25) output.add("Deck must have exactly 25 cards. Currently " + deck.size() + ".");
         return output;
     }
     /**
@@ -183,7 +183,7 @@ public class CustomDeck {
     private Card getCard(String s) throws NoSuchCardException{
         switch(s){
             //neutral
-            case "Arrakoa": return new ArakkoaCard();
+            case "Arakkoa": return new ArakkoaCard();
             case "Archer": return new ArcherCard();
             case "FireBolt": return new FireBoltCard();
             case "Holy Spear": return new FireSpearCard();

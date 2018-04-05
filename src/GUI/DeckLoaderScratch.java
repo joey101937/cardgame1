@@ -250,14 +250,19 @@ public class DeckLoaderScratch {
             chosenDeck = new CustomDeck(savedDecks.get(combo.getSelectedIndex()));
             deckTitleLabel.setText(chosenDeck.deckName);
             deckTitleLabel.setIcon(new ImageIcon(chosenDeck.deckClass.getHeroPortraitPath()));
-            int i = 0;  
+            int row = 0; 
+            int column = 0;
             for (Card c : chosenDeck.deck) {
                 JLabel cardLabel = new CardLabel(c,this);
-                cardLabel.setSize(300, 22);
-                cardLabel.setLocation(20, 200 + 22 * i);
+                cardLabel.setSize(200, 22);
+                cardLabel.setLocation(20 + (200*column), 200 + 22 * row);
                 panel.add(cardLabel);
                 cardLabels.add(cardLabel);
-                i++;
+                row++;
+                if(row>15){
+                row = 0;
+                column++;
+                }
             }
             if (!chosenDeck.isValid()) {
                 System.out.println(chosenDeck.diagnose());
