@@ -43,10 +43,10 @@ public class DeckLoaderScratch {
     private JComboBox combo;
     private JButton loadButton;
     private CardPreviewPanel cardDisplay;
-    private static Font titleFont = new Font("Times", Font.ITALIC, 35);
-    private static Font detailFont = new Font("Courier", Font.ITALIC,12);
-    private static Font deckTitleFont = new Font("Arial",Font.PLAIN,20);
-    private static Font cardTitleFont = new Font("Arial",Font.PLAIN,20);
+    public static Font titleFont = new Font("Times", Font.ITALIC, 35);
+    public static Font detailFont = new Font("Courier", Font.ITALIC,12);
+    public static Font deckTitleFont = new Font("Arial",Font.PLAIN,20);
+    public static Font cardTitleFont = new Font("Arial",Font.PLAIN,20);
     private ArrayList<JLabel> cardLabels = new ArrayList<>();
     private LegacyGUI maker;
     private DeckBuilder builder;

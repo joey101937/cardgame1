@@ -22,7 +22,7 @@ public class DragonSoulSpell extends Card {
     Minion host = null;
     public DragonSoulSpell(Minion m) {
         host = m;
-        name = m.name + " Soul";
+        name = m.name.split(" ")[0] + " Soul";
         cardType = CardType.Spell;
         heroClass = HeroClass.Restricted;
         cardPurpose = CardPurpose.Special;

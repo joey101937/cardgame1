@@ -174,7 +174,7 @@ public class CustomDeck {
         }
         //if(deck.size()<MIN_NUM_CARDS) output.add("Deck must have at least " + MIN_NUM_CARDS + " cards; currently has " + deck.size());
        //if(deck.size()>MAX_NUM_CARDS) output.add("Deck must have no more than " + MAX_NUM_CARDS + " cards; currently has " + deck.size());
-         if(deck.size()!= 20) output.add("Deck must have exactly 20 cards. Currently " + deck.size() + ".");
+         if(deck.size()!= 20) output.add("Deck must have exactly 25 cards. Currently " + deck.size() + ".");
         return output;
     }
     /**
@@ -196,6 +196,7 @@ public class CustomDeck {
             case "Vengefull Knight": return new VengefullKnightCard();
             case "Volcano": return new VolcanoCard();
             case "Tornado": return new TornadoCard();
+            case "Undying Soldier": return new UndyingSoldierCard();
             //fish
             case "Baitfish": return new BaitfishCard();
             case "Carnifish": return new CarnifishCard();

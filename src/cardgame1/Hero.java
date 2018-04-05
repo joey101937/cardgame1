@@ -8,6 +8,7 @@ package cardgame1;
 import AI.AI;
 import Minions.Minion;
 import Cards.*;
+import GUI.DeckLoaderScratch;
 import GUI.LegacyGUI;
 import Traps.TrapHolder;
 import java.awt.Color;
@@ -46,6 +47,7 @@ public class Hero {
     public boolean turn = false; //is it our turn?
     public boolean isAIControlled = false;
     private boolean available = true;//makes it so we can only restart once at a time
+    private boolean hasNotifiedDeckEmpty = false; //has the player been alerted that their deck is empty?
        
     //CONSTRUCTOR
     public Hero(String name, ArrayList<Card> deck, BufferedImage portrait){
@@ -73,6 +75,10 @@ public class Hero {
      */
     public void draw(){
         if(deck.size() == 0){
+            if(!this.hasNotifiedDeckEmpty && this==Board.playerHero){
+                JOptionPane.showMessageDialog(null, "No more cards in deck!");
+                hasNotifiedDeckEmpty = true;
+            }
             System.out.println(this + " deck empty");
             return;
         }
@@ -268,6 +274,11 @@ public class Hero {
             g.setColor(new Color(0, 255, 0, procTimer * 10));
             g.fillRect(x, y, this.picture.getWidth(), picture.getHeight());
         }
+        Font prevFont = g.getFont();
+        g.setColor(Color.black);
+        g.setFont(DeckLoaderScratch.detailFont);
+        g.drawString(deck.size() + " cards in deck", x+picture.getWidth(), y+picture.getHeight()/2);
+        g.setFont(prevFont);
     }
     
     /**
