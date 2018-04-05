@@ -44,6 +44,7 @@ public class SpriteHandler {
     public static BufferedImage iconUndead;
     public static BufferedImage iconUndeadSmall;
     public static BufferedImage iconDragon;
+    
     //advanced fish
     public static BufferedImage baitfishCard;
     public static BufferedImage baitfishMinion;
@@ -86,6 +87,7 @@ public class SpriteHandler {
     public static BufferedImage fireSpearCard;
     public static BufferedImage paladinMinion,paladinCard;
     public static BufferedImage tornadoCard;
+    public static BufferedImage spearmanMinion, spearmanCard;
     //heros
     public static BufferedImage ashePortrait;
     public static BufferedImage seaWitchHero;
@@ -149,7 +151,7 @@ public class SpriteHandler {
             iconFish = load("iconFish.png");
             //iconUndead = load("iconUndead.png");
             iconUndead = load("iconSkull.png");
-            iconDragon = load("iconDragon.png");
+            iconDragon = load("iconDragon2.png");
             //Advanced Fish
             baitfishCard = load("baitFishCard.png");
             baitfishMinion = load("baitfish.png");
@@ -191,6 +193,8 @@ public class SpriteHandler {
             paladinMinion = load("paladin.png");
             paladinCard = load("paladinCard.png");
             tornadoCard = load("tornadoCard.png");
+            spearmanCard = load("spearmanCard.png");
+            spearmanMinion = load("spearman.png");
             //heros
             ashePortrait = ImageIO.read(new File(Main.assets + "ashePortrait.png"));
             seaWitchHero = load("seaWitchHero.png");

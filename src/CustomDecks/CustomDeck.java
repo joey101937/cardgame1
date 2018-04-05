@@ -197,6 +197,7 @@ public class CustomDeck {
             case "Volcano": return new VolcanoCard();
             case "Tornado": return new TornadoCard();
             case "Undying Soldier": return new UndyingSoldierCard();
+            case "Spearman": return new SpearmanCard();
             //fish
             case "Baitfish": return new BaitfishCard();
             case "Carnifish": return new CarnifishCard();

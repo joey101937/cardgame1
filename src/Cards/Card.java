@@ -260,6 +260,7 @@ public abstract class Card implements Comparable{
         output.add(new VolcanoCard());
         output.add(new TornadoCard());
         output.add(new UndyingSoldierCard());
+        output.add(new SpearmanCard());
         
         output.add(new BaitfishCard());
         output.add(new CarnifishCard());
