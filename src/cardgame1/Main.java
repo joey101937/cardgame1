@@ -33,6 +33,7 @@ public class Main {
     public static Thread gameThread;
     public static BufferedImage BackgroundImage;
     public static Board mainBoard;
+    public static boolean isMulitiplayerGame = false;
     
     public static ArrayList<Card> enemyCards = new ArrayList<>();
     public static ArrayList<Card> playerCards = new ArrayList<>();
@@ -81,6 +82,15 @@ public class Main {
             playerCards.add(new PredationCard());
         }
 
+    }
+    
+    public static ArrayList<Card> getTestDeck(){
+        ArrayList<Card> output = new ArrayList<>();
+        for (int i = 0; i < 6; i++) {
+            output.add(new ArakkoaCard());
+            output.add(new FireBoltCard());
+        }
+        return output;
     }
     
     
