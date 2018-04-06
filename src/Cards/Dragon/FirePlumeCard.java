@@ -46,6 +46,7 @@ public class FirePlumeCard extends Card{
         Main.wait(AI.AI.speed/3);
         target.takeDamage(spellDamage);
         owner.resource -= cost;
+        notifyPhantom(target,null);
         owner.hand.remove(this);
         TrapListener.onPlay(this);
         return 1;
@@ -64,6 +65,7 @@ public class FirePlumeCard extends Card{
         Main.wait(AI.AI.speed/3);
         target.takeDamage(spellDamage);
         owner.resource -= cost;
+        notifyPhantom(null,target);
         owner.hand.remove(this);
         TrapListener.onPlay(this);
         return 1; 

@@ -68,6 +68,7 @@ public class SkeletonArmySpell extends Card {
           Main.wait(AI.AI.speed/4);
       }
         owner.resource -= cost;
+        notifyPhantom(null,null);
         owner.hand.remove(this);
         TrapListener.onPlay(this);
         return 1;

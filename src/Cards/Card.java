@@ -198,15 +198,12 @@ public abstract class Card implements Comparable{
     protected int defaultMinionSummon(){
         if (canAfford()) {
             if (owner.minions.add(summon)) {
-                if (owner.opponent.isPhantomControlled) {
+                if (owner.opponent.isPhantomControlled && (this.cardPurpose==CardPurpose.VanillaMinion || cardPurpose==CardPurpose.ChargeMinion || cardPurpose==CardPurpose.BattlecryMinionDraw)) {
                     String message = "c-" + owner.hand.indexOf(this) + "-n-" + "0";
                     System.out.println("sending message: " + message);
                     owner.opponent.getPhantom().communicateMessage(message);
                 }
-               // System.out.println("reducing " + owner.name + " resources from " + owner.resource + "/"+owner.maxResource + " to " + (owner.resource-1) +"/" + owner.maxResource);
                 owner.resource -= cost;
-               // if(owner==Board.topHero)System.out.println("owned by topHero hero");
-               // else System.out.println("not owned by topHero hero");
                 owner.hand.remove(this);
                 summon.onSummon();
                 TrapListener.onPlay(this);
@@ -222,9 +219,14 @@ public abstract class Card implements Comparable{
      * if needed, notifies the phantom and sends the appropriate message
      */
     public void notifyPhantom(Minion targetMinion, Hero targetHero){
-        if(!Main.isMulitiplayerGame)return;
-        String message = "c-"+owner.hand.indexOf(this)+"-";
-        if(targetMinion!=null){
+        if (!Main.isMulitiplayerGame)
+            return;
+        String message = "c-" + owner.hand.indexOf(this) + "-";
+        if (targetMinion == null && targetHero == null) {
+            message+="n-0";
+            Board.nonPlayerHero.getPhantom().communicateMessage(message);
+        }
+        if (targetMinion != null) {
            if(targetMinion.owner!=owner){
                message+="em-";
            }else{

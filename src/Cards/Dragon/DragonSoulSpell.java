@@ -53,6 +53,7 @@ public class DragonSoulSpell extends Card {
         if(!canAfford())return 0;
         host.onSummon();
         owner.resource -= cost;
+        notifyPhantom(null,null);
         owner.hand.remove(this);
         TrapListener.onPlay(this);
         return 1;

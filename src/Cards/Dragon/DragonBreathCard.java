@@ -75,6 +75,7 @@ public class DragonBreathCard extends Card {
         Main.wait(AI.AI.speed / 2);
         target.onSummon();
         owner.resource -= cost;
+        notifyPhantom(target,null);
         owner.hand.remove(this);
         TrapListener.onPlay(this);
         return 1;

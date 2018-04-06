@@ -49,6 +49,7 @@ public class VolcanoCard extends Card{
         for(Minion target : owner.opponent.minions.getOccupants()){
             target.takeDamage(spellDamage);
         }
+        notifyPhantom(null,null);
         owner.resource -= cost;
         owner.hand.remove(this);
         TrapListener.onPlay(this);

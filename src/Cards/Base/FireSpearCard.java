@@ -46,6 +46,7 @@ public class FireSpearCard extends Card {
         if (!canAfford()) {
             return 0; //reutrn 0 if unaffordable
         }
+        notifyPhantom(target,null);
         Sticker impactEffect = new Sticker(SpriteHandler.blastEffectSmall, target, AI.AI.speed/2);
         Main.wait(AI.AI.speed/2);
         target.destroy();

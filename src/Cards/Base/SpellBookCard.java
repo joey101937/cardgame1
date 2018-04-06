@@ -33,6 +33,7 @@ public class SpellBookCard extends Card {
     @Override
     public int cast(Minion m){
         if(!canAfford()) return 0;
+        notifyPhantom(null,null);
         owner.hand.remove(this); //remove card first
         for(int i =0 ; i < spellDamage; i++){
            owner.draw(); 

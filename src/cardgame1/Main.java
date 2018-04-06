@@ -12,6 +12,7 @@ import Cards.Base.ArcherCard;
 import Cards.Base.KnightCard;
 import Cards.Base.ArakkoaCard;
 import Cards.*;
+import Cards.Dragon.GrayDrakeCard;
 import Cards.Fish.*;
 import GUI.LegacyGUI;
 import Multiplayer.Phantom;
@@ -90,6 +91,9 @@ public class Main {
         for (int i = 0; i < 6; i++) {
             output.add(new ArakkoaCard());
             output.add(new FireBoltCard());
+            output.add(new ArcherCard());
+            output.add(new PirranahCard());
+            output.add(new GrayDrakeCard());
         }
         return output;
     }

@@ -58,6 +58,7 @@ public class TornadoCard extends Card {
             new Sticker(SpriteHandler.redX,t.getXCoordinate()+SpriteHandler.trapSymbol.getWidth()/2,t.getYCoordinate()+SpriteHandler.trapSymbol.getHeight()/2,AI.AI.speed);
             owner.opponent.traps.remove(t);
         }
+        notifyPhantom(null,null);
         owner.resource -= cost;
         owner.hand.remove(this);
         TrapListener.onPlay(this);

@@ -52,7 +52,7 @@ public class ZombieBiteSpell extends Card{
         target.refresh();
         target.sprite = SpriteHandler.swampZombieMinion;
         target.turnUndead();
-        
+        notifyPhantom(target,null);
         owner.resource -= cost;
         owner.hand.remove(this);
         TrapListener.onPlay(this);

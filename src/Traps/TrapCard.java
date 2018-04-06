@@ -54,6 +54,7 @@ public class TrapCard extends Card{
        if(owner.traps.add(myTrap)){
            myTrap.owner = owner;
            owner.resource-=cost;
+           notifyPhantom(null,null);
            owner.hand.remove(this);
            TrapListener.onPlay(this);
            return 1; //if this code runs, the trap has been added successfully

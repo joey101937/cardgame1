@@ -10,6 +10,7 @@ import Cards.CardPurpose;
 import Cards.CardType;
 import Minions.Base.PaladinMinion;
 import Minions.Minion;
+import Traps.TrapListener;
 import cardgame1.Hero;
 import cardgame1.Main;
 import cardgame1.SpriteHandler;
@@ -34,10 +35,21 @@ public class PaladinCard extends Card {
     }
   @Override
     public int cast(Minion target) {
-        int outcome = defaultMinionSummon();
-        if(outcome == 1){
+        int outcome = 0;
+        if (!canAfford()) {
+            return 0;
+        }
+        if (owner.minions.add(summon)) {
+            notifyPhantom(target,null);
+            owner.resource -= cost;
+            owner.hand.remove(this);
+            summon.onSummon();
+            TrapListener.onPlay(this);
+            outcome = 1;
+        }
+        if (outcome == 1) {
             target.proc();
-            Main.wait(AI.AI.speed/3);
+            Main.wait(AI.AI.speed / 3);
             //target.health+=spellDamage;
             target.heal(spellDamage);
         }
@@ -46,8 +58,19 @@ public class PaladinCard extends Card {
 
     @Override
     public int castOnHero(Hero target) {
-        int outcome = defaultMinionSummon();
-        if(outcome == 1){
+        int outcome = 0;
+        if (!canAfford()) {
+            return 0;
+        }
+        if (owner.minions.add(summon)) {
+            notifyPhantom(null, target);
+            owner.resource -= cost;
+            owner.hand.remove(this);
+            summon.onSummon();
+            TrapListener.onPlay(this);
+            outcome = 1;
+        }
+        if (outcome == 1) {
             target.proc();
             Main.wait(AI.AI.speed/3);
             //target.health+=spellDamage;
