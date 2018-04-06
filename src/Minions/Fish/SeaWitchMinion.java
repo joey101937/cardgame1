@@ -10,6 +10,7 @@ import Cards.Card;
 import Cards.Fish.*;
 import Minions.Minion;
 import Minions.Tribe;
+import Multiplayer.Phantom;
 import cardgame1.Main;
 import cardgame1.SpriteHandler;
 import java.util.ArrayList;
@@ -51,6 +52,6 @@ public class SeaWitchMinion extends Minion{
         //
         this.proc();
         Main.wait(AI.AI.speed/3);
-        owner.draw(options.get((int)(Math.random()*options.size())));
+        owner.draw(options.get((int)(Phantom.random.nextDouble()*options.size())));
         }
 }

@@ -197,7 +197,15 @@ public abstract class Card implements Comparable{
     protected int defaultMinionSummon(){
         if (canAfford()) {
             if (owner.minions.add(summon)) {
+                if (owner.opponent.isPhantomControlled) {
+                    String message = "c-" + owner.hand.indexOf(this) + "-n-" + "0";
+                    System.out.println("sending message: " + message);
+                    owner.opponent.getPhantom().communicateMessage(message);
+                }
+               // System.out.println("reducing " + owner.name + " resources from " + owner.resource + "/"+owner.maxResource + " to " + (owner.resource-1) +"/" + owner.maxResource);
                 owner.resource -= cost;
+               // if(owner==Board.topHero)System.out.println("owned by topHero hero");
+               // else System.out.println("not owned by topHero hero");
                 owner.hand.remove(this);
                 summon.onSummon();
                 TrapListener.onPlay(this);
@@ -290,4 +298,5 @@ public abstract class Card implements Comparable{
         output.add(new DragonSoulTrapCard());
         return output;
     }
+    
 }

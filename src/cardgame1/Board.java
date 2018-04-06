@@ -103,6 +103,37 @@ public class Board extends Canvas implements Runnable {
         controller.startGame();
     }
     
+    /**
+     * constructor for use with mulitplayer
+     * @param t top hero
+     * @param b bot hero
+     * @param d dimension of the window
+     * @param isServer weather or not this user is the server
+     */
+    public Board(Hero t, Hero b, Dimension d, boolean isServer) throws Exception{
+        mainBoard = this;
+        xScale = (d.getWidth() / 1920);
+        yScale = d.getHeight() / 1080;
+        System.out.println("Scale; " + xScale + ", " + yScale);
+        System.out.println("Dimenstion: " + d.toString());
+        window = new Window(d.width, d.height, "Card Game", this);
+        topHero = t;
+        botHero = b;
+        playerHero = b;
+        nonPlayerHero = t;
+        this.addMouseListener(ih);
+        this.addMouseMotionListener(ih);
+        this.addKeyListener(ih);
+        this.visHandler = new VisualEffectHandler(this);
+        this.controller = new GameController(this);
+        nonPlayerHero.attachPhantom(isServer);
+        controller.startGame(isServer);
+        t.opponent = b;
+        b.opponent = t;       
+        System.out.println("board constructor done");
+        System.out.println("using phantom: " + t.getPhantom());
+    }
+
     public static Board getMainBoard(){
         return mainBoard;
     }

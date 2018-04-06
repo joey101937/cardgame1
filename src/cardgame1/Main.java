@@ -14,6 +14,7 @@ import Cards.Base.ArakkoaCard;
 import Cards.*;
 import Cards.Fish.*;
 import GUI.LegacyGUI;
+import Multiplayer.Phantom;
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -183,7 +184,7 @@ public class Main {
             }else{
                 //here is the body of our method
                 int diff = max - min;
-                int output = (int)(Math.random()*diff); //generates a random number between 0 and the difference between the numbers
+                int output = (int)(Phantom.random.nextDouble()*diff); //generates a random number between 0 and the difference between the numbers
                 return (min + output);                //returns that random number plus the min
             }
         }

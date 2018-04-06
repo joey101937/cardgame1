@@ -9,6 +9,7 @@ import Cards.Card;
 import Cards.CardType;
 import Minions.Minion;
 import Minions.Tribe;
+import Multiplayer.Phantom;
 import cardgame1.Main;
 import cardgame1.ProcHandler;
 import cardgame1.SpriteHandler;
@@ -37,7 +38,7 @@ public class GrayDrakeMinion extends Minion {
     @Override
     public void onSummon() {
         if(owner.opponent.minions.numOccupants()==0)return;
-        int roll = (int) (Math.random() * (owner.opponent.minions.numOccupants()));
+        int roll = (int) (Phantom.random.nextDouble() * (owner.opponent.minions.numOccupants()));
         Minion target = owner.opponent.minions.getOccupants().get(roll);
         target.attack-=2;
         if(target.attack<0)target.attack=0;

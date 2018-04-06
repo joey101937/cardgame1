@@ -25,6 +25,7 @@ public class PhantomTester implements Runnable{
         System.out.println("client phantom created");
         Thread.sleep(100);
         clientPhantom.communicateMessage("c-0-n-0");
+        System.out.println("test");
     }
 
     @Override

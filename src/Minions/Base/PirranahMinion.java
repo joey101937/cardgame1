@@ -8,6 +8,7 @@ package Minions.Base;
 import Cards.Card;
 import Minions.Minion;
 import Minions.Tribe;
+import Multiplayer.Phantom;
 import cardgame1.Main;
 import cardgame1.SpriteHandler;
 import cardgame1.Sticker;
@@ -41,7 +42,7 @@ public class PirranahMinion extends Minion{
         Sticker s = new Sticker(SpriteHandler.bloodMedium,this,AI.AI.speed/2); 
         Main.wait(AI.AI.speed/2);
         
-        int roll = (int)(Math.random()*(owner.opponent.minions.numOccupants()));
+        int roll = (int)(Phantom.random.nextDouble()*(owner.opponent.minions.numOccupants()));
         Minion target = owner.opponent.minions.getOccupants().get(roll);
         this.refresh();
         this.attack(target);

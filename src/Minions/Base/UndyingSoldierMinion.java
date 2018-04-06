@@ -9,6 +9,7 @@ import Cards.Base.UndyingSoldierCard;
 import Cards.Card;
 import Minions.Minion;
 import Minions.Tribe;
+import Multiplayer.Phantom;
 import cardgame1.SpriteHandler;
 
 /**
@@ -34,7 +35,7 @@ public class UndyingSoldierMinion extends Minion {
         super.onDeath();
         Card toAdd = new UndyingSoldierCard();
         toAdd.setHero(owner);
-        owner.deck.add((int)(Math.random()*owner.deck.size()), toAdd);
+        owner.deck.add((int)(Phantom.random.nextDouble()*owner.deck.size()), toAdd);
     }
 
 }

@@ -22,10 +22,11 @@ import java.util.logging.Logger;
  * drives the non-user hero, controlled by remote opponenet player
  * @author Joseph
  */
-public class Phantom implements Runnable{
+public final class Phantom implements Runnable{
     /*        FIELDS          */
     public Hero host;
     public boolean isServer = false;
+    public static boolean syncedRandom = false;
     public static int port = 444;
     private static final int rSeed = (int)(Math.random()*9999);
     public static Random random = new Random(rSeed);
@@ -37,14 +38,17 @@ public class Phantom implements Runnable{
     
     
     public Phantom(Hero host, boolean isServer) throws Exception{
+        System.out.println("making new phantom");
         this.host = host;
         this.isServer = isServer;
         Main.isMulitiplayerGame=true;
+        System.out.println("isServer: " + isServer);
         if (isServer) {
             setupServer();
         } else {
             setupClient();
         }
+        System.out.println("phantom setup complete ");
         Thread t = new Thread(this);
         t.start();
     }
@@ -68,6 +72,7 @@ public class Phantom implements Runnable{
 
     
     public void communicateMessage(String s){
+        System.out.println("sending message: " + s);
         printStream.println(s);
     }
     
@@ -77,6 +82,7 @@ public class Phantom implements Runnable{
         if(isServer){
             //server code
             printStream.println("randSeed: " + rSeed);
+            
             while (true) {
                 String message = br.readLine();
                 System.out.println("server got message: " + message);
@@ -112,17 +118,23 @@ public class Phantom implements Runnable{
     private void interperateMessage(String message) {
         try{
         if (message == null) return; 
-        if (message.startsWith("randSeed: ")) {
+        if(message.equals("gotRandom")){ //acknowledgement that client got our random
+        syncedRandom = true;
+        return;
+        }
+        if (message.startsWith("randSeed: ")) {  //set random to servers seed
+            if(syncedRandom)return;
             int seed = Integer.parseInt(message.split(" ")[1]);
             System.out.println("setting seed to " + seed);
             random = new Random(seed);
+            syncedRandom = true;
+            communicateMessage("gotRandom");
             return;
         }
-        host.onTurnStart();
+              if (message.equals("end")) {
+                Board.controller.nextTurn(); //end turn
+            }
         if(!host.turn)return;//messages after this will not execute if its not our turn
-        if(message.equals("end")){
-            Board.controller.nextTurn(); //end turn
-        }
         String[] contents = message.split("-");
         int actorIndex = Integer.parseInt(contents[1]);
         int targetIndex = Integer.parseInt(contents[3]);
@@ -147,7 +159,7 @@ public class Phantom implements Runnable{
                         host.hand.get(actorIndex).castOnHero(host.opponent);
                         break;
                     case "n":
-                        System.out.println("casting card on null");
+                        System.out.println("casting card on null " + host.hand.get(actorIndex));
                         host.hand.get(actorIndex).cast(null);
                         break;
                 }

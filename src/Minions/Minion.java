@@ -9,6 +9,7 @@ import Cards.Card;
 import Traps.TrapListener;
 import cardgame1.Board;
 import cardgame1.Hero;
+import cardgame1.Main;
 import cardgame1.ProcHandler;
 import cardgame1.SpriteHandler;
 import cardgame1.Sticker;
@@ -131,6 +132,11 @@ public abstract class Minion{
      */
     public void attack(Minion target){
         if(!canAttack() || attack == 0) return;
+         if(Main.isMulitiplayerGame && owner.opponent.isPhantomControlled){
+            String message = "m-"+owner.minions.indexOf(this)+"-em-"+owner.opponent.minions.indexOf(target);
+            if(message.split("1").length!=4)System.out.println("ERROR minion attack trying to send " + message);
+            Board.nonPlayerHero.getPhantom().communicateMessage(message);
+        }
         target.takeDamage(this.attack);
         this.takeDamage(target.attack);
         this.attackReady = false;
@@ -147,6 +153,9 @@ public abstract class Minion{
         target.takeDamage(this.attack);
         this.attackReady = false;
         TrapListener.onAttackHero(this, target);
+        if(Main.isMulitiplayerGame && owner.opponent.isPhantomControlled){
+            Board.nonPlayerHero.getPhantom().communicateMessage("m-"+owner.minions.indexOf(this)+"-eh-"+0);
+        }
     }
     /**
      * removes from the game

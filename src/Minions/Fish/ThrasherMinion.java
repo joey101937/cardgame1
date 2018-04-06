@@ -8,6 +8,7 @@ package Minions.Fish;
 import Cards.Card;
 import Minions.Minion;
 import Minions.Tribe;
+import Multiplayer.Phantom;
 import cardgame1.Main;
 import cardgame1.SpriteHandler;
 import cardgame1.Sticker;
@@ -39,7 +40,7 @@ public class ThrasherMinion extends Minion{
         Sticker s = new Sticker(SpriteHandler.bloodMedium,this,AI.AI.speed/2); 
         Main.wait(AI.AI.speed/2);
         
-        int roll = (int)(Math.random()*(owner.opponent.minions.numOccupants()+1));
+        int roll = (int)(Phantom.random.nextDouble()*(owner.opponent.minions.numOccupants()+1));
         if (roll >= owner.opponent.minions.numOccupants()){
             owner.opponent.takeDamage(attack);
             return;

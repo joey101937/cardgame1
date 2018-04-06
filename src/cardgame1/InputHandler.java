@@ -140,6 +140,7 @@ public class InputHandler extends KeyAdapter implements MouseListener, MouseMoti
         }
         Board.visHandler.resetMouseOverTime();
         Board.controller.nextTurn();
+        if(Main.isMulitiplayerGame)Board.nonPlayerHero.getPhantom().communicateMessage("end");
         keyTimer = 15;
     }
 

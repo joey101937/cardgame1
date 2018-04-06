@@ -10,6 +10,7 @@ import Minions.Minion;
 import Cards.*;
 import GUI.DeckLoaderScratch;
 import GUI.LegacyGUI;
+import Multiplayer.Phantom;
 import Traps.TrapHolder;
 import java.awt.Color;
 import java.awt.Font;
@@ -33,7 +34,7 @@ public class Hero {
     /*   FIELDS   */
     public int health = 30;
     public int maxHealth = 30;
-    public int resource, maxResource;   //mana used to play cards
+    public int resource, maxResource = 1;   //mana used to play cards
     public BufferedImage picture; //visual representation
     public String name;
     public PlayArea<Minion> minions = new PlayArea<Minion>();
@@ -46,8 +47,10 @@ public class Hero {
     public int damageTicker = 0; //used to apply the red on damage effect
     public boolean turn = false; //is it our turn?
     public boolean isAIControlled = false;
+    public boolean isPhantomControlled = false;
     private boolean available = true;//makes it so we can only restart once at a time
     private boolean hasNotifiedDeckEmpty = false; //has the player been alerted that their deck is empty?
+    private Phantom phantom; //phantom controller, if applicable
        
     //CONSTRUCTOR
     public Hero(String name, ArrayList<Card> deck, BufferedImage portrait){
@@ -55,20 +58,39 @@ public class Hero {
         this.deck = deck;
         this.picture = portrait;
         this.resource = 1;
-        this.maxResource = 1;
         for(Card c: deck){
             c.setHero(this);
         }
-        shuffle();
+        //shuffle();  //temporarily disabled shuffle
         id = idBank++;
     }
     
+    public Phantom getPhantom() {
+        System.out.println("getting phantom " + phantom);
+        return phantom;
+    }
     
     public void setAIControlled(boolean b){
         this.isAIControlled = b;
     }
     
+    public void attachPhantom(boolean isServer) throws Exception{
+        this.isPhantomControlled=true;
+        phantom = new Phantom(this,isServer);
+        System.out.println("attached phantom " + phantom + " to " + name);
+    }
     
+    public Hero(Phantom p) throws Exception{
+        this.attachPhantom(p.isServer);
+    }
+    
+    
+    public void setDeck(ArrayList<Card> list){
+        for(Card c : list){
+            c.setHero(this);
+        }
+        deck=list;
+    }
     /**
      * Attempts to put card from top of deck into hand. 
      * If hand is too full, the top card of the deck is simply discarded.
@@ -110,10 +132,9 @@ public class Hero {
         ArrayList<Card> temp = new ArrayList<>();
         Main.wait(10);
         while (!deck.isEmpty()) {
-            temp.add(deck.remove((int) (Math.random() * deck.size())));
+            temp.add(deck.remove((int) (Phantom.random.nextDouble() * deck.size())));
         }
         deck = temp;
-       
     }
     
     public void onTurnStart(){
