@@ -54,6 +54,7 @@ public class FireBoltCard extends Card{
     public int cast(Minion target) {
         if(target == null) return -1;
         if(!canAfford()) return 0; //reutrn 0 if unaffordable
+        notifyPhantom(target,null);
         Sticker impactEffect = new Sticker(SpriteHandler.blastEffectSmall, target, AI.AI.speed/3);
         Main.wait(AI.AI.speed/3);
         target.takeDamage(spellDamage);
@@ -72,6 +73,7 @@ public class FireBoltCard extends Card{
     public int castOnHero(Hero target) {
         if(target == null) return -1;
         if(!canAfford()) return 0; //reutrn 0 if unaffordable
+        notifyPhantom(null,target);
         Sticker impactEffect = new Sticker(SpriteHandler.blastEffectSmall,target,AI.AI.speed/3);
         Main.wait(AI.AI.speed/3);
         target.takeDamage(spellDamage);

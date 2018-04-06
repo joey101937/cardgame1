@@ -5,18 +5,20 @@
  */
 package Multiplayer;
 
+import static AI.AI.speed;
+import Cards.Card;
+import Cards.CardPurpose;
 import cardgame1.Board;
 import cardgame1.Hero;
 import cardgame1.Main;
+import cardgame1.SpriteHandler;
+import cardgame1.Sticker;
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * drives the non-user hero, controlled by remote opponenet player
@@ -139,28 +141,39 @@ public final class Phantom implements Runnable{
         int actorIndex = Integer.parseInt(contents[1]);
         int targetIndex = Integer.parseInt(contents[3]);
         //play commands
+        Card toUse = null;
         switch(contents[0]){
             case "c": //casting a card
                 switch(contents[2]){
                     case "fm": //on a friendly minion
                         System.out.println("casting card on friednly minion");
-                        host.hand.get(actorIndex).cast(host.minions.get(targetIndex));
+                        toUse = host.hand.get(actorIndex);
+                        displayCard(toUse);
+                        toUse.cast(host.minions.get(targetIndex));  
                         break;
                     case "em": //on an enemy minion
                         System.out.println("casting card on enemy minion");
-                        host.hand.get(actorIndex).cast(host.opponent.minions.get(targetIndex));
+                        toUse = host.hand.get(actorIndex);
+                        displayCard(toUse);
+                        toUse.cast(host.opponent.minions.get(targetIndex));              
                         break;
                     case "fh": //on friednly hero
                         System.out.println("casting card on friednly hero");
-                        host.hand.get(actorIndex).castOnHero(host);
+                        toUse = host.hand.get(actorIndex);
+                        displayCard(toUse);
+                        toUse.castOnHero(host);
                         break;
                     case "eh": //on enemy hero
                         System.out.println("casting card on enemy hero");
-                        host.hand.get(actorIndex).castOnHero(host.opponent);
+                        toUse = host.hand.get(actorIndex);
+                        displayCard(toUse);
+                        toUse.castOnHero(host.opponent);
                         break;
                     case "n":
                         System.out.println("casting card on null " + host.hand.get(actorIndex));
-                        host.hand.get(actorIndex).cast(null);
+                        toUse = host.hand.get(actorIndex);
+                        displayCard(toUse);
+                        toUse.cast(null);;
                         break;
                 }
                 break;
@@ -191,4 +204,12 @@ public final class Phantom implements Runnable{
         }
     }
     
+        private void displayCard(Card c) {
+        if (c.cardPurpose == CardPurpose.Trap) {
+            Sticker s = new Sticker(SpriteHandler.trapPlaceholder, 1700, 200, speed * 2);        //let user know we are playing a trap card
+        } else {
+            Sticker s = new Sticker(c, 1700, 200, speed * 2);      //let user know what non-trap card we are playing
+        }
+        Main.wait(speed * 2);
+    }
 }

@@ -17,6 +17,7 @@ import Traps.TrapListener;
 import cardgame1.Board;
 import cardgame1.Hero;
 import cardgame1.InputHandler;
+import cardgame1.Main;
 import cardgame1.SpriteHandler;
 import java.awt.Color;
 import java.awt.Font;
@@ -217,7 +218,31 @@ public abstract class Card implements Comparable{
         }
         return 0;
     }
-    
+    /**
+     * if needed, notifies the phantom and sends the appropriate message
+     */
+    public void notifyPhantom(Minion targetMinion, Hero targetHero){
+        if(!Main.isMulitiplayerGame)return;
+        String message = "c-"+owner.hand.indexOf(this)+"-";
+        if(targetMinion!=null){
+           if(targetMinion.owner!=owner){
+               message+="em-";
+           }else{
+               message+="fm-";
+           }
+           message+=owner.opponent.minions.indexOf(targetMinion);
+           Board.nonPlayerHero.getPhantom().communicateMessage(message);
+           return;
+        }else{
+            if(targetHero==owner){
+                message+="fh-";
+            }else{
+                message+="eh-";
+            }
+            message+="0";
+            Board.nonPlayerHero.getPhantom().communicateMessage(message);
+        }
+    }
     
     @Override
     public String toString(){
