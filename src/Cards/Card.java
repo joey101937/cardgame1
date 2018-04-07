@@ -218,13 +218,15 @@ public abstract class Card implements Comparable{
     /**
      * if needed, notifies the phantom and sends the appropriate message
      */
-    public void notifyPhantom(Minion targetMinion, Hero targetHero){
+    public synchronized void notifyPhantom(Minion targetMinion, Hero targetHero){
         if (!Main.isMulitiplayerGame)
             return;
+        System.out.println("notifying: "+name);
         String message = "c-" + owner.hand.indexOf(this) + "-";
         if (targetMinion == null && targetHero == null) {
             message+="n-0";
             Board.nonPlayerHero.getPhantom().communicateMessage(message);
+            return;
         }
         if (targetMinion != null) {
            if(targetMinion.owner!=owner){

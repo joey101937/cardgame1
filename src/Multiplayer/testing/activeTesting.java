@@ -5,6 +5,7 @@
  */
 package Multiplayer.testing;
 
+import Cards.Card;
 import cardgame1.Board;
 import cardgame1.Hero;
 import cardgame1.Main;
@@ -23,8 +24,10 @@ public class activeTesting {
         public static void main(String[] args) throws Exception {
         setBackgroundImage();
         SpriteHandler.Initialize();
-        Hero bot = new Hero("bottom", Main.getTestDeck(), SpriteHandler.ashePortrait);
-        Hero top = new Hero("top", Main.getTestDeck(), SpriteHandler.knightHero);
+        //Hero bot = new Hero("bottom", Main.getTestDeck(), SpriteHandler.ashePortrait);
+        Hero bot = new Hero("bottom", Card.getCardList(), SpriteHandler.ashePortrait);
+        //Hero top = new Hero("top", Main.getTestDeck(), SpriteHandler.knightHero);
+        Hero top = new Hero("top", Card.getCardList(), SpriteHandler.knightHero);
         top.isAIControlled = false;
       //  top.attachPhantom(isServer);
         Board board = new Board(top, bot, new Dimension(1600, 900), isServer);   

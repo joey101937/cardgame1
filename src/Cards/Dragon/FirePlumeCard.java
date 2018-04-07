@@ -42,11 +42,11 @@ public class FirePlumeCard extends Card{
     public int cast(Minion target) {
         if(target == null) return -1;
         if(!canAfford()) return 0; //reutrn 0 if unaffordable
+        notifyPhantom(target,null);
         Sticker impactEffect = new Sticker(SpriteHandler.blastEffectSmall, target, AI.AI.speed/3);
         Main.wait(AI.AI.speed/3);
         target.takeDamage(spellDamage);
         owner.resource -= cost;
-        notifyPhantom(target,null);
         owner.hand.remove(this);
         TrapListener.onPlay(this);
         return 1;
@@ -61,11 +61,11 @@ public class FirePlumeCard extends Card{
     public int castOnHero(Hero target) {
         if(target == null) return -1;
         if(!canAfford()) return 0; //reutrn 0 if unaffordable
+        notifyPhantom(null,target);
         Sticker impactEffect = new Sticker(SpriteHandler.blastEffectSmall,target,AI.AI.speed/3);
         Main.wait(AI.AI.speed/3);
         target.takeDamage(spellDamage);
         owner.resource -= cost;
-        notifyPhantom(null,target);
         owner.hand.remove(this);
         TrapListener.onPlay(this);
         return 1; 

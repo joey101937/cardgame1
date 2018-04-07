@@ -134,6 +134,7 @@ public final class Phantom implements Runnable{
             return;
         }
               if (message.equals("end")) {
+                Main.wait(speed/2);
                 Board.controller.nextTurn(); //end turn
             }
         if(!host.turn)return;//messages after this will not execute if its not our turn

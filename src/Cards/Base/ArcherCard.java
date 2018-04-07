@@ -43,19 +43,18 @@ public class ArcherCard extends Card{
         int outcome = 0;
         if(!canAfford())return 0;
         if(owner.minions.add(summon)){
+            notifyPhantom(target,null);
             notifyPhantom(target, null);
             owner.resource -= cost;
             owner.hand.remove(this);
             summon.onSummon();
             TrapListener.onPlay(this);
             outcome = 1;
-        }
-        if(outcome == 1){
             Sticker s = new Sticker(SpriteHandler.slashEffect,target,AI.AI.speed/3);
             Main.wait(AI.AI.speed/3);
-            target.takeDamage(summonDamage);
-            notifyPhantom(target,null);
-        }
+            target.takeDamage(summonDamage);         
+        } 
+       
         return outcome;
     }
 
@@ -76,8 +75,7 @@ public class ArcherCard extends Card{
         if(outcome == 1){
             Sticker s = new Sticker(SpriteHandler.slashEffect,target,AI.AI.speed/3);
             Main.wait(AI.AI.speed/3);
-            target.takeDamage(summonDamage);
-            notifyPhantom(null,target);
+            target.takeDamage(summonDamage); 
         }
         return outcome;
     }
