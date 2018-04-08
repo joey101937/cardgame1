@@ -353,7 +353,7 @@ public class Board extends Canvas implements Runnable {
             frames++;
             if (System.currentTimeMillis() - timer > 1000) {
                 timer += 1000;
-                System.out.println("FPS: " + frames);
+                if(Main.showFPS)System.out.println("FPS: " + frames);
                 frames = 0;
                 ///this triggers once a second
 

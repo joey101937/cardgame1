@@ -75,8 +75,6 @@ public final class Phantom implements Runnable{
     
     public void setupClient() throws Exception{
        socket = new Socket(Phantom.connectionAddress,444);
-       //socket = new Socket("198.86.78.6",444);
-       //socket = new Socket("0.0.0.0",444);
         inputStream = new InputStreamReader(socket.getInputStream());
         printStream = new PrintStream(socket.getOutputStream());
         br = new BufferedReader(inputStream);
@@ -143,7 +141,7 @@ public final class Phantom implements Runnable{
     */
     private boolean receivingDeck = false; //if this is true, we are receiving deck
 
-    private void interperateMessage(String message) {
+    private synchronized void  interperateMessage(String message) {
         try{
         if (message == null) return; 
         if(message.equals("gotRandom")){ //acknowledgement that client got our random
@@ -248,6 +246,7 @@ public final class Phantom implements Runnable{
     }
     
         private void displayCard(Card c) {
+            System.out.println("displaying card " + c.name + "from phantom play");
         if (c.cardPurpose == CardPurpose.Trap) {
             Sticker s = new Sticker(SpriteHandler.trapPlaceholder, 1700, 200, speed * 2);        //let user know we are playing a trap card
         } else {

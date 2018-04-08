@@ -46,7 +46,7 @@ public class TrapCard extends Card{
      * default method for putting a trap into play
      * @return 1 if success, 0 if not
      */
-    protected int defaultTrapSummon(){
+    protected synchronized int defaultTrapSummon(){
         if(!canAfford())return 0;
         for(Trap t : owner.traps.getOccupants()){
             if(t.name.equals(this.name)) return 0; //no having two of the same trap out

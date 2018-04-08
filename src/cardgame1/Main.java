@@ -36,6 +36,7 @@ public class Main {
     public static BufferedImage BackgroundImage;
     public static Board mainBoard;
     public static boolean isMulitiplayerGame = false;
+    public static boolean showFPS = false;
     
     public static ArrayList<Card> enemyCards = new ArrayList<>();
     public static ArrayList<Card> playerCards = new ArrayList<>();

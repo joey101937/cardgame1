@@ -42,14 +42,14 @@ public class VolcanoCard extends Card{
     public int cast(Minion t) {
         if(owner.opponent.minions.numOccupants() == 0) return -1;
         if(!canAfford()) return 0; //reutrn 0 if unaffordable
+        notifyPhantom(null,null);
         for(Minion target : owner.opponent.minions.getOccupants()){
             Sticker impactEffect = new Sticker(SpriteHandler.blastEffectSmall,target,AI.AI.speed/3);
         } //first put the fire sticker on all targets, then apply damage. easier to follow this way.
         Main.wait(AI.AI.speed/3);
         for(Minion target : owner.opponent.minions.getOccupants()){
             target.takeDamage(spellDamage);
-        }
-        notifyPhantom(null,null);
+        }        
         owner.resource -= cost;
         owner.hand.remove(this);
         TrapListener.onPlay(this);

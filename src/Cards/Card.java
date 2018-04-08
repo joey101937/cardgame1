@@ -13,6 +13,7 @@ import Cards.Undead.*;
 import CustomDecks.HeroClass;
 import Minions.Minion;
 import Minions.Tribe;
+import Multiplayer.Phantom;
 import Traps.TrapListener;
 import cardgame1.Board;
 import cardgame1.Hero;
@@ -195,7 +196,7 @@ public abstract class Card implements Comparable{
      * default method to use for simple summon cards
      * @return  1 if success, -1 if error, 0 if could not afford
      */
-    protected int defaultMinionSummon(){
+    protected synchronized int defaultMinionSummon(){
         if (canAfford()) {
             if (owner.minions.add(summon)) {
                 if (owner.opponent.isPhantomControlled && (this.cardPurpose==CardPurpose.VanillaMinion || cardPurpose==CardPurpose.ChargeMinion || cardPurpose==CardPurpose.BattlecryMinionDraw)) {
@@ -219,9 +220,12 @@ public abstract class Card implements Comparable{
      * if needed, notifies the phantom and sends the appropriate message
      */
     public synchronized void notifyPhantom(Minion targetMinion, Hero targetHero){
-        if (!Main.isMulitiplayerGame)
+        /*
+        if (!Main.isMulitiplayerGame){
+            System.out.println("returning because not a mp game. if mp, this is an error");
             return;
-        System.out.println("notifying: "+name);
+        }
+        //System.out.println("notifying: "+name + " target: " + targetMinion.name+","+targetHero); //MAKE THIS PRINT TARGETS WHEN I GET AROUND TO IT
         String message = "c-" + owner.hand.indexOf(this) + "-";
         if (targetMinion == null && targetHero == null) {
             message+="n-0";
@@ -232,11 +236,13 @@ public abstract class Card implements Comparable{
            if(targetMinion.owner!=owner){
                message+="em-";
                message+=owner.opponent.minions.indexOf(targetMinion);
+               Board.nonPlayerHero.getPhantom().communicateMessage(message);
+               return;
            }else{
                message+="fm-";
+               message+=owner.minions.indexOf(targetMinion);
+               Board.nonPlayerHero.getPhantom().communicateMessage(message);
            }
-           message+=owner.minions.indexOf(targetMinion);
-           Board.nonPlayerHero.getPhantom().communicateMessage(message);
            return;
         }else{
             if(targetHero==owner){
@@ -246,6 +252,50 @@ public abstract class Card implements Comparable{
             }
             message+="0";
             Board.nonPlayerHero.getPhantom().communicateMessage(message);
+        }
+        */
+        if (!Main.isMulitiplayerGame) {
+            System.out.println("returning because not a mp game. if mp, this is an error");
+            return;
+        }
+        try{
+            Thread.sleep(1000);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        String actor ="c";
+        int actorIndex = owner.hand.indexOf(this);
+        String target;
+        int targetIndex;
+        String output;
+        if(targetMinion == null && targetHero==null){
+            output = actor+"-"+actorIndex+"-"+"n"+"-"+0;
+            Phantom.mainPhantom.communicateMessage(output);
+            return;
+        }
+        if(targetMinion != null){
+            if(targetMinion.owner==owner){
+                target = "fm";
+                targetIndex = owner.minions.indexOf(targetMinion);
+            }else{
+                target = "em";
+                targetIndex = owner.opponent.minions.indexOf(targetMinion);
+            }
+            output = actor+"-"+actorIndex+"-"+target+"-"+targetIndex;
+            Phantom.mainPhantom.communicateMessage(output);
+            return;
+        }
+        if(targetHero!= null){
+            if(targetHero == owner){
+                target = "fh";
+                targetIndex =0;
+            }else{
+                target = "eh";
+                targetIndex = 0;
+            }
+            output = actor+"-"+actorIndex+"-"+target+"-"+targetIndex;
+            Phantom.mainPhantom.communicateMessage(output);
+            return;
         }
     }
     

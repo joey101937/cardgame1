@@ -42,6 +42,8 @@ public class SettingsPane extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         gameOverLabel = new javax.swing.JLabel();
         disableButton = new javax.swing.JRadioButton();
+        fpsLabel = new javax.swing.JLabel();
+        fpsButton = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -87,26 +89,45 @@ public class SettingsPane extends javax.swing.JFrame {
             }
         });
 
+        fpsLabel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        fpsLabel.setText("Enable FPS on console");
+        fpsLabel.setToolTipText("If disabled, game continues after a hero dies. putting the hero into negative HP");
+
+        fpsButton.setText("Enabled");
+        fpsButton.setToolTipText("");
+        fpsButton.setAutoscrolls(true);
+        fpsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fpsButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(137, 137, 137)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(titleLabel)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(jButton1)))
-                .addContainerGap(141, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
+                        .addGap(31, 31, 31)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(aiSPeedLabel)
+                            .addComponent(jLabel1)
+                            .addComponent(gameOverLabel)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(titleLabel)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(20, 20, 20)
+                                    .addComponent(jButton1)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(fpsLabel)
+                                .addGap(24, 24, 24)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(aiSPeedLabel)
-                    .addComponent(jLabel1)
-                    .addComponent(gameOverLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(fpsButton)
                     .addComponent(showValueButton)
                     .addComponent(aiSpeedField, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(disableButton))
@@ -129,7 +150,11 @@ public class SettingsPane extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(gameOverLabel)
                     .addComponent(disableButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(fpsLabel)
+                    .addComponent(fpsButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addContainerGap())
         );
@@ -148,6 +173,7 @@ public class SettingsPane extends javax.swing.JFrame {
        Card.showValue = showValueButton.isSelected();
        Minion.showValue = showValueButton.isSelected();
        Hero.endGameOnDeath = !this.disableButton.isSelected();
+       Main.showFPS = this.fpsButton.isSelected();
        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -159,11 +185,17 @@ public class SettingsPane extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_disableButtonActionPerformed
 
+    private void fpsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fpsButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fpsButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel aiSPeedLabel;
     private javax.swing.JTextField aiSpeedField;
     private javax.swing.JRadioButton disableButton;
+    private javax.swing.JRadioButton fpsButton;
+    private javax.swing.JLabel fpsLabel;
     private javax.swing.JLabel gameOverLabel;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
