@@ -9,6 +9,7 @@ import Minions.Base.ArakkoaMinion;
 import Minions.Base.FrostBearMinion;
 import Cards.Base.FrostBearCard;
 import Cards.*;
+import GUI.LegacyGUI;
 import Minions.*;
 import Traps.Trap;
 import java.awt.Canvas;
@@ -20,6 +21,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
 import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
+import javax.swing.JOptionPane;
 
 /*
  * @author Joseph
@@ -36,12 +38,12 @@ public class Board extends Canvas implements Runnable {
     public static int buffer = 50; //extra space between rendered cards in hand
     public static VisualEffectHandler visHandler = null;
     public Window window;  //main window
-    boolean running = false;
+    public boolean running = false;
     private Thread thread = null;
     public Dimension d;
     public static InputHandler ih = new InputHandler();
     public static GameController controller;
-    private static Board mainBoard = null;
+    public static Board mainBoard = null;
     /* CONSTRUCTOR */
 
     /**
@@ -110,7 +112,8 @@ public class Board extends Canvas implements Runnable {
      * @param d dimension of the window
      * @param isServer weather or not this user is the server
      */
-    public Board(Hero t, Hero b, Dimension d, boolean isServer) throws Exception{
+    public Board(Hero t, Hero b, Dimension d, boolean isServer) {
+        try{
         mainBoard = this;
         xScale = (d.getWidth() / 1920);
         yScale = d.getHeight() / 1080;
@@ -131,10 +134,22 @@ public class Board extends Canvas implements Runnable {
         t.opponent = b;
         b.opponent = t;       
         System.out.println("board constructor done");
-        System.out.println("using phantom: " + t.getPhantom());
+            System.out.println("using phantom: " + t.getPhantom());
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null,"Unable to connect");
+            running = false;
+            if (window.frame == null) {
+                System.out.println("frame is null");
+                System.exit(1);
+            } else {
+                window.frame.dispose();
+                running = false;
+            }
+        }
     }
 
-    public static Board getMainBoard(){
+    public static Board getMainBoard() {
         return mainBoard;
     }
     

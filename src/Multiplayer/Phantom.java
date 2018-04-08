@@ -36,6 +36,7 @@ public final class Phantom implements Runnable{
     public boolean receivedDeck = false;
     public static int port = 444;
     private static final int rSeed = (int)(Math.random()*9999);
+    public static String connectionAddress = "localhost";
     public static Random random = new Random(rSeed);
     public ServerSocket serverSocket;
     public Socket socket;
@@ -62,6 +63,7 @@ public final class Phantom implements Runnable{
     }
     
     public void setupServer() throws Exception{
+        Thread t = new Thread();
         serverSocket = new ServerSocket(444);
         System.out.println("server Inet Address: "+serverSocket.getInetAddress()); //thi
         socket = serverSocket.accept();        
@@ -72,7 +74,7 @@ public final class Phantom implements Runnable{
     }
     
     public void setupClient() throws Exception{
-       socket = new Socket("localhost",444);
+       socket = new Socket(Phantom.connectionAddress,444);
        //socket = new Socket("198.86.78.6",444);
        //socket = new Socket("0.0.0.0",444);
         inputStream = new InputStreamReader(socket.getInputStream());

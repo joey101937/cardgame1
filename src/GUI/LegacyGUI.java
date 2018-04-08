@@ -11,6 +11,7 @@ import Cards.Dragon.*;
 import Cards.Fish.*;
 import Cards.Undead.*;
 import CustomDecks.CustomDeck;
+import Multiplayer.Phantom;
 import cardgame1.Board;
 import cardgame1.Hero;
 import cardgame1.Main;
@@ -19,6 +20,9 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -263,7 +267,7 @@ public class LegacyGUI extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         customDeckLabel = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        mpTestingButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -339,10 +343,10 @@ public class LegacyGUI extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Multiplayer testing");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        mpTestingButton.setText("Multiplayer testing");
+        mpTestingButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                mpTestingButtonActionPerformed(evt);
             }
         });
 
@@ -394,7 +398,7 @@ public class LegacyGUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton2))
+                        .addComponent(mpTestingButton))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(settingsButton)
                         .addGap(115, 115, 115)
@@ -428,7 +432,7 @@ public class LegacyGUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addComponent(mpTestingButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(settingsButton)
@@ -465,7 +469,6 @@ public class LegacyGUI extends javax.swing.JFrame {
         if(this.AIDeckCombo.getSelectedItem().equals(useCustomText)){
             if(this.loadedCustomDeckAI==null)return;
         }
-        System.out.println("test for commit");
         this.assignDecks();
         int x = 0, y =0;
         try{
@@ -510,9 +513,30 @@ public class LegacyGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void mpTestingButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mpTestingButtonActionPerformed
+        if (this.yourDeckCombo.getSelectedItem().equals(useCustomText)) {
+            if (this.loadedCustomDeckPlayer == null) {
+                JOptionPane.showMessageDialog(null, "Custom deck not loaded");
+                return;
+            }
+        }
+        String[] options = {"Client", "Server"};
+        int choice = JOptionPane.showOptionDialog(null, "Use as Client or Server?", "Client/Server Prompt", 0, 0, null, options, "init");
+        //-1 = exit, 0 = client, 1= server
+        if(choice == -1)return;
+        boolean isServer = choice==1;
+        this.assignDecks();
+        Hero bot = new Hero("user", PlayerDeck, SpriteHandler.ashePortrait);
+        Hero top = new Hero("top", new ArrayList<Card>(), SpriteHandler.knightHero); //emptyDeck because phantom will populate it
+        if(!isServer)Phantom.connectionAddress = JOptionPane.showInputDialog("Enter Connection Address");
+        top.isAIControlled=false;
+        Board board;
+        try {
+             board = new Board(top, bot, new Dimension(1600, 900), isServer);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_mpTestingButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -521,10 +545,10 @@ public class LegacyGUI extends javax.swing.JFrame {
     private javax.swing.JButton button720;
     private javax.swing.JLabel customDeckLabel;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JButton mpTestingButton;
     private javax.swing.JLabel opponentDeckLabel;
     private javax.swing.JButton playButton;
     private javax.swing.JTextField resX;
