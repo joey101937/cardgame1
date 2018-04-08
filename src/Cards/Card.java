@@ -231,10 +231,11 @@ public abstract class Card implements Comparable{
         if (targetMinion != null) {
            if(targetMinion.owner!=owner){
                message+="em-";
+               message+=owner.opponent.minions.indexOf(targetMinion);
            }else{
                message+="fm-";
            }
-           message+=owner.opponent.minions.indexOf(targetMinion);
+           message+=owner.minions.indexOf(targetMinion);
            Board.nonPlayerHero.getPhantom().communicateMessage(message);
            return;
         }else{

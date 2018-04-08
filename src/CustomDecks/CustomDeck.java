@@ -178,9 +178,11 @@ public class CustomDeck {
         return output;
     }
     /**
-     * returns a card cooresponding to the name given
+     * @return a card cooresponding to the name given
+     * @param s name of card
+     * @throws CustomDecks.NoSuchCardException
      */
-    private Card getCard(String s) throws NoSuchCardException{
+    public static Card getCard(String s) throws NoSuchCardException{
         switch(s){
             //neutral
             case "Arakkoa": return new ArakkoaCard();
@@ -205,7 +207,7 @@ public class CustomDeck {
             case "Jellyfish": return new JellyfishCard();
             case "Pirranah": return new PirranahCard();
             case "Predation": return new PredationCard();
-            case "SeaSerpent": return new SeaSerpentCard();
+            case "Sea Serpent": return new SeaSerpentCard();
             case "Sea Serpent Trap": return new SeaSerpentTrapCard();
             case "Sea Witch": return new SeaWitchCard();
             case "Swollow Trap": return new SwollowCard();

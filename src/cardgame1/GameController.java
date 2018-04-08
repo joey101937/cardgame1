@@ -48,14 +48,16 @@ public class GameController {
      * @param isServer 
      */
     public void startGame(boolean isServer){
-        while(!Phantom.syncedRandom){
-            System.out.println("waiting for random to sync...");
+        Phantom.mainPhantom.sendDeck(Board.playerHero.deck);
+        while(!Phantom.syncedRandom || !Phantom.mainPhantom.receivedDeck){
+           if(!Phantom.syncedRandom) System.out.println("waiting for random to sync...");
+           if(!Phantom.mainPhantom.receivedDeck)System.out.println("waiting for decks to sync...");
             try {
                 Thread.sleep(10);
             } catch (InterruptedException ex) {
                 Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
+        }    
         System.out.println("shuffling with seed test " + Phantom.random.nextInt());
         if(isServer){
             Board.botHero.shuffle();

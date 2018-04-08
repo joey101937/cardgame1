@@ -8,6 +8,7 @@ package Multiplayer;
 import static AI.AI.speed;
 import Cards.Card;
 import Cards.CardPurpose;
+import CustomDecks.CustomDeck;
 import cardgame1.Board;
 import cardgame1.Hero;
 import cardgame1.Main;
@@ -18,7 +19,10 @@ import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketException;
+import java.util.ArrayList;
 import java.util.Random;
+import javax.swing.JOptionPane;
 
 /**
  * drives the non-user hero, controlled by remote opponenet player
@@ -29,6 +33,7 @@ public final class Phantom implements Runnable{
     public Hero host;
     public boolean isServer = false;
     public static boolean syncedRandom = false;
+    public boolean receivedDeck = false;
     public static int port = 444;
     private static final int rSeed = (int)(Math.random()*9999);
     public static Random random = new Random(rSeed);
@@ -37,10 +42,11 @@ public final class Phantom implements Runnable{
     public InputStreamReader inputStream;
     public PrintStream printStream;
     public BufferedReader br;
-    
+    public static Phantom mainPhantom; //last created phantom
     
     public Phantom(Hero host, boolean isServer) throws Exception{
         System.out.println("making new phantom");
+        mainPhantom = this;
         this.host = host;
         this.isServer = isServer;
         Main.isMulitiplayerGame=true;
@@ -57,7 +63,8 @@ public final class Phantom implements Runnable{
     
     public void setupServer() throws Exception{
         serverSocket = new ServerSocket(444);
-        socket = serverSocket.accept();
+        System.out.println("server Inet Address: "+serverSocket.getInetAddress()); //thi
+        socket = serverSocket.accept();        
         inputStream = new InputStreamReader(socket.getInputStream());
         br = new BufferedReader(inputStream);
         printStream = new PrintStream(socket.getOutputStream());
@@ -65,7 +72,9 @@ public final class Phantom implements Runnable{
     }
     
     public void setupClient() throws Exception{
-        socket = new Socket("localhost",444);
+       socket = new Socket("localhost",444);
+       //socket = new Socket("198.86.78.6",444);
+       //socket = new Socket("0.0.0.0",444);
         inputStream = new InputStreamReader(socket.getInputStream());
         printStream = new PrintStream(socket.getOutputStream());
         br = new BufferedReader(inputStream);
@@ -98,10 +107,24 @@ public final class Phantom implements Runnable{
                     interperateMessage(message);                    
             }
         }
-        }catch(Exception e){
+        }catch(SocketException se){
+        if(se.getMessage().equals("Connection reset")){
+            JOptionPane.showMessageDialog(null, "Lost Connection");
+            System.exit(0);
+        }
+        }
+        catch(Exception e){
             e.printStackTrace();
         }
     }    
+    
+    public synchronized void sendDeck(ArrayList<Card> input){
+        communicateMessage("deckSend");
+        for(Card c : input){
+            communicateMessage("card:"+c.name);
+        }
+        communicateMessage("deckEnd");
+    }
     /*
         HOW PLAY COMMANDS ARE TRANSMITTED
         
@@ -116,6 +139,7 @@ public final class Phantom implements Runnable{
     "end" = end turn
     ("randSeed: " + int) sets random seed to int
     */
+    private boolean receivingDeck = false; //if this is true, we are receiving deck
 
     private void interperateMessage(String message) {
         try{
@@ -123,6 +147,20 @@ public final class Phantom implements Runnable{
         if(message.equals("gotRandom")){ //acknowledgement that client got our random
         syncedRandom = true;
         return;
+        }
+        if(message.equals("deckSend")){
+            host.deck.clear();
+            receivingDeck = true;  //if we get "decksend" we begin populating the phantom's deck with cards to be send in later messages
+            return;
+        }
+        if(message.equals("deckEnd")){
+        receivingDeck=false;    //send deckEnd when we are done receiving cards
+        receivedDeck=true;
+        }
+        if(receivingDeck && message.startsWith("card:")){
+            Card toAdd = CustomDeck.getCard(message.substring(5));
+            toAdd.setHero(host);
+            host.deck.add(toAdd);
         }
         if (message.startsWith("randSeed: ")) {  //set random to servers seed
             if(syncedRandom)return;
@@ -136,6 +174,7 @@ public final class Phantom implements Runnable{
               if (message.equals("end")) {
                 Main.wait(speed/2);
                 Board.controller.nextTurn(); //end turn
+                return;
             }
         if(!host.turn)return;//messages after this will not execute if its not our turn
         String[] contents = message.split("-");
@@ -201,6 +240,7 @@ public final class Phantom implements Runnable{
         }
         
         }catch(Exception e){
+            System.out.println("error with message " + message);
             e.printStackTrace();
         }
     }

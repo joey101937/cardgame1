@@ -34,7 +34,7 @@ public class ProcHandler implements Runnable{
                 if(minion.procTimer>0)minion.procTimer-=1;
                 if(minion.damagedTicker>0)minion.damagedTicker-=1;
                 try {
-                    Thread.sleep(8);
+                    Thread.sleep(10);
                 } catch (InterruptedException ex) {    
                     Logger.getLogger(ProcHandler.class.getName()).log(Level.SEVERE, null, ex);
                     return;
@@ -46,7 +46,7 @@ public class ProcHandler implements Runnable{
                 if(hero.procTimer>0)hero.procTimer -= 1;
                 if(hero.damageTicker>0)hero.damageTicker-=1;
                 try {
-                    Thread.sleep(8);
+                    Thread.sleep(10);
                 } catch (InterruptedException ex) {
                     Logger.getLogger(ProcHandler.class.getName()).log(Level.SEVERE, null, ex);
                     return;

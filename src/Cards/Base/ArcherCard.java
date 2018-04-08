@@ -44,7 +44,6 @@ public class ArcherCard extends Card{
         if(!canAfford())return 0;
         if(owner.minions.add(summon)){
             notifyPhantom(target,null);
-            notifyPhantom(target, null);
             owner.resource -= cost;
             owner.hand.remove(this);
             summon.onSummon();
