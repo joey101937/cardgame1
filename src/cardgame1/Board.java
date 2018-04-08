@@ -278,6 +278,8 @@ public class Board extends Canvas implements Runnable {
             } catch (ConcurrentModificationException cme) {
                 System.out.println("caught concurrent modication in main tick, cards");
                 cme.printStackTrace();
+            }catch(Exception e){
+                e.printStackTrace();
             }
         }
         //tick minions

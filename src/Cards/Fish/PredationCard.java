@@ -50,10 +50,10 @@ public class PredationCard extends Card {
     public int cast(Minion target){
         if(target == null || spellDamage < 1) return -1;
         if(!canAfford()) return 0; //reutrn 0 if unaffordable
+        notifyPhantom(target,null);
         target.takeDamage(spellDamage);
         Sticker impactEffect = new Sticker(SpriteHandler.bloodMedium,target,300);
-        owner.resource -= cost;
-        notifyPhantom(target,null);
+        owner.resource -= cost;      
         owner.hand.remove(this);
         TrapListener.onPlay(this);
         return 1;
@@ -63,10 +63,10 @@ public class PredationCard extends Card {
     public int castOnHero(Hero target){
         if(target == null || spellDamage < 1) return -1;
         if(!canAfford()) return 0; //reutrn 0 if unaffordable
+        notifyPhantom(null,target);
         target.takeDamage(spellDamage);
         Sticker impactEffect = new Sticker(SpriteHandler.bloodMedium,target,300);
         owner.resource -= cost;
-        notifyPhantom(null,target);
         owner.hand.remove(this);
         TrapListener.onPlay(this);
         return 1;

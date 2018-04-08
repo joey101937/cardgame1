@@ -5,9 +5,8 @@
  */
 package cardgame1;
 
-import AI.AI;
 import Multiplayer.Phantom;
-import java.awt.event.MouseListener;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -41,6 +40,9 @@ public class GameController {
     }
 
     public void startGame() {
+
+       Board.topHero.shuffle();
+       Board.botHero.shuffle();
         for (int i = 0; i < 4; i++) {
             Board.topHero.draw();
             Board.botHero.draw();

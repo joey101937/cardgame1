@@ -119,14 +119,14 @@ public class LegacyGUI extends javax.swing.JFrame {
             deck.add(new SeaWitchCard());
             deck.add(new PirranahCard());
             deck.add(new SeaSerpentTrapCard());
+            deck.add(new ThrasherCard());
         }
         for(int i = 0; i < 2; i++) {
             deck.add(new SwollowCard()); 
-            deck.add(new ThrasherCard());
-            //deck.add(new KelpieCard());
-         }
             deck.add(new PredationCard());
             deck.add(new VolcanoCard());
+            //deck.add(new KelpieCard());
+         }
             deck.add(new SpellBookCard());
         return deck;
         }
