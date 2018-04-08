@@ -133,7 +133,7 @@ public class InputHandler extends KeyAdapter implements MouseListener, MouseMoti
     /**
      * code to be executed whenever the player attempts to end his turn.
      */
-    private static void onEndTurn() {
+    private synchronized static void onEndTurn() {
         if (keyTimer > 0) {
             System.out.println("Key pressed to fast");
             return;
@@ -152,7 +152,8 @@ public class InputHandler extends KeyAdapter implements MouseListener, MouseMoti
         }
         switch (e.getKeyChar()) {
             case ' ':
-                 onEndTurn();
+           // Board.controller.nextTurn();
+            onEndTurn();
                 break;
             case 'q':
                 for(Card c : Board.playerHero.hand){

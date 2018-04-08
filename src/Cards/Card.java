@@ -200,9 +200,7 @@ public abstract class Card implements Comparable{
         if (canAfford()) {
             if (owner.minions.add(summon)) {
                 if (owner.opponent.isPhantomControlled && (this.cardPurpose==CardPurpose.VanillaMinion || cardPurpose==CardPurpose.ChargeMinion || cardPurpose==CardPurpose.BattlecryMinionDraw)) {
-                    String message = "c-" + owner.hand.indexOf(this) + "-n-" + "0";
-                    System.out.println("sending message: " + message);
-                    owner.opponent.getPhantom().communicateMessage(message);
+                    notifyPhantom(null,null);
                 }
                 owner.resource -= cost;
                 owner.hand.remove(this);
@@ -258,8 +256,9 @@ public abstract class Card implements Comparable{
             System.out.println("returning because not a mp game. if mp, this is an error");
             return;
         }
+        if(owner.isPhantomControlled)return;//prevent loopback
         try{
-            Thread.sleep(1000);
+            //Thread.sleep(450); //IF WE WANT A DELAY
         }catch(Exception e){
             e.printStackTrace();
         }

@@ -529,6 +529,7 @@ public class LegacyGUI extends javax.swing.JFrame {
         Hero bot = new Hero("user", PlayerDeck, SpriteHandler.ashePortrait);
         Hero top = new Hero("top", new ArrayList<Card>(), SpriteHandler.knightHero); //emptyDeck because phantom will populate it
         if(!isServer)Phantom.connectionAddress = JOptionPane.showInputDialog("Enter Connection Address");
+        if(Phantom.connectionAddress==null)return;
         top.isAIControlled=false;
         Board board;
         try {

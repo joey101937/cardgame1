@@ -114,9 +114,7 @@ public class Sticker implements Runnable{
 
     @Override
     public void run() {
-        System.out.println("starting run");
         Main.wait(timeToRender);
-        System.out.println("disabling");
         disable();
     }
 }

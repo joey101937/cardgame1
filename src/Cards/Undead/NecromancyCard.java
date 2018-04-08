@@ -43,12 +43,11 @@ public class NecromancyCard extends Card {
         if(!canAfford()) return 0; //reutrn 0 if unaffordable
         Sticker impactEffect = new Sticker(SpriteHandler.skullEffect, target, AI.speed/3);
         Main.wait(AI.speed/3);
-        
+        notifyPhantom(target,null);
         owner.opponent.minions.remove(target);
         owner.minions.add(target);
         target.owner=owner;
-        target.parent.setHero(owner);
-        notifyPhantom(target,null);
+        target.parent.setHero(owner);;
         owner.resource -= cost;
         owner.hand.remove(this);
         TrapListener.onPlay(this);

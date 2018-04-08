@@ -82,7 +82,7 @@ public final class Phantom implements Runnable{
     
 
     
-    public void communicateMessage(String s){
+    public synchronized void communicateMessage(String s){
         System.out.println("sending message: " + s);
         printStream.println(s);
     }
@@ -172,7 +172,7 @@ public final class Phantom implements Runnable{
             return;
         }
               if (message.equals("end")) {
-                Main.wait(speed/2);
+                Main.wait(300);
                 Board.controller.nextTurn(); //end turn
                 return;
             }

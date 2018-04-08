@@ -24,7 +24,15 @@ public class GameController {
     public GameController(Board b) {
         board = b;
     }
+
     public void nextTurn() {
+        if (Main.isMulitiplayerGame) {
+            try {
+                Thread.sleep(500);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
         activeHero.onTurnEnd();
         Hero temp = activeHero;
         activeHero = inactiveHero;
