@@ -9,6 +9,7 @@ import static AI.AI.speed;
 import Cards.Card;
 import Cards.CardPurpose;
 import CustomDecks.CustomDeck;
+import CustomDecks.HeroClass;
 import cardgame1.Board;
 import cardgame1.Hero;
 import cardgame1.Main;
@@ -160,6 +161,9 @@ public final class Phantom implements Runnable{
         if(receivingDeck && message.startsWith("card:")){
             Card toAdd = CustomDeck.getCard(message.substring(5));
             toAdd.setHero(host);
+            if(toAdd.heroClass!=HeroClass.Neutral){
+                host.picture = toAdd.heroClass.getHeroPortrait();
+            }
             host.deck.add(toAdd);
         }
         if (message.startsWith("randSeed: ")) {  //set random to servers seed

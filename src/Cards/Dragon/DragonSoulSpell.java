@@ -51,10 +51,10 @@ public class DragonSoulSpell extends Card {
     @Override
     public int cast(Minion m){
         if(!canAfford())return 0;
+         notifyPhantom(null,null);
+        owner.hand.remove(this);
         host.onSummon();
         owner.resource -= cost;
-        notifyPhantom(null,null);
-        owner.hand.remove(this);
         TrapListener.onPlay(this);
         return 1;
     }

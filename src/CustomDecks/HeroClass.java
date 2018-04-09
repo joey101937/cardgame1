@@ -69,7 +69,7 @@ public enum HeroClass {
     }, Ocean{
         @Override
         public BufferedImage getHeroPortrait() {
-            return SpriteHandler.seaWitchHero;
+            return SpriteHandler.fishManHero;
         }
 
         @Override
@@ -167,4 +167,30 @@ public enum HeroClass {
     public abstract Color getColor();
     
     public abstract BufferedImage getClassIcon();
+    
+    /**
+     * returns a class based on given number
+     * -1 = restricted
+     * 0 = neutral
+     * 1 = Ocean
+     * 2 = Undead
+     * 3 = Dragon
+     * @return cooresponding class
+     */
+    public static HeroClass getClassByNumber(int given){
+        switch (given){
+            case -1:
+               return HeroClass.Restricted;
+            case 0:
+                return HeroClass.Neutral;
+            case 1:
+                return HeroClass.Ocean;
+            case 2:
+                return HeroClass.Undead;
+            case 3:
+                return HeroClass.Dragon;
+            default:
+                return null;
+        }
+    }
 }

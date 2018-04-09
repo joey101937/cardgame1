@@ -118,6 +118,7 @@ public class SpriteHandler {
     public static BufferedImage volcanicDrakeCard, volcanicDrakeMinion;
     public static BufferedImage dragonBreathCard;
     public static BufferedImage dragonSoulTrap, dragonSoulSpell;
+    public static BufferedImage fireyWhelpCard, fireyWhelpMinion;
     
     public static void Initialize() {
         try {
@@ -229,6 +230,8 @@ public class SpriteHandler {
             dragonBreathCard = load("dragonBreathSpell.png");
             dragonSoulTrap = load("dragonEyeTrap.png");
             dragonSoulSpell = load("dragonEyeSpell.png");
+            fireyWhelpCard = load("fireyWhelpCard.png");
+            fireyWhelpMinion = load("fireyWhelpMinion.png");
         } catch (Exception e) {
             e.printStackTrace();
             Main.display("Error loading all assets. Please Verify Assets folder.");

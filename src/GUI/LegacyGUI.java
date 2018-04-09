@@ -180,6 +180,9 @@ public class LegacyGUI extends javax.swing.JFrame {
             deck.add(new DragonSoulTrapCard());
             deck.add(new DragonBreathCard());
         }
+        deck.add(new SpearmanCard());
+        deck.add(new UndyingSoldierCard());
+        
         return deck;
     }
         /**

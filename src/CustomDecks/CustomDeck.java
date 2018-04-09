@@ -227,6 +227,7 @@ public class CustomDeck {
             case "Volcanic Drake": return new VolcanicDrakeCard();
             case "Dragon's Breath": return new DragonBreathCard();
             case "Dragon Soul Trap": return new DragonSoulTrapCard();
+            case "Firey Whelp": return new FireyWhelpCard();
             default: throw new NoSuchCardException("No card found matching name: " + s);   
         }
     }
