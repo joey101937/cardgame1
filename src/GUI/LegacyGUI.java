@@ -5,9 +5,11 @@
  */
 package GUI;
 
+import Cards.Base.SpearmanCard;
 import Cards.Base.*;
 import Cards.Card;
 import Cards.Dragon.*;
+import Cards.Empire.*;
 import Cards.Fish.*;
 import Cards.Undead.*;
 import CustomDecks.CustomDeck;
@@ -20,8 +22,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -64,7 +64,7 @@ public class LegacyGUI extends javax.swing.JFrame {
         this.yourDeckCombo.addItem("Deep Sea");
         this.yourDeckCombo.addItem("Undead");
         this.yourDeckCombo.addItem("Dragon");
-        this.yourDeckCombo.addItem("Experimental");
+        this.yourDeckCombo.addItem("Empire");
         this.yourDeckCombo.addItem("Load Custom Deck...");
                 
         this.AIDeckCombo.addItem("Base Deck");
@@ -72,7 +72,7 @@ public class LegacyGUI extends javax.swing.JFrame {
         this.AIDeckCombo.addItem("Deep Sea");
         this.AIDeckCombo.addItem("Undead");
         this.AIDeckCombo.addItem("Dragon");
-        this.AIDeckCombo.addItem("Experimental");       
+        this.AIDeckCombo.addItem("Empire");       
         repaint();
     }
 
@@ -87,7 +87,10 @@ public class LegacyGUI extends javax.swing.JFrame {
             deck.add(new KnightCard());
             deck.add(new VengefullKnightCard());
             deck.add(new VolcanoCard());
-            deck.add(new FrostDragonCard());  
+            FrostDragonCard fdc = new FrostDragonCard();
+            fdc.summon.attack = 4; //frost dragons in this deck are strong than usual
+            fdc.cost--;
+            deck.add(fdc);  
         }
         deck.add(new SpellBookCard());
         deck.add(new SpellBookCard());
@@ -151,18 +154,23 @@ public class LegacyGUI extends javax.swing.JFrame {
         deck.add(new SpellBookCard());
         return deck;
     }
-     private ArrayList<Card> getExperimentalDeck() {
+     private ArrayList<Card> getEmpireDeck() {
         ArrayList<Card> deck = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
-            deck.add(new ZombieCard());
-            deck.add(new GhoulCard());
-            deck.add(new ZombieTrapCard());
-            deck.add(new NecromancyCard());
-            deck.add(new SpellBookCard());
+            deck.add(new SnipeTrapCard());
+            deck.add(new DoubleshotCard());
+            deck.add(new GriffonCard());
+            deck.add(new KnightCard());    
             deck.add(new ArcherCard());
-            deck.add(new VolcanoCard());
         }
-        deck.add(new PaladinCard());
+        for (int i = 0; i < 2; i++) {
+            deck.add(new PaladinCard());
+            deck.add(new SpearmanCard());
+            deck.add(new CavalryGeneralCard());
+            deck.add(new FireyWhelpCard());
+        }        
+        deck.add(new UndyingSoldierCard());
+        deck.add(new ApocalypseCard());
         return deck;
     }
 
@@ -210,9 +218,9 @@ public class LegacyGUI extends javax.swing.JFrame {
                 AIDeck = this.getDragonDeck();
                 enemyHeroPortrait = SpriteHandler.dragonHero;
                 break;
-            case 5: //experimental
-                AIDeck = this.getExperimentalDeck();
-                enemyHeroPortrait = SpriteHandler.undeadHero;
+            case 5: //empire
+                AIDeck = this.getEmpireDeck();
+                enemyHeroPortrait = SpriteHandler.empireHero;
                 break;
         }
         if(yourDeckCombo.getSelectedItem().equals(useCustomText)){
@@ -238,8 +246,8 @@ public class LegacyGUI extends javax.swing.JFrame {
             case 4://dragon
                 PlayerDeck = this.getDragonDeck();
                 break;
-            case 5: //experimental
-                PlayerDeck = this.getExperimentalDeck();
+            case 5: //empire
+                PlayerDeck = this.getEmpireDeck();
                 break;
             
         }

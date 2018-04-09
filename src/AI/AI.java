@@ -360,7 +360,7 @@ public abstract class AI {
                     return 0; //the minion is taking a slot that a largert minion should have
                 }
             }
-        }
+        } 
         return sumStats;
     }
     

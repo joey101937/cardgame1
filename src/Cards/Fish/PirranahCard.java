@@ -9,7 +9,7 @@ import Cards.Card;
 import Cards.CardPurpose;
 import Cards.CardType;
 import CustomDecks.HeroClass;
-import Minions.Base.PirranahMinion;
+import Minions.Fish.PirranahMinion;
 import cardgame1.SpriteHandler;
 
 /**

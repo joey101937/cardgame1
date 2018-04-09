@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Minions.Base;
+package Minions.Fish;
 
 import Cards.Card;
 import Minions.Minion;

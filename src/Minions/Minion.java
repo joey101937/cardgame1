@@ -78,7 +78,12 @@ public abstract class Minion{
      */
     public void onTurnStart(){
     this.attackReady = true;
-    };
+    }
+    /**
+     * run this method whenever another minion is summoned while this is in play
+     * @param m 
+     */
+    public void onSummonDetect(Minion m){}
     /**
      * runs every render
      * @param g 

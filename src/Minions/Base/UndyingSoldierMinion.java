@@ -33,6 +33,7 @@ public class UndyingSoldierMinion extends Minion {
     @Override
     public void onDeath(){
         super.onDeath();
+        if(isSilenced)return;
         Card toAdd = new UndyingSoldierCard();
         toAdd.setHero(owner);
         owner.deck.add((int)(Phantom.random.nextDouble()*owner.deck.size()), toAdd);

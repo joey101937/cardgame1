@@ -23,7 +23,7 @@ public class FrostDragonCard extends Card{
         cardPurpose = CardPurpose.VanillaMinion;
         cardText = "On Summon: \n Freeze all enemies";
         sprite = SpriteHandler.frostDragonCard;
-        cost = 6;
+        cost = 7;
         summon = new FrostDragonMinion(this);
     }
     /**

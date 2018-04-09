@@ -44,6 +44,8 @@ public class SettingsPane extends javax.swing.JFrame {
         disableButton = new javax.swing.JRadioButton();
         fpsLabel = new javax.swing.JLabel();
         fpsButton = new javax.swing.JRadioButton();
+        costLabel = new javax.swing.JLabel();
+        costButton = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -91,7 +93,7 @@ public class SettingsPane extends javax.swing.JFrame {
 
         fpsLabel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         fpsLabel.setText("Enable FPS on console");
-        fpsLabel.setToolTipText("If disabled, game continues after a hero dies. putting the hero into negative HP");
+        fpsLabel.setToolTipText("When run from console, prints fps every second");
 
         fpsButton.setText("Enabled");
         fpsButton.setToolTipText("");
@@ -99,6 +101,19 @@ public class SettingsPane extends javax.swing.JFrame {
         fpsButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 fpsButtonActionPerformed(evt);
+            }
+        });
+
+        costLabel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        costLabel.setText("Show Card Cost in DeckBuilder");
+        costLabel.setToolTipText("Cost will be show next to the card name in list of cards");
+
+        costButton.setText("Enabled");
+        costButton.setToolTipText("");
+        costButton.setAutoscrolls(true);
+        costButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                costButtonActionPerformed(evt);
             }
         });
 
@@ -116,22 +131,25 @@ public class SettingsPane extends javax.swing.JFrame {
                             .addComponent(gameOverLabel)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(30, 30, 30)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(titleLabel)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(costLabel)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(titleLabel)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(20, 20, 20)
+                                        .addComponent(jButton1)))
                                 .addGroup(layout.createSequentialGroup()
-                                    .addGap(20, 20, 20)
-                                    .addComponent(jButton1)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(fpsLabel)
-                                .addGap(24, 24, 24)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                                    .addComponent(fpsLabel)
+                                    .addGap(24, 24, 24))))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(fpsButton)
                     .addComponent(showValueButton)
                     .addComponent(aiSpeedField, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(disableButton))
-                .addGap(30, 30, 30))
+                    .addComponent(disableButton)
+                    .addComponent(costButton))
+                .addGap(28, 28, 28))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -154,7 +172,11 @@ public class SettingsPane extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(fpsLabel)
                     .addComponent(fpsButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(costLabel)
+                    .addComponent(costButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addContainerGap())
         );
@@ -174,6 +196,7 @@ public class SettingsPane extends javax.swing.JFrame {
        Minion.showValue = showValueButton.isSelected();
        Hero.endGameOnDeath = !this.disableButton.isSelected();
        Main.showFPS = this.fpsButton.isSelected();
+       Main.showCostInBuilder = this.costButton.isSelected();
        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -189,10 +212,16 @@ public class SettingsPane extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_fpsButtonActionPerformed
 
+    private void costButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_costButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_costButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel aiSPeedLabel;
     private javax.swing.JTextField aiSpeedField;
+    private javax.swing.JRadioButton costButton;
+    private javax.swing.JLabel costLabel;
     private javax.swing.JRadioButton disableButton;
     private javax.swing.JRadioButton fpsButton;
     private javax.swing.JLabel fpsLabel;

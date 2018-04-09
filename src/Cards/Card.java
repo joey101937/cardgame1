@@ -5,9 +5,12 @@
  */
 package Cards;
 
+import Cards.Empire.FireyWhelpCard;
+import Cards.Base.SpearmanCard;
 import AI.AI;
 import Cards.Base.*;
 import Cards.Dragon.*;
+import Cards.Empire.*;
 import Cards.Fish.*;
 import Cards.Undead.*;
 import CustomDecks.HeroClass;
@@ -375,7 +378,13 @@ public abstract class Card implements Comparable{
         output.add(new VolcanicDrakeCard());
         output.add(new DragonBreathCard());
         output.add(new DragonSoulTrapCard());
+        
         output.add(new FireyWhelpCard());
+        output.add(new ApocalypseCard());
+        output.add(new SnipeTrapCard());
+        output.add(new DoubleshotCard());
+        output.add(new GriffonCard());
+        output.add(new CavalryGeneralCard());
         return output;
     }
     

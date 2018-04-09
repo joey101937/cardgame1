@@ -5,9 +5,11 @@
  */
 package CustomDecks;
 
+import Cards.Empire.*;
 import Cards.Base.*;
 import Cards.Card;
 import Cards.Dragon.*;
+import Cards.Empire.ApocalypseCard;
 import Cards.Fish.*;
 import Cards.Undead.*;
 import java.io.BufferedReader;
@@ -79,6 +81,9 @@ public class CustomDeck {
                 break;
             case "Dragon":
                 this.deckClass = HeroClass.Dragon;
+                break;
+            case "Empire":
+                this.deckClass = HeroClass.Empire;
                 break;
             default: 
                 throw new CorruptFileException("Unknown Class: " + lines.get(0));
@@ -227,7 +232,13 @@ public class CustomDeck {
             case "Volcanic Drake": return new VolcanicDrakeCard();
             case "Dragon's Breath": return new DragonBreathCard();
             case "Dragon Soul Trap": return new DragonSoulTrapCard();
+            //empire
             case "Firey Whelp": return new FireyWhelpCard();
+            case "Apocalypse": return new ApocalypseCard();
+            case "Snipe Trap": return new SnipeTrapCard();
+            case "Double Shot": return new DoubleshotCard();
+            case "Griffon": return new GriffonCard();
+            case "Cavalry General": return new CavalryGeneralCard();
             default: throw new NoSuchCardException("No card found matching name: " + s);   
         }
     }

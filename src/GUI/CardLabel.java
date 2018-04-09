@@ -7,6 +7,7 @@ package GUI;
 
 import Cards.Card;
 import static GUI.DeckBuilder.mainBuilder;
+import cardgame1.Main;
 import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -43,7 +44,8 @@ public class CardLabel extends JLabel{
     private void init(Card c){
         card = c;
         setForeground(c.heroClass.getColor());
-        setText(c.name);
+        if(Main.showCostInBuilder)setText(c.cost + " "+c.name);
+        else setText(c.name);
         setFont(cardTitleFont);
         addMouseListener(new MouseListener() {
             @Override

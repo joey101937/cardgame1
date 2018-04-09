@@ -8,6 +8,7 @@ package Cards.Base;
 import Cards.Card;
 import Cards.CardPurpose;
 import Cards.CardType;
+import CustomDecks.HeroClass;
 import Minions.Base.SpearmanMinion;
 import cardgame1.SpriteHandler;
 

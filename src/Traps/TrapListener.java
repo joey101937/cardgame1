@@ -50,6 +50,12 @@ public abstract class TrapListener {
         for (Trap t : Board.botHero.traps.getOccupants()) {
             t.onSummon(m);
         }
+        for(Minion min : Board.topHero.minions.getOccupants()){
+            min.onSummonDetect(m);
+        }
+        for(Minion min : Board.botHero.minions.getOccupants()){
+            min.onSummonDetect(m);
+        }
     }
 
     public static void onPlay(Card c) {
@@ -69,5 +75,5 @@ public abstract class TrapListener {
             t.onMinionDeath(m);
         }
     }
-;
+
 }

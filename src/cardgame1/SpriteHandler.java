@@ -119,7 +119,14 @@ public class SpriteHandler {
     public static BufferedImage dragonBreathCard;
     public static BufferedImage dragonSoulTrap, dragonSoulSpell;
     public static BufferedImage fireyWhelpCard, fireyWhelpMinion;
-    
+    //Empire
+    public static BufferedImage iconEmpire;
+    public static BufferedImage empireHero;
+    public static BufferedImage apocolypseCard;
+    public static BufferedImage snipeTrap;
+    public static BufferedImage griffonMinion, griffonCard;
+    public static BufferedImage doubleshotCard;
+    public static BufferedImage cavalryGeneralMinion, cavalryGeneralCard;
     public static void Initialize() {
         try {
             if(SpriteHandler.hasInitialized) return;
@@ -232,6 +239,16 @@ public class SpriteHandler {
             dragonSoulSpell = load("dragonEyeSpell.png");
             fireyWhelpCard = load("fireyWhelpCard.png");
             fireyWhelpMinion = load("fireyWhelpMinion.png");
+            //Empire
+            iconEmpire = load("iconEmpireC.png");
+            empireHero = load("empireHero.png");
+            apocolypseCard = load("apocalypseCard.png");
+            snipeTrap = load("snipeTrap.png");
+            griffonMinion = load("griffonMinion.png");
+            griffonCard = load("griffonCard.png");
+            doubleshotCard = load("doubleshotCard.png");
+            cavalryGeneralMinion = load("cavalryGeneralMinion.png");
+            cavalryGeneralCard = load("cavalryGeneralCard.png");
         } catch (Exception e) {
             e.printStackTrace();
             Main.display("Error loading all assets. Please Verify Assets folder.");

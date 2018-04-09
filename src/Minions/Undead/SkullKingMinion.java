@@ -21,7 +21,7 @@ public class SkullKingMinion extends Minion {
         this.owner = parent.getOwner();
         attack = 5;
         originalAttack = attack;
-        maxHealth = 7;
+        maxHealth = 8;
         intrinsicValue = 4; // we want these minions to be expendable
         health = maxHealth;
         tribe = Tribe.Undead;

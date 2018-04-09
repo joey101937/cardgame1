@@ -109,6 +109,7 @@ public class DeckBuilder extends JFrame{
         classCombo.addItem(HeroClass.Ocean);
         classCombo.addItem(HeroClass.Undead);
         classCombo.addItem(HeroClass.Dragon);
+        classCombo.addItem(HeroClass.Empire);
         classCombo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

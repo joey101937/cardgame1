@@ -20,7 +20,7 @@ public class ZombieTrapCard extends TrapCard{
         name = "Zombify";
         cardText = "Whenever your \n opponent summons \n a minion, destroy \n it and summon \n a 3/1 zombie \n in its place.";
         sprite = SpriteHandler.zombieTrap;
-        cost = 3;
+        cost = 2;
         myTrap = new ZombieTrap(this);
         heroClass = HeroClass.Undead;
     }

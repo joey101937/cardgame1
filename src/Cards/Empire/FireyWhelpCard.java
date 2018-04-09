@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Cards.Dragon;
+package Cards.Empire;
 
 import AI.SimulatedMinion;
 import Cards.Base.FireBoltCard;
@@ -11,7 +11,7 @@ import Cards.Card;
 import Cards.CardPurpose;
 import Cards.CardType;
 import CustomDecks.HeroClass;
-import Minions.Dragon.FireyWhelpMinion;
+import Minions.Empire.FireyWhelpMinion;
 import cardgame1.Hero;
 import cardgame1.SpriteHandler;
 
@@ -28,7 +28,7 @@ public class FireyWhelpCard extends Card{
         sprite = SpriteHandler.fireyWhelpCard;
         cost = 2;
         summon = new FireyWhelpMinion(this);
-        heroClass = HeroClass.Dragon;
+        heroClass = HeroClass.Empire;
     }
 
     @Override

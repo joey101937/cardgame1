@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Minions.Dragon;
+package Minions.Empire;
 
 import Cards.Base.FireBoltCard;
 import Cards.Card;

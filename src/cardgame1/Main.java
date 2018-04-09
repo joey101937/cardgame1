@@ -37,7 +37,7 @@ public class Main {
     public static Board mainBoard;
     public static boolean isMulitiplayerGame = false;
     public static boolean showFPS = false;
-    
+    public static boolean showCostInBuilder = false;
     public static ArrayList<Card> enemyCards = new ArrayList<>();
     public static ArrayList<Card> playerCards = new ArrayList<>();
     /**
