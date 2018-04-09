@@ -239,6 +239,7 @@ public class CustomDeck {
             case "Double Shot": return new DoubleshotCard();
             case "Griffon": return new GriffonCard();
             case "Cavalry General": return new CavalryGeneralCard();
+            case "Enchanted Sword": return new EnchantedSwordCard();
             default: throw new NoSuchCardException("No card found matching name: " + s);   
         }
     }

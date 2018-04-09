@@ -385,6 +385,7 @@ public abstract class Card implements Comparable{
         output.add(new DoubleshotCard());
         output.add(new GriffonCard());
         output.add(new CavalryGeneralCard());
+        output.add(new EnchantedSwordCard());
         return output;
     }
     
