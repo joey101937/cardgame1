@@ -127,6 +127,7 @@ public class SpriteHandler {
     public static BufferedImage griffonMinion, griffonCard;
     public static BufferedImage doubleshotCard;
     public static BufferedImage cavalryGeneralMinion, cavalryGeneralCard;
+    public static BufferedImage enchantedSwordCard;
     public static void Initialize() {
         try {
             if(SpriteHandler.hasInitialized) return;
@@ -249,6 +250,7 @@ public class SpriteHandler {
             doubleshotCard = load("doubleshotCard.png");
             cavalryGeneralMinion = load("cavalryGeneralMinion.png");
             cavalryGeneralCard = load("cavalryGeneralCard.png");
+            enchantedSwordCard = load("enchantedSwordCard.png");
         } catch (Exception e) {
             e.printStackTrace();
             Main.display("Error loading all assets. Please Verify Assets folder.");
