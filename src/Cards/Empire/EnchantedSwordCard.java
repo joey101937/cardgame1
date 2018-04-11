@@ -29,7 +29,7 @@ public class EnchantedSwordCard extends Card {
         cardPurpose = CardPurpose.Special;
         isTargeted = true;
         spellDamage = 3;
-        cardText = "Give a knight \n +3/+2";
+        cardText = "Give a knight +3/+2";
         sprite = SpriteHandler.enchantedSwordCard;
         heroClass = HeroClass.Empire;
         cost = 2;

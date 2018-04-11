@@ -159,7 +159,8 @@ public class SpriteHandler {
             gearSmall = load("gearSmall.png");
             iconFish = load("iconFish.png");
             //iconUndead = load("iconUndead.png");
-            iconUndead = load("iconSkull.png");
+            //iconUndead = load("iconSkull.png");
+            iconUndead = load("iconUndead2small.png");
             iconDragon = load("iconDragon2.png");
             //Advanced Fish
             baitfishCard = load("baitFishCard.png");
@@ -241,7 +242,7 @@ public class SpriteHandler {
             fireyWhelpCard = load("fireyWhelpCard.png");
             fireyWhelpMinion = load("fireyWhelpMinion.png");
             //Empire
-            iconEmpire = load("iconEmpireC.png");
+            iconEmpire = load("iconEmpire2.png");
             empireHero = load("empireHero.png");
             apocolypseCard = load("apocalypseCard.png");
             snipeTrap = load("snipeTrap.png");
