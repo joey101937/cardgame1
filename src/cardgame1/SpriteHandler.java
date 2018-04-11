@@ -242,7 +242,7 @@ public class SpriteHandler {
             fireyWhelpCard = load("fireyWhelpCard.png");
             fireyWhelpMinion = load("fireyWhelpMinion.png");
             //Empire
-            iconEmpire = load("iconEmpire2.png");
+            iconEmpire = load("iconEmpireKnight.png");
             empireHero = load("empireHero.png");
             apocolypseCard = load("apocalypseCard.png");
             snipeTrap = load("snipeTrap.png");

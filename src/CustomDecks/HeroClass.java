@@ -169,7 +169,7 @@ public enum HeroClass {
 
         @Override
         public String getClassIconPath() {
-             return Main.assets+"iconEmpire2.png";
+             return Main.assets+"iconEmpire2Knight.png";
         }
     };
     /**
