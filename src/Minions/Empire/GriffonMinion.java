@@ -29,15 +29,26 @@ public class GriffonMinion extends Minion {
         tribe = Tribe.Beast;
         name = "Griffon";
         sprite = SpriteHandler.griffonMinion;
-        intrinsicValue = 0;
+        intrinsicValue = -10;
     }
     
     @Override
-    public void onSummon(){
+    public void tick(){
+        intrinsicValue = -10;
         for(Minion m : owner.minions.getOccupants()){
             if(m.tribe==Tribe.Knight){
-                this.refresh();
-                return;
+                m.intrinsicValue = this.attack;
+                this.intrinsicValue = 0;
+            }
+        }
+    }
+    
+    @Override
+    public void onDeath() {
+        super.onDeath();
+        for (Minion m : owner.minions.getOccupants()) {
+            if (m.tribe == Tribe.Knight) {
+                m.intrinsicValue = 0;
             }
         }
     }

@@ -24,20 +24,21 @@ public class GriffonCard extends Card {
         name = "Griffon";
         cardType = CardType.Minion;
         cardPurpose = CardPurpose.VanillaMinion;
-        cardText = "On Summon: \n Gain charge if you \n control a knight";
+        cardText = "Can only attack \n if you control \n a knight";
         sprite = SpriteHandler.griffonCard;
-        cost = 6;
+        cost = 3;
         summon = new GriffonMinion(this);
         heroClass = HeroClass.Empire;
         intrinsicValue = summon.intrinsicValue;
     }
     @Override
     public void tick(){
-        this.cardPurpose = CardPurpose.VanillaMinion;
-        for(Minion m : owner.minions.getOccupants()){
-            if(m.tribe==Tribe.Knight){
-                this.cardPurpose = CardPurpose.ChargeMinion;
-                return;
+    intrinsicValue = -10;
+        for (Card c : owner.hand) {
+            if (c.cardType == CardType.Minion) {
+                if (c.summon.tribe == Tribe.Knight) {
+                    this.intrinsicValue = 0;
+                }
             }
         }
     }
