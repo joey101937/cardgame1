@@ -50,6 +50,7 @@
                                   <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                               </Group>
                           </Group>
+                          <Component id="timeoutLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -60,6 +61,7 @@
                   <Component id="aiSpeedField" min="-2" pref="46" max="-2" attributes="0"/>
                   <Component id="disableButton" min="-2" max="-2" attributes="0"/>
                   <Component id="costButton" min="-2" max="-2" attributes="0"/>
+                  <Component id="timeoutButton" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
           </Group>
@@ -95,7 +97,12 @@
                   <Component id="costLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="costButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="6" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="timeoutLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="timeoutButton" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="23" max="32767" attributes="0"/>
               <Component id="jButton1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -207,6 +214,25 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="costButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="timeoutLabel">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="12" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Remove Server Timeout"/>
+        <Property name="toolTipText" type="java.lang.String" value="If removed, starting a multiplayer game as server will not end based on timeout"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="timeoutButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Remove"/>
+        <Property name="toolTipText" type="java.lang.String" value=""/>
+        <Property name="autoscrolls" type="boolean" value="true"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="timeoutButtonActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

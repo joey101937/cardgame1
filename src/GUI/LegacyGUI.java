@@ -535,6 +535,24 @@ public class LegacyGUI extends javax.swing.JFrame {
                 return;
             }
         }
+        int x= 0, y = 0;
+        try {
+            x = Integer.parseInt(this.resX.getText());
+            y = Integer.parseInt(this.resY.getText());
+            if (x < 480 || y < 480) {
+                Main.display("Warning, window too small");
+                return;
+            }
+            if (x > 2560 || y > 2560) {
+                Main.display("Warning, window too big");
+                return;
+            }
+        } catch (NumberFormatException nfe) {
+            Main.display("Invalid dimensions. Must be numeric.");
+            return;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         String[] options = {"Client", "Server"};
         int choice = JOptionPane.showOptionDialog(null, "Use as Client or Server?", "Client/Server Prompt", 0, 0, null, options, "init");
         //-1 = exit, 0 = client, 1= server
@@ -547,8 +565,9 @@ public class LegacyGUI extends javax.swing.JFrame {
         if(Phantom.connectionAddress==null)return;
         top.isAIControlled=false;
         Board board;
+        if(isServer)JOptionPane.showMessageDialog(null, "Game will now wait 25 seconds for another player connects");
         try {
-             board = new Board(top, bot, new Dimension(1600, 900), isServer);
+             board = new Board(top, bot, new Dimension(x, y), isServer);
         } catch (Exception ex) {
             ex.printStackTrace();
         }

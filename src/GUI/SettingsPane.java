@@ -46,6 +46,8 @@ public class SettingsPane extends javax.swing.JFrame {
         fpsButton = new javax.swing.JRadioButton();
         costLabel = new javax.swing.JLabel();
         costButton = new javax.swing.JRadioButton();
+        timeoutLabel = new javax.swing.JLabel();
+        timeoutButton = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -117,6 +119,19 @@ public class SettingsPane extends javax.swing.JFrame {
             }
         });
 
+        timeoutLabel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        timeoutLabel.setText("Remove Server Timeout");
+        timeoutLabel.setToolTipText("If removed, starting a multiplayer game as server will not end based on timeout");
+
+        timeoutButton.setText("Remove");
+        timeoutButton.setToolTipText("");
+        timeoutButton.setAutoscrolls(true);
+        timeoutButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                timeoutButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -141,14 +156,16 @@ public class SettingsPane extends javax.swing.JFrame {
                                         .addComponent(jButton1)))
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(fpsLabel)
-                                    .addGap(24, 24, 24))))))
+                                    .addGap(24, 24, 24)))
+                            .addComponent(timeoutLabel))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(fpsButton)
                     .addComponent(showValueButton)
                     .addComponent(aiSpeedField, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(disableButton)
-                    .addComponent(costButton))
+                    .addComponent(costButton)
+                    .addComponent(timeoutButton))
                 .addGap(28, 28, 28))
         );
         layout.setVerticalGroup(
@@ -176,7 +193,11 @@ public class SettingsPane extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(costLabel)
                     .addComponent(costButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(timeoutLabel)
+                    .addComponent(timeoutButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addContainerGap())
         );
@@ -197,6 +218,7 @@ public class SettingsPane extends javax.swing.JFrame {
        Hero.endGameOnDeath = !this.disableButton.isSelected();
        Main.showFPS = this.fpsButton.isSelected();
        Main.showCostInBuilder = this.costButton.isSelected();
+       Main.removeServerTimeout = this.timeoutButton.isSelected();
        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -216,6 +238,10 @@ public class SettingsPane extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_costButtonActionPerformed
 
+    private void timeoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_timeoutButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_timeoutButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel aiSPeedLabel;
@@ -229,6 +255,8 @@ public class SettingsPane extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JRadioButton showValueButton;
+    private javax.swing.JRadioButton timeoutButton;
+    private javax.swing.JLabel timeoutLabel;
     private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
 }

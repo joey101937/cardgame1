@@ -38,6 +38,7 @@ public class Main {
     public static boolean isMulitiplayerGame = false;
     public static boolean showFPS = false;
     public static boolean showCostInBuilder = false;
+    public static boolean removeServerTimeout = false;
     public static ArrayList<Card> enemyCards = new ArrayList<>();
     public static ArrayList<Card> playerCards = new ArrayList<>();
     /**

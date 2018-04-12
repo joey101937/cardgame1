@@ -22,7 +22,7 @@ public class SnipeTrapCard extends TrapCard {
         spellDamage = 3;
         cardText = "Whenever your \n opponent summons \n a minion, deal " + spellDamage + " \n damage to it.";
         sprite = SpriteHandler.snipeTrap;
-        cost = 1;
+        cost = 2;
         heroClass = HeroClass.Empire;
         myTrap = new SnipeTrap(this);
     }

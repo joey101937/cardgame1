@@ -36,6 +36,7 @@ public final class Phantom implements Runnable{
     public static boolean syncedRandom = false;
     public boolean receivedDeck = false;
     public static int port = 444;
+    protected static boolean connected = false;
     private static final int rSeed = (int)(Math.random()*9999);
     public static String connectionAddress = "localhost";
     public static Random random = new Random(rSeed);
@@ -66,8 +67,12 @@ public final class Phantom implements Runnable{
     public void setupServer() throws Exception{
         Thread t = new Thread();
         serverSocket = new ServerSocket(444);
-        System.out.println("server Inet Address: "+serverSocket.getInetAddress()); //thi
-        socket = serverSocket.accept();        
+        System.out.println("server Inet Address: "+serverSocket.getInetAddress()); 
+        if(!Main.removeServerTimeout){
+            TimeoutController tc = new TimeoutController(20000,serverSocket);
+        } //will itimeout if we dont connect in this time
+        socket = serverSocket.accept();    
+        connected = true;
         inputStream = new InputStreamReader(socket.getInputStream());
         br = new BufferedReader(inputStream);
         printStream = new PrintStream(socket.getOutputStream());
