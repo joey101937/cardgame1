@@ -8,10 +8,8 @@ package Minions.Empire;
 import Cards.Card;
 import Minions.Minion;
 import Minions.Tribe;
-import Multiplayer.Phantom;
-import cardgame1.Main;
+import cardgame1.Hero;
 import cardgame1.SpriteHandler;
-import cardgame1.Sticker;
 
 /**
  *
@@ -22,24 +20,31 @@ public class GriffonMinion extends Minion {
     public GriffonMinion(Card parent) {
         this.parent = parent;
         this.owner = parent.getOwner();
-        attack = 6;
+        attack = 5;
         originalAttack = attack;
-        maxHealth = 6;
+        maxHealth = 5;
         health = maxHealth;
         tribe = Tribe.Beast;
         name = "Griffon";
         sprite = SpriteHandler.griffonMinion;
-        intrinsicValue = -10;
+        intrinsicValue = -1*(this.attack+this.health-2);
     }
     
     @Override
     public void tick(){
-        intrinsicValue = -10;
+        intrinsicValue = -1*(this.attack+this.health-2);
+        boolean knightsPresent = false;
         for(Minion m : owner.minions.getOccupants()){
             if(m.tribe==Tribe.Knight){
                 m.intrinsicValue = this.attack;
                 this.intrinsicValue = 0;
+                knightsPresent = true;
             }
+        }
+        if(!knightsPresent){
+            this.bind();
+        }else{
+            this.unbind();
         }
     }
     
@@ -53,4 +58,26 @@ public class GriffonMinion extends Minion {
         }
     }
     
+    @Override
+    public void attack(Minion target) {
+        for (Minion m : owner.minions.getOccupants()) {
+            if (m.tribe == Tribe.Knight) {
+                super.attack(target);
+                return;
+            }
+        }
+    }
+    
+    @Override
+    public void attack(Hero target) {
+        for (Minion m : owner.minions.getOccupants()) {
+            if (m.tribe == Tribe.Knight) {
+                super.attack(target);
+                return;
+            }
+        }
+    }
+   
+    
+
 }

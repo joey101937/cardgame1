@@ -35,6 +35,7 @@ public abstract class Minion{
     public int procTimer = 0; //used for rendering the proc animation
     private boolean attackReady = false; //inherit one attack per turn flag. true = able to attack
     public boolean isFrozen = false;
+    public boolean isBound = false; //a bound minion is unable to attack for card effect reasons
     public boolean isSilenced = false;
     private boolean isMadeUndead = false;//if the minoin has been made undead from a card effect
     public Card parent; //card that summoned it, used for righclick for details.
@@ -111,7 +112,7 @@ public abstract class Minion{
             if(isFrozen){
                 g.drawImage(SpriteHandler.snowflakeSmall, x + Minion.WIDTH / 2 - SpriteHandler.swordsSmall.getWidth() / 2, y - SpriteHandler.swordsSmall.getHeight() / 2, null);
             }
-          } else {
+          } else if(canAttack()){
             if (attack > 0 && owner.turn) {
                 //can attack and has attack value of 1 or more
                 g.drawImage(SpriteHandler.swordsSmall, x + Minion.WIDTH / 2 - SpriteHandler.swordsSmall.getWidth() / 2, y - SpriteHandler.swordsSmall.getHeight() / 2, null);
@@ -279,13 +280,26 @@ public abstract class Minion{
     public void freeze(){
         this.isFrozen = true;
     }
+    
+    /**
+     * like freezing but for under-the-hood effects. makes minion unable to attack until unbound
+     */
+    public void bind(){
+        this.isBound=true;
+    }
+    /**
+     * like unfreezing but for bounding
+     */
+    public void unbind(){
+        this.isBound=false;
+    }
     /**
      * Is it legal for the minion to make an attack
      * based on weather it has attacked this turn and weather or not it has been frozen
      * @return 
      */
     public boolean canAttack(){
-     if(!attackReady || isFrozen) return false;
+     if(!attackReady || isFrozen || isBound) return false;
      return true;
     }
     

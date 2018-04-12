@@ -31,6 +31,7 @@ public abstract class AI {
      */
     
     public static void takeTurn(Hero h) {
+        Board.mainBoard.tick();
         Hero enemy = null;
         if(h==Board.topHero) enemy = Board.botHero;
         else enemy = Board.topHero;
@@ -287,6 +288,7 @@ public abstract class AI {
      * @param h 
      */
     private static void tradeOnBoard(Hero h, boolean instant){
+        Board.mainBoard.tick();
         int damagePotential = 0;
         Hero enemy;
         if(h == Board.topHero) enemy = Board.botHero;
