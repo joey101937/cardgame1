@@ -74,6 +74,12 @@ public abstract class TrapListener {
         for (Trap t : Board.botHero.traps.getOccupants()) {
             t.onMinionDeath(m);
         }
+        for (Minion min : Board.topHero.minions.getOccupants()) {
+            min.onDeathDetect(m);
+        }
+        for (Minion min : Board.botHero.minions.getOccupants()) {
+            min.onDeathDetect(m);
+        }
     }
 
 }

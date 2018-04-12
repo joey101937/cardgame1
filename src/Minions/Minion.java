@@ -85,6 +85,11 @@ public abstract class Minion{
      */
     public void onSummonDetect(Minion m){}
     /**
+     * run this method whenever another minion dies
+     * @param m 
+     */
+    public void onDeathDetect(Minion m){}
+    /**
      * runs every render
      * @param g 
      */

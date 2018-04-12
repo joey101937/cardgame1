@@ -226,6 +226,7 @@ public class CustomDeck {
             case "Zombify": return new ZombieTrapCard();
             case "Ghoul": return new GhoulCard();
             case "Necromancy": return new NecromancyCard();
+            case "Wraith": return new WraithCard();
             //dragon
             case "Gray Drake": return new GrayDrakeCard();
             case "Fire Plume": return new FirePlumeCard();
