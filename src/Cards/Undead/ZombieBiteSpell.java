@@ -32,7 +32,7 @@ public class ZombieBiteSpell extends Card{
         isTargeted = true;
         cardText = "Transform a minion \n into a 4/2 zombie \n with charge";
         sprite = SpriteHandler.zombieBiteSpell;
-        cost = 3;
+        cost = 2;
         heroClass = HeroClass.Undead;
     }
       
