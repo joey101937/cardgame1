@@ -37,7 +37,7 @@ public class GriffonMinion extends Minion {
         for(Minion m : owner.minions.getOccupants()){
             if(m.tribe==Tribe.Knight){
                 m.intrinsicValue = this.attack;
-                this.intrinsicValue = 0;
+                this.intrinsicValue = -1;
                 knightsPresent = true;
             }
         }

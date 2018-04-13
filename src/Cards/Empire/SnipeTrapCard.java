@@ -32,5 +32,6 @@ public class SnipeTrapCard extends TrapCard {
     public void tick() {
         intrinsicValue = 1;
         intrinsicValue += owner.opponent.hand.size() / 2;
+        if(cost==owner.maxHealth)intrinsicValue ++;
     }
 }

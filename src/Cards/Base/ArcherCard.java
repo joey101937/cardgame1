@@ -21,15 +21,14 @@ import cardgame1.Sticker;
  * @author Joseph
  */
 public class ArcherCard extends Card{
-    /* FIELDS  */
-    int summonDamage = 1;
     
     public ArcherCard() {
         name = "Archer";
         cardType = CardType.Minion;
+        spellDamage = 1;
         cardPurpose = CardPurpose.BattlecryMinionDamage;
         isTargeted = true;
-        cardText = "On Summon: \n Deal " + summonDamage + " Damage";
+        cardText = "On Summon: \n Deal " + spellDamage + " Damage";
         sprite = SpriteHandler.archerCard;
         cost = 1;
         summon = new archerMinion(this);
@@ -51,7 +50,7 @@ public class ArcherCard extends Card{
             outcome = 1;
             Sticker s = new Sticker(SpriteHandler.slashEffect,target,AI.AI.speed/3);
             Main.wait(AI.AI.speed/3);
-            target.takeDamage(summonDamage);         
+            target.takeDamage(spellDamage);         
         } 
        
         return outcome;
@@ -74,7 +73,7 @@ public class ArcherCard extends Card{
         if(outcome == 1){
             Sticker s = new Sticker(SpriteHandler.slashEffect,target,AI.AI.speed/3);
             Main.wait(AI.AI.speed/3);
-            target.takeDamage(summonDamage); 
+            target.takeDamage(spellDamage); 
         }
         return outcome;
     }

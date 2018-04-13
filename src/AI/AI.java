@@ -35,6 +35,7 @@ public abstract class AI {
         Hero enemy = null;
         if(h==Board.topHero) enemy = Board.botHero;
         else enemy = Board.topHero;
+        playCardsAboveValue(h,2.5);
         tradeOnBoard(h,false);
         playOutHand(h);
         Main.wait(speed);
@@ -86,6 +87,34 @@ public abstract class AI {
     }
     
     /**
+     * plays out hand, but restricts plays to only cards whose value-to-cost ratio is above the given value
+     * @param par 
+     */
+    public static void playCardsAboveValue(Hero h, double par){
+        Board.getMainBoard().tick();
+        boolean playOver = true;
+        for(Card c : h.hand){
+            if(c.canAfford() && ((double)AI.getValueOfCard(c)/(double)c.cost) > par) playOver = false; //there is something we want to play
+        }
+        if(playOver)return;
+        ArrayList<Card> playable = new ArrayList<>();
+        for(Card c : h.hand){
+            if(c.canAfford() && getValueOfCard(c) >= par) playable.add(c);
+        }
+        playable.sort(null); //orders the cards using their comparable interface, ordering based on value rather than worth (value accounts for cost, worth does not)
+        if(playable.get(playable.size()-1).cardPurpose == CardPurpose.Trap){
+            Sticker s = new Sticker(SpriteHandler.trapPlaceholder,1700,200,speed*3);        //let user know we are playing a trap card
+        }else{
+            Sticker s = new Sticker(playable.get(playable.size()-1),1700,200,speed*3);      //let user know what non-trap card we are playing
+        }
+        Main.wait(speed*3);
+        System.out.println("attempting to play: " + playable.get(playable.size()-1));
+        AI.playCard(playable.get(playable.size()-1));
+        playCardsAboveValue(h,par);
+    }
+    
+    
+    /**
      * plays card with minion target
      * @param c
      * @param target 
@@ -115,9 +144,9 @@ public abstract class AI {
                 c.cast(null);
                 break;
             case BattlecryMinionDamage:
-                Minion bestTarget = AI.getBestTarget(new SimulatedMinion(c.spellDamage,1,c.getOwner()));
+                Minion bestTarget = AI.getBestTarget(new SimulatedMinion(c.spellDamage,0,c.getOwner()));
                 if(bestTarget!=null) {
-                    System.out.println("casting " + c + "on " + bestTarget);
+                    System.out.println("casting " + c + " on " + bestTarget);
                     c.cast(bestTarget);
                 }
                 else{
@@ -589,7 +618,15 @@ public abstract class AI {
                 }
                 if(c.getOwner().minions.isFull()) return 0; //if there is no place to summon the minion, it has 0 value.
                 if(isVulnerable(c.summon)){
-                    value = c.summon.attack + c.intrinsicValue;
+                    value = c.intrinsicValue;
+                    int largestEnemyHealth = 0;
+                    for(Minion m : c.getOwner().opponent.minions.getOccupants()){
+                        if(m.health>largestEnemyHealth){
+                            largestEnemyHealth = m.health;
+                        }
+                    }
+                    if(c.summon.attack<=largestEnemyHealth) value+=c.summon.attack;
+                    else value+=largestEnemyHealth;
                 }
                 return value;
             case BattlecryMinionDamage:
@@ -623,7 +660,7 @@ public abstract class AI {
                 value = 0;
                 for(Minion m : c.getOwner().opponent.minions.getOccupants()){
                     if(m.health <= c.spellDamage) value += getWorth(m) +1;
-                    else value += c.spellDamage;
+                    else value += c.spellDamage/2;
                 }
                 return value+ c.intrinsicValue;
             case DirectDamage:

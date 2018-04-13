@@ -34,7 +34,7 @@ public class DoubleshotCard extends Card{
         
     @Override
     public void tick(){
-        intrinsicValue = -1;
+        intrinsicValue = -2;
         if(owner.opponent.minions.getOccupants().size()==0)return;
         if(owner.opponent.minions.getOccupants().size()==1){
             if(owner.opponent.minions.getOccupants().get(0).health<=2){
@@ -47,13 +47,18 @@ public class DoubleshotCard extends Card{
         int value = 0;
             for (Minion m : owner.opponent.minions.getOccupants()) {
                 if (m.health <= spellDamage) {
-                    value += AI.AI.getWorth(m) / 2;
+                    value += AI.AI.getWorth(m)+1;
                 } else {
                     value += 2;
                 }
             }
+            //reduce damage by avged chance based on something not getting hit
+            if(owner.opponent.minions.getOccupants().size()>2){
+                value -= value/owner.opponent.minions.getOccupants().size()+2;
+            }     
             intrinsicValue = value;
         } 
+        if(cost==owner.maxHealth)intrinsicValue ++;
     }
     @Override
     public int cast(Minion target){

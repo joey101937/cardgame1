@@ -31,11 +31,11 @@ public class FrostDragonCard extends Card{
      */
     @Override
     public void tick(){
-        this.intrinsicValue=0;
+        this.intrinsicValue=-2;
         for(Minion m : owner.opponent.minions.getOccupants()){
         if(m.attack > 0 && !m.isFrozen && !m.name.equals("Frost Bear")){ //frost bear cant be frozen so ignore it
                 if(AI.AI.canFavorablyTrade(m)){
-                    this.intrinsicValue+=2;
+                    this.intrinsicValue+=m.attack;
                 }else{
                     this.intrinsicValue+=1;
                 }

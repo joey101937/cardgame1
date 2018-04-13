@@ -43,6 +43,7 @@ public class FireBoltCard extends Card{
         cardText = "Deal " + spellDamage + " damage to \n target minion";
         sprite = SpriteHandler.fireBoltCard;
         cost = 1;
+        intrinsicValue=-1; //so the ai will not use it so liberally
     }
     
     /**
