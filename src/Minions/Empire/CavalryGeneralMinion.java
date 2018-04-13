@@ -26,12 +26,11 @@ public class CavalryGeneralMinion extends Minion{
         tribe = Tribe.Knight;
         name = "Cavalry General";
         sprite = SpriteHandler.cavalryGeneralMinion;
-        intrinsicValue = 4;
+        intrinsicValue = -1;
     }
     @Override
-    public void onSummonDetect(Minion m){
-        if(m.owner == owner && m.tribe == Tribe.Knight && m!=this) {
-            m.refresh();
-        }
+    public void onTurnStart(){
+        this.proc();
+        owner.resource--;
     }
 }

@@ -65,7 +65,7 @@ public class FireSpearCard extends Card {
     
     @Override
     public void tick(){
-        intrinsicValue = - 4;
+        intrinsicValue = - 2;
         int potential = 0;
         for(Minion m : owner.opponent.minions.getOccupants()){
             if(m.attack >= 5 && AI.AI.getWorth(m) > potential){

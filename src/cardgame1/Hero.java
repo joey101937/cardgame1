@@ -140,6 +140,8 @@ public class Hero {
     public void onTurnStart(){
         System.out.println("on turn start: " + this);
         if(Board.playerHero == this) InputHandler.enablingTimer=20;
+        if(this.maxResource<Hero.MAX_POSSIBLE_RESOURCE) this.maxResource++;
+        this.resource=maxResource;
         ArrayList<Minion> done = new ArrayList<>();
         while(true){
         try{
@@ -157,8 +159,6 @@ public class Hero {
         }
         }
         this.draw();
-        if(this.maxResource<Hero.MAX_POSSIBLE_RESOURCE) this.maxResource++;
-        this.resource=maxResource;
         this.turn = true;
         if(this.isAIControlled){
             AI.takeTurn(this);

@@ -23,9 +23,9 @@ public class CavalryGeneralCard extends Card {
         name = "Cavalry General";
         cardType = CardType.Minion;
         cardPurpose = CardPurpose.VanillaMinion;
-        cardText = "Whenever you \n summon a knight, \n give it charge.";
+        cardText = "On Turn Start: \n Expend a crystal.";
         sprite = SpriteHandler.cavalryGeneralCard;
-        cost = 3;
+        cost = 1;
         summon = new CavalryGeneralMinion(this);
         heroClass = HeroClass.Empire;
         intrinsicValue = 0;
@@ -35,9 +35,8 @@ public class CavalryGeneralCard extends Card {
     public void tick(){
         intrinsicValue = 0;
         for(Card c : owner.hand){
-            if(c.summon==null || c == this)continue;
-            if(c.summon.tribe==Tribe.Knight && owner.resource>=cost+c.cost){
-                this.intrinsicValue+=AI.AI.getWorth(c.summon);
+            if(c.cost==owner.maxResource+1){
+            intrinsicValue-=2;
             }
         }
     }
