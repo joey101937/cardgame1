@@ -23,7 +23,7 @@ public class ThrasherMinion extends Minion{
         this.owner = parent.getOwner();
         attack = 5;
         originalAttack = attack;
-        maxHealth = 6;
+        maxHealth = 5;
         health = maxHealth;
         tribe = Tribe.Fish;
         name = "Thrasher";

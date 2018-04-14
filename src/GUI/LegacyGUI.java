@@ -88,8 +88,8 @@ public class LegacyGUI extends javax.swing.JFrame {
             deck.add(new VengefullKnightCard());
             deck.add(new VolcanoCard());
             FrostDragonCard fdc = new FrostDragonCard();
-            fdc.summon.attack = 4; //frost dragons in this deck are strong than usual
-            fdc.cost--;
+            //fdc.summon.attack = 4; //frost dragons in this deck are strong than usual
+            //fdc.cost--;
             deck.add(fdc);  
         }
         deck.add(new SpellBookCard());

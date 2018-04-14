@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Minions.Empire;
+package Minions.Base;
 
 import Cards.Card;
 import Minions.Minion;
@@ -14,9 +14,10 @@ import cardgame1.SpriteHandler;
  *
  * @author Joseph
  */
-public class CavalryGeneralMinion extends Minion{
-
-    public CavalryGeneralMinion(Card parent) {
+public class MinotaurMinion extends Minion{
+ 
+    
+    public MinotaurMinion(Card parent) {
         this.parent = parent;
         this.owner = parent.getOwner();
         attack = 2;
@@ -24,14 +25,15 @@ public class CavalryGeneralMinion extends Minion{
         maxHealth = 3;
         health = maxHealth;
         tribe = Tribe.Knight;
-        name = "Cavalry General";
-        sprite = SpriteHandler.cavalryGeneralMinion;
-        intrinsicValue = -1;
+        name = "Minotaur";
+        sprite = SpriteHandler.minotaurMinion;
     }
+
+    
     @Override
-    public void onTurnStart(){
-        this.proc();
-        owner.resource--;
-        refresh();
+    public void onSummon(){
+        if(owner.opponent.minions.getStorage().get(owner.minions.getStorage().indexOf(this))!=null){
+            owner.opponent.minions.getStorage().get(owner.minions.getStorage().indexOf(this)).takeDamage(parent.spellDamage);
+        }
     }
 }

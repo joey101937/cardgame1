@@ -351,6 +351,7 @@ public abstract class Card implements Comparable{
         output.add(new TornadoCard());
         output.add(new UndyingSoldierCard());
         output.add(new SpearmanCard());
+        output.add(new MinotaurCard());
         
         output.add(new BaitfishCard());
         output.add(new CarnifishCard());
@@ -363,7 +364,7 @@ public abstract class Card implements Comparable{
         output.add(new SwollowCard());
         output.add(new SeaSerpentTrapCard());
         output.add(new ThrasherCard());
-        
+              
         output.add(new SkelemancerCard());
         output.add(new SkeletonArmySpell());
         output.add(new SkullKingCard());
