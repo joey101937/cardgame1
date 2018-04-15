@@ -9,6 +9,7 @@ import Cards.Card;
 import Cards.Dragon.FirePlumeCard;
 import Minions.Minion;
 import Minions.Tribe;
+import cardgame1.Hero;
 import cardgame1.SpriteHandler;
 
 /**
@@ -34,5 +35,11 @@ public class MoltenGolemMinion extends Minion {
     public void attack(Minion target){
         if(canAttack() && attack>0)owner.draw(new FirePlumeCard());
         super.attack(target);    
+    }
+    
+    @Override
+    public void attack(Hero h){
+        if(canAttack() && attack>0)owner.draw(new FirePlumeCard());
+        super.attack(h);
     }
 }

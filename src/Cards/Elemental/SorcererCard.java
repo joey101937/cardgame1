@@ -29,7 +29,7 @@ public class SorcererCard extends Card {
         cardText = "On Summon: \n Draw an elemental \n based on target \n golem's attribute";
         sprite = SpriteHandler.sorcererCard;
         heroClass = HeroClass.Elemental;
-        cost = 1;
+        cost = 2;
         summon = new SorcererMinion(this);
     }
     

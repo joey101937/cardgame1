@@ -29,7 +29,7 @@ public class EarthInfusionSpell extends Card{
         cardType = CardType.Spell;
         cardPurpose = CardPurpose.Special;
         isTargeted = true;
-        cardText = "Transform a Stone \n Golem into a 3/7 \n Earth Golem, which \n heals your hero \n for 2 whenever its \n attacked";
+        cardText = "Transform a Stone \n Golem into a 3/7 \n Earth Golem, which \n heals your hero \n for 2 whenever your \n hero is attacked";
         sprite = SpriteHandler.earthInfusionSpell;
         cost = 3;
         heroClass = HeroClass.Elemental;

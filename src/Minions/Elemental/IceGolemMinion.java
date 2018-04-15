@@ -31,8 +31,8 @@ public class IceGolemMinion extends Minion {
     
     @Override
     public void attack(Minion m){
-        super.attack(m);
         if(canAttack()&&attack>0)m.freeze();
+        super.attack(m);
     }
     @Override
     public void onAttacked(Minion m){

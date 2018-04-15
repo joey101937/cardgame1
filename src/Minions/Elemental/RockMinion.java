@@ -25,4 +25,8 @@ public class RockMinion extends Minion{
         sprite = SpriteHandler.rock;
         this.intrinsicValue=-5;
     }
+        @Override
+        public void onTurnEnd(){
+            this.takeDamage(1);
+        }
 }
