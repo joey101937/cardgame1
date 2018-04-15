@@ -6,8 +6,10 @@
 package Minions.Elemental;
 
 import Cards.Card;
+import Cards.Elemental.IceyWindCard;
 import Minions.Minion;
 import Minions.Tribe;
+import cardgame1.Hero;
 import cardgame1.SpriteHandler;
 
 /**
@@ -31,12 +33,15 @@ public class IceGolemMinion extends Minion {
     
     @Override
     public void attack(Minion m){
-        if(canAttack()&&attack>0)m.freeze();
+        if(canAttack()&&attack>0)owner.draw(new IceyWindCard());
         super.attack(m);
     }
-    @Override
-    public void onAttacked(Minion m){
-        m.freeze();
-    }
     
+      @Override
+    public void attack(Hero h) {
+        if (canAttack() && attack > 0) {
+            owner.draw(new IceyWindCard());
+        }
+        super.attack(h);
+    }
 }

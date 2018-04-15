@@ -149,6 +149,7 @@ public class SpriteHandler {
     public static BufferedImage elementalHero;
     public static BufferedImage iconElemental;
     public static BufferedImage rock;
+    public static BufferedImage iceyWindCard;
     public static void Initialize() {
         try {
             if(SpriteHandler.hasInitialized) return;
@@ -307,6 +308,7 @@ public class SpriteHandler {
             sandElementalMinion = load("sandElementalMinion.png");
             sandElementalCard = load("sandElementalCard.png");
             rock = load("rock.png");
+            iceyWindCard = load("icyWindCard.png");
         } catch (Exception e) {
             e.printStackTrace();
             Main.display("Error loading all assets. Please Verify Assets folder.");

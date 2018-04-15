@@ -18,7 +18,7 @@ public class WarGolemMinion extends Minion{
         public WarGolemMinion(Card parent) {
         this.parent = parent;
         this.owner = parent.getOwner();
-        attack = 2;
+        attack = 3;
         originalAttack = attack;
         maxHealth = 3;
         health = maxHealth;

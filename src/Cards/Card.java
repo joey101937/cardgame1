@@ -405,6 +405,7 @@ public abstract class Card implements Comparable{
         output.add(new IceElementalCard());
         output.add(new EarthElementalCard());
         output.add(new StoneElementalCard());
+        output.add(new IceyWindCard());
         return output;
     }
     

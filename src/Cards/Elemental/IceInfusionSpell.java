@@ -26,7 +26,7 @@ public class IceInfusionSpell extends Card{
         cardType = CardType.Spell;
         cardPurpose = CardPurpose.Special;
         isTargeted = true;
-        cardText = "Transform a Stone \n Golem into a 3/7 \n Ice Golem, which \n freezes anything it \n damages";
+        cardText = "Transform a Stone \n Golem into a 3/7 \n Ice Golem, which \n grants Freeze spells \n on attack";
         sprite = SpriteHandler.iceInfusionSpell;
         cost = 3;
         heroClass = HeroClass.Elemental;

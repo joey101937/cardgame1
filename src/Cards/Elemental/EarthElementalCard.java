@@ -28,7 +28,7 @@ public class EarthElementalCard extends Card{
         name = "Earth Elemental";
         cardType = CardType.Minion;
         cardPurpose = CardPurpose.Special;
-        cardText = "On Summon: \n Target minion is \n transformed into a \n 0/3 rock which decays";
+        cardText = "On Summon: \n Target minion is \n transformed into a \n 0/3 rock";
         sprite = SpriteHandler.earthElementalCard;
         cost = 8;
         this.isTargeted = true;
