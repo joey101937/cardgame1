@@ -28,7 +28,7 @@ public abstract class Minion{
     protected Integer originalAttack; //original attack of the minion
     public Integer health;          //current health
     public Integer maxHealth;       //current health
-    public Tribe tribe;             //"classification" or "type"
+    public Tribe tribe = Tribe.none; //"classification" or "type"
     public BufferedImage sprite;    //visual representation
     public int damagedTicker = 0; //set to positive value when damaged, passively ticks down to 0 over time.
     public int intrinsicValue = 0; //bonus value, used by AI to evaluate worth
@@ -90,6 +90,14 @@ public abstract class Minion{
      * @param m 
      */
     public void onDeathDetect(Minion m){}
+    /**
+     * activates whenever a minion attacks a hero while this is on the field
+     */
+    public void onAttackHeroDetect(Minion attacker, Hero h){}
+    /**
+     * activates whenever a minion attacks another while this is on the field
+     */
+    public void onAttackDetect(Minion attacker, Minion defender){}
     /**
      * runs every render
      * @param g 
@@ -205,7 +213,7 @@ public abstract class Minion{
      * 'proc's the minion, displaying the green animation
      */
     public void proc(){
-        procTimer = 20;
+        procTimer = 25;
         new ProcHandler(this);
     }
     

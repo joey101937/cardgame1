@@ -171,6 +171,32 @@ public enum HeroClass {
         public String getClassIconPath() {
              return Main.assets+"iconEmpire2Knight.png";
         }
+    },Elemental{
+        @Override
+        public BufferedImage getHeroPortrait() {
+           return SpriteHandler.elementalHero;
+        }
+
+        @Override
+        public String getHeroPortraitPath() {
+            return Main.assets+"elementalHero.png";
+        }
+
+        @Override
+        public String getClassIconPath() {
+            return Main.assets+"iconElemental.png";
+        }
+
+        @Override
+        public Color getColor() {
+            return new Color(84,116,54);
+        }
+
+        @Override
+        public BufferedImage getClassIcon() {
+            return SpriteHandler.iconElemental;
+        }
+        
     };
     /**
      * gets the hero image corresponding to that class
@@ -179,6 +205,7 @@ public enum HeroClass {
     public abstract BufferedImage getHeroPortrait();
     /**
      * Gets the filepath to the class's hero's portrait
+     * used in deckloaderscratch preview
      * @return filepath
      */
     public abstract String getHeroPortraitPath();
@@ -202,6 +229,8 @@ public enum HeroClass {
      * 1 = Ocean
      * 2 = Undead
      * 3 = Dragon
+     * 4 = Empire
+     * 5 = Elemental
      * @return cooresponding class
      */
     public static HeroClass getClassByNumber(int given){
@@ -216,6 +245,10 @@ public enum HeroClass {
                 return HeroClass.Undead;
             case 3:
                 return HeroClass.Dragon;
+            case 4:
+                return HeroClass.Empire;
+            case 5:
+                return HeroClass.Elemental;
             default:
                 return null;
         }

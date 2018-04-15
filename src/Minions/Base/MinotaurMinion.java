@@ -24,7 +24,7 @@ public class MinotaurMinion extends Minion{
         originalAttack = attack;
         maxHealth = 3;
         health = maxHealth;
-        tribe = Tribe.Knight;
+        tribe = Tribe.none;
         name = "Minotaur";
         sprite = SpriteHandler.minotaurMinion;
     }
@@ -32,8 +32,12 @@ public class MinotaurMinion extends Minion{
     
     @Override
     public void onSummon(){
+        try{
         if(owner.opponent.minions.getStorage().get(owner.minions.getStorage().indexOf(this))!=null){
             owner.opponent.minions.getStorage().get(owner.minions.getStorage().indexOf(this)).takeDamage(parent.spellDamage);
+        }
+        }catch(Exception e){
+            e.printStackTrace();
         }
     }
 }

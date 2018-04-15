@@ -89,6 +89,7 @@ public class SpriteHandler {
     public static BufferedImage tornadoCard;
     public static BufferedImage spearmanMinion, spearmanCard;
     public static BufferedImage minotaurMinion, minotaurCard;
+    public static BufferedImage ancientDefenderMinion, ancientDefenderCard;
     //heros
     public static BufferedImage ashePortrait;
     public static BufferedImage seaWitchHero;
@@ -130,6 +131,24 @@ public class SpriteHandler {
     public static BufferedImage doubleshotCard;
     public static BufferedImage cavalryGeneralMinion, cavalryGeneralCard;
     public static BufferedImage enchantedSwordCard;
+    //Elemental
+    public static BufferedImage 
+            stoneGolemMinion,stoneGolemCard,
+            warGolemMinion, warGolemCard,
+            earthGolemMinion,earthInfusionSpell,
+            moltenGolemMinion, fireInfusionSpell,
+            iceGolemMinion, iceInfusionSpell,
+            sorcererMinion, sorcererCard,
+            geomancerMinion,geomancerCard,
+            earthElementalMinion,earthElementalCard,
+            fireElementalMinion, fireElementalCard,
+            iceElementalMinion,iceElementalCard,
+            stoneElementalMinion, stoneElementalCard,
+            waterElementalMinion,waterElementalCard,
+            sandElementalMinion,sandElementalCard;
+    public static BufferedImage elementalHero;
+    public static BufferedImage iconElemental;
+    public static BufferedImage rock;
     public static void Initialize() {
         try {
             if(SpriteHandler.hasInitialized) return;
@@ -160,10 +179,9 @@ public class SpriteHandler {
             canceledEffect = load("canceled.png");
             gearSmall = load("gearSmall.png");
             iconFish = load("iconFish.png");
-            //iconUndead = load("iconUndead.png");
-            //iconUndead = load("iconSkull.png");
             iconUndead = load("iconUndead2small.png");
             iconDragon = load("iconDragon2.png");
+            iconElemental = load("iconElemental.png");
             //Advanced Fish
             baitfishCard = load("baitFishCard.png");
             baitfishMinion = load("baitfish.png");
@@ -209,6 +227,8 @@ public class SpriteHandler {
             spearmanMinion = load("spearman.png");
             minotaurMinion = load("minotaurMinion.png");
             minotaurCard = load("minotaurCard.png");
+            ancientDefenderMinion = load("ancientDefenderMinion.png");
+            ancientDefenderCard = load("ancientDefenderCard.png");
             //heros
             ashePortrait = ImageIO.read(new File(Main.assets + "ashePortrait.png"));
             seaWitchHero = load("seaWitchHero.png");
@@ -217,6 +237,7 @@ public class SpriteHandler {
             knightHero = load("knightHero.png");
             alligatorHero = load("alligatorHero.png");
             dragonHero = load("dragonHero.png");
+            elementalHero = load("elementalHero.png");
             //undead
             zombieCard = load("zombieCard.png");
             zombieTrap = load("zombieTrap.png");
@@ -258,6 +279,34 @@ public class SpriteHandler {
             cavalryGeneralMinion = load("cavalryGeneralMinion.png");
             cavalryGeneralCard = load("cavalryGeneralCard.png");
             enchantedSwordCard = load("enchantedSwordCard.png");
+            //Elemental
+            stoneGolemMinion = load("stoneGolemMinion.png");
+            stoneGolemCard = load("stoneGolemCard.png");
+            warGolemMinion = load("warGolemMinion.png");
+            warGolemCard = load("warGolemCard.png");
+            earthInfusionSpell = load("earthInfusionSpell.png");
+            earthGolemMinion = load("earthGolemMinion.png");
+            fireInfusionSpell = load("fireInfusionSpell.png");
+            moltenGolemMinion = load("moltenGolemMinion.png");
+            iceInfusionSpell = load("iceInfusionSpell.png");
+            iceGolemMinion = load("iceGolemMinion.png");
+            sorcererCard = load("sorcererCard.png");
+            sorcererMinion = load("sorcererMinion.png");
+            stoneElementalCard = load("stoneElementalCard.png");
+            stoneElementalMinion = load("stoneElementalMinion.png");
+            fireElementalCard = load("fireElementalCard.png");
+            fireElementalMinion = load("fireElementalMinion.png");
+            iceElementalCard = load("iceElementalCard.png");
+            iceElementalMinion = load("iceElementalMinion.png");
+            earthElementalMinion = load("earthElementalMinion.png");
+            earthElementalCard = load("earthElementalCard.png");
+            geomancerCard = load("geomancerCard.png");
+            geomancerMinion = load("geomancerMinion.png");
+            waterElementalCard = load("waterElementalCard.png");
+            waterElementalMinion = load("waterElementalMinion.png");
+            sandElementalMinion = load("sandElementalMinion.png");
+            sandElementalCard = load("sandElementalCard.png");
+            rock = load("rock.png");
         } catch (Exception e) {
             e.printStackTrace();
             Main.display("Error loading all assets. Please Verify Assets folder.");

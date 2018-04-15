@@ -9,6 +9,7 @@ import Cards.Empire.*;
 import Cards.Base.*;
 import Cards.Card;
 import Cards.Dragon.*;
+import Cards.Elemental.*;
 import Cards.Empire.ApocalypseCard;
 import Cards.Fish.*;
 import Cards.Undead.*;
@@ -84,6 +85,9 @@ public class CustomDeck {
                 break;
             case "Empire":
                 this.deckClass = HeroClass.Empire;
+                break;
+            case "Elemental":
+                this.deckClass = HeroClass.Elemental;
                 break;
             default: 
                 throw new CorruptFileException("Unknown Class: " + lines.get(0));
@@ -206,6 +210,7 @@ public class CustomDeck {
             case "Undying Soldier": return new UndyingSoldierCard();
             case "Spearman": return new SpearmanCard();
             case "Minotaur": return new MinotaurCard();
+            case "Ancient Defender": return new AncientDefenderCard();
             //fish
             case "Baitfish": return new BaitfishCard();
             case "Carnifish": return new CarnifishCard();
@@ -242,6 +247,20 @@ public class CustomDeck {
             case "Griffon": return new GriffonCard();
             case "Cavalry General": return new CavalryGeneralCard();
             case "Enchanted Sword": return new EnchantedSwordCard();
+            //elemental
+            case "Stone Golem": return new StoneGolemCard();
+            case "War Golem": return new WarGolemCard();
+            case "Geomancer": return new GeomancerCard();
+            case "Sorcerer": return new SorcererCard();
+            case "Fire Infusion": return new FireInfusionSpell();
+            case "Earth Infusion": return new EarthInfusionSpell();
+            case "Ice Infusion": return new IceInfusionSpell();
+            case "Sand Elemental": return new SandElementalCard();
+            case "Water Elemental": return new WaterElementalCard();
+            case "Fire Elemental": return new FireElementalCard();
+            case "Earth Elemental": return new EarthElementalCard();
+            case "Ice Elemental": return new IceElementalCard();
+            case "Stone Elemental": return new StoneElementalCard();
             default: throw new NoSuchCardException("No card found matching name: " + s);   
         }
     }

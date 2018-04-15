@@ -23,6 +23,12 @@ public abstract class TrapListener {
         for (Trap t : Board.botHero.traps.getOccupants()) {
             t.onAttack(attacker, defender);
         }
+        for (Minion min : Board.topHero.minions.getOccupants()) {
+            min.onAttackDetect(attacker, defender);
+        }
+        for (Minion min : Board.botHero.minions.getOccupants()) {
+            min.onAttackDetect(attacker, defender);
+        }
     }
 
     public static void onAttackHero(Minion attacker, Hero defender) {
@@ -31,6 +37,12 @@ public abstract class TrapListener {
         }
         for (Trap t : Board.botHero.traps.getOccupants()) {
             t.onAttackHero(attacker, defender);
+        }
+        for (Minion min : Board.topHero.minions.getOccupants()) {
+            min.onAttackHeroDetect(attacker,defender);
+        }
+        for (Minion min : Board.botHero.minions.getOccupants()) {
+           min.onAttackHeroDetect(attacker,defender);
         }
     }
 

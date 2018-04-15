@@ -10,6 +10,7 @@ import Cards.Base.SpearmanCard;
 import AI.AI;
 import Cards.Base.*;
 import Cards.Dragon.*;
+import Cards.Elemental.*;
 import Cards.Empire.*;
 import Cards.Fish.*;
 import Cards.Undead.*;
@@ -352,6 +353,7 @@ public abstract class Card implements Comparable{
         output.add(new UndyingSoldierCard());
         output.add(new SpearmanCard());
         output.add(new MinotaurCard());
+        output.add(new AncientDefenderCard());
         
         output.add(new BaitfishCard());
         output.add(new CarnifishCard());
@@ -388,6 +390,21 @@ public abstract class Card implements Comparable{
         output.add(new GriffonCard());
         output.add(new CavalryGeneralCard());
         output.add(new EnchantedSwordCard());
+        
+        output.add(new StoneGolemCard());
+        output.add(new WarGolemCard());
+        output.add(new GeomancerCard());
+        output.add(new SorcererCard());
+        output.add(new FireInfusionSpell());
+        output.add(new EarthInfusionSpell());
+        output.add(new IceInfusionSpell());
+        output.add(new SandElementalCard());
+        output.add(new WaterElementalCard());
+        
+        output.add(new FireElementalCard());
+        output.add(new IceElementalCard());
+        output.add(new EarthElementalCard());
+        output.add(new StoneElementalCard());
         return output;
     }
     
