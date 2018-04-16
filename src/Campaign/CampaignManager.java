@@ -5,10 +5,14 @@
  */
 package Campaign;
 
+import Campaign.campaignGUI.CampaignInterface;
+import Campaign.campaignGUI.HeroSelector;
 import Cards.Base.*;
 import Cards.Card;
 import CustomDecks.CorruptFileException;
+import CustomDecks.CustomDeck;
 import static CustomDecks.CustomDeck.getCard;
+import CustomDecks.HeroClass;
 import CustomDecks.NoSuchCardException;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -30,42 +34,35 @@ public class CampaignManager {
     private static String fileName = "SavedGame.campaign";
     public static int level = 1;
     public static ArrayList<Card> playerCards = new ArrayList<>();
-    
+    public static HeroClass playerClass = HeroClass.Neutral;
     
     /**
      * run when campaign launched
      */
-    public static void init(){
-        if(savedGameExists()){
+    public static void init() {
+        if (savedGameExists()) {
             try {
                 loadGame();
+                startGame();
+                return;
             } catch (Exception ex) {
                 ex.printStackTrace();
-                JOptionPane.showMessageDialog(null,"Error loading saved game, starting new game");
-                setInitialValues();
-            }  
-        }else{
-            setInitialValues();
+                JOptionPane.showMessageDialog(null, "Error loading saved game, starting new game");
+            }
         }
+        //no save or save was corrupt
+        level = 1;
+        new HeroSelector();
+    }
+
+    /**
+     * begins the campaign
+     */
+    public static void startGame(){
+        CampaignInterface ci = new CampaignInterface();
     }
     
-    /**
-     * sets all values to starting values
-     * and populates starting deck
-     */
-    private static void setInitialValues(){
-        level = 1;
-        for(int i = 0; i < 3; i++){
-            playerCards.add(new ArcherCard());
-            playerCards.add(new KnightCard());
-        }
-        playerCards.add(new FireBoltCard());
-        playerCards.add(new VolcanoCard());
-        playerCards.add(new FrostBearCard());
-        playerCards.add(new FrostBearCard());
-        playerCards.add(new SpearmanCard());
-        playerCards.add(new UndyingSoldierCard());
-    }
+    
     
     private static boolean savedGameExists(){
         File f = new File(fileName);
@@ -134,7 +131,25 @@ public class CampaignManager {
         }
     }
     
+    public ArrayList<Card> getPlayerDeck(){
+        ArrayList<Card> output = new ArrayList<>();
+        for(Card c : playerCards){
+            try {
+                output.add(CustomDeck.getCard(c.name));
+            } catch (NoSuchCardException ex) {
+                ex.printStackTrace();
+            }
+        }
+        return output;
+    }
     
+    
+    /**
+     * gets enemy decks for each level
+     * @param level
+     * @return
+     * @throws Exception if no decks are on file for that level
+     */
     public ArrayList<Card> getDeckForLevel(int level) throws Exception{
         ArrayList<Card> deck = new ArrayList<>();
         switch(level){
