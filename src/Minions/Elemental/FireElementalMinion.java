@@ -8,7 +8,10 @@ package Minions.Elemental;
 import Cards.Card;
 import Minions.Minion;
 import Minions.Tribe;
+import Multiplayer.Phantom;
+import cardgame1.Main;
 import cardgame1.SpriteHandler;
+import cardgame1.Sticker;
 
 /**
  *
@@ -21,7 +24,7 @@ public class FireElementalMinion extends Minion {
         this.owner = parent.getOwner();
         attack = 6;
         originalAttack = attack;
-        maxHealth = 4;
+        maxHealth = 6;
         health = maxHealth;
         name = "Fire Elemental";
         this.tribe = Tribe.Elemental;
@@ -29,8 +32,13 @@ public class FireElementalMinion extends Minion {
     }
     
     @Override
-    public void onSummon(){
-        proc();
-        owner.opponent.takeDamage(parent.spellDamage);
+    public void onTurnEnd() {
+        int roll = (int)(Phantom.random.nextDouble()*(owner.opponent.minions.numOccupants()));
+        Minion target = owner.opponent.minions.getOccupants().get(roll);
+        if(target==null)return;
+        Sticker launchEffect = new Sticker(SpriteHandler.blastEffectSmall, this, AI.AI.speed / 3);
+        Sticker targetEffect = new Sticker(SpriteHandler.blastEffectSmall, target, AI.AI.speed / 3);
+        Main.wait(AI.AI.speed / 3);
+        target.takeDamage(parent.spellDamage);
     }
 }

@@ -55,7 +55,6 @@ public class CardLabel extends JLabel{
              public void mousePressed(MouseEvent e) {   
                  if(e.getButton()==1)CardDisplay.display(card); //l;eft click
                 if(e.getButton()==3 && mainBuilder!=null && mainBuilder.isEnabled()){
-                    System.out.println("test");
                     mainBuilder.product.deck.remove(mainBuilder.cardLabels.indexOf(me));
                     mainBuilder.updateList();
                 }//right click

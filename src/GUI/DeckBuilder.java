@@ -19,6 +19,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Comparator;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -252,6 +253,7 @@ public class DeckBuilder extends JFrame{
             panel.remove(cl);
         }
         cardLabels.clear();
+        product.deck.sort(new CardOrderComparator()); //sorts based on cost then name
         int i = 0;
         for(Card c : this.product.deck){
             CardLabel cl = new CardLabel(c);
@@ -411,5 +413,25 @@ public class DeckBuilder extends JFrame{
     public void dispose(){
         super.dispose();
         mainBuilder = null;
+    }
+    
+    /**
+     * compares cards first based on cost, then on name
+     */
+    private class CardOrderComparator implements Comparator<Card> {
+
+        @Override
+        public int compare(Card o1, Card o2) {
+            if (o1.cost == o2.cost) {
+                return o1.name.compareTo(o2.name); //if same cost then use alphabetical order
+            } else {
+                if (o1.cost > o2.cost) {
+                    return 1;
+                } else {
+                    return -1;
+                }
+            }
+        }
+
     }
 }

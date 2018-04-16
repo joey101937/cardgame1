@@ -73,13 +73,13 @@ public class SorcererCard extends Card {
             if(m.tribe!=Tribe.Golem)continue;
             switch(m.name){
             case "Molten Golem":
-                intrinsicValue+=3;
+                intrinsicValue+=5;
                 return;
             case "Ice Golem":
-                intrinsicValue+=3;
+                intrinsicValue+=5;
                 return;
             case "Earth Golem":
-                intrinsicValue+=3;
+                intrinsicValue+=5;
                 return;
             default:
                 intrinsicValue+=2;

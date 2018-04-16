@@ -23,10 +23,10 @@ public class FireElementalCard extends Card {
         name = "Fire Elemental";
         cardType = CardType.Minion;
         cardPurpose = CardPurpose.VanillaMinion;
-        spellDamage = 5;
-        cardText = "On Summon: \n Deal " + spellDamage + " damage to \n enemy hero.";
+        spellDamage = 3;
+        cardText = "On Turn End: \n Deal " + spellDamage + " Damage to a \n random enemy \n minion";
         sprite = SpriteHandler.fireElementalCard;
-        cost = 6;
+        cost = 8;
         heroClass = HeroClass.Restricted;
         summon = new FireElementalMinion(this);
         intrinsicValue = 4;
@@ -37,14 +37,13 @@ public class FireElementalCard extends Card {
     public void tick() {
         intrinsicValue = 4;
         int damagePotential = 0;
-        for (Minion m : owner.opponent.minions.getStorage()) {
-            if (m == null) {
-                continue;
+        for(Minion m : owner.opponent.minions.getOccupants()){
+            if(m.health<=spellDamage){
+                damagePotential+=AI.AI.getWorth(m);
+            }else{
+                damagePotential+=spellDamage;
             }
-            damagePotential += m.attack;
         }
-        if(damagePotential+spellDamage >= owner.opponent.health){
-        intrinsicValue = 10;
-        }
+        this.intrinsicValue+=damagePotential;
     }
 }
