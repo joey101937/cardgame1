@@ -32,10 +32,10 @@ import javax.swing.JOptionPane;
  */
 public class CampaignManager {
     private static String fileName = "SavedGame.campaign";
-    public static int level = 1;
+    public static int level = 14;
     public static ArrayList<Card> playerCards = new ArrayList<>();
     public static HeroClass playerClass = HeroClass.Neutral;
-    
+    public static final int NUM_LEVELS = 13; //number of levels in the game
     /**
      * run when campaign launched
      */
@@ -167,5 +167,35 @@ public class CampaignManager {
             default: throw new Exception("No deck available for level " + level);
         }
         return deck;
+    }
+    
+    /**
+     * returns the enemy class for the given level
+     */
+    public static HeroClass getEnemyClassForLevel(int level){
+        switch(level){
+            case 1:
+            case 2:
+            case 3:
+                return HeroClass.Neutral;
+            case 7:
+            case 12:
+                return HeroClass.Empire;
+            case 5:
+            case 10:
+                return HeroClass.Ocean;
+            case 6:
+            case 11:
+                return HeroClass.Undead;
+            case 8:
+            case 13:
+                return HeroClass.Dragon;
+            case 4:
+            case 9:
+                return HeroClass.Elemental;
+            default:
+                System.out.println("Error, no class listed for level "+ level +" -CampaignMangager.getEnemyClassForLevel("+level+")");
+                return HeroClass.Restricted;
+        }
     }
 }

@@ -565,7 +565,7 @@ public class LegacyGUI extends javax.swing.JFrame {
         if(Phantom.connectionAddress==null)return;
         top.isAIControlled=false;
         Board board;
-        if(isServer)JOptionPane.showMessageDialog(null, "Game will now wait 25 seconds for another player connects");
+        if(isServer)JOptionPane.showMessageDialog(null, "Game will now wait 25 seconds for another player to connect");
         try {
              board = new Board(top, bot, new Dimension(x, y), isServer);
         } catch (Exception ex) {

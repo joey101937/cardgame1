@@ -6,10 +6,11 @@
 package Campaign.campaignGUI;
 
 import Campaign.CampaignManager;
-import GUI.BackgroundPane;
+import static Campaign.CampaignManager.level;
 import GUI.SettingsPane;
 import cardgame1.Main;
 import cardgame1.SpriteHandler;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -22,11 +23,14 @@ import javax.swing.JLabel;
  * @author Joseph
  */
 public class CampaignInterface extends JFrame{
-    private BackgroundPane panel;
+    private CampaignPanel panel;
     private JLabel playerPortrait;
     private JLabel optionsLabel;
     private JLabel levelLabel;
+    private JLabel enemyPortrait;
+    private JLabel enemyName;
     private static Font classTitleFont = new Font("Arial",Font.BOLD,26);
+     private static Font enemyTitleFont = new Font("Arial",Font.BOLD,18);
     public CampaignInterface(){
         init();
     }
@@ -34,9 +38,10 @@ public class CampaignInterface extends JFrame{
     private void init() {
         if(panel!=null)panel.removeAll();
         this.setSize(700, 700);
+        this.setPreferredSize(new Dimension(700,700));
         this.setIconImage(SpriteHandler.swordsSmall);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        panel = new BackgroundPane(Main.BackgroundImage);
+        panel = new CampaignPanel(Main.BackgroundImage);
         panel.setSize(this.getSize());
         panel.setLayout(null);
         this.add(panel);
@@ -65,8 +70,21 @@ public class CampaignInterface extends JFrame{
         });
         panel.add(optionsLabel);
         
+        enemyPortrait = new JLabel();
+        enemyPortrait.setSize(300, 80);
+        enemyPortrait.setLocation(0, 0);
+        enemyPortrait.setIcon(new ImageIcon(CampaignManager.getEnemyClassForLevel(level).getHeroPortrait().getSubimage(0, 60, 300, 85)));
+        if(level<=CampaignManager.NUM_LEVELS)panel.add(enemyPortrait);
+        
+        enemyName = new JLabel();
+        enemyName.setSize(new Dimension(300,35));
+        enemyName.setText("Next Opponent: " + CampaignManager.getEnemyClassForLevel(level));
+        enemyName.setLocation(0,80);
+        enemyName.setFont(enemyTitleFont);
+         if(level<=CampaignManager.NUM_LEVELS)panel.add(enemyName);
+        
         levelLabel = new JLabel();
-        levelLabel.setSize(100,40);
+        levelLabel.setSize(150,40);
         levelLabel.setLocation(200, 460);
         levelLabel.setText("Level: " + CampaignManager.level);
         levelLabel.setFont(classTitleFont);
