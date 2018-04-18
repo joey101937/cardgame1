@@ -33,6 +33,7 @@ public class FireElementalMinion extends Minion {
     
     @Override
     public void onTurnEnd() {
+        if(owner.opponent.minions.numOccupants()==0)return;
         int roll = (int)(Phantom.random.nextDouble()*(owner.opponent.minions.numOccupants()));
         Minion target = owner.opponent.minions.getOccupants().get(roll);
         if(target==null)return;

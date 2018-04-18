@@ -52,6 +52,7 @@ public class MinotaurCard extends Card {
     @Override
     public void tick(){
         this.intrinsicValue=0;
+        if(owner.opponent.minions.getOccupants().size()==0)return;
         if(getOpenSlot()==-1)return;
         Minion target = owner.opponent.minions.getStorage().get(getOpenSlot());
         if(target==null)return;

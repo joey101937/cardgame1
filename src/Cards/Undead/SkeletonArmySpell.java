@@ -29,7 +29,7 @@ public class SkeletonArmySpell extends Card {
         cardType = CardType.Spell;
         cardPurpose = CardPurpose.Special;
         isTargeted = false;
-        cardText = "Summon up to \n four 2/1 skeletons \n with charge";
+        cardText = "Summon up to \n four 2/1 skeletons \n with charge. \n Deals 1/2 damage to \n heros.";
         sprite = SpriteHandler.skeletonSpell;
         cost = 7;
         heroClass = HeroClass.Undead;
@@ -64,7 +64,7 @@ public class SkeletonArmySpell extends Card {
     public int cast(Minion target) {
       if(!canAfford())return 0;
       for(int i = 0; i < 4; i++){
-          owner.minions.add(new SkeletonMinion(this));
+          owner.minions.add(new SkeletonMinion(this,true));
           Main.wait(AI.AI.speed/4);
       }
         owner.resource -= cost;

@@ -51,7 +51,7 @@ public abstract class AI {
             m.attack(AI.getBestTarget(m)); //if we are vulnerable, attack on board as best as possible
             }
         }
-        Main.wait(speed);
+        Main.wait((speed*2)/3);
         Board.controller.nextTurn();
         /*
         for(Card c : h.hand){
@@ -102,6 +102,7 @@ public abstract class AI {
             if(c.canAfford() && getValueOfCard(c) >= par) playable.add(c);
         }
         playable.sort(null); //orders the cards using their comparable interface, ordering based on value rather than worth (value accounts for cost, worth does not)
+        if(playable.size()==0)return;
         if(playable.get(playable.size()-1).cardPurpose == CardPurpose.Trap){
             Sticker s = new Sticker(SpriteHandler.trapPlaceholder,1700,200,speed*3);        //let user know we are playing a trap card
         }else{

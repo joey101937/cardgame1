@@ -46,6 +46,7 @@ public class SpriteHandler {
     public static BufferedImage iconDragon;
     public static BufferedImage PLAYtext;
     public static BufferedImage NEXTLEVELtext;
+    public static BufferedImage backArrow;
     //advanced fish
     public static BufferedImage baitfishCard;
     public static BufferedImage baitfishMinion;
@@ -187,6 +188,7 @@ public class SpriteHandler {
             iconElemental = load("iconElemental.png");
             PLAYtext = load("PLAY.png");
             NEXTLEVELtext = load("NEXT LEVEL.png");
+            backArrow = load("backArrowSmall.png");
             //Advanced Fish
             baitfishCard = load("baitFishCard.png");
             baitfishMinion = load("baitfish.png");

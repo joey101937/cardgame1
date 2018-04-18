@@ -9,6 +9,13 @@ import Cards.Base.SpearmanCard;
 import Cards.Base.*;
 import Cards.Card;
 import Cards.Dragon.*;
+import Cards.Elemental.EarthInfusionSpell;
+import Cards.Elemental.FireInfusionSpell;
+import Cards.Elemental.GeomancerCard;
+import Cards.Elemental.IceInfusionSpell;
+import Cards.Elemental.SandElementalCard;
+import Cards.Elemental.SorcererCard;
+import Cards.Elemental.StoneGolemCard;
 import Cards.Empire.*;
 import Cards.Fish.*;
 import Cards.Undead.*;
@@ -171,6 +178,37 @@ public class LegacyGUI extends javax.swing.JFrame {
         }        
         deck.add(new UndyingSoldierCard());
         deck.add(new ApocalypseCard());
+        return deck;
+    }
+     
+     
+        
+    private ArrayList<Card> getElementalDeck() {
+        ArrayList<Card> deck = new ArrayList<>();
+  deck.add(new StoneGolemCard());
+                deck.add(new StoneGolemCard());
+                deck.add(new StoneGolemCard());
+                deck.add(new GeomancerCard());
+                deck.add(new GeomancerCard());
+                deck.add(new GeomancerCard());
+                deck.add(new SorcererCard());
+                deck.add(new SorcererCard());
+                deck.add(new SorcererCard());
+                deck.add(new EarthInfusionSpell());
+                deck.add(new EarthInfusionSpell());
+                deck.add(new FireInfusionSpell());
+                deck.add(new IceInfusionSpell());
+                deck.add(new SandElementalCard());
+                deck.add(new SandElementalCard());
+                deck.add(new SandElementalCard());
+                deck.add(new VolcanoCard());
+                deck.add(new VolcanoCard());
+                deck.add(new ArcherCard());
+                deck.add(new MinotaurCard());
+                deck.add(new SpellBookCard());
+                deck.add(new SpellBookCard());
+                deck.add(new PaladinCard());
+                deck.add(new PaladinCard());
         return deck;
     }
 

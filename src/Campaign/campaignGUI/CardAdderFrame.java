@@ -77,8 +77,7 @@ public class CardAdderFrame extends JFrame{
         currentSelection.clear();
         ArrayList<Card> possibilities = new ArrayList<>();
         switch (draws) {
-            case 3:
-            case 2:        
+            case 3: //class card
                 for (Card c : Card.getCardList()) {
                     if (c.heroClass == CampaignManager.playerClass) {
                         possibilities.add(c);
@@ -88,7 +87,30 @@ public class CardAdderFrame extends JFrame{
                     currentSelection.add(possibilities.remove((int) (Phantom.random.nextDouble() * possibilities.size())));
                 }
                 break;
-            case 1:
+            case 2:       //randomly chooses a neutral or class card  
+            case 4:
+              if(Phantom.random.nextBoolean()){
+                    for (Card c : Card.getCardList()) {
+                    if (c.heroClass == CampaignManager.playerClass) {
+                        possibilities.add(c);
+                    }
+                }
+                for (int i = 0; i < 3; i++) {
+                    currentSelection.add(possibilities.remove((int) (Phantom.random.nextDouble() * possibilities.size())));
+                }
+                break;
+              }else{
+                    for (Card c : Card.getCardList()) {
+                    if (c.heroClass == HeroClass.Neutral) {
+                        possibilities.add(c);
+                    }
+                }
+                for (int i = 0; i < 3; i++) {
+                    currentSelection.add(possibilities.remove((int) (Phantom.random.nextDouble() * possibilities.size())));
+                }
+                break;
+              }
+            case 1: //neutral card
                 for (Card c : Card.getCardList()) {
                     if (c.heroClass == HeroClass.Neutral) {
                         possibilities.add(c);

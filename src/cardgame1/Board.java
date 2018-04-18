@@ -187,6 +187,10 @@ public class Board extends Canvas implements Runnable {
         controller.startGame();
         this.isCampaignGame=true;
         window = new Window(d.width, d.height, "Card Game", this);
+        if(CampaignManager.level>9){
+            //nonPlayerHero.draw();
+            nonPlayerHero.maxResource++;
+        }
     }
 
 

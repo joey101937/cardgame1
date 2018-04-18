@@ -33,12 +33,17 @@ public class GriffonCard extends Card {
     }
     @Override
     public void tick(){
-    intrinsicValue = -1*(summon.attack+summon.health-2);
+    intrinsicValue = -8;
         for (Card c : owner.hand) {
             if (c.cardType == CardType.Minion) {
                 if (c.summon.tribe == Tribe.Knight) {
                     this.intrinsicValue = 0;
                 }
+            }
+        }
+        for(Minion m : owner.minions.getOccupants()){
+            if(m.tribe==Tribe.Knight){
+                this.intrinsicValue = 0;
             }
         }
     }

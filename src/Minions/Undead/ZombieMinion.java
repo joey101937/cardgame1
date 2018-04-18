@@ -23,7 +23,7 @@ public class ZombieMinion extends Minion {
         this.owner = parent.getOwner();
         attack = 3;
         originalAttack = attack;
-        maxHealth = 1;
+        maxHealth = 2;
         health = maxHealth;
         tribe = Tribe.Undead;
         name = "Zombie";

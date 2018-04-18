@@ -47,6 +47,7 @@ public class CampaignPanel extends JPanel{
             //g.drawImage(img, 0, 0, null);
             g.drawImage(background,0,0,1000,1000,200,200,1000,1300,null);
             drawLevelList(g2d);
+            drawCircle(g);
         } 
         /**
          * Draws the list of levels on the right side of the screen to show player progress
@@ -74,5 +75,10 @@ public class CampaignPanel extends JPanel{
                     g.drawImage(SpriteHandler.swordsSmall, 480, (40*i)-10, null);
                 }
             }
+        }
+        
+        private void drawCircle(Graphics g){
+            g.setColor(new Color(30,200,30,200));
+            g.fillOval(30, 160, 300, 300);
         }
 }

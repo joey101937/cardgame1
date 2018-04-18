@@ -33,12 +33,14 @@ public class CampaignInterface extends JFrame{
     private JLabel enemyName;
     private JLabel playButton;
     private JLabel playTextLabel;
+    private JLabel backButton;
     private static Font classTitleFont = new Font("Arial",Font.BOLD,26);
      private static Font enemyTitleFont = new Font("Arial",Font.BOLD,18);
      private static Font playButtonFont = new Font("Arial",Font.BOLD,30);
     public CampaignInterface(){
         init();
         CampaignManager.saveGame();
+        repaint();
     }
     
     private void init() {
@@ -52,6 +54,12 @@ public class CampaignInterface extends JFrame{
         panel.setLayout(null);
         this.add(panel);
         
+        backButton = new JLabel();
+        backButton.setSize(70, 70);
+        backButton.setLocation(0, 590);
+        backButton.setIcon(new ImageIcon(SpriteHandler.backArrow));
+        panel.add(backButton);
+
         playerPortrait = new JLabel();
         playerPortrait.setSize(300,200);
         playerPortrait.setLocation(0, 500);
@@ -91,12 +99,11 @@ public class CampaignInterface extends JFrame{
         
         levelLabel = new JLabel();
         levelLabel.setSize(150,40);
-        levelLabel.setLocation(200, 460);
+        levelLabel.setLocation(450, 600);
+        levelLabel.setForeground(Color.black);
         levelLabel.setText("Level: " + CampaignManager.level);
         levelLabel.setFont(classTitleFont);
         panel.add(levelLabel);
-        
-
         
         playButton = new JLabel();
         playButton.setSize(300,300);

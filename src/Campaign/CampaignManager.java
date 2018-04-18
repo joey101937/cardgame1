@@ -10,6 +10,33 @@ import Campaign.campaignGUI.CardAdderFrame;
 import Campaign.campaignGUI.HeroSelector;
 import Cards.Base.*;
 import Cards.Card;
+import Cards.Dragon.DragonBreathCard;
+import Cards.Dragon.DragonSoulTrapCard;
+import Cards.Dragon.GrayDrakeCard;
+import Cards.Dragon.VolcanicDrakeCard;
+import Cards.Elemental.*;
+import Cards.Empire.ApocalypseCard;
+import Cards.Empire.CavalryGeneralCard;
+import Cards.Empire.DoubleshotCard;
+import Cards.Empire.EnchantedSwordCard;
+import Cards.Empire.FireyWhelpCard;
+import Cards.Empire.GriffonCard;
+import Cards.Empire.SnipeTrapCard;
+import Cards.Fish.BaitfishCard;
+import Cards.Fish.CarnifishCard;
+import Cards.Fish.FrenzyCard;
+import Cards.Fish.JellyfishCard;
+import Cards.Fish.PirranahCard;
+import Cards.Fish.PredationCard;
+import Cards.Fish.SeaSerpentTrapCard;
+import Cards.Fish.SeaWitchCard;
+import Cards.Fish.SwollowCard;
+import Cards.Fish.ThrasherCard;
+import Cards.Undead.SkelemancerCard;
+import Cards.Undead.SkeletonArmySpell;
+import Cards.Undead.SkullKingCard;
+import Cards.Undead.ZombieBiteSpell;
+import Cards.Undead.ZombieTrapCard;
 import CustomDecks.CorruptFileException;
 import CustomDecks.CustomDeck;
 import static CustomDecks.CustomDeck.getCard;
@@ -237,7 +264,8 @@ public class CampaignManager {
         } else {
             frame.dispose();
             board.running = false;
-            new CardAdderFrame(3);
+            if(level<=4)new CardAdderFrame(4);
+            else new CardAdderFrame(3);
             //available = true;
         }
     }
@@ -259,9 +287,198 @@ public class CampaignManager {
                 deck.add(new UndyingSoldierCard());
                 break;
             case 2:
-                //todo
+                deck.add(new ArakkoaCard());
+                deck.add(new ArakkoaCard());
+                deck.add(new ArcherCard());
+                deck.add(new KnightCard());
+                deck.add(new KnightCard());
+                deck.add(new KnightCard());
+                deck.add(new KnightCard());
+                deck.add(new FrostBearCard());
+                deck.add(new FrostBearCard());
+                deck.add(new FrostBearCard());
+                deck.add(new VolcanoCard());
+                deck.add(new VolcanoCard());
                 break;
-            default: throw new Exception("No deck available for level " + level);
+            case 3:
+                for (int i = 0; i < 3; i++) {
+                    deck.add(new ArakkoaCard());
+                    deck.add(new ArcherCard());
+                    deck.add(new FireBoltCard());
+                    deck.add(new FrostBearCard());
+                    deck.add(new KnightCard());
+                    deck.add(new VengefullKnightCard());
+                    deck.add(new VolcanoCard());
+                }
+                deck.add(new SpellBookCard());
+                deck.add(new SpellBookCard());
+                deck.add(new FireSpearCard());
+                deck.add(new FireSpearCard());
+                deck.add(new PaladinCard());
+                deck.add(new PaladinCard());
+                break;
+            case 4: //base deck
+                for (int i = 0; i < 3; i++) {
+                    deck.add(new ArakkoaCard());
+                    deck.add(new ArcherCard());
+                    deck.add(new FireBoltCard());
+                    deck.add(new FrostBearCard());
+                    deck.add(new KnightCard());
+                    deck.add(new VengefullKnightCard());
+                    deck.add(new VolcanoCard());
+                    FrostDragonCard fdc = new FrostDragonCard();
+                    //fdc.summon.attack = 4; //frost dragons in this deck are strong than usual
+                    //fdc.cost--;
+                    deck.add(fdc);
+                }
+                deck.add(new SpellBookCard());
+                deck.add(new SpellBookCard());
+                deck.add(new FireSpearCard());
+                deck.add(new PaladinCard());
+                deck.add(new PaladinCard());
+                break;
+            case 5: //empire deck
+                for (int i = 0; i < 3; i++) {
+                    deck.add(new SnipeTrapCard());
+                    deck.add(new DoubleshotCard());
+                    deck.add(new GriffonCard());
+                    deck.add(new KnightCard());
+                    deck.add(new ArcherCard());
+                }
+                for (int i = 0; i < 2; i++) {
+                    deck.add(new PaladinCard());
+                    deck.add(new SpearmanCard());
+                    deck.add(new CavalryGeneralCard());
+                    deck.add(new FireyWhelpCard());
+                }
+                deck.add(new UndyingSoldierCard());
+                deck.add(new ApocalypseCard());
+                break;
+            case 6: //deep sea
+                for (int i = 0; i < 3; i++) {
+                    deck.add(new JellyfishCard());
+                    deck.add(new SeaWitchCard());
+                    deck.add(new PirranahCard());
+                    deck.add(new SeaSerpentTrapCard());
+                    deck.add(new ThrasherCard());
+                }
+                for (int i = 0; i < 2; i++) {
+                    deck.add(new SwollowCard());
+                    deck.add(new PredationCard());
+                    deck.add(new VolcanoCard());
+                    //deck.add(new KelpieCard());
+                }
+                deck.add(new ThrasherCard());
+                deck.add(new SpellBookCard());
+                break;
+            case 7: //undead
+                for (int i = 0; i < 5; i++) {
+                    deck.add(new ArcherCard());
+                    deck.add(new KnightCard());
+                }
+                for (int i = 0; i < 4; i++) {
+                    deck.add(new SkeletonArmySpell());
+                }
+                for (int i = 0; i < 2; i++) {
+                    deck.add(new SkelemancerCard());
+                    deck.add(new SkullKingCard());
+                    deck.add(new ZombieTrapCard());
+                    deck.add(new FireBoltCard());
+                    deck.add(new VolcanoCard());
+                }
+                deck.add(new ZombieBiteSpell());
+                deck.add(new SpellBookCard());
+                break;
+            case 8:
+                deck.add(new StoneGolemCard());
+                deck.add(new StoneGolemCard());
+                deck.add(new StoneGolemCard());
+                deck.add(new GeomancerCard());
+                deck.add(new GeomancerCard());
+                deck.add(new GeomancerCard());
+                deck.add(new SorcererCard());
+                deck.add(new SorcererCard());
+                deck.add(new SorcererCard());
+                deck.add(new EarthInfusionSpell());
+                deck.add(new EarthInfusionSpell());
+                deck.add(new FireInfusionSpell());
+                deck.add(new IceInfusionSpell());
+                deck.add(new SandElementalCard());
+                deck.add(new SandElementalCard());
+                deck.add(new SandElementalCard());
+                deck.add(new VolcanoCard());
+                deck.add(new VolcanoCard());
+                deck.add(new ArcherCard());
+                deck.add(new MinotaurCard());
+                deck.add(new SpellBookCard());
+                deck.add(new SpellBookCard());
+                deck.add(new PaladinCard());
+                deck.add(new PaladinCard());
+                break;
+            case 9: //dragon
+                for (int i = 0; i < 5; i++) {
+                    deck.add(new GrayDrakeCard());
+                    deck.add(new VolcanicDrakeCard());
+                    deck.add(new FrostDragonCard());
+                    deck.add(new ArcherCard());
+                    deck.add(new VolcanoCard());
+                    deck.add(new PaladinCard());
+                }
+                for (int i = 0; i < 3; i++) {
+                    deck.add(new DragonSoulTrapCard());
+                    deck.add(new DragonBreathCard());
+                }
+                deck.add(new SpearmanCard());
+                deck.add(new UndyingSoldierCard());
+                break;
+            case 10://hard empire (empireburn)
+                deck.add(new CavalryGeneralCard());
+                deck.add(new CavalryGeneralCard());
+                deck.add(new CavalryGeneralCard());
+                deck.add(new GriffonCard());
+                deck.add(new GriffonCard());
+                deck.add(new GriffonCard());
+                deck.add(new EnchantedSwordCard());
+                deck.add(new EnchantedSwordCard());
+                deck.add(new EnchantedSwordCard());
+                deck.add(new FireyWhelpCard());
+                deck.add(new FireyWhelpCard());
+                deck.add(new SpearmanCard());
+                deck.add(new SpearmanCard());
+                deck.add(new SpearmanCard());
+                deck.add(new VengefullKnightCard());
+                deck.add(new VengefullKnightCard());
+                deck.add(new VengefullKnightCard());
+                deck.add(new KnightCard());
+                deck.add(new KnightCard());
+                deck.add(new KnightCard());
+                deck.add(new ArcherCard());
+                deck.add(new ArcherCard());
+                deck.add(new ArcherCard());
+                deck.add(new FrostBearCard());
+                deck.add(new FrostBearCard());
+                deck.add(new SpellBookCard());
+                deck.add(new SpellBookCard());
+                break;
+            case 11: //hard fish (deepsea again
+                for (int i = 0; i < 6; i++) {
+                    deck.add(new JellyfishCard());
+                    deck.add(new SeaWitchCard());
+                    deck.add(new PirranahCard());
+                    deck.add(new SeaSerpentTrapCard());
+                    deck.add(new ThrasherCard());
+                }
+                for (int i = 0; i < 4; i++) {
+                    deck.add(new SwollowCard());
+                    deck.add(new PredationCard());
+                    deck.add(new VolcanoCard());
+                    //deck.add(new KelpieCard());
+                    deck.add(new SpellBookCard());
+                }
+                deck.add(new ThrasherCard());
+                break;
+            default:
+                throw new Exception("No deck available for level " + level);
         }
         return deck;
     }
