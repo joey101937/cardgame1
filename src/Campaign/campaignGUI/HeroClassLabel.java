@@ -22,13 +22,13 @@ public class HeroClassLabel extends JLabel{
         this.addMouseListener(new MouseListener(){
             @Override
             public void mouseClicked(MouseEvent e) {
+                parent.chosenClass = hClass;
+                System.out.println("chose hero: " + hClass);
+                parent.dispose();
             }
 
             @Override
             public void mousePressed(MouseEvent e) {
-                parent.chosenClass=hClass;
-                System.out.println("chose hero: " + hClass);
-                parent.dispose();
             }
 
             @Override

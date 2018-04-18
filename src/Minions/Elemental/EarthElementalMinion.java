@@ -19,7 +19,7 @@ public class EarthElementalMinion extends Minion {
     public EarthElementalMinion(Card parent) {
         this.parent = parent;
         this.owner = parent.getOwner();
-        attack = 4;
+        attack = 3;
         originalAttack = attack;
         maxHealth = 5;
         health = maxHealth;

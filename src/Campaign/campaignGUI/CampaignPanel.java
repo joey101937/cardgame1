@@ -16,7 +16,8 @@ import java.awt.image.BufferedImage;
 import javax.swing.JPanel;
 
 /**
- *
+ * Panel for campaign interface GUI.
+ * renders list of levels + related icons
  * @author Joseph
  */
 public class CampaignPanel extends JPanel{

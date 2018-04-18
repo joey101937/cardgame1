@@ -137,7 +137,8 @@ public class HeroSelector extends JFrame{
     public void dispose(){
         super.dispose();
         CampaignManager.playerClass = chosenClass;
-        CampaignManager.playerCards = getStartingDeck(chosenClass);
+        //CampaignManager.playerCards = getStartingDeck(chosenClass);
+        getStartingDeck(chosenClass);
         CampaignManager.startGame();
     }
     
@@ -223,6 +224,9 @@ public class HeroSelector extends JFrame{
                 output.add(new MinotaurCard());
                 output.add(new VolcanoCard());
                 break;
+        }
+        for(Card c : output){
+        CampaignManager.playerCards.add(c);
         }
         return output;
     }

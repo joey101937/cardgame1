@@ -44,7 +44,8 @@ public class SpriteHandler {
     public static BufferedImage iconUndead;
     public static BufferedImage iconUndeadSmall;
     public static BufferedImage iconDragon;
-    
+    public static BufferedImage PLAYtext;
+    public static BufferedImage NEXTLEVELtext;
     //advanced fish
     public static BufferedImage baitfishCard;
     public static BufferedImage baitfishMinion;
@@ -154,6 +155,7 @@ public class SpriteHandler {
         try {
             if(SpriteHandler.hasInitialized) return;
             else hasInitialized=true;
+            if(Main.BackgroundImage==null)Main.setBackgroundImage();
             cardback = ImageIO.read(new File(Main.assets + "cardBack.png"));
             cardbackL = ImageIO.read(new File(Main.assets + "cardBackL.png"));
             cardback2 = ImageIO.read(new File(Main.assets + "cardBack2.png"));
@@ -183,6 +185,8 @@ public class SpriteHandler {
             iconUndead = load("iconUndead2small.png");
             iconDragon = load("iconDragon2.png");
             iconElemental = load("iconElemental.png");
+            PLAYtext = load("PLAY.png");
+            NEXTLEVELtext = load("NEXT LEVEL.png");
             //Advanced Fish
             baitfishCard = load("baitFishCard.png");
             baitfishMinion = load("baitfish.png");

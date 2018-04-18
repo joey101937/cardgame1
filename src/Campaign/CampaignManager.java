@@ -6,6 +6,7 @@
 package Campaign;
 
 import Campaign.campaignGUI.CampaignInterface;
+import Campaign.campaignGUI.CardAdderFrame;
 import Campaign.campaignGUI.HeroSelector;
 import Cards.Base.*;
 import Cards.Card;
@@ -14,6 +15,12 @@ import CustomDecks.CustomDeck;
 import static CustomDecks.CustomDeck.getCard;
 import CustomDecks.HeroClass;
 import CustomDecks.NoSuchCardException;
+import GUI.LegacyGUI;
+import cardgame1.Board;
+import cardgame1.Hero;
+import cardgame1.Main;
+import cardgame1.SpriteHandler;
+import cardgame1.Window;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -24,6 +31,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -31,17 +40,39 @@ import javax.swing.JOptionPane;
  * @author Joseph
  */
 public class CampaignManager {
-    private static String fileName = "SavedGame.campaign";
-    public static int level = 14;
+    private static String fileName = Main.assets+"SavedGame.campaign";
+    public static int level = 1;
     public static ArrayList<Card> playerCards = new ArrayList<>();
     public static HeroClass playerClass = HeroClass.Neutral;
-    public static final int NUM_LEVELS = 13; //number of levels in the game
+    public static final int NUM_LEVELS = 14; //number of levels in the game
+   
+    public static void main(String[] args){
+    Main.setBackgroundImage();
+    SpriteHandler.Initialize();
+    init();
+    }
+    
     /**
      * run when campaign launched
      */
     public static void init() {
+        SpriteHandler.Initialize();
         if (savedGameExists()) {
             try {
+                String[] options = {"Continue", "Start New Game"};
+                int choice = JOptionPane.showOptionDialog(null, "Saved game detected. Continue?", "Continue Prompt", 0, 0, new ImageIcon(SpriteHandler.swordsSmall), options, "init");
+                if(choice == -1){
+                    //exit back to main menu
+                    new LegacyGUI();
+                    return;
+                }
+                if(choice  == 1){
+                    level = 1;
+                    new HeroSelector();
+                    return;
+                }
+                //-1 = exit, 0 = options[0], 1= options[1]
+                //should only get here if user choses continue
                 loadGame();
                 startGame();
                 return;
@@ -82,10 +113,11 @@ public class CampaignManager {
     
     
     
+    
     /**
      * loads game saved in save game file
      */
-    private static void loadGame() throws FileNotFoundException, IOException, CorruptFileException{
+    public static void loadGame() throws FileNotFoundException, IOException, CorruptFileException{
         ArrayList<String> lines = new ArrayList<>(); //output is where we store all the lines from the given file
         File file = new File(fileName);
         InputStream ips = new FileInputStream(file);
@@ -97,7 +129,8 @@ public class CampaignManager {
         }
          if(lines.size() < 3) throw new CorruptFileException("Too few lines to be valid file: " + file.getName());
          level = Integer.parseInt(lines.get(0));
-                 for(int i = 1; i < lines.size();i++){
+         playerClass = HeroClass.valueOf(lines.get(1));
+                 for(int i = 2; i < lines.size();i++){
             try {
                 playerCards.add(getCard(lines.get(i)));
             } catch (NoSuchCardException ex) {
@@ -110,10 +143,12 @@ public class CampaignManager {
     /**
      * saves game to save game file
      */
-    private static void saveGame() {
+    public static void saveGame() {
+        System.out.println("Saving Game...");
         File output = new File(fileName);
         ArrayList<String> lines = new ArrayList<>();
         lines.add(String.valueOf(level));
+        lines.add(playerClass.toString());
         for (Card c : playerCards) {
             lines.add(c.name);
         }
@@ -129,9 +164,10 @@ public class CampaignManager {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        System.out.println("Game Save Complete");
     }
     
-    public ArrayList<Card> getPlayerDeck(){
+    public static ArrayList<Card> getPlayerDeck(){
         ArrayList<Card> output = new ArrayList<>();
         for(Card c : playerCards){
             try {
@@ -143,6 +179,68 @@ public class CampaignManager {
         return output;
     }
     
+    /**
+     * run this method when an indevidual round ends
+     * @param loser hero that died, ending the round
+     */
+    public static void onGameEnd(Hero loser){
+        if(loser == Board.playerHero){ //player loss
+            JOptionPane.showMessageDialog(null, "Round Lost!");
+            returnToInterface();
+            return;
+        }else{
+            level++;
+            if(level>NUM_LEVELS){
+                onCampaignVictory();
+                return;
+            }
+            JOptionPane.showMessageDialog(null, "Round Won!");
+            goToCardAdder();
+            return;
+        }
+    }
+    
+    /**
+     * run when user beats the campaign
+     */
+    private static void onCampaignVictory(){
+        JOptionPane.showMessageDialog(null, "YOU HAVE BEATEN CAMAPGIN!");
+        returnToInterface(); //let them see the victorious interface, should have no more 'play' button on it
+    }
+    /**
+     * ends the current game instance and returns to campaign interface
+     */
+    public static void returnToInterface() {
+        Board board = Board.getMainBoard();
+        board.running = false;
+        Window window = board.window;
+        JFrame frame = window.frame;
+        if (frame == null) {
+            System.out.println("frame is null");
+            System.exit(1);
+        } else {
+            frame.dispose();
+            board.running = false;
+            new CampaignInterface();
+            //available = true;
+        }
+    }
+    
+    public static void goToCardAdder(){
+        Board board = Board.getMainBoard();
+        board.running = false;
+        Window window = board.window;
+        JFrame frame = window.frame;
+        if (frame == null) {
+            System.out.println("frame is null");
+            System.exit(1);
+        } else {
+            frame.dispose();
+            board.running = false;
+            new CardAdderFrame(3);
+            //available = true;
+        }
+    }
     
     /**
      * gets enemy decks for each level
@@ -150,14 +248,13 @@ public class CampaignManager {
      * @return
      * @throws Exception if no decks are on file for that level
      */
-    public ArrayList<Card> getDeckForLevel(int level) throws Exception{
+    public static ArrayList<Card> getDeckForLevel(int level) throws Exception{
         ArrayList<Card> deck = new ArrayList<>();
         switch(level){
             case 1:
-                for(int i = 0; i<3; i++){
+                for(int i = 0; i<5; i++){
                     deck.add(new ArakkoaCard());
                     deck.add(new KnightCard());
-                    deck.add(new KelpieCard());
                 }
                 deck.add(new UndyingSoldierCard());
                 break;
@@ -177,22 +274,23 @@ public class CampaignManager {
             case 1:
             case 2:
             case 3:
+            case 4:
                 return HeroClass.Neutral;
-            case 7:
-            case 12:
-                return HeroClass.Empire;
             case 5:
             case 10:
-                return HeroClass.Ocean;
+                return HeroClass.Empire;
             case 6:
             case 11:
+                return HeroClass.Ocean;
+            case 7:
+            case 12:
                 return HeroClass.Undead;
             case 8:
             case 13:
-                return HeroClass.Dragon;
-            case 4:
-            case 9:
                 return HeroClass.Elemental;
+            case 9:
+            case 14:
+                return HeroClass.Dragon;
             default:
                 System.out.println("Error, no class listed for level "+ level +" -CampaignMangager.getEnemyClassForLevel("+level+")");
                 return HeroClass.Restricted;

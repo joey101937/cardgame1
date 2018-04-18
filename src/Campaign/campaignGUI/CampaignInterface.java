@@ -8,8 +8,10 @@ package Campaign.campaignGUI;
 import Campaign.CampaignManager;
 import static Campaign.CampaignManager.level;
 import GUI.SettingsPane;
+import cardgame1.Board;
 import cardgame1.Main;
 import cardgame1.SpriteHandler;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.MouseEvent;
@@ -29,10 +31,14 @@ public class CampaignInterface extends JFrame{
     private JLabel levelLabel;
     private JLabel enemyPortrait;
     private JLabel enemyName;
+    private JLabel playButton;
+    private JLabel playTextLabel;
     private static Font classTitleFont = new Font("Arial",Font.BOLD,26);
      private static Font enemyTitleFont = new Font("Arial",Font.BOLD,18);
+     private static Font playButtonFont = new Font("Arial",Font.BOLD,30);
     public CampaignInterface(){
         init();
+        CampaignManager.saveGame();
     }
     
     private void init() {
@@ -89,18 +95,33 @@ public class CampaignInterface extends JFrame{
         levelLabel.setText("Level: " + CampaignManager.level);
         levelLabel.setFont(classTitleFont);
         panel.add(levelLabel);
+        
+
+        
+        playButton = new JLabel();
+        playButton.setSize(300,300);
+        playButton.setLocation(50, 150);
+        playButton.setIcon(new ImageIcon(SpriteHandler.NEXTLEVELtext));
+        panel.add(playButton);
+        playButton.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+               dispose();
+               new Board(CampaignManager.level);
+            }
+            @Override
+            public void mousePressed(MouseEvent e) {}
+            @Override
+            public void mouseReleased(MouseEvent e) { }
+            @Override
+            public void mouseEntered(MouseEvent e) { }
+            @Override
+            public void mouseExited(MouseEvent e) {  }
+        });
+        
         this.setVisible(true);
     }
 
-    /**
-     * for testing purposes
-     * @param args 
-     */
-    public static void main(String[] args) {
-        Main.setBackgroundImage();
-        SpriteHandler.Initialize();
-        new CampaignInterface();
-    }
    
 
 }

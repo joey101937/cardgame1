@@ -6,6 +6,7 @@
 package cardgame1;
 
 import AI.AI;
+import Campaign.CampaignManager;
 import Minions.Minion;
 import Cards.*;
 import GUI.DeckLoaderScratch;
@@ -203,6 +204,10 @@ public class Hero {
         if(!available)return;
         available = false;
         if(!endGameOnDeath)return;
+        if(Board.mainBoard.isCampaignGame){
+            CampaignManager.onGameEnd(this);
+            return;
+        }
         if (this == Board.playerHero) {
             Main.display("Game over!");
             int selection = JOptionPane.showConfirmDialog(null, "Restart?");
@@ -248,6 +253,8 @@ public class Hero {
             //available = true;
         }
     }
+    
+    
     
     /**
      * adds health to a hero up to their maximum health

@@ -5,11 +5,11 @@
  */
 package cardgame1;
 
+import Campaign.CampaignManager;
 import Minions.Base.ArakkoaMinion;
 import Minions.Base.FrostBearMinion;
 import Cards.Base.FrostBearCard;
 import Cards.*;
-import GUI.LegacyGUI;
 import Minions.*;
 import Traps.Trap;
 import java.awt.Canvas;
@@ -18,9 +18,12 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Toolkit;
 import java.awt.image.BufferStrategy;
 import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /*
@@ -39,6 +42,7 @@ public class Board extends Canvas implements Runnable {
     public static VisualEffectHandler visHandler = null;
     public Window window;  //main window
     public boolean running = false;
+    public boolean isCampaignGame = false;
     private Thread thread = null;
     public Dimension d;
     public static InputHandler ih = new InputHandler();
@@ -77,7 +81,7 @@ public class Board extends Canvas implements Runnable {
     
     /**
      * Creates Board with given heros and given dimension.
-     * THIS IS THE CONSTRUCTOR TO BE USED WITH GUI
+     * THIS IS THE CONSTRUCTOR TO BE USED WITH LEGACYGUI VS AI
      * @param t top hero
      * @param b bottom hero
      * @param d dimension of window
@@ -148,6 +152,43 @@ public class Board extends Canvas implements Runnable {
             }
         }
     }
+    
+    /**
+     * Constructor to be used in campaign
+     * All level specific data will be loaded in constructor based on campaign progress and current level
+     * @param level level to play
+     */
+    public Board(int level){
+        Dimension d = Toolkit.getDefaultToolkit().getScreenSize(); 
+        mainBoard = this;
+         xScale = (d.getWidth() / 1920);
+        yScale = d.getHeight() / 1080;  
+         Hero t = null ,b = null;
+        try {
+            t = new Hero("enemy hero",CampaignManager.getDeckForLevel(level),CampaignManager.getEnemyClassForLevel(level).getHeroPortrait());
+            b = new Hero("player hero",CampaignManager.getPlayerDeck(),CampaignManager.playerClass.getHeroPortrait());
+        } catch (Exception ex) {
+            //if there is no decka available
+            System.out.println("ex");
+            ex.printStackTrace();
+        }
+        topHero = t;
+        botHero = b;
+        playerHero = b;
+        t.opponent = b;
+        b.opponent = t;
+        nonPlayerHero = t;
+        nonPlayerHero.setAIControlled(true);
+        this.addMouseListener(ih);
+        this.addMouseMotionListener(ih);
+        this.addKeyListener(ih);
+        this.visHandler = new VisualEffectHandler(this);
+        this.controller = new GameController(this);
+        controller.startGame();
+        this.isCampaignGame=true;
+        window = new Window(d.width, d.height, "Card Game", this);
+    }
+
 
     public static Board getMainBoard() {
         return mainBoard;
