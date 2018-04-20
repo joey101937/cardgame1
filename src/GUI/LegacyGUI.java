@@ -83,7 +83,7 @@ public class LegacyGUI extends javax.swing.JFrame {
         repaint();
     }
 
-    private ArrayList<Card> getBaseDeck(){
+    public static ArrayList<Card> getBaseDeck(){
         //Base
         ArrayList<Card> deck = new ArrayList<>();
         for(int i = 0; i < 3; i++){
@@ -108,7 +108,7 @@ public class LegacyGUI extends javax.swing.JFrame {
         return deck;
     }
 
-        private ArrayList<Card> getFishDeck(){
+        public static ArrayList<Card> getFishDeck(){
         //Base
         ArrayList<Card> deck = new ArrayList<>();
         for(int i = 0; i < 3; i++){
@@ -122,7 +122,7 @@ public class LegacyGUI extends javax.swing.JFrame {
         return deck;
     }
         
-     private ArrayList<Card> getDeepSeaDeck() {
+     public  static ArrayList<Card> getDeepSeaDeck() {
         ArrayList<Card> deck = new ArrayList<>();
         for (int i = 0; i < 3; i++) {  
             deck.add(new JellyfishCard()); 
@@ -141,7 +141,7 @@ public class LegacyGUI extends javax.swing.JFrame {
         return deck;
         }
      
-    private ArrayList<Card> getUndeadDeck() {
+    public static  ArrayList<Card> getUndeadDeck() {
         ArrayList<Card> deck = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
             deck.add(new ArcherCard());
@@ -161,7 +161,7 @@ public class LegacyGUI extends javax.swing.JFrame {
         deck.add(new SpellBookCard());
         return deck;
     }
-     private ArrayList<Card> getEmpireDeck() {
+     public static ArrayList<Card> getEmpireDeck() {
         ArrayList<Card> deck = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
             deck.add(new SnipeTrapCard());
@@ -183,7 +183,7 @@ public class LegacyGUI extends javax.swing.JFrame {
      
      
         
-    private ArrayList<Card> getElementalDeck() {
+    public static ArrayList<Card> getElementalDeck() {
         ArrayList<Card> deck = new ArrayList<>();
                 deck.add(new StoneGolemCard());
                 deck.add(new StoneGolemCard());
@@ -212,7 +212,7 @@ public class LegacyGUI extends javax.swing.JFrame {
         return deck;
     }
 
-    private ArrayList<Card> getDragonDeck() {
+    public static ArrayList<Card> getDragonDeck() {
         ArrayList<Card> deck = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
             deck.add(new GrayDrakeCard());

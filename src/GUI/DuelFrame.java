@@ -5,25 +5,18 @@
  */
 package GUI;
 
-import Cards.Base.ArakkoaCard;
-import Cards.Base.ArcherCard;
-import Cards.Base.FireBoltCard;
-import Cards.Base.FireSpearCard;
-import Cards.Base.FrostBearCard;
-import Cards.Base.FrostDragonCard;
-import Cards.Base.KnightCard;
-import Cards.Base.PaladinCard;
-import Cards.Base.SpellBookCard;
-import Cards.Base.VengefullKnightCard;
-import Cards.Base.VolcanoCard;
 import Cards.Card;
+import CustomDecks.CustomDeck;
 import CustomDecks.HeroClass;
 import cardgame1.Main;
 import cardgame1.SpriteHandler;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -38,7 +31,9 @@ public class DuelFrame extends JFrame{
     private JPanel line;            //center devider
     private JLabel playerName, enemyName; //text names
     private JLabel playerPort, enemyPort; //class portraits, based on selected class
-    private ChosenDeck playerDeck, enemyDeck;
+    private JComboBox playerCombo, enemyCombo;
+    public ChosenDeck playerDeck = getDeck("Base Deck"), enemyDeck = getDeck("Base Deck");
+    private CustomDeck loadedCustom = null;
     private static Font classTitleFont = new Font("Arial",Font.BOLD,26);
     /**
      * constructor
@@ -84,12 +79,50 @@ public class DuelFrame extends JFrame{
         playerPort.setLocation(10,60);
         playerPort.setIcon(new ImageIcon(SpriteHandler.ashePortrait.getSubimage(0, 60, 300, 110))); //should be set by chosen deck in future
         panel.add(playerPort);
-        
+        ////
         enemyPort = new JLabel();
         enemyPort.setSize(300,200);
         enemyPort.setLocation(350,60);
         enemyPort.setIcon(new ImageIcon(SpriteHandler.knightHero.getSubimage(0, 60, 300, 110))); //should be set by chosen deck in future
         panel.add(enemyPort);
+        //setup JComboBox for deck selection
+        playerCombo = new JComboBox();
+        playerCombo.setSize(300, 40);
+        playerCombo.setLocation(10, 250);
+        playerCombo.addItem("Base Deck");
+        playerCombo.addItem("Undead Deck");
+        playerCombo.addItem("Feeding Frenzy Deck");
+        playerCombo.addItem("Deep Sea Deck");
+        playerCombo.addItem("Empire Deck");
+        playerCombo.addItem("Dragon Deck");
+        playerCombo.addItem("Elemental Deck");
+        playerCombo.addItem("Load Custom...");
+        playerCombo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setDeck(playerCombo);
+            }
+        });
+        panel.add(playerCombo);
+        enemyCombo = new JComboBox();
+        enemyCombo.setSize(300, 40);
+        enemyCombo.setLocation(350, 250);
+        enemyCombo.addItem("Base Deck");
+        enemyCombo.addItem("Undead Deck");
+        enemyCombo.addItem("Feeding Frenzy Deck");
+        enemyCombo.addItem("Deep Sea Deck");
+        enemyCombo.addItem("Empire Deck");
+        enemyCombo.addItem("Dragon Deck");
+        enemyCombo.addItem("Elemental Deck");
+        enemyCombo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setDeck(enemyCombo);
+            }
+        });
+        panel.add(enemyCombo);
+        setDeck(playerCombo);
+        setDeck(enemyCombo);
     }
     
     public static void main(String[] args) {
@@ -98,45 +131,83 @@ public class DuelFrame extends JFrame{
     
     /**
      * gets the build in deck with given title
+     * NOTE: Returns base deck if given unknown name
+     *       Returns null if loading custom deck
      * @param title title of the wanted deck
-     * @return chosen deck of given name. if 
+     * @return chosen deck of given name.
      */
-    private ChosenDeck getDeck(String title){
+    private ChosenDeck getDeck(String title) {
         ArrayList<Card> deck = new ArrayList<Card>();
         switch (title) {
             case "Base Deck":
-                for (int i = 0; i < 3; i++) {
-                    deck.add(new ArakkoaCard());
-                    deck.add(new ArcherCard());
-                    deck.add(new FireBoltCard());
-                    deck.add(new FrostBearCard());
-                    deck.add(new KnightCard());
-                    deck.add(new VengefullKnightCard());
-                    deck.add(new VolcanoCard());
-                    FrostDragonCard fdc = new FrostDragonCard();
-                    //fdc.summon.attack = 4; //frost dragons in this deck are strong than usual
-                    //fdc.cost--;
-                    deck.add(fdc);
-                }
-                deck.add(new SpellBookCard());
-                deck.add(new SpellBookCard());
-                deck.add(new FireSpearCard());
-                deck.add(new FireSpearCard());
-                deck.add(new PaladinCard());
-                deck.add(new PaladinCard());
+                deck = LegacyGUI.getBaseDeck();
                 return new ChosenDeck(deck, HeroClass.Neutral);
+            case "Undead Deck":
+                deck = LegacyGUI.getUndeadDeck();
+                return new ChosenDeck(deck, HeroClass.Undead);
+            case "Feeding Frenzy Deck":
+                deck = LegacyGUI.getFishDeck();
+                return new ChosenDeck(deck,HeroClass.Ocean);
+            case "Deep Sea Deck":
+                deck = LegacyGUI.getDeepSeaDeck();
+                return new ChosenDeck(deck,HeroClass.Ocean);
+            case "Elemental Deck":
+                deck = LegacyGUI.getElementalDeck();
+                return new ChosenDeck(deck,HeroClass.Elemental);
+            case "Dragon Deck":
+                deck = LegacyGUI.getDragonDeck();
+                return new ChosenDeck(deck,HeroClass.Dragon);
+            case "Empire Deck":
+                deck = LegacyGUI.getEmpireDeck();
+                return new ChosenDeck(deck,HeroClass.Empire);
+            case "Load Custom...":
+                  DeckLoaderScratch dls = new DeckLoaderScratch(this);
+                  this.setEnabled(false);
+                  return null;
             default:
                 JOptionPane.showMessageDialog(null, "Error: No built-in deck found with name " + title);
                 return getDeck("Base Deck");
         }
     }
 
+    public void setPlayerDeck(ArrayList<Card> deck, HeroClass c){
+        playerDeck = new ChosenDeck(deck,c);
+    }
 
+    public void setEnemyDeck(ArrayList<Card> deck, HeroClass c) {
+        enemyDeck = new ChosenDeck(deck, c);
+    }
+
+    /**
+     * updates the portraits and decks based on what the user chooses
+     */
+    public void setDeck(JComboBox combo){
+        //assign a deck to the get value. if the player is loading a custom deck, this will return null so we dont need to assign anything
+        ChosenDeck deck = getDeck(combo.getSelectedItem().toString());
+        if(deck==null){ //loading custom deck
+            updatePortrait();
+            return;
+        }
+        if(combo==playerCombo){
+            playerDeck = getDeck(combo.getSelectedItem().toString());
+        }else{
+            enemyDeck = getDeck(combo.getSelectedItem().toString());
+        }
+        updatePortrait();
+    }
     
+    /**
+     * sets portraits to loaded decks
+     */
+    public void updatePortrait(){
+        playerPort.setIcon(new ImageIcon(playerDeck.hClass.getHeroPortrait().getSubimage(0, 60, 300, 110)));
+        enemyPort.setIcon(new ImageIcon(enemyDeck.hClass.getHeroPortrait().getSubimage(0, 60, 300, 110)));
+        repaint(); 
+    }
     /**
      * holds a arraylist of cards and a hero class
      */
-    private class ChosenDeck{
+    public class ChosenDeck{
         public ArrayList<Card> cards;
         public HeroClass hClass;
         public ChosenDeck(ArrayList<Card> ac, HeroClass hc){

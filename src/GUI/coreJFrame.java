@@ -15,11 +15,13 @@ public class coreJFrame extends JFrame{
     private DeckLoaderScratch host;
     private LegacyGUI parent;
     private DeckBuilder builder;
+    private DuelFrame duel;
     
-    public coreJFrame(DeckLoaderScratch dls, LegacyGUI leg, DeckBuilder build){
+    public coreJFrame(DeckLoaderScratch dls, LegacyGUI leg, DeckBuilder build, DuelFrame df){
         host = dls;
         parent = leg;
         builder = build;
+        duel=df;
     }
     @Override
     public void dispose(){
@@ -32,6 +34,10 @@ public class coreJFrame extends JFrame{
             builder.setEnabled(true);
             builder.requestFocus();
             builder.loadDeck(host.chosenDeck);
+        }
+        if(duel!=null){
+            duel.setEnabled(true);
+            duel.requestFocus();
         }
     }
 }
