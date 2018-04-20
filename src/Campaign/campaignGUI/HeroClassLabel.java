@@ -12,7 +12,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 /**
- *
+ * used with hero selector, displays a class portrait and starts campaign when clicked
  * @author Joseph
  */
 public class HeroClassLabel extends JLabel{

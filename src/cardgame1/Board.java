@@ -91,8 +91,7 @@ public class Board extends Canvas implements Runnable {
         xScale = (d.getWidth()/1920);
         yScale = d.getHeight()/1080;
         System.out.println("Scale; " + xScale + ", " + yScale);
-        System.out.println("Dimenstion: " + d.toString());
-        window = new Window(d.width, d.height, "Card Game", this);
+        System.out.println("Dimenstion: " + d.toString());      
         topHero = t;
         botHero = b;
         playerHero = b;
@@ -106,6 +105,7 @@ public class Board extends Canvas implements Runnable {
         this.visHandler = new VisualEffectHandler(this);
         this.controller = new GameController(this);
         //setupTest();
+        window = new Window(d.width, d.height, "Card Game", this);
         controller.startGame();
     }
     

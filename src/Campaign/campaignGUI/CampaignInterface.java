@@ -14,11 +14,15 @@ import cardgame1.SpriteHandler;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 /**
  * Main campaign menu
@@ -106,6 +110,7 @@ public class CampaignInterface extends JFrame{
         panel.add(levelLabel);
         
         playButton = new JLabel();
+        if(level<=CampaignManager.NUM_LEVELS){
         playButton.setSize(300,300);
         playButton.setLocation(50, 150);
         playButton.setIcon(new ImageIcon(SpriteHandler.NEXTLEVELtext));
@@ -123,9 +128,51 @@ public class CampaignInterface extends JFrame{
             @Override
             public void mouseEntered(MouseEvent e) { }
             @Override
-            public void mouseExited(MouseEvent e) {  }
-        });
-        
+                public void mouseExited(MouseEvent e) {
+                }
+            });
+        } else {
+            playButton.setSize(300, 300);
+            playButton.setLocation(50, 150);
+            playButton.setIcon(new ImageIcon(SpriteHandler.NEXTLEVELtext));
+            panel.add(playButton);
+            playButton.addMouseListener(new MouseListener() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    JOptionPane.showMessageDialog(null, "You have beaten the " + CampaignManager.playerClass + " campaign! \n Choose \"New Game\" to play again as another hero!");
+                }
+
+                @Override
+                public void mousePressed(MouseEvent e) {
+                }
+
+                @Override
+                public void mouseReleased(MouseEvent e) {
+                }
+
+                @Override
+                public void mouseEntered(MouseEvent e) {
+                }
+
+                @Override
+                public void mouseExited(MouseEvent e) {
+                }
+            });
+            JButton restartButton = new JButton();
+            restartButton.setLocation(0, 0);
+            restartButton.setSize(200, 50);
+            restartButton.setText("New Game!");
+            restartButton.setFont(classTitleFont);
+            restartButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    dispose();
+                    level = 1;
+                    new HeroSelector();
+                }
+            });
+            panel.add(restartButton);
+        }
         this.setVisible(true);
     }
 

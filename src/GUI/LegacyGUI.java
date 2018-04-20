@@ -185,7 +185,7 @@ public class LegacyGUI extends javax.swing.JFrame {
         
     private ArrayList<Card> getElementalDeck() {
         ArrayList<Card> deck = new ArrayList<>();
-  deck.add(new StoneGolemCard());
+                deck.add(new StoneGolemCard());
                 deck.add(new StoneGolemCard());
                 deck.add(new StoneGolemCard());
                 deck.add(new GeomancerCard());
@@ -228,7 +228,6 @@ public class LegacyGUI extends javax.swing.JFrame {
         }
         deck.add(new SpearmanCard());
         deck.add(new UndyingSoldierCard());
-        
         return deck;
     }
         /**

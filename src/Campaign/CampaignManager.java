@@ -265,7 +265,7 @@ public class CampaignManager {
             frame.dispose();
             board.running = false;
             if(level<=4)new CardAdderFrame(4);
-            else new CardAdderFrame(3);
+            else new CardAdderFrame(2);
             //available = true;
         }
     }
@@ -477,17 +477,88 @@ public class CampaignManager {
                 }
                 deck.add(new ThrasherCard());
                 break;
+            case 12:
+                for (int i = 0; i < 10; i++) {
+                    deck.add(new ArcherCard());
+                    deck.add(new KnightCard());
+                }
+                for (int i = 0; i < 6; i++) {
+                    deck.add(new SkeletonArmySpell());
+                }
+                for (int i = 0; i < 4; i++) {
+                    deck.add(new SkelemancerCard());
+                    deck.add(new SkullKingCard());
+                    deck.add(new ZombieTrapCard());
+                    deck.add(new FireBoltCard());
+                    deck.add(new VolcanoCard());
+                    deck.add(new SpellBookCard());
+                }
+                deck.add(new ZombieBiteSpell());
+                deck.add(new ZombieBiteSpell());         
+                break;
+            case 13:
+                deck.add(new StoneGolemCard());
+                deck.add(new StoneGolemCard());
+                deck.add(new StoneGolemCard());
+                deck.add(new StoneGolemCard());
+                deck.add(new StoneGolemCard());
+                deck.add(new StoneGolemCard());
+                deck.add(new GeomancerCard());
+                deck.add(new GeomancerCard());
+                deck.add(new GeomancerCard());
+                deck.add(new SorcererCard());
+                deck.add(new SorcererCard());
+                deck.add(new SorcererCard());
+                deck.add(new SorcererCard());
+                deck.add(new EarthInfusionSpell());
+                deck.add(new EarthInfusionSpell());
+                deck.add(new FireInfusionSpell());
+                deck.add(new IceInfusionSpell());
+                deck.add(new SandElementalCard());
+                deck.add(new SandElementalCard());
+                deck.add(new SandElementalCard());
+                deck.add(new VolcanoCard());
+                deck.add(new VolcanoCard());
+                deck.add(new ArcherCard());
+                deck.add(new MinotaurCard());
+                deck.add(new SpellBookCard());
+                deck.add(new SpellBookCard());
+                deck.add(new SpellBookCard());
+                deck.add(new PaladinCard());
+                deck.add(new PaladinCard());
+                break;
+            case 14:
+                for (int i = 0; i < 4; i++) {
+                    deck.add(new GrayDrakeCard());
+                    deck.add(new VolcanicDrakeCard());
+                    deck.add(new FrostDragonCard());
+                    deck.add(new ArcherCard());    
+                    deck.add(new PaladinCard());
+                }
+                for (int i = 0; i < 2; i++) {
+                    deck.add(new DragonSoulTrapCard());
+                    deck.add(new DragonBreathCard());
+                    deck.add(new DragonBreathCard());
+                     deck.add(new VolcanoCard());
+                }
+                deck.add(new SpearmanCard());
+                deck.add(new SpearmanCard());
+                deck.add(new SpellBookCard());
+                deck.add(new SpellBookCard());
+                deck.add(new SpellBookCard());
+                deck.add(new UndyingSoldierCard());
+                break;
             default:
                 throw new Exception("No deck available for level " + level);
         }
         return deck;
     }
-    
+
     /**
      * returns the enemy class for the given level
      */
-    public static HeroClass getEnemyClassForLevel(int level){
-        switch(level){
+    public static HeroClass getEnemyClassForLevel(int level) {
+        switch (level) {
             case 1:
             case 2:
             case 3:
@@ -509,7 +580,7 @@ public class CampaignManager {
             case 14:
                 return HeroClass.Dragon;
             default:
-                System.out.println("Error, no class listed for level "+ level +" -CampaignMangager.getEnemyClassForLevel("+level+")");
+                System.out.println("Error, no class listed for level " + level + " -CampaignMangager.getEnemyClassForLevel(" + level + ")");
                 return HeroClass.Restricted;
         }
     }
