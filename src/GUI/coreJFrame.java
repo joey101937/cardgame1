@@ -16,12 +16,13 @@ public class coreJFrame extends JFrame{
     private LegacyGUI parent;
     private DeckBuilder builder;
     private DuelFrame duel;
-    
-    public coreJFrame(DeckLoaderScratch dls, LegacyGUI leg, DeckBuilder build, DuelFrame df){
+    private MultiplayerFrame mpf;
+    public coreJFrame(DeckLoaderScratch dls, LegacyGUI leg, DeckBuilder build, DuelFrame df, MultiplayerFrame mpf){
         host = dls;
         parent = leg;
         builder = build;
         duel=df;
+        this.mpf=mpf;
     }
     @Override
     public void dispose(){
@@ -38,6 +39,10 @@ public class coreJFrame extends JFrame{
         if(duel!=null){
             duel.setEnabled(true);
             duel.requestFocus();
+        }
+        if(mpf !=null){
+            mpf.setEnabled(true);
+            mpf.requestFocus();
         }
     }
 }

@@ -22,9 +22,6 @@ import Cards.Empire.EnchantedSwordCard;
 import Cards.Empire.FireyWhelpCard;
 import Cards.Empire.GriffonCard;
 import Cards.Empire.SnipeTrapCard;
-import Cards.Fish.BaitfishCard;
-import Cards.Fish.CarnifishCard;
-import Cards.Fish.FrenzyCard;
 import Cards.Fish.JellyfishCard;
 import Cards.Fish.PirranahCard;
 import Cards.Fish.PredationCard;
@@ -42,7 +39,7 @@ import CustomDecks.CustomDeck;
 import static CustomDecks.CustomDeck.getCard;
 import CustomDecks.HeroClass;
 import CustomDecks.NoSuchCardException;
-import GUI.LegacyGUI;
+import GUI.LandingPage;
 import cardgame1.Board;
 import cardgame1.Hero;
 import cardgame1.Main;
@@ -90,7 +87,7 @@ public class CampaignManager {
                 int choice = JOptionPane.showOptionDialog(null, "Saved game detected. Continue?", "Continue Prompt", 0, 0, new ImageIcon(SpriteHandler.swordsSmall), options, "init");
                 if(choice == -1){
                     //exit back to main menu
-                    new LegacyGUI();
+                    new LandingPage();
                     return;
                 }
                 if(choice  == 1){

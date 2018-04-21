@@ -51,6 +51,7 @@ public class DeckLoaderScratch {
     private LegacyGUI maker;
     private DuelFrame duelFrame;
     private DeckBuilder builder;
+    private MultiplayerFrame mpf;
     /**
      * constructor
      */
@@ -71,6 +72,12 @@ public class DeckLoaderScratch {
         setupInitialComponents();
     }
     
+    DeckLoaderScratch(MultiplayerFrame mp) {
+        mpf = mp;
+        SpriteHandler.Initialize();
+        setupInitialComponents();
+    }
+    
     DeckLoaderScratch(DeckBuilder builder){
         this.builder = builder;
         SpriteHandler.Initialize();
@@ -80,12 +87,12 @@ public class DeckLoaderScratch {
      * initializes ui components
      */
     private void setupInitialComponents(){
-        core = new coreJFrame(this, maker, builder, duelFrame);
+        core = new coreJFrame(this, maker, builder, duelFrame, mpf);
         core.setSize(625, 720);
         core.setIconImage(SpriteHandler.swords);
         core.setPreferredSize(new Dimension(600,720));
        
-        if(maker==null && builder==null && duelFrame == null)core.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        if(maker==null && builder==null && duelFrame == null && mpf ==null)core.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         else{
             System.out.println("dispose on close");
             core.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -154,6 +161,15 @@ public class DeckLoaderScratch {
                     core.dispose();
                     return;
                 }
+                 if(chosenDeck.isValid() && mpf!=null){
+                     System.out.println("setting chosen deck for mp");
+                     mpf.setPlayerDeck(chosenDeck.deck, chosenDeck.deckClass);
+                     mpf.loadedCustom=chosenDeck;
+                     mpf.setEnabled(true);
+                     mpf.updatePortrait();
+                     core.dispose();
+                     return;
+                 }
                  if(builder!=null){
                      if(!chosenDeck.isValid())JOptionPane.showMessageDialog(null, "Notice: Loading invalid Deck");
                      builder.setEnabled(true);

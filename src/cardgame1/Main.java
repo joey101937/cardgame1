@@ -14,7 +14,7 @@ import Cards.Base.ArakkoaCard;
 import Cards.*;
 import Cards.Dragon.GrayDrakeCard;
 import Cards.Fish.*;
-import GUI.LegacyGUI;
+import GUI.LandingPage;
 import Multiplayer.Phantom;
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
@@ -47,7 +47,8 @@ public class Main {
     public static void main(String[] args) {
         setBackgroundImage();
         SpriteHandler.Initialize();
-        LegacyGUI og = new LegacyGUI();
+        //LegacyGUI og = new LegacyGUI();
+        new LandingPage();
     }
 
     /**

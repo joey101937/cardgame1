@@ -47,6 +47,7 @@ public class DeckBuilder extends JFrame{
     private JButton saveButton;
     private JButton loadButton;
     private JButton clearButton;
+    private JLabel backButton;
     public CustomDeck product = new CustomDeck("Unnamed", new ArrayList<Card>(), HeroClass.Neutral); //deck we are building
     public String loadedDeckName = null; //name of the deck we loaded via the deck loader, if applicable
     private static Font titleFont = new Font("Times", Font.BOLD, 35);
@@ -152,6 +153,26 @@ public class DeckBuilder extends JFrame{
             public void mouseExited(MouseEvent e) {}
         });
         panel.add(isValidLabel);
+        
+        backButton = new JLabel();
+        backButton.setSize(70,70);
+        backButton.setIcon(new ImageIcon(SpriteHandler.backArrow));
+        backButton.setLocation(0, 600);
+        panel.add(backButton);
+        backButton.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+            dispose();
+            }
+            @Override
+            public void mousePressed(MouseEvent e) {}
+            @Override
+            public void mouseReleased(MouseEvent e) {}
+            @Override
+            public void mouseEntered(MouseEvent e) {}
+            @Override
+            public void mouseExited(MouseEvent e) { }
+        });
         
         loadButton = new JButton();
         loadButton.setSize(100,50);

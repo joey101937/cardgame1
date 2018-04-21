@@ -50,6 +50,7 @@ public class SpriteHandler {
     public static BufferedImage backArrow;
     public static BufferedImage VS;
     public static BufferedImage scroll;
+    public static BufferedImage HOSTtext, JOINtext;
     //advanced fish
     public static BufferedImage baitfishCard;
     public static BufferedImage baitfishMinion;
@@ -197,6 +198,8 @@ public class SpriteHandler {
             OPTIONStext = load("OPTIONS.png");
             CAMPAIGNtext = load("Campaign.png");
             scroll = load("scroll.png");
+            HOSTtext = load("Host.png");
+            JOINtext = load("Join.png");
             
             backArrow = load("backArrowSmall.png");
             VS = load("VS2.png");

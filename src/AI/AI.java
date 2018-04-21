@@ -38,19 +38,23 @@ public abstract class AI {
         playCardsAboveValue(h,2.5);
         tradeOnBoard(h,false);
         playOutHand(h);
+        if(h.opponent.health<=0)return;
         Main.wait(speed);
         tradeOnBoard(h,false);
+        if(h.opponent.health<=0)return;
         for(Minion m : h.minions.getStorage()){
             if(!AI.isHeroVulnerable(h)){
             if(m==null) continue;
             Main.wait(speed);
             m.attack(enemy);
+            if(h.opponent.health<=0)return;
             }else{
             if(m==null) continue;
             Main.wait(speed);
             m.attack(AI.getBestTarget(m)); //if we are vulnerable, attack on board as best as possible
             }
         }
+        if(h.opponent.health<=0)return;
         Main.wait((speed*2)/3);
         Board.controller.nextTurn();
         /*

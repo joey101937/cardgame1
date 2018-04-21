@@ -7,6 +7,7 @@ package Campaign.campaignGUI;
 
 import Campaign.CampaignManager;
 import static Campaign.CampaignManager.level;
+import GUI.LandingPage;
 import GUI.SettingsPane;
 import cardgame1.Board;
 import cardgame1.Main;
@@ -62,6 +63,21 @@ public class CampaignInterface extends JFrame{
         backButton.setSize(70, 70);
         backButton.setLocation(0, 590);
         backButton.setIcon(new ImageIcon(SpriteHandler.backArrow));
+        backButton.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+            dispose();
+            new LandingPage();
+            }
+            @Override
+            public void mousePressed(MouseEvent e) {}
+            @Override
+            public void mouseReleased(MouseEvent e) { }
+            @Override
+            public void mouseEntered(MouseEvent e) {}
+            @Override
+            public void mouseExited(MouseEvent e) {}
+        });
         panel.add(backButton);
 
         playerPortrait = new JLabel();

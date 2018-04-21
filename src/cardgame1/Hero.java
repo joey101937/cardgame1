@@ -10,7 +10,7 @@ import Campaign.CampaignManager;
 import Minions.Minion;
 import Cards.*;
 import GUI.DeckLoaderScratch;
-import GUI.LegacyGUI;
+import GUI.LandingPage;
 import Multiplayer.Phantom;
 import Traps.TrapHolder;
 import java.awt.Color;
@@ -249,7 +249,7 @@ public class Hero {
         }else{
             frame.dispose();
             board.running= false;
-            new LegacyGUI();
+            new LandingPage();
             //available = true;
         }
     }
