@@ -8,12 +8,17 @@ package GUI;
 import Cards.Card;
 import CustomDecks.CustomDeck;
 import CustomDecks.HeroClass;
+import cardgame1.Board;
+import cardgame1.Hero;
 import cardgame1.Main;
 import cardgame1.SpriteHandler;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
@@ -23,7 +28,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
- * Main frame for duel menu
+ * Main frame for duel menu, PvE skirmish
  * @author Joseph
  */
 public class DuelFrame extends JFrame{
@@ -34,6 +39,8 @@ public class DuelFrame extends JFrame{
     private JLabel vsLabel; //vs image
     private JLabel loadedLabel; //displayed the currently loaded deck
     private JComboBox playerCombo, enemyCombo;
+    private JLabel backButton;
+    private JLabel playButton;
     public ChosenDeck playerDeck = getDeck("Base Deck"), enemyDeck = getDeck("Base Deck");
     public CustomDeck loadedCustom = null;
     private static Font classTitleFont = new Font("Arial",Font.BOLD,26);
@@ -57,6 +64,29 @@ public class DuelFrame extends JFrame{
         panel = new BackgroundPane(Main.BackgroundImage);
         panel.setLayout(null);
         add(panel);
+        //play button setup
+        playButton = new JLabel();
+        playButton.setIcon(new ImageIcon(SpriteHandler.PLAYtext));
+        playButton.setSize(300, 100);
+        playButton.setLocation(230,500);
+        playButton.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {}
+            @Override
+            public void mousePressed(MouseEvent e) {
+            dispose();
+            Hero enemy = new Hero("enemyHero",enemyDeck.cards,enemyDeck.hClass.getHeroPortrait());
+            Hero player = new Hero("playerHero",playerDeck.cards,playerDeck.hClass.getHeroPortrait());
+            Board b = new Board(enemy,player, Toolkit.getDefaultToolkit().getScreenSize()); //toolkit gets the screen resolutionz
+            }
+            @Override
+            public void mouseReleased(MouseEvent e) {}
+            @Override
+            public void mouseEntered(MouseEvent e) { }
+            @Override
+            public void mouseExited(MouseEvent e) {}
+        });
+        panel.add(playButton);
         //vs label setup
         vsLabel = new JLabel();
         vsLabel.setIcon(new ImageIcon(SpriteHandler.VS));
@@ -70,23 +100,30 @@ public class DuelFrame extends JFrame{
         loadedLabel.setForeground(Color.black);
         loadedLabel.setFont(loadedFont);
         panel.add(loadedLabel);
-        //black devider setup
+        //black devider setup REMOVED
         line = new JPanel();
         line.setSize(7, 700);
         line.setLocation(325, 0);
         line.setBackground(Color.black);
-        panel.add(line);
+       // panel.add(line); //removed
+       //backbutton setup
+       backButton = new JLabel();
+       backButton.setIcon(new ImageIcon(SpriteHandler.backArrow));
+       backButton.setSize(70,70);
+       backButton.setLocation(0, 590);
+       backButton.setToolTipText("Return to main menu");
+       panel.add(backButton);
         //setup nameplates
         playerName = new JLabel();
         playerName.setSize(300,40);
         playerName.setText("Player");
-        playerName.setLocation(95,400);
+        playerName.setLocation(95,300);
         playerName.setFont(classTitleFont);
         panel.add(playerName);
         enemyName = new JLabel();
         enemyName.setSize(300,40);
         enemyName.setText("AI");
-        enemyName.setLocation(490, 400);
+        enemyName.setLocation(490, 300);
         enemyName.setFont(classTitleFont);
         panel.add(enemyName);
         //setup portraits
@@ -104,7 +141,7 @@ public class DuelFrame extends JFrame{
         //setup JComboBox for deck selection
         playerCombo = new JComboBox();
         playerCombo.setSize(300, 40);
-        playerCombo.setLocation(10, 450);
+        playerCombo.setLocation(10, 350);
         playerCombo.addItem("Base Deck");
         playerCombo.addItem("Undead Deck");
         playerCombo.addItem("Feeding Frenzy Deck");
@@ -122,7 +159,7 @@ public class DuelFrame extends JFrame{
         panel.add(playerCombo);
         enemyCombo = new JComboBox();
         enemyCombo.setSize(300, 40);
-        enemyCombo.setLocation(350, 450);
+        enemyCombo.setLocation(360, 350);
         enemyCombo.addItem("Base Deck");
         enemyCombo.addItem("Undead Deck");
         enemyCombo.addItem("Feeding Frenzy Deck");
