@@ -148,6 +148,7 @@ public class DeckLoaderScratch {
                  if(chosenDeck.isValid() && duelFrame != null) {
                     System.out.println("setting chosen deck for player");
                     duelFrame.setPlayerDeck(chosenDeck.deck, chosenDeck.deckClass);
+                    duelFrame.loadedCustom=chosenDeck;
                     duelFrame.setEnabled(true);
                     duelFrame.updatePortrait();
                     core.dispose();
