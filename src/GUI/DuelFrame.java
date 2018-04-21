@@ -31,6 +31,7 @@ public class DuelFrame extends JFrame{
     private JPanel line;            //center devider
     private JLabel playerName, enemyName; //text names
     private JLabel playerPort, enemyPort; //class portraits, based on selected class
+    private JLabel vsLabel; //vs image
     private JComboBox playerCombo, enemyCombo;
     public ChosenDeck playerDeck = getDeck("Base Deck"), enemyDeck = getDeck("Base Deck");
     private CustomDeck loadedCustom = null;
@@ -54,9 +55,15 @@ public class DuelFrame extends JFrame{
         panel = new BackgroundPane(Main.BackgroundImage);
         panel.setLayout(null);
         add(panel);
+        //vs label setup
+        vsLabel = new JLabel();
+        vsLabel.setIcon(new ImageIcon(SpriteHandler.VS));
+        vsLabel.setSize(150, 100);
+        vsLabel.setLocation(270, 110);
+        panel.add(vsLabel);
         //black devider setup
         line = new JPanel();
-        line.setSize(7,700);
+        line.setSize(7, 700);
         line.setLocation(325, 0);
         line.setBackground(Color.black);
         panel.add(line);
@@ -64,31 +71,31 @@ public class DuelFrame extends JFrame{
         playerName = new JLabel();
         playerName.setSize(300,40);
         playerName.setText("Player");
-        playerName.setLocation(120, 70);
+        playerName.setLocation(120, 270);
         playerName.setFont(classTitleFont);
         panel.add(playerName);
         enemyName = new JLabel();
         enemyName.setSize(300,40);
         enemyName.setText("AI");
-        enemyName.setLocation(490, 70);
+        enemyName.setLocation(490, 270);
         enemyName.setFont(classTitleFont);
         panel.add(enemyName);
         //setup portraits
         playerPort = new JLabel();
         playerPort.setSize(300,200);
-        playerPort.setLocation(10,60);
+        playerPort.setLocation(10,160);
         playerPort.setIcon(new ImageIcon(SpriteHandler.ashePortrait.getSubimage(0, 60, 300, 110))); //should be set by chosen deck in future
         panel.add(playerPort);
         ////
         enemyPort = new JLabel();
         enemyPort.setSize(300,200);
-        enemyPort.setLocation(350,60);
+        enemyPort.setLocation(350,160);
         enemyPort.setIcon(new ImageIcon(SpriteHandler.knightHero.getSubimage(0, 60, 300, 110))); //should be set by chosen deck in future
         panel.add(enemyPort);
         //setup JComboBox for deck selection
         playerCombo = new JComboBox();
         playerCombo.setSize(300, 40);
-        playerCombo.setLocation(10, 250);
+        playerCombo.setLocation(10, 450);
         playerCombo.addItem("Base Deck");
         playerCombo.addItem("Undead Deck");
         playerCombo.addItem("Feeding Frenzy Deck");
@@ -106,7 +113,7 @@ public class DuelFrame extends JFrame{
         panel.add(playerCombo);
         enemyCombo = new JComboBox();
         enemyCombo.setSize(300, 40);
-        enemyCombo.setLocation(350, 250);
+        enemyCombo.setLocation(350, 450);
         enemyCombo.addItem("Base Deck");
         enemyCombo.addItem("Undead Deck");
         enemyCombo.addItem("Feeding Frenzy Deck");
@@ -123,6 +130,8 @@ public class DuelFrame extends JFrame{
         panel.add(enemyCombo);
         setDeck(playerCombo);
         setDeck(enemyCombo);
+        
+
     }
     
     public static void main(String[] args) {
