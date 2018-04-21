@@ -19,8 +19,24 @@ import javax.swing.JPanel;
  */
 public class BackgroundPane extends JPanel{
         BufferedImage img;
+        public int xOffset = 200, yOffset = 200;
+        /**
+         * creates background pane with desired image at 200x200 offset
+         * @param i 
+         */
         public BackgroundPane(BufferedImage i){
             img = i;
+        }
+        /**
+         *  creates background with desired image at set offsets
+         * @param i img to draw
+         * @param xOff x offset
+         * @param yOff  y offset
+         */
+        public BackgroundPane(BufferedImage i, int xOff, int yOff){
+            img = i;
+            xOffset = xOff;
+            yOffset = yOff;
         }
         /**
          * Same as regular paintComponent except it also draws the given buffered image
@@ -37,6 +53,6 @@ public class BackgroundPane extends JPanel{
              }
             this.setBackground(Color.black);  
             //g.drawImage(img, 0, 0, null);
-            g.drawImage(img,0,0,1000,1000,200,200,1000,1300,null);
+            g.drawImage(img,0,0,1000,1000,xOffset,yOffset,1000,1300,null);
         } 
 }

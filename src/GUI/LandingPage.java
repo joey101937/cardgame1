@@ -9,6 +9,7 @@ import cardgame1.Main;
 import cardgame1.SpriteHandler;
 import java.awt.Dimension;
 import java.awt.Font;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
 import javax.swing.JLabel;
@@ -21,46 +22,58 @@ import javax.swing.JLabel;
 public class LandingPage{
     private JFrame core;
     private BackgroundPane panel;
-    private JLabel titleLabel;
-    private JLabel playLabel;
-    private JLabel editorLabel;
-    private JLabel optionsLabel;
-    private JLabel exitLabel;
+    private JLabel campaignLabel, duelLabel, multiplayerLabel, deckBuilderLabel, optionLabel;
     private static Font titleFont = new Font("Comic Sans", Font.BOLD, 35);
     /**
      * constructor
      */
     public LandingPage(){
         initComponents();
+
     }
     /**
      * sets initial component values
      */
     private void initComponents(){
         core = new JFrame();
-        core.setSize(1000,700);
+        core.setSize(700,700);
         core.setIconImage(SpriteHandler.swords);
-        core.setPreferredSize(new Dimension(1000,700));
+        core.setPreferredSize(new Dimension(700,700));
         core.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        panel = new BackgroundPane(Main.BackgroundImage);
+        panel = new BackgroundPane(SpriteHandler.scroll,0,0);
         panel.setSize(core.getWidth(), core.getHeight());
         panel.setLayout(null); //allows us to place components at indevidual xy coordinates
         
-        titleLabel = new JLabel();
-        titleLabel.setFont(titleFont);
-        titleLabel.setText("Main Menu");
-        titleLabel.setSize(600,100);
-        titleLabel.setLocation(380, 20);
-        panel.add(titleLabel);
+        campaignLabel = new JLabel();
+        campaignLabel.setIcon(new ImageIcon(SpriteHandler.CAMPAIGNtext));
+        campaignLabel.setSize(500,100);
+        campaignLabel.setLocation(200,80);
+        panel.add(campaignLabel);
         
-        playLabel = new JLabel();
-        playLabel.setFont(titleFont);
-        playLabel.setSize(300,60);
-        playLabel.setText("Play");
-        playLabel.setLocation(380, 100);
-        panel.add(playLabel);
+        duelLabel = new JLabel();
+        duelLabel.setIcon(new ImageIcon(SpriteHandler.DUELtext));
+        duelLabel.setSize(500,100);
+        duelLabel.setLocation(270,180);
+        panel.add(duelLabel);
         
+        multiplayerLabel = new JLabel();
+        multiplayerLabel.setIcon(new ImageIcon(SpriteHandler.MULTIPLAYERtext));
+        multiplayerLabel.setSize(500,100);
+        multiplayerLabel.setLocation(180,270);
+        panel.add(multiplayerLabel);
+        
+        deckBuilderLabel = new JLabel();
+        deckBuilderLabel.setIcon(new ImageIcon(SpriteHandler.DECKBUILDERtext));
+        deckBuilderLabel.setSize(500,100);
+        deckBuilderLabel.setLocation(150, 370);
+        panel.add(deckBuilderLabel);
+        
+        optionLabel = new JLabel();
+        optionLabel.setIcon(new ImageIcon(SpriteHandler.OPTIONStext));
+        optionLabel.setSize(500,100);
+        optionLabel.setLocation(220,480);
+        panel.add(optionLabel);
         
         panel.repaint();
         core.add(panel);

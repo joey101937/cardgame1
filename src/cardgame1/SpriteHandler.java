@@ -46,8 +46,10 @@ public class SpriteHandler {
     public static BufferedImage iconDragon;
     public static BufferedImage PLAYtext;
     public static BufferedImage NEXTLEVELtext;
+    public static BufferedImage CAMPAIGNtext, DUELtext, MULTIPLAYERtext, DECKBUILDERtext, OPTIONStext;
     public static BufferedImage backArrow;
     public static BufferedImage VS;
+    public static BufferedImage scroll;
     //advanced fish
     public static BufferedImage baitfishCard;
     public static BufferedImage baitfishMinion;
@@ -189,6 +191,13 @@ public class SpriteHandler {
             iconElemental = load("iconElemental.png");
             PLAYtext = load("PLAY.png");
             NEXTLEVELtext = load("NEXT LEVEL.png");
+            DUELtext = load("DUEL.png");
+            MULTIPLAYERtext = load("Multiplayer.png");
+            DECKBUILDERtext = load("Deck Builder.png");
+            OPTIONStext = load("OPTIONS.png");
+            CAMPAIGNtext = load("Campaign.png");
+            scroll = load("scroll.png");
+            
             backArrow = load("backArrowSmall.png");
             VS = load("VS2.png");
             //Advanced Fish

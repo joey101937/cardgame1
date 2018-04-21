@@ -60,6 +60,7 @@ public class DuelFrame extends JFrame{
         SpriteHandler.Initialize();
         this.setSize(700, 700);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setIconImage(SpriteHandler.swordsSmall);
         //panel setup
         panel = new BackgroundPane(Main.BackgroundImage);
         panel.setLayout(null);
