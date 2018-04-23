@@ -50,7 +50,6 @@ public class SpriteHandler {
     public static BufferedImage backArrow;
     public static BufferedImage VS;
     public static BufferedImage scroll;
-    public static BufferedImage HOSTtext, JOINtext;
     //advanced fish
     public static BufferedImage baitfishCard;
     public static BufferedImage baitfishMinion;
@@ -70,6 +69,8 @@ public class SpriteHandler {
     public static BufferedImage seaSerphantTrap;
     public static BufferedImage seaSerphantCard;
     public static BufferedImage seaSerphantMinion;
+    public static BufferedImage predatoryFishMinion, predatoryFishCard;
+    public static BufferedImage underSeaMantisMinion, underSeaMantisCard;
     //neutral
     public static BufferedImage frostBearCard;
     public static BufferedImage frostBearMinion;
@@ -198,8 +199,6 @@ public class SpriteHandler {
             OPTIONStext = load("OPTIONS.png");
             CAMPAIGNtext = load("Campaign.png");
             scroll = load("scroll.png");
-            HOSTtext = load("Host.png");
-            JOINtext = load("Join.png");
             
             backArrow = load("backArrowSmall.png");
             VS = load("VS2.png");
@@ -220,6 +219,10 @@ public class SpriteHandler {
             seaSerphantTrap = load("seaSerphantTrap.png");
             seaSerphantCard = load("seaSerphantCard.png");
             seaSerphantMinion = load("seaSerphantMinion.png");
+            underSeaMantisMinion = load("underseaMantisMinion.png");
+            underSeaMantisCard = load("underSeaMantisCard.png");
+            predatoryFishCard = load("predatoryFishCard.png");
+            predatoryFishMinion = load("predatoryFishMinion.png");
             //Neutral Cards
             fireBoltCard = ImageIO.read((new File(Main.assets + "fireBoltCard.png")));
             frostBearMinion = load("frostBear.png");

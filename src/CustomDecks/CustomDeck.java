@@ -213,6 +213,7 @@ public class CustomDeck {
             case "Ancient Defender": return new AncientDefenderCard();
             //fish
             case "Baitfish": return new BaitfishCard();
+            case "Predatory Fish": return new PredatoryFishCard();
             case "Carnifish": return new CarnifishCard();
             case "Frenzy": return new FrenzyCard();
             case "Jellyfish": return new JellyfishCard();
@@ -223,6 +224,7 @@ public class CustomDeck {
             case "Sea Witch": return new SeaWitchCard();
             case "Swollow Trap": return new SwollowCard();
             case "Thrasher": return new ThrasherCard();
+            case "Undersea Mantis": return new UnderSeaMantisCard();
             //undead
             case "Skelemancer": return new SkelemancerCard();
             case "Skeleton Army": return new SkeletonArmySpell();

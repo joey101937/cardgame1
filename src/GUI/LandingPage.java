@@ -112,13 +112,14 @@ public class LandingPage{
         campaignLabel.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-            CampaignManager.init();
-            core.dispose();
             }
             @Override
             public void mousePressed(MouseEvent e) {}
             @Override
-            public void mouseReleased(MouseEvent e) {}
+            public void mouseReleased(MouseEvent e) {
+            CampaignManager.init();
+            core.dispose();
+            }
             @Override
             public void mouseEntered(MouseEvent e) {
             helpText.setLocation(80, 570);
@@ -132,13 +133,14 @@ public class LandingPage{
         duelLabel.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-            core.dispose();
-            new DuelFrame();
             }
             @Override
             public void mousePressed(MouseEvent e) {}
             @Override
-            public void mouseReleased(MouseEvent e) {}
+            public void mouseReleased(MouseEvent e) {
+            core.dispose();
+            new DuelFrame();
+            }
             @Override
             public void mouseEntered(MouseEvent e) {
             helpText.setLocation(160, 570);
@@ -152,16 +154,17 @@ public class LandingPage{
             multiplayerLabel.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-            core.dispose();
-            new MultiplayerFrame();
             }
             @Override
             public void mousePressed(MouseEvent e) {}
             @Override
-            public void mouseReleased(MouseEvent e) {}
+            public void mouseReleased(MouseEvent e) {
+            core.dispose();
+            new MultiplayerFrame();
+            }
             @Override
             public void mouseEntered(MouseEvent e) {
-                 helpText.setLocation(80, 570);
+            helpText.setLocation(80, 570);
             helpText.setText("Peer-to-Peer. Server: make sure port 444 is open, Client: Enter server's IP");
             }
             @Override
@@ -172,12 +175,13 @@ public class LandingPage{
             deckBuilderLabel.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-            new DeckBuilder();
             }
             @Override
             public void mousePressed(MouseEvent e) {}
             @Override
-            public void mouseReleased(MouseEvent e) {}
+            public void mouseReleased(MouseEvent e) {
+            new DeckBuilder();
+            }
             @Override
             public void mouseEntered(MouseEvent e) {
                  helpText.setLocation(180, 570);
@@ -191,12 +195,13 @@ public class LandingPage{
         optionLabel.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-            new SettingsPane();
             }
             @Override
             public void mousePressed(MouseEvent e) {}
             @Override
-            public void mouseReleased(MouseEvent e) {}
+            public void mouseReleased(MouseEvent e) {
+            new SettingsPane();
+            }
             @Override
             public void mouseEntered(MouseEvent e) {
                  helpText.setLocation(300, 570);
