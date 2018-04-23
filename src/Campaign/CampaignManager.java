@@ -92,6 +92,7 @@ public class CampaignManager {
                 }
                 if(choice  == 1){
                     level = 1;
+                    playerCards = new ArrayList<>();
                     new HeroSelector();
                     return;
                 }

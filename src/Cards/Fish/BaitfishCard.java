@@ -21,7 +21,7 @@ import cardgame1.SpriteHandler;
 public class BaitfishCard extends Card{
     
     public BaitfishCard(){
-         name = "Baitfish";
+        name = "Baitfish";
         cardType = CardType.Minion;
         cardPurpose = CardPurpose.VanillaMinion;
         cardText = "On Death: \n Give a Friendly Fish \n +1/+1 and \n Return to Hand";

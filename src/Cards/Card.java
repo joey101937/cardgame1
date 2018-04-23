@@ -355,6 +355,7 @@ public abstract class Card implements Comparable{
         output.add(new MinotaurCard());
         output.add(new AncientDefenderCard());
         
+        output.add(new FishermanCard());
         output.add(new BaitfishCard());
         output.add(new PredatoryFishCard());
         output.add(new CarnifishCard());

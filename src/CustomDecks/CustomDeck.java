@@ -212,6 +212,7 @@ public class CustomDeck {
             case "Minotaur": return new MinotaurCard();
             case "Ancient Defender": return new AncientDefenderCard();
             //fish
+            case "Fisherman": return new FishermanCard();
             case "Baitfish": return new BaitfishCard();
             case "Predatory Fish": return new PredatoryFishCard();
             case "Carnifish": return new CarnifishCard();

@@ -96,7 +96,7 @@ public class DuelFrame extends JFrame{
         panel.add(vsLabel);
         //loadedLabel setup
         loadedLabel = new JLabel();
-        loadedLabel.setSize(200, 40);
+        loadedLabel.setSize(400, 40);
         loadedLabel.setLocation(10, 380);
         loadedLabel.setForeground(Color.black);
         loadedLabel.setFont(loadedFont);
@@ -166,6 +166,7 @@ public class DuelFrame extends JFrame{
         playerCombo.addItem("Dragon Deck");
         playerCombo.addItem("Elemental Deck");
         playerCombo.addItem("Load Custom...");
+        playerCombo.setFont(loadedFont);
         playerCombo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -183,6 +184,7 @@ public class DuelFrame extends JFrame{
         enemyCombo.addItem("Empire Deck");
         enemyCombo.addItem("Dragon Deck");
         enemyCombo.addItem("Elemental Deck");
+        enemyCombo.setFont(loadedFont);
         enemyCombo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
