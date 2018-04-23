@@ -30,11 +30,5 @@ public class WaterElementalMinion extends Minion {
         sprite = SpriteHandler.waterElementalMinion;
     }
  
-    @Override
-    public void onSummon() {
-        for (Trap t : owner.opponent.traps.getOccupants()) {
-            new Sticker(SpriteHandler.redX, t.getXCoordinate() + SpriteHandler.trapSymbol.getWidth() / 2, t.getYCoordinate() + SpriteHandler.trapSymbol.getHeight() / 2, AI.AI.speed);
-            owner.opponent.traps.remove(t);
-        }
-    }
+
 }

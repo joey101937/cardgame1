@@ -10,8 +10,10 @@ import Cards.CardPurpose;
 import Cards.CardType;
 import CustomDecks.HeroClass;
 import Minions.Elemental.WaterElementalMinion;
+import Minions.Minion;
 import Traps.Trap;
 import cardgame1.SpriteHandler;
+import cardgame1.Sticker;
 
 /**
  *
@@ -30,10 +32,21 @@ public class WaterElementalCard extends Card {
         cost = 3;
         summon = new WaterElementalMinion(this);
     }
-    
-     
+
     @Override
-    public void tick(){
+    public int cast(Minion m) {
+        if (owner.minions.isFull() || !canAfford()) {
+            return 0;
+        }
+        for (Trap t : owner.opponent.traps.getOccupants()) {
+            new Sticker(SpriteHandler.redX, t.getXCoordinate() + SpriteHandler.trapSymbol.getWidth() / 2, t.getYCoordinate() + SpriteHandler.trapSymbol.getHeight() / 2, AI.AI.speed);
+            owner.opponent.traps.remove(t);
+        }
+        return super.cast(m);
+    }
+
+    @Override
+    public void tick() {
         int value =0;
         for(Trap t : owner.opponent.traps.getOccupants()){
             value += t.parent.cost;

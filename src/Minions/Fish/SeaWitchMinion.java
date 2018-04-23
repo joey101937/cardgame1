@@ -40,13 +40,13 @@ public class SeaWitchMinion extends Minion{
         options.add(new PredationCard());
         options.add(new SwollowCard());
         options.add(new SeaSerpentTrapCard());
-        
+        options.add(new PredatoryFishCard());
         options.add(new ThrasherCard());
         options.add(new JellyfishCard());
         options.add(new CarnifishCard());
         options.add(new BaitfishCard());
         options.add(new SeaWitchCard());
-        
+        options.add(new UnderSeaMantisCard());
         options.add(new KelpieCard());
         options.add(new PirranahCard());
         //
