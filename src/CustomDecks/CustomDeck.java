@@ -192,79 +192,10 @@ public class CustomDeck {
      * @throws CustomDecks.NoSuchCardException
      */
     public static Card getCard(String s) throws NoSuchCardException{
-        switch(s){
-            //neutral
-            case "Arakkoa": return new ArakkoaCard();
-            case "Archer": return new ArcherCard();
-            case "FireBolt": return new FireBoltCard();
-            case "Holy Spear": return new FireSpearCard();
-            case "Frost Bear": return new FrostBearCard();
-            case "Frost Dragon": return new FrostDragonCard();
-            case "Kelpie": return new KelpieCard();
-            case "Knight": return new KnightCard();
-            case "Paladin": return new PaladinCard();
-            case "Spell Book": return new SpellBookCard();
-            case "Vengefull Knight": return new VengefullKnightCard();
-            case "Volcano": return new VolcanoCard();
-            case "Tornado": return new TornadoCard();
-            case "Undying Soldier": return new UndyingSoldierCard();
-            case "Spearman": return new SpearmanCard();
-            case "Minotaur": return new MinotaurCard();
-            case "Ancient Defender": return new AncientDefenderCard();
-            //fish
-            case "Fisherman": return new FishermanCard();
-            case "Baitfish": return new BaitfishCard();
-            case "Predatory Fish": return new PredatoryFishCard();
-            case "Carnifish": return new CarnifishCard();
-            case "Frenzy": return new FrenzyCard();
-            case "Jellyfish": return new JellyfishCard();
-            case "Pirranah": return new PirranahCard();
-            case "Predation": return new PredationCard();
-            case "Sea Serpent": return new SeaSerpentCard();
-            case "Sea Serpent Trap": return new SeaSerpentTrapCard();
-            case "Sea Witch": return new SeaWitchCard();
-            case "Swollow Trap": return new SwollowCard();
-            case "Thrasher": return new ThrasherCard();
-            case "Undersea Mantis": return new UnderSeaMantisCard();
-            //undead
-            case "Skelemancer": return new SkelemancerCard();
-            case "Skeleton Army": return new SkeletonArmySpell();
-            case "Skeleton King": return new SkullKingCard();
-            case "Zombie Bite": return new ZombieBiteSpell();
-            case "Zombie": return new ZombieCard();
-            case "Zombify": return new ZombieTrapCard();
-            case "Ghoul": return new GhoulCard();
-            case "Necromancy": return new NecromancyCard();
-            case "Wraith": return new WraithCard();
-            //dragon
-            case "Gray Drake": return new GrayDrakeCard();
-            case "Fire Plume": return new FirePlumeCard();
-            case "Volcanic Drake": return new VolcanicDrakeCard();
-            case "Dragon's Breath": return new DragonBreathCard();
-            case "Dragon Soul Trap": return new DragonSoulTrapCard();
-            //empire
-            case "Firey Whelp": return new FireyWhelpCard();
-            case "Apocalypse": return new ApocalypseCard();
-            case "Snipe Trap": return new SnipeTrapCard();
-            case "Double Shot": return new DoubleshotCard();
-            case "Griffon": return new GriffonCard();
-            case "Cavalry General": return new CavalryGeneralCard();
-            case "Enchanted Sword": return new EnchantedSwordCard();
-            //elemental
-            case "Stone Golem": return new StoneGolemCard();
-            case "War Golem": return new WarGolemCard();
-            case "Geomancer": return new GeomancerCard();
-            case "Sorcerer": return new SorcererCard();
-            case "Fire Infusion": return new FireInfusionSpell();
-            case "Earth Infusion": return new EarthInfusionSpell();
-            case "Ice Infusion": return new IceInfusionSpell();
-            case "Sand Elemental": return new SandElementalCard();
-            case "Water Elemental": return new WaterElementalCard();
-            case "Fire Elemental": return new FireElementalCard();
-            case "Earth Elemental": return new EarthElementalCard();
-            case "Ice Elemental": return new IceElementalCard();
-            case "Stone Elemental": return new StoneElementalCard();
-            default: throw new NoSuchCardException("No card found matching name: " + s);   
+        
+        for(Card c : Card.getCardList()){
+        if(c.name.equals(s)) return c;
         }
+        throw new NoSuchCardException("No card found matching name: " + s);   
     }
 }
