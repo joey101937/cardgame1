@@ -9,6 +9,7 @@ import Cards.Card;
 import Minions.DragonInterface;
 import Minions.Minion;
 import Minions.Tribe;
+import cardgame1.ProcHandler;
 import cardgame1.SpriteHandler;
 
 /**
@@ -32,11 +33,11 @@ public class FaerieDragonMinion extends Minion implements DragonInterface{
     }
     
     @Override
-    public void onTurnStart(){
+    public void onSummon(){
     breath();
     }
     
-    
+
     @Override
     public int getTurnsRemaining() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -50,6 +51,8 @@ public class FaerieDragonMinion extends Minion implements DragonInterface{
     @Override
     public void breath() {
         proc();
+        owner.opponent.damageTicker = 20;
+        new ProcHandler(owner.opponent);
         owner.opponent.maxResource--;
     }
 

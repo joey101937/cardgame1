@@ -22,7 +22,7 @@ public class DragonEggCard extends Card{
         name = "Dragon Egg";
         cardType = CardType.Minion;
         cardPurpose = CardPurpose.VanillaMinion;
-        cardText = "On Death: \n Add a random \n dragon to your hand, \n it costs (0)";
+        cardText = "On Death: \n Add a random \n dragon to your hand, \n it costs (2)";
         sprite = SpriteHandler.dragonEggCard;
         cost = 3;
         heroClass = HeroClass.Dragon;

@@ -22,7 +22,7 @@ public class RedDragonMinion extends Minion implements DragonInterface{
         this.owner = parent.getOwner();
         attack = 5;
         originalAttack = attack;
-        maxHealth = 6;
+        maxHealth = 7;
         health = maxHealth;
         tribe = Tribe.Dragon;
         name = "Red Dragon";
@@ -30,7 +30,7 @@ public class RedDragonMinion extends Minion implements DragonInterface{
     }
         
     @Override
-    public void onTurnStart(){
+    public void onSummon(){
          for(Minion m : owner.opponent.minions.getOccupants()){
             proc();
             m.takeDamage(parent.spellDamage);

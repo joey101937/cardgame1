@@ -47,8 +47,10 @@ public class EmeraldDragonMinion extends Minion implements DragonInterface{
 
     @Override
     public void breath() {
+        if(owner.health>=owner.maxHealth)return;
         proc();
        owner.heal(3);
+       owner.proc();
     }
 
     @Override

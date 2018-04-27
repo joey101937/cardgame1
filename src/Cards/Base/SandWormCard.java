@@ -96,6 +96,7 @@ public class SandWormCard extends Card{
     public int cast(Minion target){
         if(owner.minions.isFull() || !canAfford())return 0;
         if(target == null || target.owner!=owner)return -1;
+        notifyPhantom(target,null);
         new Sticker(SpriteHandler.bloodMedium,target,AI.AI.speed);
         Main.wait(AI.AI.speed);
         target.takeDamage(spellDamage);

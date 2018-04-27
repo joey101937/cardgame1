@@ -143,6 +143,7 @@ public class SpriteHandler {
     public static BufferedImage dragonEggMinion, dragonEggCard;
     public static BufferedImage hatchlingCard;
     public static BufferedImage mothersCardCard;
+    public static BufferedImage purifyingBlastCard;
      //Empire
     public static BufferedImage iconEmpire;
     public static BufferedImage empireHero;
@@ -331,6 +332,7 @@ public class SpriteHandler {
             dragonEggCard = load("dragonEggCard.png");
             hatchlingCard = load("hatchlingCard.png");
             mothersCardCard = load("mothersCareCard.png");
+            purifyingBlastCard = load("purifyingBlastCard.png");
             //Empire
             iconEmpire = load("iconEmpireKnight.png");
             empireHero = load("empireHero.png");

@@ -27,6 +27,7 @@ public class RedDragonCard extends Card{
         cardText = "On Summon: \n Deal 1 damage to \n all enemy minions.";
         sprite = SpriteHandler.redDragonCard;
         cost = 7;
+        spellDamage = 1;
         heroClass = HeroClass.Dragon;
     }
 }
