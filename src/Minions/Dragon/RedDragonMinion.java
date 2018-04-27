@@ -15,28 +15,27 @@ import cardgame1.SpriteHandler;
  *
  * @author Joseph
  */
-public class FaerieDragonMinion extends Minion implements DragonInterface{
+public class RedDragonMinion extends Minion implements DragonInterface{
 
-    
-    
-    public FaerieDragonMinion(Card parent) {
+    public RedDragonMinion(Card parent) {
         this.parent = parent;
         this.owner = parent.getOwner();
-        attack = 6;
+        attack = 5;
         originalAttack = attack;
-        maxHealth = 3;
+        maxHealth = 6;
         health = maxHealth;
         tribe = Tribe.Dragon;
-        name = "Faerie Dragon";
-        sprite = SpriteHandler.faerieDragonMinion;
+        name = "Red Dragon";
+        sprite = SpriteHandler.redDragonMinion;
     }
-    
+        
     @Override
     public void onTurnStart(){
-    breath();
+         for(Minion m : owner.opponent.minions.getOccupants()){
+            proc();
+            m.takeDamage(parent.spellDamage);
+        }
     }
-    
-    
     @Override
     public int getTurnsRemaining() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -49,13 +48,15 @@ public class FaerieDragonMinion extends Minion implements DragonInterface{
 
     @Override
     public void breath() {
-        proc();
-        owner.opponent.maxResource--;
+         for(Minion m : owner.opponent.minions.getOccupants()){
+            proc();
+            m.takeDamage(parent.spellDamage);
+        }
     }
 
     @Override
     public Minion getAdultForm() {
-             throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

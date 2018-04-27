@@ -21,7 +21,7 @@ public class DragonSoulTrapCard extends TrapCard {
     public DragonSoulTrapCard() {
         super();
         name = "Dragon Soul Trap";
-        cardText = "Whenever a friendly \n dragon dies, gain \n its on-summon \n effect as a spell";
+        cardText = "Whenever a friendly \n dragon dies, gain \n its effect as a spell";
         sprite = SpriteHandler.dragonSoulTrap;
         cost = 1;
         heroClass = HeroClass.Dragon;
