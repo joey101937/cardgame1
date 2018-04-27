@@ -210,6 +210,8 @@ public class Hero {
         }
         if (this == Board.playerHero) {
             Main.display("Game over!");
+            restartApplication();
+            /*
             int selection = JOptionPane.showConfirmDialog(null, "Restart?");
             if(selection == 0){
                 try{
@@ -221,9 +223,12 @@ public class Hero {
             }else{
                  System.exit(0);
              }
+            */
         }
         if(this == Board.nonPlayerHero){
             Main.display("Victory!");
+            restartApplication();
+            /*
              int selection = JOptionPane.showConfirmDialog(null, "Restart?");
              if(selection==0){
                  try{
@@ -235,6 +240,7 @@ public class Hero {
              }else{
                  System.exit(0);
              }
+            */
         }
     }
 
