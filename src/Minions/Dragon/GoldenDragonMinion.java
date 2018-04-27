@@ -6,38 +6,35 @@
 package Minions.Dragon;
 
 import Cards.Card;
+import Cards.Dragon.PurifyingBlastCard;
 import Minions.DragonInterface;
 import Minions.Minion;
 import Minions.Tribe;
-import cardgame1.Main;
 import cardgame1.SpriteHandler;
-import cardgame1.Sticker;
 
 /**
  *
  * @author Joseph
  */
-public class RedDragonMinion extends Minion implements DragonInterface{
-
-    public RedDragonMinion(Card parent) {
+public class GoldenDragonMinion extends Minion implements DragonInterface{
+    
+    public GoldenDragonMinion(Card parent) {
         this.parent = parent;
         this.owner = parent.getOwner();
-        attack = 5;
+        attack = 7;
         originalAttack = attack;
-        maxHealth = 7;
+        maxHealth = 5;
         health = maxHealth;
         tribe = Tribe.Dragon;
-        name = "Red Dragon";
-        sprite = SpriteHandler.redDragonMinion;
+        name = "Golden Dragon";
+        sprite = SpriteHandler.goldDragonMinion;
     }
-        
+
     @Override
     public void onSummon(){
-         for(Minion m : owner.opponent.minions.getOccupants()){
-            proc();
-            m.takeDamage(parent.spellDamage);
-        }
+        breath();
     }
+    
     @Override
     public int getTurnsRemaining() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -50,18 +47,12 @@ public class RedDragonMinion extends Minion implements DragonInterface{
 
     @Override
     public void breath() {
-         for(Minion m : owner.opponent.minions.getOccupants()){
-            proc();
-            new Sticker(SpriteHandler.blastEffectSmall,m,AI.AI.speed/3);
-            Main.wait(AI.AI.speed/3);
-            m.takeDamage(parent.spellDamage);
-        }
-         
+       proc();
+       owner.draw(new PurifyingBlastCard());
     }
 
     @Override
     public Minion getAdultForm() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
 }

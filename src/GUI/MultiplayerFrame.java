@@ -177,6 +177,7 @@ public class MultiplayerFrame extends JFrame{
                 setDeck(playerCombo);
             }
         });
+        playerCombo.setFont(loadedFont);
         panel.add(playerCombo);    
         setDeck(playerCombo);
     }

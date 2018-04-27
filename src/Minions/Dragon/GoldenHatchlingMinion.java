@@ -6,7 +6,7 @@
 package Minions.Dragon;
 
 import Cards.Card;
-import Cards.Dragon.RedDragonCard;
+import Cards.Dragon.GoldenDragonCard;
 import Minions.DragonInterface;
 import Minions.Minion;
 import Minions.Tribe;
@@ -16,10 +16,10 @@ import cardgame1.SpriteHandler;
  *
  * @author Joseph
  */
-public class RedHatchlingMinion extends Minion implements DragonInterface{
-    public int turnsRemaining = 2;
+public class GoldenHatchlingMinion extends Minion implements DragonInterface{
+      public int turnsRemaining = 2;
     
-    public RedHatchlingMinion(Card parent) {
+    public GoldenHatchlingMinion(Card parent) {
         this.parent = parent;
         this.owner = parent.getOwner();
         attack = 1;
@@ -27,17 +27,16 @@ public class RedHatchlingMinion extends Minion implements DragonInterface{
         maxHealth = 3;
         health = maxHealth;
         tribe = Tribe.Hatchling;
-        name = "Red Hatchling";
-        sprite = SpriteHandler.redHatchlingMinion;
+        name = "Golden Hatchling";
+        sprite = SpriteHandler.goldHatchlingMinion;
         this.intrinsicValue = 3;
     }
-
     
      @Override
     public void onTurnStart() {
         super.onTurnStart();
         turnsRemaining--;
-        parent.cardText = "After " + getTurnsRemaining() + "* turns, grow \n into a Glacial Dragon";
+        parent.cardText = "After " + getTurnsRemaining() + "* turns, grow \n into a Golden Dragon";
         this.proc();
         if (turnsRemaining <= 0) {
             grow();
@@ -67,9 +66,8 @@ public class RedHatchlingMinion extends Minion implements DragonInterface{
 
     @Override
     public Minion getAdultForm() {
-        RedDragonCard dragonCard = new RedDragonCard();
+        GoldenDragonCard dragonCard = new GoldenDragonCard();
         dragonCard.setHero(owner);
         return dragonCard.summon;
     }
-    
 }

@@ -26,7 +26,7 @@ public class GlacialDragonCard extends Card{
         DragonInterface di = (DragonInterface)summon;
         cardText = "On Summon: \n Deal 3 damage and \n freeze a random \n enemy minion.";
         sprite = SpriteHandler.whiteDragonCard;
-        cost = 7;
+        cost = 8;
         heroClass = HeroClass.Dragon;
     }
 }

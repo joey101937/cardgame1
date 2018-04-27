@@ -23,7 +23,7 @@ public class EmeraldDragonMinion extends Minion implements DragonInterface{
         this.owner = parent.getOwner();
         attack = 3;
         originalAttack = attack;
-        maxHealth = 9;
+        maxHealth = 8;
         health = maxHealth;
         tribe = Tribe.Dragon;
         name = "Emerald Dragon";

@@ -142,8 +142,11 @@ public class SpriteHandler {
     public static BufferedImage greenHatchlingMinion, greenHatchlingCard;
     public static BufferedImage dragonEggMinion, dragonEggCard;
     public static BufferedImage hatchlingCard;
-    public static BufferedImage mothersCardCard;
+    public static BufferedImage mothersCareCard;
     public static BufferedImage purifyingBlastCard;
+    public static BufferedImage goldDragonMinion, goldDragonCard;
+    public static BufferedImage goldHatchlingMinion, goldHatchlingCard;
+    public static BufferedImage dragonTamerMinion, dragonTamerCard;
      //Empire
     public static BufferedImage iconEmpire;
     public static BufferedImage empireHero;
@@ -331,8 +334,14 @@ public class SpriteHandler {
             dragonEggMinion = load("dragonEggMinion.png");
             dragonEggCard = load("dragonEggCard.png");
             hatchlingCard = load("hatchlingCard.png");
-            mothersCardCard = load("mothersCareCard.png");
+            mothersCareCard = load("mothersCareCard.png");
             purifyingBlastCard = load("purifyingBlastCard.png");
+            goldDragonCard = load("goldDragonCard.png");
+            goldDragonMinion = load("goldDragonMinion.png");
+            goldHatchlingMinion = load("goldDragonMinion.png");
+            goldHatchlingCard = load("goldHatchlingCard.png");
+            dragonTamerMinion = load("dragonTamerMinion.png");
+            dragonTamerCard = load("dragonTamerCard.png");
             //Empire
             iconEmpire = load("iconEmpireKnight.png");
             empireHero = load("empireHero.png");

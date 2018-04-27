@@ -388,8 +388,7 @@ public abstract class AI {
         }
         if(m.owner.minions.isFull()){
             for(Minion min: m.owner.minions.getStorage()){
-                if(m==null)continue;
-                if(sumStats > min.attack + min.health){
+                if(min!=null && sumStats > min.attack + min.health){
                     return sumStats;
                 }
             }

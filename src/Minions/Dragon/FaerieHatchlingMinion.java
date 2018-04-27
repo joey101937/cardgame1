@@ -30,6 +30,7 @@ public class FaerieHatchlingMinion extends Minion implements DragonInterface{
         tribe = Tribe.Hatchling;
         name = "Faerie hatchling";
         sprite = SpriteHandler.faerieHatchlingMinion;
+        this.intrinsicValue = 3;
     }
 
     @Override

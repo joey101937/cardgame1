@@ -20,7 +20,7 @@ public class HellFiendMinion extends Minion{
         this.owner = parent.getOwner();
         attack = 7;
         originalAttack = attack;
-        maxHealth = 7;
+        maxHealth = 8;
         health = maxHealth;
         tribe = Tribe.none;
         name = "Hell Fiend";

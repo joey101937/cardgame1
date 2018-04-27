@@ -30,6 +30,7 @@ public class EmeraldHatchlingMinion extends Minion implements DragonInterface{
         tribe = Tribe.Hatchling;
         name = "Emerald Hatchling";
         sprite = SpriteHandler.greenHatchlingMinion;
+        this.intrinsicValue = 3;
     }
 
     @Override

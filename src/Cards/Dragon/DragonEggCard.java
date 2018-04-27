@@ -24,7 +24,7 @@ public class DragonEggCard extends Card{
         cardPurpose = CardPurpose.VanillaMinion;
         cardText = "On Death: \n Add a random \n dragon to your hand, \n it costs (2)";
         sprite = SpriteHandler.dragonEggCard;
-        cost = 3;
+        cost = 2;
         heroClass = HeroClass.Dragon;
     }
 }

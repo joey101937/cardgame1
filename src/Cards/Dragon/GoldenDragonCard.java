@@ -9,7 +9,7 @@ import Cards.Card;
 import Cards.CardPurpose;
 import Cards.CardType;
 import CustomDecks.HeroClass;
-import Minions.Dragon.EmeraldDragonMinion;
+import Minions.Dragon.GoldenDragonMinion;
 import Minions.DragonInterface;
 import cardgame1.SpriteHandler;
 
@@ -17,16 +17,16 @@ import cardgame1.SpriteHandler;
  *
  * @author Joseph
  */
-public class EmeraldDragonCard extends Card{
-      public EmeraldDragonCard() {
-        summon = new EmeraldDragonMinion(this);
-        name = "Emerald Dragon";
+public class GoldenDragonCard extends Card{
+      public GoldenDragonCard() {
+        summon = new GoldenDragonMinion(this);
+        name = "Golden Dragon";
         cardType = CardType.Minion;
         cardPurpose = CardPurpose.VanillaMinion;
         DragonInterface di = (DragonInterface)summon;
-        cardText = "On Turn End: \n Restore 3 health \n to your hero.";
-        sprite = SpriteHandler.greenDragonCard;
-        cost = 8;
+        cardText = "On Summon: \n Add a \"Purifying \n Impact\" card to \n your hand.";
+        sprite = SpriteHandler.goldDragonCard;
+        cost = 9;
         heroClass = HeroClass.Dragon;
     }
 }

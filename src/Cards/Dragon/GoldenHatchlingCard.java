@@ -9,7 +9,7 @@ import Cards.Card;
 import Cards.CardPurpose;
 import Cards.CardType;
 import CustomDecks.HeroClass;
-import Minions.Dragon.EmeraldDragonMinion;
+import Minions.Dragon.RedHatchlingMinion;
 import Minions.DragonInterface;
 import cardgame1.SpriteHandler;
 
@@ -17,16 +17,17 @@ import cardgame1.SpriteHandler;
  *
  * @author Joseph
  */
-public class EmeraldDragonCard extends Card{
-      public EmeraldDragonCard() {
-        summon = new EmeraldDragonMinion(this);
-        name = "Emerald Dragon";
+public class GoldenHatchlingCard extends Card{
+      public GoldenHatchlingCard() {
+        summon = new RedHatchlingMinion(this);
+        name = "Golden Hatchling";
         cardType = CardType.Minion;
         cardPurpose = CardPurpose.VanillaMinion;
         DragonInterface di = (DragonInterface)summon;
-        cardText = "On Turn End: \n Restore 3 health \n to your hero.";
-        sprite = SpriteHandler.greenDragonCard;
-        cost = 8;
-        heroClass = HeroClass.Dragon;
+        cardText = "After " + di.getTurnsRemaining() + "* turns, grow \n into a Golden Dragon";
+        sprite = SpriteHandler.goldHatchlingCard;
+        cost = 2;
+        heroClass = HeroClass.Restricted;
+        this.intrinsicValue = 1;
     }
 }
