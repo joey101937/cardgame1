@@ -9,6 +9,7 @@ import Cards.Card;
 import Cards.CardPurpose;
 import Cards.CardType;
 import CustomDecks.HeroClass;
+import Minions.DragonInterface;
 import Minions.Minion;
 import Minions.Tribe;
 import Traps.TrapListener;
@@ -29,7 +30,7 @@ public class DragonBreathCard extends Card {
         cardPurpose = CardPurpose.Special;
         isTargeted = true;
         spellDamage = 0;
-        cardText = "Activate a dragon's \n On-Summon effect";
+        cardText = "Activate a dragon's \n effect";
         sprite = SpriteHandler.dragonBreathCard;
         cost = 2;
         heroClass = HeroClass.Dragon;
@@ -73,7 +74,8 @@ public class DragonBreathCard extends Card {
         if(!canAfford())return 0;
         Sticker impactEffect = new Sticker(SpriteHandler.iconDragon, target, AI.AI.speed / 2);
         Main.wait(AI.AI.speed / 2);
-        target.onSummon();
+        DragonInterface di = (DragonInterface)target;
+        di.breath();
         owner.resource -= cost;
         notifyPhantom(target,null);
         owner.hand.remove(this);

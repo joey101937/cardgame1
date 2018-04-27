@@ -6,11 +6,10 @@
 package Minions.Dragon;
 
 import Cards.Card;
-import Cards.CardType;
+import Minions.DragonInterface;
 import Minions.Minion;
 import Minions.Tribe;
 import Multiplayer.Phantom;
-import cardgame1.Main;
 import cardgame1.ProcHandler;
 import cardgame1.SpriteHandler;
 
@@ -18,7 +17,7 @@ import cardgame1.SpriteHandler;
  *
  * @author Joseph
  */
-public class GrayDrakeMinion extends Minion {
+public class GrayDrakeMinion extends Minion implements DragonInterface{
 
     public GrayDrakeMinion(Card parent) {
         this.parent = parent;
@@ -32,12 +31,28 @@ public class GrayDrakeMinion extends Minion {
         sprite = SpriteHandler.grayDrakeMinion;
     }
 
-    /**
+    //casts this dragons breath on summon
+    @Override
+    public void onSummon() {
+      breath(); 
+    }
+
+    @Override
+    public int getTurnsRemaining() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void grow() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+        /**
      * reduces random enemy minions attack by 2; minimum of 0
      */
     @Override
-    public void onSummon() {
-        if(owner.opponent.minions.numOccupants()==0)return;
+    public void breath() {
+         if(owner.opponent.minions.numOccupants()==0)return;
         int roll = (int) (Phantom.random.nextDouble() * (owner.opponent.minions.numOccupants()));
         Minion target = owner.opponent.minions.getOccupants().get(roll);
         target.attack-=2;
@@ -45,5 +60,10 @@ public class GrayDrakeMinion extends Minion {
         this.proc();
         target.damagedTicker=20;
         new ProcHandler(target);
+    }
+
+    @Override
+    public Minion getAdultForm() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

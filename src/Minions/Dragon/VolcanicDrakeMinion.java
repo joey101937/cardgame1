@@ -7,6 +7,7 @@ package Minions.Dragon;
 
 import Cards.Card;
 import Cards.Dragon.FirePlumeCard;
+import Minions.DragonInterface;
 import Minions.Minion;
 import Minions.Tribe;
 import cardgame1.SpriteHandler;
@@ -15,7 +16,7 @@ import cardgame1.SpriteHandler;
  *
  * @author Joseph
  */
-public class VolcanicDrakeMinion extends Minion{
+public class VolcanicDrakeMinion extends Minion implements DragonInterface{
     public VolcanicDrakeMinion(Card parent) {
         this.parent = parent;
         this.owner = parent.getOwner();
@@ -33,8 +34,28 @@ public class VolcanicDrakeMinion extends Minion{
      */
     @Override
     public void onSummon() {
-        this.proc();
+       breath();
+    }
+
+    @Override
+    public int getTurnsRemaining() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void grow() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void breath() {
+         this.proc();
         owner.draw(new FirePlumeCard());
         owner.draw(new FirePlumeCard());
+    }
+
+    @Override
+    public Minion getAdultForm() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

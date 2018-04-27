@@ -112,6 +112,7 @@ public class LegacyGUI extends javax.swing.JFrame {
         //Base
         ArrayList<Card> deck = new ArrayList<>();
         for(int i = 0; i < 3; i++){
+            deck.add(new PredatoryFishCard());
             deck.add(new BaitfishCard());
             deck.add(new CarnifishCard());
             deck.add(new PirranahCard());
@@ -127,14 +128,14 @@ public class LegacyGUI extends javax.swing.JFrame {
         for (int i = 0; i < 3; i++) {  
             deck.add(new JellyfishCard()); 
             deck.add(new SeaWitchCard());
-            deck.add(new PirranahCard());
-            deck.add(new SeaSerpentTrapCard());
+            deck.add(new PirranahCard());           
             deck.add(new ThrasherCard());
         }
         for(int i = 0; i < 2; i++) {
             deck.add(new SwollowCard()); 
             deck.add(new PredationCard());
             deck.add(new VolcanoCard());
+            deck.add(new SeaSerpentTrapCard());
             //deck.add(new KelpieCard());
          }
             deck.add(new SpellBookCard());

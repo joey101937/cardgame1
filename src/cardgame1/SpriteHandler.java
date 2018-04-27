@@ -98,6 +98,8 @@ public class SpriteHandler {
     public static BufferedImage spearmanMinion, spearmanCard;
     public static BufferedImage minotaurMinion, minotaurCard;
     public static BufferedImage ancientDefenderMinion, ancientDefenderCard;
+    public static BufferedImage hellFiendCard, hellFiendMinion;
+    public static BufferedImage sandWormCard, sandWormMinion;
     //heros
     public static BufferedImage ashePortrait;
     public static BufferedImage seaWitchHero;
@@ -130,6 +132,8 @@ public class SpriteHandler {
     public static BufferedImage dragonBreathCard;
     public static BufferedImage dragonSoulTrap, dragonSoulSpell;
     public static BufferedImage fireyWhelpCard, fireyWhelpMinion;
+    public static BufferedImage whiteHatchlingMinion, whiteHatchlingCard;
+    public static BufferedImage whiteDragonMinion, whiteDragonCard;
     //Empire
     public static BufferedImage iconEmpire;
     public static BufferedImage empireHero;
@@ -255,6 +259,10 @@ public class SpriteHandler {
             minotaurCard = load("minotaurCard.png");
             ancientDefenderMinion = load("ancientDefenderMinion.png");
             ancientDefenderCard = load("ancientDefenderCard.png");
+            hellFiendMinion = load("hellFiendMinion.png");
+            hellFiendCard = load("hellFiendCard.png");
+            sandWormCard = load("sandWormCard.png");
+            sandWormMinion = load("sandWormMinion.png");
             //heros
             ashePortrait = ImageIO.read(new File(Main.assets + "ashePortrait.png"));
             seaWitchHero = load("seaWitchHero.png");

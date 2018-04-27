@@ -68,6 +68,7 @@ public abstract class AI {
      * plays all cards we can in the best way possible, recursively
      */
     public static void playOutHand(Hero h){
+        if(h.opponent.health<=0)return;
         Board.getMainBoard().tick();
         boolean playOver = true;
         for(Card c : h.hand){
@@ -322,6 +323,7 @@ public abstract class AI {
      * @param h 
      */
     private static void tradeOnBoard(Hero h, boolean instant){
+        if(h.opponent.health<=0)return;
         Board.mainBoard.tick();
         int damagePotential = 0;
         Hero enemy;
@@ -340,6 +342,7 @@ public abstract class AI {
         }
         boolean doneTrading = false;
         while (!doneTrading) {
+            if(h.opponent.health<=0)return;
             doneTrading = true;
             for (Minion m : h.minions.getStorage()) {
                 if (m == null) continue;

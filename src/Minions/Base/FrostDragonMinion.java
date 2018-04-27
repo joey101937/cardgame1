@@ -6,6 +6,7 @@
 package Minions.Base;
 
 import Cards.Card;
+import Minions.DragonInterface;
 import Minions.Minion;
 import Minions.Tribe;
 import cardgame1.Main;
@@ -16,7 +17,7 @@ import cardgame1.Sticker;
  *
  * @author Joseph
  */
-public class FrostDragonMinion extends Minion{
+public class FrostDragonMinion extends Minion implements DragonInterface{
      public FrostDragonMinion(Card parent){
         this.parent = parent;
         this.owner = parent.getOwner();
@@ -31,10 +32,30 @@ public class FrostDragonMinion extends Minion{
      
      @Override
      public void onSummon(){
+      breath();  
+     }
+
+    @Override
+    public int getTurnsRemaining() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void grow() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void breath() {
          Sticker s = new Sticker(SpriteHandler.snowflakeLarge,this.getXCordinate() + Minion.WIDTH/2, this.getYcoordinate()+Minion.HEIGHT/2, AI.AI.speed);
          Main.wait(AI.AI.speed);
          for(Minion m : owner.opponent.minions.getOccupants()){
              m.freeze();
          }
-     }
+    }
+
+    @Override
+    public Minion getAdultForm() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

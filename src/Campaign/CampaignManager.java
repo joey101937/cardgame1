@@ -171,6 +171,7 @@ public class CampaignManager {
     public static void saveGame() {
         System.out.println("Saving Game...");
         File output = new File(fileName);
+        if(output.exists())output.delete();
         ArrayList<String> lines = new ArrayList<>();
         lines.add(String.valueOf(level));
         lines.add(playerClass.toString());

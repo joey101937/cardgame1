@@ -9,6 +9,7 @@ import Cards.Card;
 import Cards.CardPurpose;
 import Cards.CardType;
 import CustomDecks.HeroClass;
+import Minions.DragonInterface;
 import Minions.Minion;
 import Traps.TrapListener;
 import cardgame1.Hero;
@@ -28,9 +29,20 @@ public class DragonSoulSpell extends Card {
         cardPurpose = CardPurpose.Special;
         isTargeted = false;
         spellDamage = 0;
-        cardText = m.parent.cardText.substring(13); //get battlecry description
+        setCardText();
         sprite = SpriteHandler.dragonSoulSpell;
         cost = 1;
+    }
+    /**
+     * sets card text to be card text of dragon that you cast it on, excluding the first line.
+     * (usually a trigger effect like "on summon:"
+     */
+    private void setCardText(){
+        cardText = "";
+        String[] lines = host.parent.cardText.split(" \n ");
+        for(int i = 1; i < lines.length; i ++){
+            cardText += lines[i]+" \n ";
+        }
     }
     
     @Override
@@ -51,9 +63,10 @@ public class DragonSoulSpell extends Card {
     @Override
     public int cast(Minion m){
         if(!canAfford())return 0;
-         notifyPhantom(null,null);
+        notifyPhantom(null,null);
         owner.hand.remove(this);
-        host.onSummon();
+        DragonInterface di = (DragonInterface)host;
+        di.breath();
         owner.resource -= cost;
         TrapListener.onPlay(this);
         return 1;
