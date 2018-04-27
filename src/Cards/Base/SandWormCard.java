@@ -24,7 +24,7 @@ public class SandWormCard extends Card{
      public SandWormCard() {
         name = "Sand Worm";
         cardType = CardType.Minion;
-        spellDamage = 3;
+        spellDamage = 2;
         cardPurpose = CardPurpose.Special;
         isTargeted = true;
         cardText = "On Summon: \n Deal " + spellDamage + " Damage to a \n friendly minion. If \n it dies, gain 2 health";
@@ -40,14 +40,14 @@ public class SandWormCard extends Card{
         int bestValue = -9999;
         for(Minion m : owner.minions.getOccupants()){
             if(m.health <= 3){ //it would die
-                int value = 3 - AI.AI.getWorth(m);
+                int value = 2 - AI.AI.getWorth(m);
                 if(value > bestValue){
                     bestValue = value;
                     bestTarget = m;
                 }
             }else{
                 //it would live
-                int value = -3;
+                int value = -2;
                  if(value > bestValue){
                     bestValue = value;
                     bestTarget = m;
@@ -68,14 +68,14 @@ public class SandWormCard extends Card{
         int bestValue = -9999;
         for(Minion m : owner.minions.getOccupants()){
             if(m.health <= 3){ //it would die
-                int value = 3 - AI.AI.getWorth(m);
+                int value = 2 - AI.AI.getWorth(m);
                 if(value > bestValue){
                     bestValue = value;
                     bestTarget = m;
                 }
             }else{
                 //it would live
-                int value = -3;
+                int value = -2;
                  if(value > bestValue){
                     bestValue = value;
                     bestTarget = m;

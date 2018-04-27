@@ -6,21 +6,21 @@
 package Minions.Dragon;
 
 import Cards.Card;
-import Cards.Dragon.GlacialDragonCard;
+import Cards.Dragon.FaerieDragonCard;
+import Minions.DragonInterface;
 import Minions.Minion;
 import Minions.Tribe;
 import cardgame1.SpriteHandler;
-import Minions.DragonInterface;
 
 /**
  *
  * @author Joseph
  */
-public class GlacialHatchlingMinion extends Minion implements DragonInterface{
-
-    public int turnsRemaining = 2;
+public class FaerieHatchlingMinion extends Minion implements DragonInterface{
     
-    public GlacialHatchlingMinion(Card parent) {
+     public int turnsRemaining = 2;
+    
+    public FaerieHatchlingMinion(Card parent) {
         this.parent = parent;
         this.owner = parent.getOwner();
         attack = 1;
@@ -28,37 +28,24 @@ public class GlacialHatchlingMinion extends Minion implements DragonInterface{
         maxHealth = 3;
         health = maxHealth;
         tribe = Tribe.Hatchling;
-        name = "Glacial Hatchling";
-        sprite = SpriteHandler.whiteHatchlingMinion;
+        name = "Faerie hatchling";
+        sprite = SpriteHandler.faerieHatchlingMinion;
     }
-    
+
     @Override
-    public void onTurnStart(){
+    public void onTurnStart() {
         super.onTurnStart();
         turnsRemaining--;
-        parent.cardText = "After " + getTurnsRemaining() + "* turns, grow \n into a Glacial Dragon";
+        parent.cardText = "After " + getTurnsRemaining() + "* turns, grow \n into a Faerie Dragon";
         this.proc();
-        if(turnsRemaining<=0){
+        if (turnsRemaining <= 0) {
             grow();
         }
     }
-
-    @Override
-    public void breath() {
-        System.out.println("trying to get breath from a hatchling " + this);
-        return;
-    }
-
-    @Override
-    public Minion getAdultForm() {
-        GlacialDragonCard dragonCard = new GlacialDragonCard();
-        dragonCard.setHero(owner);
-        return dragonCard.summon;
-    }
-
+    
     @Override
     public int getTurnsRemaining() {
-       return this.turnsRemaining;
+            return this.turnsRemaining;
     }
 
     @Override
@@ -69,6 +56,18 @@ public class GlacialHatchlingMinion extends Minion implements DragonInterface{
             owner.minions.add(place, adultForm);
             adultForm.onSummon();   
             intrinsicValue =  3-turnsRemaining;
+    }
+
+    @Override
+    public void breath() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Minion getAdultForm() {
+        FaerieDragonCard dragonCard = new FaerieDragonCard();
+        dragonCard.setHero(owner);
+        return dragonCard.summon;
     }
 
 }

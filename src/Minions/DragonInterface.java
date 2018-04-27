@@ -6,7 +6,10 @@
 package Minions;
 
 /**
- *
+ * interface to be used with the dragon class
+ * hatchlings use grow, getturns, and getadult form.
+ * fully grown dragons (to be denoted by dragon tribe as opposed to hatchling)
+ * will use the breath method.
  * @author Joseph
  */
 public interface DragonInterface {
