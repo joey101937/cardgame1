@@ -32,14 +32,13 @@ public class MinotaurCard extends Card {
     
     /**
      * index where the minotaur would be summoned
-     *
      * @return
      */
     private int getOpenSlot() {
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 4; i++) {
             try {
                 if (owner.minions.get(i) == null) {
-                    return 0;
+                    return i;
                 }
             } catch (Exception e) {
                 continue;

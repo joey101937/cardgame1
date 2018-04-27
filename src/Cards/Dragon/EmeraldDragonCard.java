@@ -24,7 +24,7 @@ public class EmeraldDragonCard extends Card{
         cardType = CardType.Minion;
         cardPurpose = CardPurpose.VanillaMinion;
         DragonInterface di = (DragonInterface)summon;
-        cardText = "On Turn End: \n Restore 3 health \n to your hero.";
+        cardText = "On Turn End: \n Restore 2 health \n to your hero.";
         sprite = SpriteHandler.greenDragonCard;
         cost = 8;
         heroClass = HeroClass.Dragon;

@@ -43,7 +43,7 @@ public class EmeraldHatchlingMinion extends Minion implements DragonInterface{
           int place = owner.minions.indexOf(this);
             owner.minions.remove(this);
             Minion adultForm = getAdultForm();
-            owner.minions.add(place, adultForm);
+            owner.minions.add( adultForm);
             adultForm.onSummon();   
             intrinsicValue =  3-turnsRemaining;
     }

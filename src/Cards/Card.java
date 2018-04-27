@@ -89,7 +89,7 @@ public abstract class Card implements Comparable{
        }else{
            g.drawImage(SpriteHandler.cardback, x, y, null);    //if we arent the owner of the card, we see the cardback, not the card itself
        }
-            if(showValue && (owner==Board.playerHero || override)){
+            if(showValue && (owner==Board.playerHero || override) && Board.mainBoard.running){
             g.setColor(Color.gray);
             g.drawString(String.valueOf(AI.getValueOfCard(this)), x, y);
         }

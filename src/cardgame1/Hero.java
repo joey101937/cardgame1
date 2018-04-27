@@ -62,8 +62,10 @@ public class Hero {
         for(Card c: deck){
             c.setHero(this);
         }
-        //shuffle();  //temporarily disabled shuffle
         id = idBank++;
+        for(int i = 0; i<4;i++){
+            minions.getStorage().add(null); //prepopulate the field with null, this helps prevent out of bounds exceptions 
+        }
     }
     
     public Phantom getPhantom() {

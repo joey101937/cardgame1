@@ -23,7 +23,7 @@ public class EmeraldDragonMinion extends Minion implements DragonInterface{
         this.owner = parent.getOwner();
         attack = 3;
         originalAttack = attack;
-        maxHealth = 8;
+        maxHealth = 9;
         health = maxHealth;
         tribe = Tribe.Dragon;
         name = "Emerald Dragon";
@@ -49,7 +49,7 @@ public class EmeraldDragonMinion extends Minion implements DragonInterface{
     public void breath() {
         if(owner.health>=owner.maxHealth)return;
         proc();
-       owner.heal(3);
+       owner.heal(2);
        owner.proc();
     }
 
