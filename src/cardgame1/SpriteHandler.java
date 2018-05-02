@@ -126,6 +126,8 @@ public class SpriteHandler {
     public static BufferedImage necromancyCard;
     public static BufferedImage wraithMinion, wraithCard;
     public static BufferedImage reaperMinion, reaperCard;
+    public static BufferedImage darkClericCard, darkClericMinion;
+    public static BufferedImage infectCard;
     //Dragons
     public static BufferedImage grayDrakeMinion, grayDrakeCard;
     public static BufferedImage firePlumeCard;
@@ -309,6 +311,9 @@ public class SpriteHandler {
             wraithCard = load("wraithCard.png");
             reaperMinion = load("reaperMinion.png");
             reaperCard = load("reaperCard.png");
+            darkClericCard = load("darkClericCard.png");
+            darkClericMinion = load("darkClericMinion.png");
+            infectCard = load("infectCard.png");
             //Dragons
             grayDrakeMinion = load("grayDrakeMinion.png");
             grayDrakeCard = load("grayDrakeCard.png");

@@ -41,32 +41,7 @@ public enum HeroClass {
         public BufferedImage getClassIcon() {
             return SpriteHandler.swordsSmall;
         }
-    }, Restricted{
-        @Override
-        public BufferedImage getHeroPortrait() {
-            return SpriteHandler.ashePortrait;
-        }
-
-        @Override
-        public String getClassIconPath() {
-            return Main.assets+"redXsmall.png";
-        }
-
-        @Override
-        public String getHeroPortraitPath() {
-            return Main.assets+"ashePortrait.png";
-        }
-
-        @Override
-        public Color getColor() {
-           return Color.RED;
-        }
-
-        @Override
-        public BufferedImage getClassIcon() {
-           return SpriteHandler.redX;
-        }
-    }, Ocean{
+    },  Ocean{
         @Override
         public BufferedImage getHeroPortrait() {
             return SpriteHandler.fishManHero;
@@ -197,6 +172,31 @@ public enum HeroClass {
             return SpriteHandler.iconElemental;
         }
         
+    }, Restricted{
+        @Override
+        public BufferedImage getHeroPortrait() {
+            return SpriteHandler.ashePortrait;
+        }
+
+        @Override
+        public String getClassIconPath() {
+            return Main.assets+"redXsmall.png";
+        }
+
+        @Override
+        public String getHeroPortraitPath() {
+            return Main.assets+"ashePortrait.png";
+        }
+
+        @Override
+        public Color getColor() {
+           return Color.RED;
+        }
+
+        @Override
+        public BufferedImage getClassIcon() {
+           return SpriteHandler.redX;
+        }
     };
     /**
      * gets the hero image corresponding to that class

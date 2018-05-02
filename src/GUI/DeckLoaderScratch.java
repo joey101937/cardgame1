@@ -203,6 +203,7 @@ public class DeckLoaderScratch {
         combo = new JComboBox();
         combo.setSize(400,40);
         combo.setLocation(20, 90);
+        combo.setMaximumRowCount(99);
         combo.addItem("No Decks Found");
         panel.add(combo);
         

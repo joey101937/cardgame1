@@ -245,7 +245,9 @@ public class DeckBuilder extends JFrame{
         
         int column = 0;
         int row = 0;
-        for(Card c : Card.getCardList()){
+        ArrayList<Card> cardList = Card.getCardList();
+        cardList.sort(new CardOrderComparator());
+        for(Card c : cardList){
             CardIcon ci = new CardIcon(c, this);
             ci.setLocation(10 + column*(c.sprite.getWidth() + 30), row*(c.sprite.getHeight() + 20));
             column++;
@@ -309,7 +311,9 @@ public class DeckBuilder extends JFrame{
         
         int column = 0;
         int row = 0;
-        for(Card c : Card.getCardList()){
+        ArrayList<Card> cardList = Card.getCardList();
+        cardList.sort(new CardOrderComparator());
+        for(Card c : cardList){
             if(product.deckClass!=HeroClass.Neutral && product.deckClass != c.heroClass && c.heroClass!=HeroClass.Neutral)continue;
             CardIcon ci = new CardIcon(c, this);
             ci.setLocation(10 + column*(c.sprite.getWidth() + 30), row*(c.sprite.getHeight() + 20));
@@ -443,6 +447,9 @@ public class DeckBuilder extends JFrame{
 
         @Override
         public int compare(Card o1, Card o2) {
+            if(o1.heroClass!=o2.heroClass){
+                return o1.heroClass.compareTo(o2.heroClass);
+            }
             if (o1.cost == o2.cost) {
                 return o1.name.compareTo(o2.name); //if same cost then use alphabetical order
             } else {

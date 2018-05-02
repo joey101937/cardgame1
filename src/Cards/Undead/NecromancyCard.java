@@ -45,10 +45,10 @@ public class NecromancyCard extends Card {
         Main.wait(AI.speed/3);
         notifyPhantom(target,null);
         owner.opponent.minions.remove(target);
-        owner.minions.add(target);
-        target.owner=owner;
-        target.parent.setHero(owner);;
-        owner.resource -= cost;
+         target.owner = owner;
+         target.parent.setHero(owner);
+         owner.minions.add(target);
+         owner.resource -= cost;
         owner.hand.remove(this);
         TrapListener.onPlay(this);
         return 1;

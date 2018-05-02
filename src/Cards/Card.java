@@ -382,6 +382,8 @@ public abstract class Card implements Comparable{
         output.add(new NecromancyCard());
         output.add(new WraithCard());
         output.add(new ReaperCard());
+        output.add(new DarkClericCard());
+        output.add(new InfectCard());
         
         output.add(new GrayDrakeCard());
         output.add(new FirePlumeCard());
