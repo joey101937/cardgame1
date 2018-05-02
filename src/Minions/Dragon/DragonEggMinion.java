@@ -24,7 +24,7 @@ public class DragonEggMinion extends Minion{
         this.owner = parent.getOwner();
         attack = 0;
         originalAttack = attack;
-        maxHealth = 3;
+        maxHealth = 2;
         health = maxHealth;
         tribe = Tribe.none;
         name = "Dragon Egg";

@@ -125,6 +125,7 @@ public class SpriteHandler {
     public static BufferedImage ghoulMinion;
     public static BufferedImage necromancyCard;
     public static BufferedImage wraithMinion, wraithCard;
+    public static BufferedImage reaperMinion, reaperCard;
     //Dragons
     public static BufferedImage grayDrakeMinion, grayDrakeCard;
     public static BufferedImage firePlumeCard;
@@ -156,6 +157,8 @@ public class SpriteHandler {
     public static BufferedImage doubleshotCard;
     public static BufferedImage cavalryGeneralMinion, cavalryGeneralCard;
     public static BufferedImage enchantedSwordCard;
+    public static BufferedImage trebuchetCard, trebuchetMinion;
+    public static BufferedImage vigorCard;
     //Elemental
     public static BufferedImage 
             stoneGolemMinion,stoneGolemCard,
@@ -304,6 +307,8 @@ public class SpriteHandler {
             iconUndeadSmall = load("iconUndeadSmall.png");
             wraithMinion = load("wraithMinion.png");
             wraithCard = load("wraithCard.png");
+            reaperMinion = load("reaperMinion.png");
+            reaperCard = load("reaperCard.png");
             //Dragons
             grayDrakeMinion = load("grayDrakeMinion.png");
             grayDrakeCard = load("grayDrakeCard.png");
@@ -353,6 +358,9 @@ public class SpriteHandler {
             cavalryGeneralMinion = load("cavalryGeneralMinion.png");
             cavalryGeneralCard = load("cavalryGeneralCard.png");
             enchantedSwordCard = load("enchantedSwordCard.png");
+            trebuchetMinion = load("trebuchetMinion.png");
+            trebuchetCard = load("trebuchetCard.png");
+            vigorCard = load("vigorCard.png");
             //Elemental
             stoneGolemMinion = load("stoneGolemMinion.png");
             stoneGolemCard = load("stoneGolemCard.png");

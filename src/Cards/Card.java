@@ -381,6 +381,7 @@ public abstract class Card implements Comparable{
         output.add(new GhoulCard());
         output.add(new NecromancyCard());
         output.add(new WraithCard());
+        output.add(new ReaperCard());
         
         output.add(new GrayDrakeCard());
         output.add(new FirePlumeCard());
@@ -411,6 +412,9 @@ public abstract class Card implements Comparable{
         output.add(new GriffonCard());
         output.add(new CavalryGeneralCard());
         output.add(new EnchantedSwordCard());
+        output.add(new TrebuchetCard());
+        output.add(new ReservesCard());
+        
         
         output.add(new StoneGolemCard());
         output.add(new WarGolemCard());

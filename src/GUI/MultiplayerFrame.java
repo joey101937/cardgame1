@@ -288,8 +288,8 @@ public class MultiplayerFrame extends JFrame{
         Board board;
         String notice = "Game will now wait 25 seconds for another player to connect.";
         try{
-             InetAddress inetAddress = InetAddress.getLocalHost();
-            notice+= ("\n\nServer Address: " + inetAddress.getHostAddress() + "\nPort: 444");
+             //InetAddress inetAddress = InetAddress.getLocalHost(); //gets local ip
+            notice+= ("\n\nPort: 444");
         }catch(Exception e){
             e.printStackTrace();
         }
