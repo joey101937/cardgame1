@@ -198,7 +198,7 @@ public class SpriteHandler {
             blastEffectLarge = load("blastEffectLarge.png");
             blastEffectSmall = load("blastEffectSmall.png");
             slashEffect = load("slashEffect.png");
-            lightbulb = load("lightbulb.png");
+            lightbulb = load("lightbulb.PNG");
             bloodLarge = load("blood.png");
             bloodMedium = load("bloodMed.png");
             swords = load("swords.png");
@@ -216,10 +216,10 @@ public class SpriteHandler {
             iconElemental = load("iconElemental.png");
             PLAYtext = load("PLAY.png");
             NEXTLEVELtext = load("NEXT LEVEL.png");
-            DUELtext = load("DUEL.png");
+            DUELtext = load("Duel.png");
             MULTIPLAYERtext = load("Multiplayer.png");
             DECKBUILDERtext = load("Deck Builder.png");
-            OPTIONStext = load("OPTIONS.png");
+            OPTIONStext = load("Options.png");
             CAMPAIGNtext = load("Campaign.png");
             scroll = load("scroll.png");
             
@@ -248,7 +248,7 @@ public class SpriteHandler {
             predatoryFishCard = load("predatoryFishCard.png");
             predatoryFishMinion = load("predatoryFishMinion.png");
             //Neutral Cards
-            fireBoltCard = ImageIO.read((new File(Main.assets + "fireBoltCard.png")));
+            fireBoltCard = load("FireBoltCard.png");
             frostBearMinion = load("frostBear.png");
             frostBearCard = load("frostBearCard.png");
             archerCard = load("archerCard.png");
@@ -257,7 +257,7 @@ public class SpriteHandler {
             knightMinion = load("Knight.png");
             knightChargeMinion = load("KnightCharge.png");
             knightChargeCard = load("KnightChargeCard.png");
-            arakkoaMinion = ImageIO.read(new File(Main.assets + "arakkoaMinionL.png"));
+            arakkoaMinion = ImageIO.read(new File(Main.assets + "ArakkoaMinionL.png"));
             arakkoaCard = ImageIO.read(new File(Main.assets + "arakkoaCard.png"));
             kelpieCard = load("kelpieCard.png");
             kelpieMinion = load("kelpiePortrait.png");
@@ -301,7 +301,7 @@ public class SpriteHandler {
             skeletonMinion = load("skeletonSoldier.png");
             skelemancerMinion = load("skelemancerMinion.png");
             skelemancerCard = load("skelemancerCard.png");
-            skullKingMinion = load("skullKingMinion.png");
+            skullKingMinion = load("skullkingMinion.png");
             skullKingCard = load("skullKingCard.png");
             ghoulMinion = load("ghoulMinion.png");
             ghoulCard = load("ghoulCard.png");
