@@ -221,7 +221,8 @@ public class CampaignManager {
                 return;
             }
             JOptionPane.showMessageDialog(null, "Round Won!");
-            goToCardAdder();
+           returnToInterface(); 
+            // goToCardAdder();
             return;
         }
     }

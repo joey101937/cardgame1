@@ -6,26 +6,10 @@
 package Campaign.campaignGUI;
 
 import Campaign.CampaignManager;
-import Cards.Base.ArcherCard;
-import Cards.Base.FrostBearCard;
-import Cards.Base.KnightCard;
-import Cards.Base.MinotaurCard;
-import Cards.Base.PaladinCard;
-import Cards.Base.SpearmanCard;
-import Cards.Base.UndyingSoldierCard;
-import Cards.Base.VolcanoCard;
 import Cards.Card;
-import Cards.Dragon.GrayDrakeCard;
-import Cards.Elemental.GeomancerCard;
-import Cards.Elemental.StoneGolemCard;
-import Cards.Empire.DoubleshotCard;
-import Cards.Empire.GriffonCard;
-import Cards.Fish.JellyfishCard;
-import Cards.Fish.PirranahCard;
-import Cards.Undead.GhoulCard;
-import Cards.Undead.SkeletonArmySpell;
 import CustomDecks.HeroClass;
 import GUI.BackgroundPane;
+import GUI.LegacyGUI;
 import cardgame1.Main;
 import cardgame1.SpriteHandler;
 import java.awt.Color;
@@ -33,6 +17,7 @@ import java.awt.Font;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 /**
  * displays 6 buttons, one for each class for the player to choose from
@@ -143,6 +128,32 @@ public class HeroSelector extends JFrame{
     }
     
     private ArrayList<Card> getStartingDeck(HeroClass hClass){
+        switch(hClass){
+            case Neutral:
+                CampaignManager.playerCards =  LegacyGUI.getBaseDeck();
+                return LegacyGUI.getBaseDeck();
+            case Undead:
+                  CampaignManager.playerCards =  LegacyGUI.getUndeadDeck();
+                return LegacyGUI.getUndeadDeck();
+            case Ocean:
+                  CampaignManager.playerCards =  LegacyGUI.getFishDeck();
+                    return LegacyGUI.getFishDeck();
+            case Dragon:
+                  CampaignManager.playerCards =  LegacyGUI.getDragonDeck();
+                return LegacyGUI.getDragonDeck();
+            case Elemental:
+                  CampaignManager.playerCards =  LegacyGUI.getElementalDeck();  
+                return LegacyGUI.getElementalDeck();
+            case Empire:
+                  CampaignManager.playerCards =  LegacyGUI.getEmpireDeck();
+                return LegacyGUI.getEmpireDeck();
+            default:
+                JOptionPane.showMessageDialog(null,"Error trying to get starting deck for restricted class");
+                return null;
+        }
+    }
+    /*
+    private ArrayList<Card> getStartingDeck(HeroClass hClass){
         ArrayList<Card> output = new ArrayList<>();
         switch(hClass){
             case Neutral:
@@ -230,7 +241,7 @@ public class HeroSelector extends JFrame{
         }
         return output;
     }
-    
+    */
     
     /**
      * for testing purposes
