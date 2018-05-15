@@ -37,6 +37,7 @@ import java.util.ArrayList;
 public abstract class Card implements Comparable{
     public static final Integer WIDTH = 200;
     public static final Integer HEIGHT = 300;
+    public static double fontScale = 1;
     /*   AI FLAGS       */
     /** will this deal damage (true) or heal (false). used to determine which side of the field to target */
     public boolean isOffensive = false;
@@ -105,7 +106,7 @@ public abstract class Card implements Comparable{
     
     private void renderCardText(Graphics2D g, int x , int y){
         Font original = g.getFont();
-        Font toUse = new Font("Arial", Font.BOLD, 18);
+        Font toUse = new Font("Arial", Font.BOLD, (int)(18*fontScale));
         g.setColor(Color.black);
         g.setFont(toUse);
         String[] lines = cardText.split(" \n ");
@@ -115,7 +116,7 @@ public abstract class Card implements Comparable{
         g.setColor(Color.black);
         g.drawString(name,x+40, y+20);
         if(summon!=null && summon.tribe!= Tribe.none){
-        g.setFont(new Font("Arial", Font.BOLD,15));
+        g.setFont(new Font("Arial", Font.BOLD,(int)(15*fontScale)));
         g.setColor(Color.white);
         g.drawString(summon.tribe.toString(), x+110 - summon.tribe.toString().length()*5, y+Card.HEIGHT-10);
         }

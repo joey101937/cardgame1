@@ -33,7 +33,7 @@ public class LandingPage{
     private BackgroundPane panel;
     private JLabel campaignLabel, duelLabel, multiplayerLabel, deckBuilderLabel, optionLabel;
     private JLabel helpText;
-    private static Font helpFont = new Font("Comic Sans", Font.BOLD, 16);
+    private static Font helpFont = new Font("Comic Sans", Font.BOLD, (int)(16*Card.fontScale));
     /**
      * constructor
      */

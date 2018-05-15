@@ -19,6 +19,7 @@ import Cards.Fish.*;
 import GUI.LandingPage;
 import Multiplayer.Phantom;
 import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
@@ -48,6 +49,7 @@ public class Main {
      */
     public static void main(String[] args) {
         setBackgroundImage();
+        setFontScale();
         SpriteHandler.Initialize();
         //LegacyGUI og = new LegacyGUI();
         new LandingPage();
@@ -103,6 +105,18 @@ public class Main {
         return output;
     }
     
+    /**
+     * returns font scale and also sets it in Card.java
+     * */
+    public static double setFontScale(){
+        Dimension screensize = Toolkit.getDefaultToolkit().getScreenSize();
+        double given = screensize.getWidth()*screensize.getHeight();
+        double scale = screensize.getWidth()/1920; //devide by 1920
+        scale +=1;
+        scale/=2; //make it less extremes
+        Card.fontScale = scale;
+        return scale;
+    }
     
     
     //UTILITY METHODS
