@@ -3,6 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+//testing on mint laptop
 package cardgame1;
 
 import Cards.Base.FireBoltCard;
