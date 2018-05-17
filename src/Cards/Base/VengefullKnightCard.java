@@ -24,6 +24,7 @@ public class VengefullKnightCard extends Card{
         cardType = CardType.Minion;
         cardPurpose = CardPurpose.ChargeMinion;
         cardText = "Charge";
+        helpText = "Charge: Can attack immediately";
         sprite = SpriteHandler.knightChargeCard;
         cost = 4;
         summon = new VengefullKnightMinion(this);

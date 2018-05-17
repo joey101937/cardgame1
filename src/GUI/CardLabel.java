@@ -47,6 +47,7 @@ public class CardLabel extends JLabel{
         if(Main.showCostInBuilder)setText(c.cost + " "+c.name);
         else setText(c.name);
         setFont(cardTitleFont);
+        this.setToolTipText(c.cardText);
         addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {  

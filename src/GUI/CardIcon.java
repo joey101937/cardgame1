@@ -32,6 +32,7 @@ public class CardIcon extends JPanel{
         card = c;
         host = db;
         cardImage = card.sprite;
+        setToolTipText(c.helpText);
         this.setSize(new Dimension(cardImage.getWidth(),cardImage.getHeight()));
         this.addMouseListener(new MouseListener() {
             @Override

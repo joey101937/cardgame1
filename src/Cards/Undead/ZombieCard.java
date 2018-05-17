@@ -23,6 +23,7 @@ public class ZombieCard extends Card {
         name = "Zombie";
         cardType = CardType.Minion;
         cardPurpose = CardPurpose.VanillaMinion;
+        helpText = "Turning something undead allows you to take control of it using the 'Necromancy' card";
         cardText = "Minions damaged \n by this card \n become undead.";
         intrinsicValue = 0;
         sprite = SpriteHandler.zombieCard;

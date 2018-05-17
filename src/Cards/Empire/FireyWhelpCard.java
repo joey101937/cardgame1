@@ -24,6 +24,7 @@ public class FireyWhelpCard extends Card{
         name = "Firey Whelp";
         cardType = CardType.Minion;
         cardPurpose = CardPurpose.VanillaMinion;
+        helpText = "Fire Plume: Deal 2 Damage for 1 mana";
         cardText = "On Summon: \n Add a \"Fire Bolt\" \n card to your hand";
         sprite = SpriteHandler.fireyWhelpCard;
         cost = 2;

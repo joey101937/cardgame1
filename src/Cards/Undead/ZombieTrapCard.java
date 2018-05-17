@@ -18,6 +18,7 @@ public class ZombieTrapCard extends TrapCard{
     public ZombieTrapCard(){
         super();
         name = "Zombify";
+        helpText = "Turning something undead allows you to take control of it using the 'Necromancy' card";
         cardText = "Whenever your \n opponent summons \n a minion, destroy \n it and summon \n a 3/1 zombie \n in its place.";
         sprite = SpriteHandler.zombieTrap;
         cost = 1;

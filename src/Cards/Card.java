@@ -54,6 +54,7 @@ public abstract class Card implements Comparable{
     public int cost;            //casting cost
     public BufferedImage sprite; //visual representation of the card
     public HeroClass heroClass = HeroClass.Neutral; //neutral by default
+    public String helpText = ""; //shows in tooltip when moused over in deckbuilder
     protected Hero owner;
     public static boolean showValue = false;
     

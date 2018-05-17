@@ -28,6 +28,7 @@ public class FireInfusionSpell extends Card {
         cardType = CardType.Spell;
         cardPurpose = CardPurpose.Special;
         isTargeted = true;
+        helpText = "Fire Plume: Deal 3 Damage for 0 mana";
         cardText = "Transform a Stone \n Golem into a 5/4 \n Molten Golem \n with \"On Attack: \n Add a \"Fire Plume\" \n card to your hand\"";
         sprite = SpriteHandler.fireInfusionSpell;
         cost = 3;

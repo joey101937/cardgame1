@@ -22,6 +22,7 @@ public class VolcanicDrakeCard extends Card {
 
     public VolcanicDrakeCard() {
         name = "Volcanic Drake";
+        helpText = "Fire Plume: Deal 3 Damage for 0 mana";
         cardType = CardType.Minion;
         cardPurpose = CardPurpose.VanillaMinion;
         cardText = "On Summon: \n Add 2 \"Fire Plume\" \n cards to your hand";

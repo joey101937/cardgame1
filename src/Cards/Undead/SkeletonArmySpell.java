@@ -26,6 +26,7 @@ public class SkeletonArmySpell extends Card {
 
     public SkeletonArmySpell() {
         name = "Skeleton Army";
+        helpText = "Charge: Can attack immediately";
         cardType = CardType.Spell;
         cardPurpose = CardPurpose.Special;
         isTargeted = false;

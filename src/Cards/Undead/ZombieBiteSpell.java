@@ -30,6 +30,7 @@ public class ZombieBiteSpell extends Card{
         cardType = CardType.Spell;
         cardPurpose = CardPurpose.Special;
         isTargeted = true;
+        helpText = "Turning something undead allows you to take control of it using the 'Necromancy' card";
         cardText = "Transform a minion \n into a 4/2 zombie \n with charge";
         sprite = SpriteHandler.zombieBiteSpell;
         cost = 2;
