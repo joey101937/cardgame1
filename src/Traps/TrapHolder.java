@@ -19,7 +19,7 @@ public class TrapHolder {
         /**
      * tries to add trap to play area. fills null slots if applicable.
      * returns false if adding would violate max size requirement
-     * @param m minion to add
+     * @param t minion to add
      * @return was successful?
      */
     public Boolean add(Trap t){

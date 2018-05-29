@@ -57,7 +57,7 @@ public abstract class Card implements Comparable{
     public String helpText = ""; //shows in tooltip when moused over in deckbuilder
     protected Hero owner;
     public static boolean showValue = false;
-    
+    private static ArrayList<Card> allCards = null;
     /**
      * renders a particular card, cardback if its an enemy's card.
      * @param g graphics to use
@@ -164,7 +164,7 @@ public abstract class Card implements Comparable{
     /**
      * what happens when the card is played from the hand.
      * @param target target minion if applicable. may be null
-     * returns an int reflecting the outcome. 
+     * @return returns an int reflecting the outcome. 
      * 1 for success
      * 0 for not cast (not enough mana, etc)
      */
@@ -173,7 +173,7 @@ public abstract class Card implements Comparable{
     }
     /**
      * what happens when the card is played from the hand onto a hero.
-     * @param target
+     * @param target Hero that this card is targeting
      * @return an int reflecting outcome
      * 1 for success
      * 0 for not cast (not enough mana, cant target heros, etc)
@@ -183,7 +183,7 @@ public abstract class Card implements Comparable{
     }
     /**
      * if the owner has enough resources left to afford the cast cost of this card
-     * @return 
+     * @return can the owner afford?
      */
     public boolean canAfford(){
         return owner.resource >= cost;
@@ -338,6 +338,9 @@ public abstract class Card implements Comparable{
      * @return 
      */
     public static ArrayList<Card> getCardList(){
+        if(allCards!=null){
+            return allCards;
+        }
         ArrayList<Card> output = new ArrayList<>();
         output.add(new ArakkoaCard());
         output.add(new ArcherCard());
@@ -435,6 +438,7 @@ public abstract class Card implements Comparable{
         output.add(new EarthElementalCard());
         output.add(new StoneElementalCard());
         output.add(new IceyWindCard());
+        allCards = output;
         return output;
     }
     

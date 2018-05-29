@@ -35,7 +35,7 @@ public class VolcanoCard extends Card{
         
         /**
      * deals damage to target minion.
-     * @param target
+     * @param t
      * @return 1 if success, 0 if too expensive, -1 if opponent has no minions
      */
     @Override

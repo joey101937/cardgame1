@@ -32,7 +32,7 @@ public class ZombieMinion extends Minion {
     
     /**
      * supports alternate consturctor in which you may specify the attack and health of the minion rather than using the default 3/3 stats
-     * @param Owner the hero this minion will be owned by
+     * @param owner the hero this minion will be owned by
      * @param atk attack
      * @param hp initial health
      */

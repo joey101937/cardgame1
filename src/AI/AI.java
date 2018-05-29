@@ -23,13 +23,16 @@ import java.util.ArrayList;
  * @author Joseph
  */
 public abstract class AI {
-    public static int speed = 800; //how long to wait between making moves so the player is able to follow along
+    /** 
+     * how long to wait between making moves so the player is able to follow along
+     * NOTE THIS ALSO CONTROLS EFFECT DURATION
+     */
+    public static int speed = 800;
     
     /**
      * core of the AI player, makes plays and casts cards the most efficient way possible and ends turn when done
      * @param h the AI will make plays on behalf on this hero
-     */
-    
+     */    
     public static void takeTurn(Hero h) {
         Board.mainBoard.tick();
         Hero enemy = null;
@@ -57,11 +60,7 @@ public abstract class AI {
         if(h.opponent.health<=0)return;
         Main.wait((speed*2)/3);
         Board.controller.nextTurn();
-        /*
-        for(Card c : h.hand){
-            System.out.println(c + " == " + AI.getValueOfCard(c));
-        }
-        */
+
     }
     
     /**
@@ -122,8 +121,7 @@ public abstract class AI {
     
     /**
      * plays card with minion target
-     * @param c
-     * @param target 
+     * @param c card to play
      */
     public static void playCard(Card c){
         Board.getMainBoard().tick();
@@ -428,7 +426,7 @@ public abstract class AI {
     /**
      * returns true if combat would reduce the defender's worth by more than it would reduce the attacker's worth
      * @param attacker
-     * @param Defender
+     * @param defender
      * @return 
      */
     public static boolean isFavorableTrade(Minion attacker, Minion defender){
