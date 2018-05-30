@@ -291,7 +291,7 @@ public class MultiplayerFrame extends JFrame{
         String notice = "Game will now wait 25 seconds for another player to connect.";
         try{
              //InetAddress inetAddress = InetAddress.getLocalHost(); //gets local ip
-            notice+= ("\n\nPort: 444");
+            notice+= ("\nServer Address: " + Main.getPublicIP() + "\nPort: 444");
         }catch(Exception e){
             e.printStackTrace();
         }
