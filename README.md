@@ -1,5 +1,5 @@
 # Overview
-Java based virtual card game with an implemented complex strategic AI opponent and peer-to-peer multiplayer. Players can play with built-in decks or create, save, and import decks of their own to use.
+Java based virtual card game with an implemented complex strategic AI opponent and peer-to-peer multiplayer. Players can play with built-in decks or create, save, and import decks of their own to use. DOWNLOAD https://joey101937.itch.io/cardgame1
 ![Screenshot](http://i68.tinypic.com/rr59n8.jpg)
 # Strategic AI
 The AI opponent for the single player of this game is dynamic and able to assess a nearly infinite number of board states. It does this by analyzing the value of each card on a dynamic basis, taking into consideration other related cards- both friend and foe- and the resources available as well as how close it is to a failure or victory state.
