@@ -70,6 +70,9 @@ public class DeckBuilder extends JFrame{
      * initializes core components
      */
     private void init(){
+        System.out.println("setting location to " + LandingPage.metaX + " " + LandingPage.metaY);
+        this.setLocation(LandingPage.metaX, LandingPage.metaY);
+        
         panel = new BackgroundPane(Main.BackgroundImage);
         panel.setSize(this.getSize());
         panel.setLayout(null);
@@ -435,7 +438,9 @@ public class DeckBuilder extends JFrame{
     }
     
     @Override
-    public void dispose(){
+    public void dispose() {
+        LandingPage.metaX = this.getLocationOnScreen().x;
+        LandingPage.metaY = this.getLocationOnScreen().y;
         super.dispose();
         mainBuilder = null;
     }

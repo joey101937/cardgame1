@@ -34,6 +34,7 @@ public class LandingPage{
     private JLabel campaignLabel, duelLabel, multiplayerLabel, deckBuilderLabel, optionLabel;
     private JLabel helpText;
     private static Font helpFont = new Font("Comic Sans", Font.BOLD, (int)(16*Card.fontScale));
+    public static int metaX, metaY;
     /**
      * constructor
      */
@@ -51,6 +52,9 @@ public class LandingPage{
         core.setPreferredSize(new Dimension(700,700));
         core.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
+        System.out.println("setting location to " + LandingPage.metaX + " " + LandingPage.metaY);
+        core.setLocation(LandingPage.metaX, LandingPage.metaY);
+        
         panel = new BackgroundPane(SpriteHandler.scroll,0,0);
         panel.setSize(core.getWidth(), core.getHeight());
         panel.setLayout(null); //allows us to place components at indevidual xy coordinates
@@ -117,8 +121,8 @@ public class LandingPage{
             public void mousePressed(MouseEvent e) {}
             @Override
             public void mouseReleased(MouseEvent e) {
+            disposeCore();
             CampaignManager.init();
-            core.dispose();
             }
             @Override
             public void mouseEntered(MouseEvent e) {
@@ -138,7 +142,7 @@ public class LandingPage{
             public void mousePressed(MouseEvent e) {}
             @Override
             public void mouseReleased(MouseEvent e) {
-            core.dispose();
+             disposeCore();
             new DuelFrame();
             }
             @Override
@@ -159,7 +163,7 @@ public class LandingPage{
             public void mousePressed(MouseEvent e) {}
             @Override
             public void mouseReleased(MouseEvent e) {
-            core.dispose();
+             disposeCore();
             new MultiplayerFrame();
             }
             @Override
@@ -214,6 +218,12 @@ public class LandingPage{
         });
     }
     
+    public void disposeCore(){
+        System.out.println("disposing ccore at " + core.getLocationOnScreen());
+        metaX = core.getLocationOnScreen().x;
+        metaY = core.getLocationOnScreen().y;
+        core.dispose();   
+    }
     
     
 }

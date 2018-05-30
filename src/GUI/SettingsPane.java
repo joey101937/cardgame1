@@ -21,6 +21,8 @@ public class SettingsPane extends javax.swing.JFrame {
      */
     public SettingsPane() {
         initComponents();
+        System.out.println("setting location to " + LandingPage.metaX + " " + LandingPage.metaY);
+        this.setLocation(LandingPage.metaX, LandingPage.metaY);
         this.aiSpeedField.setText(String.valueOf(AI.AI.speed));
         this.setVisible(true);
     }

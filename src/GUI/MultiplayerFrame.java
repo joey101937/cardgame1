@@ -58,6 +58,8 @@ public class MultiplayerFrame extends JFrame{
      */
     private void init(){
         //this setup
+        System.out.println("setting location to " + LandingPage.metaX + " " + LandingPage.metaY);
+        this.setLocation(LandingPage.metaX, LandingPage.metaY);
         SpriteHandler.Initialize();
         this.setSize(700, 700);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -301,5 +303,10 @@ public class MultiplayerFrame extends JFrame{
         }
     }
     
-    
+    @Override
+    public void dispose() {
+        LandingPage.metaX = this.getLocationOnScreen().x;
+        LandingPage.metaY = this.getLocationOnScreen().y;
+        super.dispose();
+    }
 }

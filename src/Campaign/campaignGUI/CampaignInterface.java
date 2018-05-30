@@ -49,6 +49,9 @@ public class CampaignInterface extends JFrame{
     }
     
     private void init() {
+        System.out.println("setting location to " + LandingPage.metaX + " " + LandingPage.metaY);
+        this.setLocation(LandingPage.metaX, LandingPage.metaY);
+        
         if(panel!=null)panel.removeAll();
         this.setSize(700, 700);
         this.setPreferredSize(new Dimension(700,700));
@@ -193,5 +196,10 @@ public class CampaignInterface extends JFrame{
     }
 
    
-
+    @Override
+    public void dispose(){
+        LandingPage.metaX = this.getLocationOnScreen().x;
+        LandingPage.metaY = this.getLocationOnScreen().y;
+        super.dispose();
+    }
 }

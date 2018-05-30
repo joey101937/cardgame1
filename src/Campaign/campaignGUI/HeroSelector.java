@@ -9,6 +9,7 @@ import Campaign.CampaignManager;
 import Cards.Card;
 import CustomDecks.HeroClass;
 import GUI.BackgroundPane;
+import GUI.LandingPage;
 import GUI.LegacyGUI;
 import cardgame1.Main;
 import cardgame1.SpriteHandler;
@@ -35,7 +36,10 @@ public class HeroSelector extends JFrame{
         init();
     }
 
-    private void init() {
+    private void init() {      
+        System.out.println("setting location to " + LandingPage.metaX + " " + LandingPage.metaY);
+        this.setLocation(LandingPage.metaX, LandingPage.metaY);
+        
         this.setSize(700, 700);
         this.setIconImage(SpriteHandler.swordsSmall);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -120,6 +124,8 @@ public class HeroSelector extends JFrame{
 
     @Override
     public void dispose(){
+        LandingPage.metaX = this.getLocationOnScreen().x;
+        LandingPage.metaY = this.getLocationOnScreen().y;
         super.dispose();
         CampaignManager.playerClass = chosenClass;
         //CampaignManager.playerCards = getStartingDeck(chosenClass);
@@ -252,4 +258,5 @@ public class HeroSelector extends JFrame{
         SpriteHandler.Initialize();
         new HeroSelector();
     }
+
 }

@@ -56,6 +56,9 @@ public class DuelFrame extends JFrame{
      * initializes swing and awt components
      */
     private void init(){
+        System.out.println("setting location to " + LandingPage.metaX + " " + LandingPage.metaY);
+        this.setLocation(LandingPage.metaX, LandingPage.metaY);
+        
         //this setup
         SpriteHandler.Initialize();
         this.setSize(700, 700);
@@ -292,5 +295,12 @@ public class DuelFrame extends JFrame{
             hClass = hc;
             cards = ac;
         }
+    }
+    
+    @Override
+    public void dispose() {
+        LandingPage.metaX = this.getLocationOnScreen().x;
+        LandingPage.metaY = this.getLocationOnScreen().y;
+        super.dispose();
     }
 }

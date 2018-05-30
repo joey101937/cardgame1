@@ -8,6 +8,7 @@ package Campaign.campaignGUI;
 import Campaign.CampaignManager;
 import Cards.Card;
 import CustomDecks.HeroClass;
+import GUI.LandingPage;
 import Multiplayer.Phantom;
 import cardgame1.SpriteHandler;
 import java.awt.Font;
@@ -40,6 +41,9 @@ public class CardAdderFrame extends JFrame{
     
     //initializes starting components
     private void initialize(){
+        System.out.println("setting location to " + LandingPage.metaX + " " + LandingPage.metaY);
+        this.setLocation(LandingPage.metaX, LandingPage.metaY);
+        
         this.setSize(700, 700);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         populateSelectionBasedOnDraws();
@@ -158,5 +162,12 @@ public class CardAdderFrame extends JFrame{
             }
         }
         
+    }
+    
+    @Override
+    public void dispose(){
+        LandingPage.metaX = this.getLocationOnScreen().x;
+        LandingPage.metaY = this.getLocationOnScreen().y;
+        super.dispose();
     }
 }
