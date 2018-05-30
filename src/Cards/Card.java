@@ -57,7 +57,6 @@ public abstract class Card implements Comparable{
     public String helpText = ""; //shows in tooltip when moused over in deckbuilder
     protected Hero owner;
     public static boolean showValue = false;
-    private static ArrayList<Card> allCards = null;
     /**
      * renders a particular card, cardback if its an enemy's card.
      * @param g graphics to use
@@ -338,9 +337,6 @@ public abstract class Card implements Comparable{
      * @return 
      */
     public static ArrayList<Card> getCardList(){
-        if(allCards!=null){
-            return allCards;
-        }
         ArrayList<Card> output = new ArrayList<>();
         output.add(new ArakkoaCard());
         output.add(new ArcherCard());
@@ -438,7 +434,6 @@ public abstract class Card implements Comparable{
         output.add(new EarthElementalCard());
         output.add(new StoneElementalCard());
         output.add(new IceyWindCard());
-        allCards = output;
         return output;
     }
     
