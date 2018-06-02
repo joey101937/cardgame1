@@ -28,7 +28,6 @@ A user, when making plays in an online game, will send instructions to the phant
 The game has a class system and 30+ cards as of this update. Cards are of three types: Minion, Spell, and Trap. Minions summon a creature or "minion" onto the field which can attack for you, spells do some listed effect, and traps go dormant and wait for their trigger condition to be met. Every card has a price that you must pay to play. This is the yellow value at the top left of the card. You start out with one crystal and gain an additional one each turn. Expended crystals are returned at the end of each turn. There are also different classes that pertain to the overall deck, meaning theme cards go together. A deck can contain that class's cards as well as neutral cards. A deck may not, however, contain cards belonging to a different class. Players can build their own decks and load them into the game to play against the AI or give them to the AI to use against players.
 
 Additionally, at the start of a game, the server will generate a random seed for use in both user's Random object, which will synchronize random outcomes across both user's games. Each player's deck will also be sent to the other user's phantom at the beginning of the game, and appropriate asset changes will be made by each instance.
-
-![Screenshot](https://img.itch.zone/aW1hZ2UvMjUzMzI1LzEyMTI1NDgucG5n/original/irFtlX.png)
 ![Screenshot](https://img.itch.zone/aW1hZ2UvMjUzMzI1LzEyMTI1NDYucG5n/original/Z1HyHN.png)
+![Screenshot](https://img.itch.zone/aW1hZ2UvMjUzMzI1LzEyMTI1NDgucG5n/original/irFtlX.png)
 ![Screenshot](http://i68.tinypic.com/15s0yue.png)
