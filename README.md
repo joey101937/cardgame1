@@ -29,5 +29,6 @@ The game has a class system and 30+ cards as of this update. Cards are of three 
 
 Additionally, at the start of a game, the server will generate a random seed for use in both user's Random object, which will synchronize random outcomes across both user's games. Each player's deck will also be sent to the other user's phantom at the beginning of the game, and appropriate asset changes will be made by each instance.
 
+![Screenshot](https://img.itch.zone/aW1hZ2UvMjUzMzI1LzEyMTI1NDgucG5n/original/irFtlX.png)
+![Screenshot](https://img.itch.zone/aW1hZ2UvMjUzMzI1LzEyMTI1NDYucG5n/original/Z1HyHN.png)
 ![Screenshot](http://i68.tinypic.com/15s0yue.png)
-![Screenshot](http://i66.tinypic.com/23jliqc.png)
