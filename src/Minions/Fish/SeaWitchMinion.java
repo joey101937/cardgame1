@@ -7,7 +7,9 @@ package Minions.Fish;
 
 import Cards.Base.KelpieCard;
 import Cards.Card;
+import Cards.CardType;
 import Cards.Fish.*;
+import CustomDecks.HeroClass;
 import Minions.Minion;
 import Minions.Tribe;
 import Multiplayer.Phantom;
@@ -20,6 +22,8 @@ import java.util.ArrayList;
  * @author Joseph
  */
 public class SeaWitchMinion extends Minion{
+        private static ArrayList<Card> options = null; //possible draw options
+    
         public SeaWitchMinion(Card parent){
         this.parent = parent;
         this.owner = parent.getOwner();
@@ -34,22 +38,14 @@ public class SeaWitchMinion extends Minion{
         
         @Override
         public void onSummon() {
-        ArrayList<Card> options = new ArrayList<>();
-        //possible draw options
-        options.add(new FrenzyCard());
-        options.add(new PredationCard());
-        options.add(new SwollowCard());
-        options.add(new SeaSerpentTrapCard());
-        options.add(new PredatoryFishCard());
-        options.add(new ThrasherCard());
-        options.add(new JellyfishCard());
-        options.add(new CarnifishCard());
-        options.add(new BaitfishCard());
-        options.add(new SeaWitchCard());
-        options.add(new UnderSeaMantisCard());
-        options.add(new KelpieCard());
-        options.add(new PirranahCard());
-        //
+        if(options==null){
+            options = new ArrayList<Card>();
+            for(Card c : Card.getCardList()){
+                if(c.heroClass == HeroClass.Ocean || (c.cardType==CardType.Minion && c.summon.tribe==Tribe.Fish)){
+                    options.add(c);
+                }
+            }
+        }
         this.proc();
         Main.wait(AI.AI.speed/3);
         owner.draw(options.get((int)(Phantom.random.nextDouble()*options.size())));
