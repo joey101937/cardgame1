@@ -17,6 +17,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import javafx.scene.input.KeyCode;
+import javax.swing.JOptionPane;
 
 /**
  * Representation of a summoned monster, rendered on the board and can fight/die
@@ -150,6 +152,18 @@ public class InputHandler extends KeyAdapter implements MouseListener, MouseMoti
             System.out.println("Key pressed to fast");
             return;
         }
+        if(e.getKeyCode() == KeyEvent.VK_ESCAPE){
+            System.out.println("test esc");
+               String[] options = {"Quit", "Resume"};
+                    int choice = JOptionPane.showOptionDialog(null, "Quit to main menu?", "Quit Prompt", 0, 0, null, options, "init");
+                    System.out.println(choice);
+                    //-1 = exit, 0 = options[0], 1= options[1]
+                    if(choice==0){
+                        Board.playerHero.restartApplication();
+                    }else{
+                        //do nothing
+                    }
+        }
         switch (e.getKeyChar()) {
             case ' ':
            // Board.controller.nextTurn();
@@ -175,6 +189,7 @@ public class InputHandler extends KeyAdapter implements MouseListener, MouseMoti
             case 'k':
                  AI.takeTurn(Board.playerHero);
                  break;
+            
         }
         keyTimer = 10;
     }
