@@ -235,6 +235,7 @@ public class Board extends Canvas implements Runnable {
         renderTraps(g);
         g.drawImage(SpriteHandler.gearSmall,0,0,null);
         this.visHandler.render(g);
+        LineManager.render(g);
         g.dispose();
             bs.show();
     }

@@ -9,6 +9,7 @@ import Cards.Card;
 import Traps.TrapListener;
 import cardgame1.Board;
 import cardgame1.Hero;
+import cardgame1.LineManager;
 import cardgame1.Main;
 import cardgame1.ProcHandler;
 import cardgame1.SpriteHandler;
@@ -156,7 +157,8 @@ public abstract class Minion{
             if(message.split("1").length!=4)System.out.println("ERROR minion attack trying to send " + message);
             Board.nonPlayerHero.getPhantom().communicateMessage(message);
         }
-        target.takeDamage(this.attack);
+        LineManager.drawLine(getXCordinate()+Minion.WIDTH/2, getYcoordinate()+Minion.HEIGHT/2, target.getXCordinate()+Minion.WIDTH/2, target.getYcoordinate()+Minion.HEIGHT/2, AI.AI.speed/2);
+         target.takeDamage(this.attack);
         this.takeDamage(target.attack);
         this.attackReady = false;
         target.onAttacked(this);
@@ -169,6 +171,7 @@ public abstract class Minion{
      */
     public void attack(Hero target){
         if(!canAttack() || attack==0) return;
+        LineManager.drawLine(getXCordinate()+Minion.WIDTH/2, getYcoordinate()+Minion.HEIGHT/2, target.getXCoordinate()+target.picture.getWidth()/2, target.getYCoordinate()+target.picture.getHeight()/2, AI.AI.speed/2);
         target.takeDamage(this.attack);
         this.attackReady = false;
         TrapListener.onAttackHero(this, target);

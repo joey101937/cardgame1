@@ -9,6 +9,7 @@ import Cards.Card;
 import Minions.Minion;
 import cardgame1.Board;
 import cardgame1.Hero;
+import cardgame1.LineManager;
 
 /**
  * listens to events on the board and relays those to active traps
@@ -29,6 +30,7 @@ public abstract class TrapListener {
         for (Minion min : Board.botHero.minions.getOccupants()) {
             min.onAttackDetect(attacker, defender);
         }
+        
     }
 
     public static void onAttackHero(Minion attacker, Hero defender) {
@@ -44,6 +46,7 @@ public abstract class TrapListener {
         for (Minion min : Board.botHero.minions.getOccupants()) {
            min.onAttackHeroDetect(attacker,defender);
         }
+         
     }
 
     public static void onMinionTakeDamage(Minion m) {

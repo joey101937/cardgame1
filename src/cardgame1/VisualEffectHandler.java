@@ -140,4 +140,7 @@ public class VisualEffectHandler {
             timeLeftOnCard = duration;
     }
 
+
+    
+
 }
