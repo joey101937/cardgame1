@@ -25,6 +25,7 @@ public class GoldenDragonCard extends Card{
         cardPurpose = CardPurpose.VanillaMinion;
         DragonInterface di = (DragonInterface)summon;
         cardText = "On Summon: \n Add a \"Purifying \n Impact\" card to \n your hand.";
+        helpText = "Purifying Impact: 2-cost spell, \"Destroy Target Minion\"";
         sprite = SpriteHandler.goldDragonCard;
         cost = 9;
         heroClass = HeroClass.Dragon;
