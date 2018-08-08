@@ -10,7 +10,7 @@ import Cards.CardPurpose;
 import Cards.CardType;
 import Minions.Minion;
 import cardgame1.SpriteHandler;
-import Minions.Base.archerMinion;
+import Minions.Base.ArcherMinion;
 import Traps.TrapListener;
 import cardgame1.Hero;
 import cardgame1.Main;
@@ -31,7 +31,7 @@ public class ArcherCard extends Card{
         cardText = "On Summon: \n Deal " + spellDamage + " Damage";
         sprite = SpriteHandler.archerCard;
         cost = 1;
-        summon = new archerMinion(this);
+        summon = new ArcherMinion(this);
     }
     
     
