@@ -189,7 +189,7 @@ public abstract class AI {
                         }
                     }
                 }
-                if(bestHealTarget!=null) c.cast(bestHealTarget);
+                if(bestHealTarget!=null && value > 0) c.cast(bestHealTarget);
                 else c.castOnHero(c.getOwner());
                 break;
             case BattleCryMinionBuff:
