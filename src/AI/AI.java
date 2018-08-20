@@ -118,6 +118,15 @@ public abstract class AI {
         playCardsAboveValue(h,par);
     }
     
+    public static int getOnBoardDamagePotential(Hero h){
+        int output = 0;
+        for(Minion m : h.minions.getOccupants()){
+            if(m.canAttack()){
+                output+=m.attack;
+            }
+        }
+        return output;
+    }
     
     /**
      * plays card with minion target
@@ -160,6 +169,10 @@ public abstract class AI {
             case BattlecryMinionHeal:
                 value = -999;
                 Minion bestHealTarget = null;
+                if(AI.isHeroVulnerable(c.getOwner()) && AI.getOnBoardDamagePotential(enemy) <= c.getOwner().health + c.spellDamage){
+                    c.castOnHero(c.getOwner());
+                    return; //if we can save the hero with the heal, save the hero
+                }
                 for (Minion m : c.getOwner().minions.getStorage()) {
                     if (m == null)continue;
                     if (isVulnerable(m)) {
@@ -168,6 +181,11 @@ public abstract class AI {
                                 value = getWorth(m);    //the value of the card becomes teh value of the minion saved. use the value of the most important minion we can save
                                 bestHealTarget = m;
                             }
+                        }
+                    }else{
+                        if(m.maxHealth-m.health > value){
+                            value = getWorth(m);
+                            bestHealTarget = m;
                         }
                     }
                 }
@@ -656,9 +674,15 @@ public abstract class AI {
                                 value = getWorth(m);    //the value of the card becomes teh value of the minion saved. use the value of the most important minion we can save
                             }
                         }
+                    }else{
+                        if(m.maxHealth-m.health>value){
+                            value = m.maxHealth-m.health;
+                        }
                     }
                 }
-                if(value == 0) value = c.spellDamage;
+                int heroHealPotential = 4;
+                if(30 - c.getOwner().health < 4) heroHealPotential = 30 - c.getOwner().health;
+                if(value == 0) value = heroHealPotential;
                 value += getWorth(c.summon);
                 return value+ c.intrinsicValue;
             case AOEDamage:
@@ -666,6 +690,9 @@ public abstract class AI {
                 for(Minion m : c.getOwner().opponent.minions.getOccupants()){
                     if(m.health <= c.spellDamage) value += getWorth(m) +1;
                     else value += c.spellDamage/2;
+                }
+                if(value>c.cost*2){
+                    value*=1.5;     //if the aoe spell has the change to get value over twice the cost, incentivize the play
                 }
                 return value+ c.intrinsicValue;
             case DirectDamage:
