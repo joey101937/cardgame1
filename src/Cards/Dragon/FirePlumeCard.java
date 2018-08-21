@@ -26,6 +26,7 @@ public class FirePlumeCard extends Card{
         cardType = CardType.Spell;
         heroClass = HeroClass.Restricted;
         cardPurpose = CardPurpose.DirectDamage;
+        damagesHeros = true;
         isTargeted = true;
         spellDamage = 3;
         cardText = "Deal " + spellDamage + " damage to \n target";

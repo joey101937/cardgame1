@@ -48,6 +48,7 @@ public abstract class Card implements Comparable{
     public CardPurpose cardPurpose; //purpose of the card, used with AI
     public int intrinsicValue; //bonusValue given to a card, used by AI
     public boolean isTargeted = false; //does this card's cast method want to take a target?
+    public boolean damagesHeros = false; //for use in direct damage and direct damage battelcry cards
     public int spellDamage = 0;     //damage dealt on cast, if applicable
     public Minion summon;       //if this is a minion card, the minion it summons. if spell, this is null
     public String cardText;     //what the card says on it

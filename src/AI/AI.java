@@ -38,6 +38,10 @@ public abstract class AI {
         Hero enemy = null;
         if(h==Board.topHero) enemy = Board.botHero;
         else enemy = Board.topHero;
+        if(AI.getTotalDamagePotential(h) > h.opponent.health){
+            System.out.println("lethal in range");
+            AI.goForLethal(h);
+        }
         playCardsAboveValue(h,2.5);
         tradeOnBoard(h,false);
         playOutHand(h);
@@ -65,6 +69,7 @@ public abstract class AI {
     
     /**
      * plays all cards we can in the best way possible, recursively
+     * @param h hero we are playing for
      */
     public static void playOutHand(Hero h){
         if(h.opponent.health<=0)return;
@@ -92,7 +97,8 @@ public abstract class AI {
     
     /**
      * plays out hand, but restricts plays to only cards whose value-to-cost ratio is above the given value
-     * @param par 
+     * @param par minimum required worth:cost ratio 
+     * @param h hero we are playing for
      */
     public static void playCardsAboveValue(Hero h, double par){
         Board.getMainBoard().tick();
@@ -118,6 +124,11 @@ public abstract class AI {
         playCardsAboveValue(h,par);
     }
     
+    /**
+     * Returns the total possible damage the given hero can do using only the 
+     * available minions on the board
+     * @param h hero we are evaluating
+     */
     public static int getOnBoardDamagePotential(Hero h){
         int output = 0;
         for(Minion m : h.minions.getOccupants()){
@@ -125,7 +136,77 @@ public abstract class AI {
                 output+=m.attack;
             }
         }
+        //TODO : Account for defensive minions (ie earth golem)
         return output;
+    }
+    
+    /**
+     * @return how much damage we could theoretically do to the opponent's hero this turn
+     */
+    public static int getTotalDamagePotential(Hero h){
+        int output = 0;
+        for(Minion m : h.minions.getOccupants()){
+            if(m.canAttack()){
+                output+=m.attack;
+            }
+        }
+        //TODO : Account for defensive minions (ie earth golem)
+        ArrayList<Card> potentialDirect = new ArrayList<Card>();
+        for(Card c : h.hand){
+            if((c.cardPurpose == CardPurpose.DirectDamage && c.damagesHeros) || c.cardPurpose==CardPurpose.ChargeMinion){
+                if(!c.canAfford()) continue;
+                potentialDirect.add(c);
+            }
+        }
+        int resources = h.resource;
+        int i = 0;
+        for(Card c : potentialDirect){
+            if(c.cost>resources) break;
+            if(c.cardPurpose == CardPurpose.DirectDamage || c.cardPurpose == CardPurpose.BattlecryMinionDamage){
+                output+=c.spellDamage;
+            } else if(c.cardPurpose == CardPurpose.ChargeMinion){
+                output+=c.summon.attack;
+            }
+            resources-=c.cost;
+        }
+        System.out.println("evaluated damage potential for hero " + h + " is " + output + " with " + h.resource + " mana");
+        return output;
+    }
+    
+    /**
+     * has all available minons attack the opponent's hero and plays available
+     * charge minoins and direct damage for the face 
+     * @param h hero we are playing for 
+     */
+    public static void goForLethal(Hero h){
+        if(getTotalDamagePotential(h) < h.opponent.health){
+            System.out.println("Trying to go for lethal without enough damage potential (required " + h.opponent.health +")");
+            return;
+        }
+        for(Minion m : h.minions.getOccupants()){
+            if(m.canAttack())m.attack(h.opponent);
+        }
+        ArrayList<Card> potentialDirect = new ArrayList<Card>();
+        for(Card c : h.hand){
+            if((c.cardPurpose == CardPurpose.DirectDamage && c.damagesHeros) || c.cardPurpose==CardPurpose.ChargeMinion){
+                if(!c.canAfford()) continue;
+                potentialDirect.add(c);
+            }
+        }
+        int resources = h.resource;
+        int i = 0;
+        for(Card c : potentialDirect){
+            if(c.cost>resources) break;
+            resources-=c.cost;
+            if(c.isTargeted){
+                System.out.println("Casting card " + c + " on hero for lethal");
+                c.castOnHero(h.opponent);
+            }
+            else {
+                System.out.println("Casting card " + c + " on null for lethal");
+                c.cast(null);
+            }
+        }
     }
     
     /**

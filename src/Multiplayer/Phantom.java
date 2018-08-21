@@ -47,6 +47,18 @@ public final class Phantom implements Runnable{
     public BufferedReader br;
     public static Phantom mainPhantom; //last created phantom
     
+    
+    /**
+     * Creates a phantom to control the given hero.
+     * NOTES:
+     * Sets Phantom.mainPhantom to this object when constructor is run
+     * Sets Main.isMultiplayerGame to true
+     * If client, automatically attempts to connect to Phantom.connectionAddress
+     * @param host hero the phnatom will control and play as
+     * @param isServer weather or not the phantom will try to connect to
+     * Phantom.connectionAddress or if it should open its own sever socket
+     * @throws Exception 
+     */
     public Phantom(Hero host, boolean isServer) throws Exception{
         System.out.println("making new phantom");
         mainPhantom = this;
@@ -69,9 +81,11 @@ public final class Phantom implements Runnable{
         serverSocket = new ServerSocket(444);
         System.out.println("server Inet Address: "+serverSocket.getInetAddress()); 
         if(!Main.removeServerTimeout){
-            TimeoutController tc = new TimeoutController(20000,serverSocket);
-        } //will itimeout if we dont connect in this time
-        socket = serverSocket.accept();    
+            int timeoutDuration = 20000; //will timeout if we dont connect in this time
+            TimeoutController tc = new TimeoutController(timeoutDuration,serverSocket);
+        } 
+        socket = serverSocket.accept();
+        //if we get to this line, that means the server connected before timeout
         connected = true;
         inputStream = new InputStreamReader(socket.getInputStream());
         br = new BufferedReader(inputStream);
@@ -147,6 +161,17 @@ public final class Phantom implements Runnable{
     */
     private boolean receivingDeck = false; //if this is true, we are receiving deck
 
+    /**
+     * Performs a function based on the given input.
+     * First, it sets initial settings to sync client to server
+     * server will send seed to client and client will change its seed to match
+     * this makes sure the rng outcomes will match
+     * Then it sends the deck starting with "deckSend"and ending with deckEnd
+     * cards names are then sent one at a time by name and prefix "card:"
+     * It changes the host's portrait based on the last non-neutral card received
+     * after setup, this method will interperate the 4-part player commands indefinitely
+     * @param message message to interperate
+     */
     private synchronized void  interperateMessage(String message) {
         try{
         if (message == null) return; 
@@ -156,7 +181,8 @@ public final class Phantom implements Runnable{
         }
         if(message.equals("deckSend")){
             host.deck.clear();
-            receivingDeck = true;  //if we get "decksend" we begin populating the phantom's deck with cards to be send in later messages
+            //if we get "decksend" we begin populating the phantom's deck with cards to be send in later messages
+            receivingDeck = true; 
             return;
         }
         if(message.equals("deckEnd")){
@@ -253,7 +279,11 @@ public final class Phantom implements Runnable{
             e.printStackTrace();
         }
     }
-    
+        /**
+         * Displays a card to player in same area the AI does when it plays a card
+         * used to show the user that a card is being played
+         * @param c card to display
+         */
         private void displayCard(Card c) {
             System.out.println("displaying card " + c.name + "from phantom play");
         if (c.cardPurpose == CardPurpose.Trap) {

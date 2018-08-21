@@ -26,6 +26,7 @@ public class InfectCard extends Card{
         cardType = CardType.Spell;
         cardPurpose = CardPurpose.Special;
         isTargeted = true;
+        damagesHeros = true;
         spellDamage = 2;
         helpText = "Turning something undead allows you to take control of it using the 'Necromancy' card";
         cardText = "Deal " + spellDamage + " damage. If \n target is a minion, \n it becomes undead.";

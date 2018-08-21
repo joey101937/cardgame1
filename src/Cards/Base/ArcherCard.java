@@ -27,6 +27,7 @@ public class ArcherCard extends Card{
         cardType = CardType.Minion;
         spellDamage = 1;
         cardPurpose = CardPurpose.BattlecryMinionDamage;
+        damagesHeros = true;
         isTargeted = true;
         cardText = "On Summon: \n Deal " + spellDamage + " Damage";
         sprite = SpriteHandler.archerCard;

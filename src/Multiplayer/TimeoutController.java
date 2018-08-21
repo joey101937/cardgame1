@@ -9,13 +9,19 @@ import java.net.ServerSocket;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * Simple timeout class for Phantom
+ * Closes the serversocket of a phantom if there is no connection after a delay
  * @author Joseph
  */
 public class TimeoutController implements Runnable{
-
     public int time;
     public ServerSocket socket;
+    
+    /**
+     * Creates a timeout for the given phantom, which expires after given ms
+     * @param duration Time to wait in ms
+     * @param socket Socket we will close after timeout if not connected
+     */
     public TimeoutController(int duration, ServerSocket socket){
         time = duration;
         this.socket = socket;

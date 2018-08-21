@@ -26,6 +26,7 @@ public class PredationCard extends Card {
         cardType = CardType.Spell;
         cardPurpose = CardPurpose.DirectDamage;
         isTargeted = true;
+        damagesHeros = true;
         spellDamage = 0;
         cardText = "Deal Damage equal \n to the attack of \n your strongest fish \n (" + spellDamage +")";
         sprite = SpriteHandler.predationCard;
