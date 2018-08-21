@@ -38,7 +38,7 @@ public abstract class AI {
         Hero enemy = null;
         if(h==Board.topHero) enemy = Board.botHero;
         else enemy = Board.topHero;
-        if(AI.getTotalDamagePotential(h) > h.opponent.health){
+        if(AI.getTotalDamagePotential(h) >= h.opponent.health){
             System.out.println("lethal in range");
             AI.goForLethal(h);
         }
@@ -153,11 +153,12 @@ public abstract class AI {
         //TODO : Account for defensive minions (ie earth golem)
         ArrayList<Card> potentialDirect = new ArrayList<Card>();
         for(Card c : h.hand){
-            if((c.cardPurpose == CardPurpose.DirectDamage && c.damagesHeros) || c.cardPurpose==CardPurpose.ChargeMinion){
+            if(((c.cardPurpose == CardPurpose.DirectDamage || c.cardPurpose == CardPurpose.BattlecryMinionDamage) && c.damagesHeros) || c.cardPurpose==CardPurpose.ChargeMinion){
                 if(!c.canAfford()) continue;
                 potentialDirect.add(c);
             }
         }
+        potentialDirect.sort(null);
         int resources = h.resource;
         int i = 0;
         for(Card c : potentialDirect){
@@ -193,12 +194,19 @@ public abstract class AI {
                 potentialDirect.add(c);
             }
         }
+        potentialDirect.sort(null);
         int resources = h.resource;
         int i = 0;
         for(Card c : potentialDirect){
             if(c.cost>resources) break;
-            resources-=c.cost;
-            if(c.isTargeted){
+            resources -= c.cost;
+            if (c.cardPurpose == CardPurpose.Trap) {
+                Sticker s = new Sticker(SpriteHandler.trapPlaceholder, 1700, 200, speed * 3);        //let user know we are playing a trap card
+            } else {
+                Sticker s = new Sticker(c, 1700, 200, speed * 3);      //let user know what non-trap card we are playing
+            }
+            Main.wait(speed * 3);
+            if (c.isTargeted) {
                 System.out.println("Casting card " + c + " on hero for lethal");
                 c.castOnHero(h.opponent);
             }

@@ -188,7 +188,9 @@ public class InputHandler extends KeyAdapter implements MouseListener, MouseMoti
             case 'k':
                  AI.takeTurn(Board.playerHero);
                  break;
-            
+            case 'l':
+                System.out.println(AI.getTotalDamagePotential(Board.playerHero));
+                break;
         }
         keyTimer = 10;
     }
