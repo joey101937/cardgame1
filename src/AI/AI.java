@@ -185,6 +185,7 @@ public abstract class AI {
             return;
         }
         for(Minion m : h.minions.getOccupants()){
+            Main.wait(AI.speed);
             if(m.canAttack())m.attack(h.opponent);
         }
         ArrayList<Card> potentialDirect = new ArrayList<Card>();
