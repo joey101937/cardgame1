@@ -47,7 +47,7 @@ public class FrostDragonMinion extends Minion implements DragonInterface{
 
     @Override
     public void breath() {
-         Sticker s = new Sticker(SpriteHandler.snowflakeLarge,this.getXCordinate() + Minion.WIDTH/2, this.getYcoordinate()+Minion.HEIGHT/2, AI.AI.speed);
+         Sticker s = new Sticker(SpriteHandler.snowflakeLarge,this.getXCoordinate() + Minion.WIDTH/2, this.getYCoordinate()+Minion.HEIGHT/2, AI.AI.speed);
          Main.wait(AI.AI.speed);
          for(Minion m : owner.opponent.minions.getOccupants()){
              m.freeze();

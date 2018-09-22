@@ -20,6 +20,7 @@ import Minions.Tribe;
 import Multiplayer.Phantom;
 import Traps.TrapListener;
 import cardgame1.Board;
+import cardgame1.Coordinate;
 import cardgame1.Hero;
 import cardgame1.InputHandler;
 import cardgame1.Main;
@@ -124,6 +125,10 @@ public abstract class Card implements Comparable{
         g.setFont(original);
     }
     
+    public Coordinate getCoordinates() {
+        return new Coordinate(getXCoordinate(), getYCoordinate());
+    }
+
     /**
      * gets the int value of the topleft corner of the rendered card based on location in hand.
      * @return x value of topleft corner NOT ADJUSTED FOR SCALING; -1 if card is not in hand.

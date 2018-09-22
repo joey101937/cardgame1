@@ -56,8 +56,8 @@ public class Sticker implements Runnable{
      */
     public Sticker(BufferedImage i, Minion m, int duration){
         image = i;
-        int mx = m.getXCordinate();
-        int my = m.getYcoordinate();
+        int mx = m.getXCoordinate();
+        int my = m.getYCoordinate();
         spawnLocation.x = mx + Minion.WIDTH/2;
         spawnLocation.y = my + Minion.HEIGHT/2;
         if(mx > 0 && my > 0){

@@ -108,7 +108,7 @@ public class VisualEffectHandler {
     public void drawLineM(Graphics2D g){
         Minion selected = InputHandler.selectedMinion;
         if(selected == null) return;
-        g.drawLine(selected.getXCordinate()+Minion.WIDTH/2, selected.getYcoordinate()+Minion.HEIGHT/2, Board.mouseX, Board.mouseY);
+        g.drawLine(selected.getXCoordinate()+Minion.WIDTH/2, selected.getYCoordinate()+Minion.HEIGHT/2, Board.mouseX, Board.mouseY);
     }
     /**
      * draws a line from the selected card to the location of the mouse

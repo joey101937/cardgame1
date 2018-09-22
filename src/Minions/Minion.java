@@ -8,6 +8,7 @@ package Minions;
 import Cards.Card;
 import Traps.TrapListener;
 import cardgame1.Board;
+import cardgame1.Coordinate;
 import cardgame1.Hero;
 import cardgame1.LineManager;
 import cardgame1.Main;
@@ -157,7 +158,7 @@ public abstract class Minion{
             if(message.split("1").length!=4)System.out.println("ERROR minion attack trying to send " + message);
             Board.nonPlayerHero.getPhantom().communicateMessage(message);
         }
-        LineManager.drawLine(getXCordinate()+Minion.WIDTH/2, getYcoordinate()+Minion.HEIGHT/2, target.getXCordinate()+Minion.WIDTH/2, target.getYcoordinate()+Minion.HEIGHT/2, AI.AI.speed/2);
+        LineManager.drawLine(getXCoordinate()+Minion.WIDTH/2, getYCoordinate()+Minion.HEIGHT/2, target.getXCoordinate()+Minion.WIDTH/2, target.getYCoordinate()+Minion.HEIGHT/2, AI.AI.speed/2);
          target.takeDamage(this.attack);
         this.takeDamage(target.attack);
         this.attackReady = false;
@@ -171,7 +172,7 @@ public abstract class Minion{
      */
     public void attack(Hero target){
         if(!canAttack() || attack==0) return;
-        LineManager.drawLine(getXCordinate()+Minion.WIDTH/2, getYcoordinate()+Minion.HEIGHT/2, target.getXCoordinate()+target.picture.getWidth()/2, target.getYCoordinate()+target.picture.getHeight()/2, AI.AI.speed/2);
+        LineManager.drawLine(getXCoordinate()+Minion.WIDTH/2, getYCoordinate()+Minion.HEIGHT/2, target.getXCoordinate()+target.picture.getWidth()/2, target.getYCoordinate()+target.picture.getHeight()/2, AI.AI.speed/2);
         target.takeDamage(this.attack);
         this.attackReady = false;
         TrapListener.onAttackHero(this, target);
@@ -242,16 +243,20 @@ public abstract class Minion{
      */
     public void directAttack(Hero target){
         target.takeDamage(attack);
-        if(target.health<=0){
+        if (target.health <= 0) {
             //TODO: <win game>
         }
     }
-    
+
+    public Coordinate getCoordinates() {
+        return new Coordinate(getXCoordinate(), getYCoordinate());
+    }
+
     /**
      * gets the x coordinate of the top left corner of the rendering, assuming the minion is in play. returns -1 if the minion is not
      * @return x coordinate of top left corner, -1 if not in play
      */
-    public int getXCordinate(){
+    public int getXCoordinate(){
         for(Minion m : Board.topHero.minions.getStorage()){
             if(m == this){
                 return (Minion.SPACER_SIZE + (Board.topHero.minions.indexOf(m) * (Minion.WIDTH + Minion.SPACER_SIZE)));
@@ -269,7 +274,7 @@ public abstract class Minion{
      * if owner is neither top nor bottom hero, return -1
      * @return 
      */
-    public int getYcoordinate(){
+    public int getYCoordinate(){
         if(this.owner == Board.topHero){
             return Minion.TOP_Y_OFFSET;
         }
