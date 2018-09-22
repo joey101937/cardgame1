@@ -3,11 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cardgame1;
+package cardgame1.Stickers;
 
 
 import Cards.Card;
 import Minions.Minion;
+import cardgame1.Coordinate;
+import cardgame1.Hero;
+import cardgame1.Main;
+import cardgame1.VisualEffectHandler;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.ConcurrentModificationException;

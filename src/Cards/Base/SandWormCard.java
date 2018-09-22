@@ -13,7 +13,7 @@ import Minions.Minion;
 import cardgame1.Hero;
 import cardgame1.Main;
 import cardgame1.SpriteHandler;
-import cardgame1.Sticker;
+import cardgame1.Stickers.Sticker;
 
 /**
  *

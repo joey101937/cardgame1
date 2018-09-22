@@ -15,7 +15,7 @@ import cardgame1.Board;
 import cardgame1.Hero;
 import cardgame1.Main;
 import cardgame1.SpriteHandler;
-import cardgame1.Sticker;
+import cardgame1.Stickers.Sticker;
 import java.util.ArrayList;
 
 /**

@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cardgame1;
+package cardgame1.Stickers;
 
+import cardgame1.Coordinate;
+import cardgame1.Main;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
