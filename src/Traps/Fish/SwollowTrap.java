@@ -11,7 +11,7 @@ import Traps.Trap;
 import cardgame1.Board;
 import cardgame1.Main;
 import cardgame1.SpriteHandler;
-import cardgame1.Stickers.Sticker;
+import cardgame1.Sticker;
 import cardgame1.VisualEffectHandler;
 
 

@@ -5,7 +5,7 @@
  */
 package cardgame1;
 
-import cardgame1.Stickers.Sticker;
+import cardgame1.Sticker;
 import Cards.Card;
 import Minions.Minion;
 import Traps.Trap;

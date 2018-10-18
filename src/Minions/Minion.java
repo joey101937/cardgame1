@@ -14,7 +14,7 @@ import cardgame1.LineManager;
 import cardgame1.Main;
 import cardgame1.ProcHandler;
 import cardgame1.SpriteHandler;
-import cardgame1.Stickers.Sticker;
+import cardgame1.Sticker;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;

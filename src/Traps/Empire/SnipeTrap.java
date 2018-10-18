@@ -10,7 +10,7 @@ import Minions.Minion;
 import Traps.Trap;
 import cardgame1.Main;
 import cardgame1.SpriteHandler;
-import cardgame1.Stickers.Sticker;
+import cardgame1.Sticker;
 
 
 /**
