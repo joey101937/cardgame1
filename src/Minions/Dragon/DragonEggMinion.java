@@ -46,7 +46,7 @@ public class DragonEggMinion extends Minion{
             }
         }
         Card c = possibilities.get((int)(Phantom.random.nextDouble()*possibilities.size()));
-        c.cost=2;
+        c.cost-=2;
         owner.draw(c);
     }
 }
