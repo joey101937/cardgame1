@@ -1,3 +1,4 @@
+[![CodeFactor](https://www.codefactor.io/repository/github/joey101937/cardgame1/badge)](https://www.codefactor.io/repository/github/joey101937/cardgame1)
 # Overview
 Java based virtual card game with an implemented complex strategic AI opponent and peer-to-peer multiplayer. Players can play with built-in decks or create, save, and import decks of their own to use. [GAME PAGE WITH DOWNLOAD](https://joey101937.itch.io/cardgame1)
 ![Screenshot](http://i68.tinypic.com/rr59n8.jpg)
