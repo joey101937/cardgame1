@@ -100,6 +100,7 @@ public class SpriteHandler {
     public static BufferedImage ancientDefenderMinion, ancientDefenderCard;
     public static BufferedImage hellFiendCard, hellFiendMinion;
     public static BufferedImage sandWormCard, sandWormMinion;
+    public static BufferedImage demonCard, demonMinion;
     //heros
     public static BufferedImage ashePortrait;
     public static BufferedImage seaWitchHero;
@@ -281,6 +282,8 @@ public class SpriteHandler {
             hellFiendCard = load("hellFiendCard.png");
             sandWormCard = load("sandWormCard.png");
             sandWormMinion = load("sandWormMinion.png");
+            demonCard = load("demonCard.png");
+            demonMinion = load("demonMinion.png");
             //heros
             ashePortrait = ImageIO.read(new File(Main.assets + "ashePortrait.png"));
             seaWitchHero = load("seaWitchHero.png");
