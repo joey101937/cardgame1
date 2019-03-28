@@ -39,4 +39,27 @@ public class DemonCard extends Card{
         cost = 3;
         summon = new DemonMinion(this);
     }
+    
+    @Override
+    public void tick(){
+        int total = 0;
+        int numPossibleTargets = 0;
+        for(Minion m : owner.minions.getOccupants()){
+            if(m.health <= spellDamage){
+                total-=AI.AI.getWorth(m);
+            }else{
+                total-=spellDamage;
+            }
+            numPossibleTargets++;
+        }
+        for(Minion m : owner.opponent.minions.getOccupants()){
+            if(m.health<=spellDamage){
+                total+=AI.AI.getWorth(m);
+            }else{
+                total+=spellDamage;
+            }
+        }
+        if(numPossibleTargets>0)this.intrinsicValue=total/numPossibleTargets;
+        else this.intrinsicValue=0;
+    }
 }
