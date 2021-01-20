@@ -34,7 +34,7 @@ public class DemonCard extends Card{
         cardType = CardType.Minion;
         cardPurpose = CardPurpose.VanillaMinion;
         spellDamage = 2;
-        cardText = "On Summon: \n Deal " + spellDamage + "damage to \n another random \n minion";
+        cardText = "On Summon: \n Deal " + spellDamage + " damage to \n another random \n minion";
         sprite = SpriteHandler.demonCard;
         cost = 3;
         summon = new DemonMinion(this);

@@ -20,9 +20,9 @@ public class AncientDefenderMinion extends Minion {
     public AncientDefenderMinion(Card parent) {
         this.parent = parent;
         this.owner = parent.getOwner();
-        attack = 1;
+        attack = 2;
         originalAttack = attack;
-        maxHealth = 7;
+        maxHealth = 6;
         health = maxHealth;
         tribe = Tribe.Golem;
         name = "Ancient Defender";
