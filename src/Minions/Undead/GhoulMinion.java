@@ -19,9 +19,9 @@ public class GhoulMinion extends Minion{
         public GhoulMinion(Card parent) {
         this.parent = parent;
         this.owner = parent.getOwner();
-        attack = 2;
+        attack = 1;
         originalAttack = attack;
-        maxHealth = 3;
+        maxHealth = 4;
         health = maxHealth;
         tribe = Tribe.Undead;
         name = "Ghoul";

@@ -23,7 +23,8 @@ public class HellFiendCard extends Card{
         cardPurpose = CardPurpose.VanillaMinion;
         cardText = "";
         sprite = SpriteHandler.hellFiendCard;
-        cost = 7;
+        cost = 8;
         summon = new HellFiendMinion(this);
+        intrinsicValue = 20;
     }
 }

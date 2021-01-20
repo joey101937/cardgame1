@@ -27,7 +27,7 @@ public class FireSpearCard extends Card {
         cardPurpose = CardPurpose.Special;
         isTargeted = true;
         spellDamage = 0;
-        cardText = "Destroy a minion \n with 5 or more attack";
+        cardText = "Target a minion with \n 5+ attack. Deal 5 \n Damage to it and \n reduce its attack \n by 4";
         sprite = SpriteHandler.fireSpearCard;
         cost = 3;
     }
@@ -49,7 +49,8 @@ public class FireSpearCard extends Card {
         notifyPhantom(target,null);
         Sticker impactEffect = new Sticker(SpriteHandler.blastEffectSmall, target, AI.AI.speed/2);
         Main.wait(AI.AI.speed/2);
-        target.destroy();
+        target.attack -= 4;
+        target.takeDamage(5);
         owner.resource -= cost;
         owner.hand.remove(this);
         TrapListener.onPlay(this);

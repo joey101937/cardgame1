@@ -19,9 +19,9 @@ public class CavalryGeneralMinion extends Minion{
     public CavalryGeneralMinion(Card parent) {
         this.parent = parent;
         this.owner = parent.getOwner();
-        attack = 2;
+        attack = 3;
         originalAttack = attack;
-        maxHealth = 3;
+        maxHealth = 2;
         health = maxHealth;
         tribe = Tribe.Knight;
         name = "Cavalry General";

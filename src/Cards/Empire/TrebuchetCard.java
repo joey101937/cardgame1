@@ -22,15 +22,15 @@ public class TrebuchetCard extends Card{
         cardType = CardType.Minion;
         cardPurpose = CardPurpose.VanillaMinion;
         heroClass = HeroClass.Empire;
-        spellDamage = 6;
+        spellDamage = 3;
         cardText = "On Turn End: \n Deal " + spellDamage + " to the minion \n directly across from \n this. (If exists)";
         sprite = SpriteHandler.trebuchetCard;
-        cost = 8;
+        cost = 7;
         summon = new TrebuchetMinion(this);
     }
      
      /**
-     * index where the minotaur would be summoned
+     * index where the minion would be summoned
      * @return -1 if full, otherwise index to be added to
      */
     private int getOpenSlot() {
@@ -49,11 +49,14 @@ public class TrebuchetCard extends Card{
       @Override
     public void tick(){
         this.intrinsicValue=0;
-        if(owner.opponent.minions.getOccupants().size()==0)return;
+        if(owner.opponent.minions.getOccupants().isEmpty()) {
+            intrinsicValue = 19;
+            return;
+        }
         if(getOpenSlot()==-1)return;
         Minion target = owner.opponent.minions.getStorage().get(getOpenSlot());
         if(target==null)return;
-        this.intrinsicValue = AI.AI.getWorth(target)-AI.AI.getWorthAfterDamage(target, spellDamage);
+        this.intrinsicValue = AI.AI.getWorth(target)-AI.AI.getWorthAfterDamage(target, spellDamage) + 8;
     }
     
 }

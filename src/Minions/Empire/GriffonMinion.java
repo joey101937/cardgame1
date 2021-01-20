@@ -20,14 +20,14 @@ public class GriffonMinion extends Minion {
     public GriffonMinion(Card parent) {
         this.parent = parent;
         this.owner = parent.getOwner();
-        attack = 5;
+        attack = 3;
         originalAttack = attack;
         maxHealth = 5;
         health = maxHealth;
         tribe = Tribe.Beast;
         name = "Griffon";
         sprite = SpriteHandler.griffonMinion;
-        intrinsicValue = -1*(this.attack+this.health-2);
+        intrinsicValue = -1*(this.attack+this.health-4);
     }
     
     @Override

@@ -29,7 +29,7 @@ public class NecromancyCard extends Card {
         cardType = CardType.Spell;
         cardPurpose = CardPurpose.Special;
         isTargeted = true;
-        cardText = "Take control of \n an enemy that \n has been turned \n undead by your \n card effect(s)";
+        cardText = "Turn a minion \n undead. If already \n undead, take control \n of it.";//"Take control of \n an enemy that \n has been turned \n undead by your \n card effect(s)";
         sprite = SpriteHandler.necromancyCard;
         cost = 2;
         heroClass = HeroClass.Undead;
@@ -38,7 +38,13 @@ public class NecromancyCard extends Card {
      @Override
     public int cast(Minion target) {
         if(target == null) return -1;
-        if(target.hasTurnedUndead()==false) return -1;
+        if(target.hasTurnedUndead()==false) {
+            target.turnUndead();
+            owner.hand.remove(this);
+            owner.resource -= cost;
+            TrapListener.onPlay(this);
+            return 1;
+        }
         if(owner.minions.isFull()) return -1;
         if(!canAfford()) return 0; //reutrn 0 if unaffordable
         Sticker impactEffect = new Sticker(SpriteHandler.skullEffect, target, AI.speed/3);

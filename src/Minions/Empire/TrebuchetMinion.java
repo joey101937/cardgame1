@@ -22,7 +22,7 @@ public class TrebuchetMinion extends Minion{
       public TrebuchetMinion(Card parent) {
         this.parent = parent;
         this.owner = parent.getOwner();
-        attack = 1;
+        attack = 2;
         originalAttack = attack;
         maxHealth = 7;
         health = maxHealth;
@@ -37,7 +37,7 @@ public class TrebuchetMinion extends Minion{
           Minion target = owner.opponent.minions.get(owner.minions.indexOf(this));
           if(target!=null){
               proc();
-              target.takeDamage(6);
+              target.takeDamage(3);
           }
       }
       
@@ -45,7 +45,10 @@ public class TrebuchetMinion extends Minion{
       public void tick(){
           intrinsicValue = 0;
           Minion target = owner.opponent.minions.get(owner.minions.indexOf(this));
-          if(target!=nextTarget && target!=null)target.intrinsicValue-=6;
+          if(target!=nextTarget && target!=null) {
+              if(target.health <= 3) target.intrinsicValue =- (AI.AI.getWorth(target)+1);
+              else target.intrinsicValue -= 3;
+          }
           nextTarget = target;
           if(target!=null){
               intrinsicValue = AI.AI.getWorth(target)-AI.AI.getWorthAfterDamage(target, 6);

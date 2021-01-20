@@ -53,6 +53,20 @@ public class ReservesCard extends Card{
             toAdd.setHero(owner);
             owner.hand.add(toAdd);
         }
-        return 1;
+        return 0;
+    }
+    
+    @Override
+    public void tick() {
+        boolean roomInHand = owner.hand.size() < 5;
+        boolean boardLarge = owner.minions.getOccupants().size() > 2;
+        if(!roomInHand) intrinsicValue = 0;
+        else {
+            if(boardLarge) {
+                intrinsicValue = 5;
+            } else {
+                intrinsicValue = 2;
+            }
+        }
     }
 }

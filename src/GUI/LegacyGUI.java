@@ -95,8 +95,6 @@ public class LegacyGUI extends javax.swing.JFrame {
             deck.add(new VengefullKnightCard());
             deck.add(new VolcanoCard());
             FrostDragonCard fdc = new FrostDragonCard();
-            //fdc.summon.attack = 4; //frost dragons in this deck are strong than usual
-            //fdc.cost--;
             deck.add(fdc);  
         }
         deck.add(new SpellBookCard());
@@ -166,19 +164,20 @@ public class LegacyGUI extends javax.swing.JFrame {
         ArrayList<Card> deck = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
             deck.add(new SnipeTrapCard());
-            deck.add(new DoubleshotCard());
-            deck.add(new GriffonCard());
-            deck.add(new KnightCard());    
-            deck.add(new ArcherCard());
+            deck.add(new GriffonCard());  
         }
         for (int i = 0; i < 2; i++) {
-            deck.add(new PaladinCard());
-            deck.add(new SpearmanCard());
-            deck.add(new CavalryGeneralCard());
             deck.add(new FireyWhelpCard());
+            deck.add(new VengefullKnightCard());
+            deck.add(new VolcanoCard());
+            deck.add(new HellFiendCard());
+            deck.add(new ReservesCard());
+            deck.add(new DoubleshotCard());
+            deck.add(new TrebuchetCard());
+            deck.add(new ArcherCard());
+            deck.add(new SpearmanCard());
         }        
-        deck.add(new UndyingSoldierCard());
-        deck.add(new ApocalypseCard());
+         deck.add(new PaladinCard());
         return deck;
     }
      
@@ -205,7 +204,7 @@ public class LegacyGUI extends javax.swing.JFrame {
                 deck.add(new VolcanoCard());
                 deck.add(new VolcanoCard());
                 deck.add(new ArcherCard());
-                deck.add(new MinotaurCard());
+                deck.add(new SpearmanCard());
                 deck.add(new SpellBookCard());
                 deck.add(new SpellBookCard());
                 deck.add(new PaladinCard());

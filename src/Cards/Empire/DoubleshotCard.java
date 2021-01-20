@@ -34,7 +34,7 @@ public class DoubleshotCard extends Card{
         
     @Override
     public void tick(){
-        intrinsicValue = -2;
+        intrinsicValue = -3;
         if(owner.opponent.minions.getOccupants().size()==0)return;
         if(owner.opponent.minions.getOccupants().size()==1){
             if(owner.opponent.minions.getOccupants().get(0).health<=2){

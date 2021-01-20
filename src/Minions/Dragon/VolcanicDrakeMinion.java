@@ -20,7 +20,7 @@ public class VolcanicDrakeMinion extends Minion implements DragonInterface{
     public VolcanicDrakeMinion(Card parent) {
         this.parent = parent;
         this.owner = parent.getOwner();
-        attack = 5;
+        attack = 6;
         originalAttack = attack;
         maxHealth = 4;
         health = maxHealth;
