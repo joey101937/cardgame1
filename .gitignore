@@ -3,3 +3,7 @@
 build.xml
 manifest.mf
 /build/
+*.xml
+*.xml
+*.deck
+*.properties
