@@ -35,7 +35,7 @@ import javax.swing.JOptionPane;
  * @author Joseph
  */
 public class MultiplayerFrame extends JFrame{
-        private BackgroundPane panel;
+    private BackgroundPane panel;
     private JLabel chooseDeckTitle;
     private JLabel playerPort; //class portraits, based on selected class
     private JLabel loadedLabel; //displayed the currently loaded deck
@@ -246,7 +246,6 @@ public class MultiplayerFrame extends JFrame{
         }
         if (combo == playerCombo) {
             playerDeck = getDeck(combo.getSelectedItem().toString());
-            System.out.println("resetting custom");
             loadedCustom = null; //because we are not loading custom, we must be setting to preset and therefore must reset the loaded deck label
         }
         updatePortrait();
@@ -293,6 +292,7 @@ public class MultiplayerFrame extends JFrame{
              //InetAddress inetAddress = InetAddress.getLocalHost(); //gets local ip
             notice+= ("\nServer Address: " + Main.getPublicIP() + "\nPort: 444");
         }catch(Exception e){
+            notice += "\nApp an error getting public IP";
             e.printStackTrace();
         }
         if(isServer)JOptionPane.showMessageDialog(null, notice);

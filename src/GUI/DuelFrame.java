@@ -267,7 +267,6 @@ public class DuelFrame extends JFrame{
         if (combo == playerCombo) {
 
             playerDeck = getDeck(combo.getSelectedItem().toString());
-            System.out.println("resetting custom");
             loadedCustom = null; //because we are not loading custom, we must be setting to preset and therefore must reset the loaded deck label
         } else {
             enemyDeck = getDeck(combo.getSelectedItem().toString());

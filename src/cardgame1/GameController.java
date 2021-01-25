@@ -63,7 +63,7 @@ public class GameController {
            if(!Phantom.syncedRandom) System.out.println("waiting for random to sync...");
            if(!Phantom.mainPhantom.receivedDeck)System.out.println("waiting for decks to sync...");
             try {
-                Thread.sleep(10);
+                Thread.sleep(100);
             } catch (InterruptedException ex) {
                 Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
             }

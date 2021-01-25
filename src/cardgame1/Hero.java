@@ -247,6 +247,7 @@ public class Hero {
     }
 
     public void restartApplication() {
+        System.out.println("Restarting app...");
         Board board = Board.getMainBoard();
         board.running= false;
         Window window = board.window;

@@ -16,6 +16,7 @@ import cardgame1.Main;
 import cardgame1.SpriteHandler;
 import cardgame1.Sticker;
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.net.ServerSocket;
@@ -33,7 +34,7 @@ public final class Phantom implements Runnable{
     /*        FIELDS          */
     public Hero host;
     public boolean isServer = false;
-    public static boolean syncedRandom = false;
+    public static volatile boolean syncedRandom = false;
     public boolean receivedDeck = false;
     public static int port = 444;
     protected static boolean connected = false;
@@ -48,6 +49,17 @@ public final class Phantom implements Runnable{
     public static Phantom mainPhantom; //last created phantom
     
     
+    public static void closeConnections () throws IOException {
+        if(mainPhantom != null) {
+            if(mainPhantom.isServer) {
+                mainPhantom.serverSocket.close();
+            }else {
+                mainPhantom.socket.close();
+            }
+        }
+        syncedRandom = false;
+    }
+    
     /**
      * Creates a phantom to control the given hero.
      * NOTES:
@@ -61,6 +73,7 @@ public final class Phantom implements Runnable{
      */
     public Phantom(Hero host, boolean isServer) throws Exception{
         System.out.println("making new phantom");
+        closeConnections();
         mainPhantom = this;
         this.host = host;
         this.isServer = isServer;
@@ -114,14 +127,14 @@ public final class Phantom implements Runnable{
             //server code
             printStream.println("randSeed: " + rSeed);
             
-            while (true) {
+            while (!serverSocket.isClosed()) {
                 String message = br.readLine();
                 System.out.println("server got message: " + message);
                 interperateMessage(message);
             }
         } else {
             //client code
-            while (true) {
+            while (!socket.isClosed()) {
                     String message = br.readLine();
                     System.out.println("client got message: " + message);
                     interperateMessage(message);                    
