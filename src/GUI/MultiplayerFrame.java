@@ -16,6 +16,7 @@ import cardgame1.SpriteHandler;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.IllegalComponentStateException;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -46,12 +47,18 @@ public class MultiplayerFrame extends JFrame{
     public CustomDeck loadedCustom = null;
     private static Font classTitleFont = new Font("Arial",Font.BOLD,35);
     private static Font loadedFont = new Font("Arial",Font.BOLD,16);
+    
+    public volatile static MultiplayerFrame mainMultiplayerFrame = null;
     /**
      * constructor
      */
     public MultiplayerFrame(){
         init();
         this.setVisible(true);
+        if(mainMultiplayerFrame != null) { 
+            mainMultiplayerFrame.dispose();
+        }
+         mainMultiplayerFrame = this;
     }
     /**
      * initializes swing and awt components
@@ -305,8 +312,12 @@ public class MultiplayerFrame extends JFrame{
     
     @Override
     public void dispose() {
-        LandingPage.metaX = this.getLocationOnScreen().x;
-        LandingPage.metaY = this.getLocationOnScreen().y;
+        try {
+            LandingPage.metaX = this.getLocationOnScreen().x;
+            LandingPage.metaY = this.getLocationOnScreen().y;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         super.dispose();
     }
 }

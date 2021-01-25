@@ -5,6 +5,7 @@
  */
 package cardgame1;
 
+import GUI.MultiplayerFrame;
 import Multiplayer.Phantom;
 import java.util.Random;
 import java.util.logging.Level;
@@ -58,6 +59,7 @@ public class GameController {
      * @param isServer 
      */
     public void startGame(boolean isServer){
+        if(MultiplayerFrame.mainMultiplayerFrame != null) MultiplayerFrame.mainMultiplayerFrame.dispose();
         Phantom.mainPhantom.sendDeck(Board.playerHero.deck);
         while(!Phantom.syncedRandom || !Phantom.mainPhantom.receivedDeck){
            if(!Phantom.syncedRandom) System.out.println("waiting for random to sync...");

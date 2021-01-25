@@ -110,7 +110,7 @@ public class Board extends Canvas implements Runnable {
     }
     
     /**
-     * constructor for use with mulitplayer
+     * constructor for use with multiplayer
      * @param t top hero
      * @param b bot hero
      * @param d dimension of the window
